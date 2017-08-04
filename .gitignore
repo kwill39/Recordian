@@ -20,3 +20,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# Test Files #
+HourTracker.db
+Hours_Worked.txt
+
+# Test Directorys #
+Hour_Tracker_Files
+
+# Intellij Files #
+.idea
+/out
+Kyles_Hour_Tracker.iml
