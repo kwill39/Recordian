@@ -32,3 +32,6 @@ Hour_Tracker_Files
 .idea
 /out
 Kyles_Hour_Tracker.iml
+
+# Gradle generated files #
+.gradle
