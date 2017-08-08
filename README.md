@@ -1,13 +1,10 @@
 # Kyles-Hour-Tracker
 
+<h2>Introduction</h2>
+This README is not even remotely finished. I plan to update it to make it more conventional in the future. For now, it just gives some basic information about the app.
 
 <h2>Purpose</h2>
-This app was created for my father to help him keep track of the hours he worked after he goes home.
-
-
-<h2>Platform</h2>
-This app is designed for desktops and optimized for the Windows OS.
-
+This app was created for my father to help him keep track of the hours he has worked after he goes home.
 
 <h2>Database</h2>
 This app uses an SQLite database for some of its features while using a flat file database for other features.

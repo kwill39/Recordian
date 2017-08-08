@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="10" prefHeight="69.0" prefWidth="358.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kylewill.controller.DeleteSupervisorController">
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Label text="Are you sure you want to delete this supervisor?" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+      <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" GridPane.rowIndex="1" />
+      <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   </children>
+</GridPane>
