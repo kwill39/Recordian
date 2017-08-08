@@ -4,8 +4,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" gridLinesVisible="true">
+<GridPane fx:controller="com.kylewill.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
     <Label GridPane.columnIndex="0" GridPane.rowIndex="0">Length of Time Worked</Label>
     <TextField fx:id="hours" GridPane.columnIndex="1" GridPane.rowIndex="0" onKeyReleased="#keyCheck"/>
