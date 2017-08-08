@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Kyles_Hour_Tracker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Kyles_Hour_Tracker_jar</output-path>
+    <root id="archive" name="Kyles_Hour_Tracker.jar">
+      <element id="module-output" name="Kyles_Hour_Tracker" />
+    </root>
+  </artifact>
+</component>
