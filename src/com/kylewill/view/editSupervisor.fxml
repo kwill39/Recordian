@@ -10,13 +10,13 @@
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
    <children>
       <Label text="First Name" />
-      <TextField fx:id="supervisorFirstName" GridPane.columnIndex="1" />
-      <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
       <Label text="Last Name" GridPane.rowIndex="1" />
       <Label text="Display Name" GridPane.rowIndex="2" />
+      <TextField fx:id="supervisorFirstName" GridPane.columnIndex="1" />
       <TextField fx:id="supervisorLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="supervisorDisplayName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
    </children>
    <columnConstraints>
       <ColumnConstraints />

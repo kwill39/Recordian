@@ -17,8 +17,8 @@
    </rowConstraints>
    <children>
       <Label text="Company Name" />
+      <TextField fx:id="companyName" GridPane.columnIndex="1" />
       <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.rowIndex="1" />
       <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField fx:id="companyName" GridPane.columnIndex="1" />
    </children>
 </GridPane>

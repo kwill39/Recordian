@@ -19,16 +19,16 @@
    </rowConstraints>
    <children>
       <Label text="Location Name" />
-      <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.rowIndex="5" />
-      <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <TextField fx:id="locationName" GridPane.columnIndex="1" />
       <Label text="Address" GridPane.rowIndex="1" />
       <Label text="City" GridPane.rowIndex="2" />
       <Label text="State" GridPane.rowIndex="3" />
       <Label text="Zip" GridPane.rowIndex="4" />
+      <TextField fx:id="locationName" GridPane.columnIndex="1" />
       <TextField fx:id="locationAddress" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="locationCity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField fx:id="locationState" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <TextField fx:id="locationZipCode" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.rowIndex="5" />
+      <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
    </children>
 </GridPane>
