@@ -11,7 +11,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DeleteLocationController implements Initializable{
+public class DeleteLocationController extends DatabaseItemController implements Initializable{
     private MainViewController mainViewController;
     private Stage stage;
     private String nameOfLocationToDelete;
@@ -22,14 +22,6 @@ public class DeleteLocationController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         cancelButton.setOnMouseClicked(event -> stage.close());
         deleteButton.setOnMouseClicked(event -> deleteLocation());
-    }
-
-    void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
-    }
-
-    void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     public void setNameOfLocationToDelete(String nameOfLocationToDelete) {

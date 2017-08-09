@@ -11,9 +11,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DeleteCompanyController implements Initializable{
-    private MainViewController mainViewController;
-    private Stage stage;
+public class DeleteCompanyController extends DatabaseItemController implements Initializable{
     private String nameOfcompanyToDelete;
     @FXML private Button deleteButton;
     @FXML private Button cancelButton;
@@ -22,14 +20,6 @@ public class DeleteCompanyController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         cancelButton.setOnMouseClicked(event -> stage.close());
         deleteButton.setOnMouseClicked(event -> deleteCompany());
-    }
-
-    void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
-    }
-
-    void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     public void setNameOfCompanyToDelete(String nameOfcompanyToDelete) {

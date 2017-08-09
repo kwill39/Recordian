@@ -11,9 +11,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddCompanyController implements Initializable{
-    private MainViewController mainViewController;
-    private Stage stage;
+public class AddCompanyController extends DatabaseItemController implements Initializable{
     @FXML private TextField newCompanyName;
     @FXML private Button addButton;
     @FXML private Button cancelButton;
@@ -22,14 +20,6 @@ public class AddCompanyController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         addButton.setOnMouseClicked(event -> addCompany());
         cancelButton.setOnMouseClicked(event -> stage.close());
-    }
-
-    void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
-    }
-
-    void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     private void addCompany() {

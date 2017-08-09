@@ -286,7 +286,7 @@ public class MainViewController implements Initializable{
         }
     }
 
-    /*private void createChoiceboxItemStage(String choiceBoxItem, String stageTitle, String viewPath, ) throws IOException{
+    /*private void createModifyDatabaseItemStage(String choiceBoxItem, String stageTitle, String viewPath, Datab) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
         Stage newStage = new Stage();
         newStage.setTitle(stageTitle);
@@ -294,7 +294,6 @@ public class MainViewController implements Initializable{
         DeleteSupervisorController deleteSupervisorController = loader.getController();
         deleteSupervisorController.setMainViewController(this);
         deleteSupervisorController.setStage(newStage);
-        deleteSupervisorController.setDisplayNameOfSupervisorToDelete(displayName);
         newStage.show();
     }*/
 }

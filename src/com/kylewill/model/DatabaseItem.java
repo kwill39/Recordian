@@ -1,4 +1,4 @@
 package com.kylewill.model;
 
-interface DatabaseItem {
+public interface DatabaseItem {
 }

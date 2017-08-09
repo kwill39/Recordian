@@ -12,10 +12,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class EditCompanyController implements Initializable {
+public class EditCompanyController extends DatabaseItemController implements Initializable {
     private String nameOfCompanyToEdit;
-    private MainViewController mainViewController;
-    private Stage stage;
     private @FXML Button saveButton;
     private @FXML Button cancelButton;
     private @FXML TextField companyName;
@@ -24,14 +22,6 @@ public class EditCompanyController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         saveButton.setOnMouseClicked(event -> updateCompany());
         cancelButton.setOnMouseClicked(event -> stage.close());
-    }
-
-    public void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     public void setNameOfCompanyToEdit(String nameOfCompanyToEdit) {

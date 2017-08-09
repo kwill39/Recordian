@@ -11,9 +11,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddSupervisorController implements Initializable{
-    private MainViewController mainViewController;
-    private Stage stage;
+public class AddSupervisorController extends DatabaseItemController implements Initializable{
     @FXML private TextField newSupervisorFirstName;
     @FXML private TextField newSupervisorLastName;
     @FXML private TextField newSupervisorDisplayName;
@@ -24,14 +22,6 @@ public class AddSupervisorController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         addButton.setOnMouseClicked(event -> addSupervisor());
         cancelButton.setOnMouseClicked(event -> stage.close());
-    }
-
-    void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
-    }
-
-    void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     private void addSupervisor() {
