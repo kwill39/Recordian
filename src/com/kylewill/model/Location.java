@@ -1,6 +1,6 @@
 package com.kylewill.model;
 
-public class Location {
+public class Location implements DatabaseItem{
 
     private int locationID;
     private String locationName;

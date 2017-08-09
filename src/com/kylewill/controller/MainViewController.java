@@ -3,9 +3,9 @@ package com.kylewill.controller;
 import com.kylewill.model.Company;
 import com.kylewill.model.Location;
 import com.kylewill.model.Supervisor;
-import com.kylewill.objectrelationalmaps.CompanyMapper;
-import com.kylewill.objectrelationalmaps.LocationMapper;
-import com.kylewill.objectrelationalmaps.SupervisorMapper;
+import com.kylewill.objectrelationalmap.CompanyMapper;
+import com.kylewill.objectrelationalmap.LocationMapper;
+import com.kylewill.objectrelationalmap.SupervisorMapper;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -285,4 +285,16 @@ public class MainViewController implements Initializable{
             supervisorDisplayNames.add(someSupervisor.getSupervisorDisplayName());
         }
     }
+
+    /*private void createChoiceboxItemStage(String choiceBoxItem, String stageTitle, String viewPath, ) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+        Stage newStage = new Stage();
+        newStage.setTitle(stageTitle);
+        newStage.setScene(new Scene(loader.load()));
+        DeleteSupervisorController deleteSupervisorController = loader.getController();
+        deleteSupervisorController.setMainViewController(this);
+        deleteSupervisorController.setStage(newStage);
+        deleteSupervisorController.setDisplayNameOfSupervisorToDelete(displayName);
+        newStage.show();
+    }*/
 }

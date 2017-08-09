@@ -1,12 +1,11 @@
 package com.kylewill.controller;
 
 import com.kylewill.model.Company;
-import com.kylewill.objectrelationalmaps.CompanyMapper;
+import com.kylewill.objectrelationalmap.CompanyMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.net.URL;

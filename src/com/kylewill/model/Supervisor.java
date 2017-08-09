@@ -1,6 +1,6 @@
 package com.kylewill.model;
 
-public class Supervisor{
+public class Supervisor implements DatabaseItem{
     private int supervisorID;
     private String supervisorFirstName;
     private String supervisorLastName;

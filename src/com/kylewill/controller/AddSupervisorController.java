@@ -1,7 +1,7 @@
 package com.kylewill.controller;
 
 import com.kylewill.model.Supervisor;
-import com.kylewill.objectrelationalmaps.SupervisorMapper;
+import com.kylewill.objectrelationalmap.SupervisorMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

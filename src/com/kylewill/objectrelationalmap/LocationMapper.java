@@ -1,26 +1,28 @@
-package com.kylewill.objectrelationalmaps;
+package com.kylewill.objectrelationalmap;
 
 import com.kylewill.DatabaseHelper;
-import com.kylewill.model.Supervisor;
+import com.kylewill.model.Location;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SupervisorMapper {
+public final class LocationMapper {
 
-    private SupervisorMapper() {}
+    private LocationMapper() {}
 
-    public static void create(Supervisor supervisor) {
+    public static void create(Location location) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-            String sqlInsert = "INSERT INTO supervisors(supervisorFirstName,supervisorLastName,"
-                    + "supervisorDisplayName) VALUES(?,?,?)";
+            String sqlInsert = "INSERT INTO locations(locationName, locationAddress, locationCity,"
+                    + "locationState, locationZipCode) VALUES(?,?,?,?,?);";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
-            preparedStatement.setString(1, supervisor.getSupervisorFirstName());
-            preparedStatement.setString(2, supervisor.getSupervisorLastName());
-            preparedStatement.setString(3, supervisor.getSupervisorDisplayName());
+            preparedStatement.setString(1, location.getLocationName());
+            preparedStatement.setString(2, location.getLocationAddress());
+            preparedStatement.setString(3, location.getLocationCity());
+            preparedStatement.setString(4, location.getLocationState());
+            preparedStatement.setString(5, location.getLocationZipCode());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // TODO: Handle exceptions
@@ -37,23 +39,25 @@ public final class SupervisorMapper {
         }
     }
 
-    public static List<Supervisor> readAll() {
+    public static List<Location> readAll() {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-            String sqlQuery = "SELECT * FROM supervisors";
+            String sqlQuery = "SELECT * FROM locations";
             Statement statement = dbConnection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
-            List<Supervisor> supervisorList = new ArrayList<>();
-            Supervisor someSupervisor;
+            List<Location> locationList = new ArrayList<>();
+            Location someLocation;
             while(resultSet.next()){
-                someSupervisor = new Supervisor(resultSet.getString("supervisorDisplayName"));
-                someSupervisor.setSupervisorID(resultSet.getInt("supervisorID"));
-                someSupervisor.setSupervisorFirstName(resultSet.getString("supervisorFirstName"));
-                someSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
-                supervisorList.add(someSupervisor);
+                someLocation = new Location(resultSet.getString("locationName"));
+                someLocation.setLocationID(resultSet.getInt("locationID"));
+                someLocation.setLocationAddress(resultSet.getString("locationAddress"));
+                someLocation.setLocationCity(resultSet.getString("locationCity"));
+                someLocation.setLocationState(resultSet.getString("locationState"));
+                someLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
+                locationList.add(someLocation);
             }
-            return supervisorList;
+            return locationList;
         } catch (SQLException e) {
             // TODO: Handle exceptions
             System.err.println(e.getMessage());
@@ -70,19 +74,23 @@ public final class SupervisorMapper {
         return null;
     }
 
-    public static void update(Supervisor supervisor) {
+    public static void update(Location location) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-            String sqlUpdate = "UPDATE supervisors SET supervisorFirstName = ?,"
-                    + "supervisorLastName = ?,"
-                    + "supervisorDisplayName = ?"
-                    + "WHERE supervisorID = ?";
+            String sqlUpdate = "UPDATE locations SET locationName = ?,"
+                    + "locationAddress = ?,"
+                    + "locationCity = ?,"
+                    + "locationState = ?,"
+                    + "locationZipCode = ?"
+                    + "WHERE locationID = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlUpdate);
-            preparedStatement.setString(1, supervisor.getSupervisorFirstName());
-            preparedStatement.setString(2, supervisor.getSupervisorLastName());
-            preparedStatement.setString(3, supervisor.getSupervisorDisplayName());
-            preparedStatement.setInt(4, supervisor.getSupervisorID());
+            preparedStatement.setString(1, location.getLocationName());
+            preparedStatement.setString(2, location.getLocationAddress());
+            preparedStatement.setString(3, location.getLocationCity());
+            preparedStatement.setString(4, location.getLocationState());
+            preparedStatement.setString(5, location.getLocationZipCode());
+            preparedStatement.setInt(6, location.getLocationID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // TODO: Handle exceptions
@@ -99,13 +107,13 @@ public final class SupervisorMapper {
         }
     }
 
-    public static void delete(Supervisor supervisor) {
+    public static void delete(Location location) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-            String sqlDelete = "DELETE FROM supervisors WHERE supervisorID = ?";
+            String sqlDelete = "DELETE FROM locations WHERE locationID = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
-            preparedStatement.setInt(1, supervisor.getSupervisorID());
+            preparedStatement.setInt(1, location.getLocationID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // TODO: Handle exceptions

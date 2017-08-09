@@ -1,6 +1,6 @@
 package com.kylewill.model;
 
-public class Company {
+public class Company implements DatabaseItem{
     private int companyID;
     private String companyName;
 

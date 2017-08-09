@@ -1,7 +1,7 @@
 package com.kylewill.controller;
 
 import com.kylewill.model.Location;
-import com.kylewill.objectrelationalmaps.LocationMapper;
+import com.kylewill.objectrelationalmap.LocationMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
