@@ -5,12 +5,15 @@ import com.kylewill.objectrelationalmap.LocationMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeleteLocationController extends DatabaseItemController implements Initializable{
+    private Location locationToDelete;
+    @FXML private Label confirmationLabel;
     @FXML private Button deleteButton;
     @FXML private Button cancelButton;
 
@@ -20,14 +23,20 @@ public class DeleteLocationController extends DatabaseItemController implements 
         deleteButton.setOnMouseClicked(event -> deleteLocation());
     }
 
-    private void deleteLocation() {
+    @Override
+    protected void onMainViewControllerSet() {
         String nameOfLocationToDelete = mainViewController.locationChoiceBox.getValue().toString();
         List<Location> companies = LocationMapper.readAll();
         for (Location someLocation : companies){
             if (someLocation.getLocationName().equals(nameOfLocationToDelete)){
-                LocationMapper.delete(someLocation);
+                locationToDelete = someLocation;
             }
         }
+        confirmationLabel.setText("Are you sure you want to delete " + locationToDelete.getLocationName() + "?");
+    }
+
+    private void deleteLocation() {
+        LocationMapper.delete(locationToDelete);
         mainViewController.refreshLocationNames();
         stage.close();
     }

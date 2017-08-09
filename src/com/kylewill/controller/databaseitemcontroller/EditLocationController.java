@@ -13,13 +13,13 @@ import java.util.ResourceBundle;
 
 public class EditLocationController extends DatabaseItemController implements Initializable {
     private Location locationToEdit;
-    private @FXML Button saveButton;
-    private @FXML Button cancelButton;
     private @FXML TextField locationName;
     private @FXML TextField locationAddress;
     private @FXML TextField locationCity;
     private @FXML TextField locationState;
     private @FXML TextField locationZipCode;
+    private @FXML Button saveButton;
+    private @FXML Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

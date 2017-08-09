@@ -13,9 +13,9 @@ import java.util.ResourceBundle;
 
 public class EditCompanyController extends DatabaseItemController implements Initializable {
     private Company companyToEdit;
+    private @FXML TextField companyName;
     private @FXML Button saveButton;
     private @FXML Button cancelButton;
-    private @FXML TextField companyName;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

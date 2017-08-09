@@ -13,11 +13,11 @@ import java.util.ResourceBundle;
 
 public class EditSupervisorController extends DatabaseItemController implements Initializable {
     private Supervisor supervisorToEdit;
-    private @FXML Button saveButton;
-    private @FXML Button cancelButton;
     private @FXML TextField supervisorFirstName;
     private @FXML TextField supervisorLastName;
     private @FXML TextField supervisorDisplayName;
+    private @FXML Button saveButton;
+    private @FXML Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

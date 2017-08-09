@@ -218,7 +218,7 @@ public class MainViewController implements Initializable{
         // Set supervisor choicebox items
         sortedSupervisorDisplayNames = new SortedList<>(supervisorDisplayNames, String.CASE_INSENSITIVE_ORDER);
         sortedSupervisorDisplayNames.addListener((ListChangeListener<String>) c ->
-                locationChoiceBox.setItems(sortedSupervisorDisplayNames));
+                supervisorChoiceBox.setItems(sortedSupervisorDisplayNames));
         supervisorChoiceBox.setItems(sortedSupervisorDisplayNames);
     }
 
