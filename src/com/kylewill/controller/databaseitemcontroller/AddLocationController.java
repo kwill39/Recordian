@@ -1,5 +1,6 @@
-package com.kylewill.controller;
+package com.kylewill.controller.databaseitemcontroller;
 
+import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Location;
 import com.kylewill.objectrelationalmap.LocationMapper;
 import javafx.fxml.FXML;
@@ -19,6 +20,10 @@ public class AddLocationController extends DatabaseItemController implements Ini
     @FXML private TextField newLocationZipCode;
     @FXML private Button addButton;
     @FXML private Button cancelButton;
+
+    public AddLocationController(Stage stage, MainViewController mainViewController) {
+        super(stage, mainViewController);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

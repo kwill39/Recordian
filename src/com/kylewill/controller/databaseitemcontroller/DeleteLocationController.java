@@ -1,5 +1,6 @@
-package com.kylewill.controller;
+package com.kylewill.controller.databaseitemcontroller;
 
+import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Location;
 import com.kylewill.objectrelationalmap.LocationMapper;
 import javafx.fxml.FXML;
@@ -12,11 +13,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeleteLocationController extends DatabaseItemController implements Initializable{
-    private MainViewController mainViewController;
-    private Stage stage;
-    private String nameOfLocationToDelete;
     @FXML private Button deleteButton;
     @FXML private Button cancelButton;
+
+    public DeleteLocationController(Stage stage, MainViewController mainViewController) {
+        super(stage, mainViewController);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -24,11 +26,8 @@ public class DeleteLocationController extends DatabaseItemController implements 
         deleteButton.setOnMouseClicked(event -> deleteLocation());
     }
 
-    public void setNameOfLocationToDelete(String nameOfLocationToDelete) {
-        this.nameOfLocationToDelete = nameOfLocationToDelete;
-    }
-
     private void deleteLocation() {
+        String nameOfLocationToDelete = mainViewController.locationChoiceBox.getValue().toString();
         List<Location> companies = LocationMapper.readAll();
         for (Location someLocation : companies){
             if (someLocation.getLocationName().equals(nameOfLocationToDelete)){

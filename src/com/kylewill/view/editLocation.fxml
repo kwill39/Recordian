@@ -5,7 +5,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane hgap="10" prefHeight="69.0" prefWidth="358.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kylewill.controller.EditLocationController">
+<GridPane hgap="10" prefHeight="69.0" prefWidth="358.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kylewill.controller.databaseitemcontroller.EditLocationController">
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
    <columnConstraints>
       <ColumnConstraints />

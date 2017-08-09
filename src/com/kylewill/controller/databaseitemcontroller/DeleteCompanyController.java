@@ -1,5 +1,6 @@
-package com.kylewill.controller;
+package com.kylewill.controller.databaseitemcontroller;
 
+import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Company;
 import com.kylewill.objectrelationalmap.CompanyMapper;
 import javafx.fxml.FXML;
@@ -12,9 +13,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeleteCompanyController extends DatabaseItemController implements Initializable{
-    private String nameOfcompanyToDelete;
     @FXML private Button deleteButton;
     @FXML private Button cancelButton;
+
+    public DeleteCompanyController(Stage stage, MainViewController mainViewController) {
+        super(stage, mainViewController);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -22,11 +26,8 @@ public class DeleteCompanyController extends DatabaseItemController implements I
         deleteButton.setOnMouseClicked(event -> deleteCompany());
     }
 
-    public void setNameOfCompanyToDelete(String nameOfcompanyToDelete) {
-        this.nameOfcompanyToDelete = nameOfcompanyToDelete;
-    }
-
     private void deleteCompany() {
+        String nameOfcompanyToDelete = mainViewController.companyChoiceBox.getValue().toString();
         List<Company> companies = CompanyMapper.readAll();
         for (Company someCompany : companies){
             if (someCompany.getCompanyName().equals(nameOfcompanyToDelete)){

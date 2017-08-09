@@ -1,5 +1,6 @@
-package com.kylewill.controller;
+package com.kylewill.controller.databaseitemcontroller;
 
+import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Supervisor;
 import com.kylewill.objectrelationalmap.SupervisorMapper;
 import javafx.fxml.FXML;
@@ -12,11 +13,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeleteSupervisorController extends DatabaseItemController implements Initializable{
-    private MainViewController mainViewController;
-    private Stage stage;
-    private String displayNameOfSupervisorToDelete;
     @FXML private Button deleteButton;
     @FXML private Button cancelButton;
+
+    public DeleteSupervisorController(Stage stage, MainViewController mainViewController) {
+        super(stage, mainViewController);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -24,11 +26,8 @@ public class DeleteSupervisorController extends DatabaseItemController implement
         deleteButton.setOnMouseClicked(event -> deleteSupervisor());
     }
 
-    public void setDisplayNameOfSupervisorToDelete(String displayNameOfSupervisorToDelete) {
-        this.displayNameOfSupervisorToDelete = displayNameOfSupervisorToDelete;
-    }
-
     private void deleteSupervisor() {
+        String displayNameOfSupervisorToDelete = mainViewController.supervisorChoiceBox.getValue().toString();
         List<Supervisor> supervisors = SupervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisors){
             if (someSupervisor.getSupervisorDisplayName().equals(displayNameOfSupervisorToDelete)){

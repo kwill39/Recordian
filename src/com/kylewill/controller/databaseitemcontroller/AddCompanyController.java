@@ -1,5 +1,6 @@
-package com.kylewill.controller;
+package com.kylewill.controller.databaseitemcontroller;
 
+import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Company;
 import com.kylewill.objectrelationalmap.CompanyMapper;
 import javafx.fxml.FXML;
@@ -15,6 +16,10 @@ public class AddCompanyController extends DatabaseItemController implements Init
     @FXML private TextField newCompanyName;
     @FXML private Button addButton;
     @FXML private Button cancelButton;
+
+    public AddCompanyController(Stage stage, MainViewController mainViewController) {
+        super(stage, mainViewController);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

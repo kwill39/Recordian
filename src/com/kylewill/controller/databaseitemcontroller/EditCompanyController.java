@@ -1,5 +1,6 @@
-package com.kylewill.controller;
+package com.kylewill.controller.databaseitemcontroller;
 
+import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Company;
 import com.kylewill.objectrelationalmap.CompanyMapper;
 import javafx.fxml.FXML;
@@ -18,15 +19,15 @@ public class EditCompanyController extends DatabaseItemController implements Ini
     private @FXML Button cancelButton;
     private @FXML TextField companyName;
 
+    public EditCompanyController(Stage stage, MainViewController mainViewController) {
+        super(stage, mainViewController);
+        nameOfCompanyToEdit = mainViewController.companyChoiceBox.getValue().toString();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         saveButton.setOnMouseClicked(event -> updateCompany());
         cancelButton.setOnMouseClicked(event -> stage.close());
-    }
-
-    public void setNameOfCompanyToEdit(String nameOfCompanyToEdit) {
-        this.nameOfCompanyToEdit = nameOfCompanyToEdit;
-        // TODO: Find a better way to set the text of companyName - currently setting it outside the initialize method
         companyName.setText(nameOfCompanyToEdit);
     }
 

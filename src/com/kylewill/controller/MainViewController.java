@@ -1,5 +1,6 @@
 package com.kylewill.controller;
 
+import com.kylewill.controller.databaseitemcontroller.*;
 import com.kylewill.model.Company;
 import com.kylewill.model.Location;
 import com.kylewill.model.Supervisor;
@@ -36,17 +37,17 @@ public class MainViewController implements Initializable{
     private ObservableList<String> sortedLocationNames;
     private ObservableList<String> sortedSupervisorDisplayNames;
     @FXML private TextField hours;
-    @FXML private ChoiceBox<String> companyChoiceBox;
+    @FXML public ChoiceBox<String> companyChoiceBox;
+    @FXML public ChoiceBox<String> locationChoiceBox;
+    @FXML public ChoiceBox<String> supervisorChoiceBox;
     @FXML private Button addCompany;
-    @FXML private Button editCompany;
-    @FXML private Button deleteCompany;
-    @FXML private ChoiceBox<String> locationChoiceBox;
     @FXML private Button addLocation;
-    @FXML private Button editLocation;
-    @FXML private Button deleteLocation;
-    @FXML private ChoiceBox<String> supervisorChoiceBox;
     @FXML private Button addSupervisor;
+    @FXML private Button editCompany;
+    @FXML private Button editLocation;
     @FXML private Button editSupervisor;
+    @FXML private Button deleteCompany;
+    @FXML private Button deleteLocation;
     @FXML private Button deleteSupervisor;
     @FXML private TextArea comments;
     @FXML private Button submit;

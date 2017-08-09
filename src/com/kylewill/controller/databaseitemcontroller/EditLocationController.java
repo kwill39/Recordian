@@ -1,5 +1,6 @@
-package com.kylewill.controller;
+package com.kylewill.controller.databaseitemcontroller;
 
+import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Location;
 import com.kylewill.objectrelationalmap.LocationMapper;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import java.util.ResourceBundle;
 
 public class EditLocationController extends DatabaseItemController implements Initializable {
     private String nameOfLocationToEdit;
+    private Location locationToBeEdited;
     private @FXML Button saveButton;
     private @FXML Button cancelButton;
     private @FXML TextField locationName;
@@ -22,23 +24,21 @@ public class EditLocationController extends DatabaseItemController implements In
     private @FXML TextField locationState;
     private @FXML TextField locationZipCode;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        saveButton.setOnMouseClicked(event -> updateLocation());
-        cancelButton.setOnMouseClicked(event -> stage.close());
-    }
-
-    public void setNameOfLocationToEdit(String nameOfLocationToEdit) {
-        this.nameOfLocationToEdit = nameOfLocationToEdit;
-        // TODO: Find a better way to set the textfields for location values
-        // TODO: currently setting it outside the initialize method
-        Location locationToBeEdited = new Location("");
+    public EditLocationController(Stage stage, MainViewController mainViewController) {
+        super(stage, mainViewController);
+        nameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
         List<Location> locations = LocationMapper.readAll();
         for (Location someLocation : locations) {
             if (someLocation.getLocationName().equals(nameOfLocationToEdit)){
                 locationToBeEdited = someLocation;
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        saveButton.setOnMouseClicked(event -> updateLocation());
+        cancelButton.setOnMouseClicked(event -> stage.close());
         locationName.setText(locationToBeEdited.getLocationName());
         locationAddress.setText(locationToBeEdited.getLocationAddress());
         locationCity.setText(locationToBeEdited.getLocationCity());
