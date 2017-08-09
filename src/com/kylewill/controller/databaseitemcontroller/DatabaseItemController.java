@@ -11,4 +11,12 @@ public abstract class DatabaseItemController {
         this.stage = stage;
         this.mainViewController = mainViewController;
     }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setMainViewController(MainViewController mainViewController) {
+        this.mainViewController = mainViewController;
+    }
 }

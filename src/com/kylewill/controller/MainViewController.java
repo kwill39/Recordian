@@ -103,14 +103,9 @@ public class MainViewController implements Initializable{
 
     @FXML private void addCompany(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/addCompany.fxml"));
-            Stage addCompanyStage = new Stage();
-            addCompanyStage.setTitle("Add Company");
-            addCompanyStage.setScene(new Scene(loader.load()));
-            AddCompanyController addCompanyController = loader.getController();
-            addCompanyController.setMainViewController(this);
-            addCompanyController.setStage(addCompanyStage);
-            addCompanyStage.show();
+            String viewPath = "/com/kylewill/view/addCompany.fxml";
+            String stageTitle = "Add Company";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -120,15 +115,9 @@ public class MainViewController implements Initializable{
     @FXML private void editCompany(){
         String companyName = companyChoiceBox.getValue();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/editCompany.fxml"));
-            Stage editCompanyStage = new Stage();
-            editCompanyStage.setTitle("Edit Company");
-            editCompanyStage.setScene(new Scene(loader.load()));
-            EditCompanyController editCompanyController = loader.getController();
-            editCompanyController.setMainViewController(this);
-            editCompanyController.setStage(editCompanyStage);
-            editCompanyController.setNameOfCompanyToEdit(companyName);
-            editCompanyStage.show();
+            String viewPath = "/com/kylewill/view/editCompany.fxml";
+            String stageTitle = "Edit Company";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         } catch (IOException e){
             //TODO: Handle Exception
             System.err.println(e);
@@ -136,17 +125,10 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void deleteCompany(){
-        String companyName = companyChoiceBox.getValue();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/deleteCompany.fxml"));
-            Stage deleteCompanyStage = new Stage();
-            deleteCompanyStage.setTitle("Delete Company");
-            deleteCompanyStage.setScene(new Scene(loader.load()));
-            DeleteCompanyController deleteCompanyController = loader.getController();
-            deleteCompanyController.setMainViewController(this);
-            deleteCompanyController.setStage(deleteCompanyStage);
-            deleteCompanyController.setNameOfCompanyToDelete(companyName);
-            deleteCompanyStage.show();
+            String viewPath = "/com/kylewill/view/deleteCompany.fxml";
+            String stageTitle = "Delete Company";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -155,14 +137,9 @@ public class MainViewController implements Initializable{
 
     @FXML private void addLocation(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/addLocation.fxml"));
-            Stage addLocationStage = new Stage();
-            addLocationStage.setTitle("Add Location");
-            addLocationStage.setScene(new Scene(loader.load()));
-            AddLocationController addLocationController = loader.getController();
-            addLocationController.setMainViewController(this);
-            addLocationController.setStage(addLocationStage);
-            addLocationStage.show();
+            String viewPath = "/com/kylewill/view/addLocation.fxml";
+            String stageTitle = "Add Location";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -170,17 +147,10 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void editLocation(){
-        String locationName = locationChoiceBox.getValue();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/editLocation.fxml"));
-            Stage editLocationStage = new Stage();
-            editLocationStage.setTitle("Edit Location");
-            editLocationStage.setScene(new Scene(loader.load()));
-            EditLocationController editLocationController = loader.getController();
-            editLocationController.setMainViewController(this);
-            editLocationController.setStage(editLocationStage);
-            editLocationController.setNameOfLocationToEdit(locationName);
-            editLocationStage.show();
+            String viewPath = "/com/kylewill/view/editLocation.fxml";
+            String stageTitle = "Edit Location";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         } catch (IOException e){
             //TODO: Handle Exception
             System.err.println(e);
@@ -188,17 +158,10 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void deleteLocation(){
-        String locationName = locationChoiceBox.getValue();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/deleteLocation.fxml"));
-            Stage deleteLocationStage = new Stage();
-            deleteLocationStage.setTitle("Delete Location");
-            deleteLocationStage.setScene(new Scene(loader.load()));
-            DeleteLocationController deleteLocationController = loader.getController();
-            deleteLocationController.setMainViewController(this);
-            deleteLocationController.setStage(deleteLocationStage);
-            deleteLocationController.setNameOfLocationToDelete(locationName);
-            deleteLocationStage.show();
+            String viewPath = "/com/kylewill/view/deleteLocation.fxml";
+            String stageTitle = "Delete Location";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -207,14 +170,9 @@ public class MainViewController implements Initializable{
 
     @FXML private void addSupervisor(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/addSupervisor.fxml"));
-            Stage addSupervisorStage = new Stage();
-            addSupervisorStage.setTitle("Add Supervisor");
-            addSupervisorStage.setScene(new Scene(loader.load()));
-            AddSupervisorController addSupervisorController = loader.getController();
-            addSupervisorController.setMainViewController(this);
-            addSupervisorController.setStage(addSupervisorStage);
-            addSupervisorStage.show();
+            String viewPath = "/com/kylewill/view/addSupervisor.fxml";
+            String stageTitle = "Add Supervisor";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -226,17 +184,10 @@ public class MainViewController implements Initializable{
     }*/
 
     @FXML private void deleteSupervisor(){
-        String supervisorDisplayName = companyChoiceBox.getValue();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/deleteSupervisor.fxml"));
-            Stage deleteSupervisorStage = new Stage();
-            deleteSupervisorStage.setTitle("Delete Supervisor");
-            deleteSupervisorStage.setScene(new Scene(loader.load()));
-            DeleteSupervisorController deleteSupervisorController = loader.getController();
-            deleteSupervisorController.setMainViewController(this);
-            deleteSupervisorController.setStage(deleteSupervisorStage);
-            deleteSupervisorController.setDisplayNameOfSupervisorToDelete(supervisorDisplayName);
-            deleteSupervisorStage.show();
+            String viewPath = "/com/kylewill/view/deleteSupervisor.fxml";
+            String stageTitle = "DeleteSupervisor";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -287,14 +238,14 @@ public class MainViewController implements Initializable{
         }
     }
 
-    /*private void createModifyDatabaseItemStage(String choiceBoxItem, String stageTitle, String viewPath, Datab) throws IOException{
+    private void createModifyDatabaseItemStage(String viewPath, String stageTitle) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
         Stage newStage = new Stage();
         newStage.setTitle(stageTitle);
         newStage.setScene(new Scene(loader.load()));
-        DeleteSupervisorController deleteSupervisorController = loader.getController();
-        deleteSupervisorController.setMainViewController(this);
-        deleteSupervisorController.setStage(newStage);
+        DatabaseItemController databaseItemController = loader.getController();
+        databaseItemController.setMainViewController(this);
+        databaseItemController.setStage(newStage);
         newStage.show();
-    }*/
+    }
 }
