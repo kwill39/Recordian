@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditLocationController extends DatabaseItemController implements Initializable {
-    private String nameOfLocationToEdit;
-    private Location locationToBeEdited;
+    private Location locationToEdit;
     private @FXML Button saveButton;
     private @FXML Button cancelButton;
     private @FXML TextField locationName;
@@ -22,39 +21,34 @@ public class EditLocationController extends DatabaseItemController implements In
     private @FXML TextField locationState;
     private @FXML TextField locationZipCode;
 
-    public EditLocationController() {
-        nameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
-        List<Location> locations = LocationMapper.readAll();
-        for (Location someLocation : locations) {
-            if (someLocation.getLocationName().equals(nameOfLocationToEdit)){
-                locationToBeEdited = someLocation;
-            }
-        }
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         saveButton.setOnMouseClicked(event -> updateLocation());
         cancelButton.setOnMouseClicked(event -> stage.close());
-        locationName.setText(locationToBeEdited.getLocationName());
-        locationAddress.setText(locationToBeEdited.getLocationAddress());
-        locationCity.setText(locationToBeEdited.getLocationCity());
-        locationState.setText(locationToBeEdited.getLocationState());
-        locationZipCode.setText(locationToBeEdited.getLocationZipCode());
     }
 
-    private void updateLocation() {
+    @Override
+    protected void onMainViewControllerSet() {
+        String nameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
         List<Location> locations = LocationMapper.readAll();
         for (Location someLocation : locations) {
             if (someLocation.getLocationName().equals(nameOfLocationToEdit)){
-                someLocation.setLocationName(locationName.getText());
-                someLocation.setLocationAddress(locationAddress.getText());
-                someLocation.setLocationCity(locationCity.getText());
-                someLocation.setLocationState(locationState.getText());
-                someLocation.setLocationZipCode(locationZipCode.getText());
-                LocationMapper.update(someLocation);
+                locationToEdit = someLocation;
             }
         }
+        locationName.setText(locationToEdit.getLocationName());
+        locationAddress.setText(locationToEdit.getLocationAddress());
+        locationCity.setText(locationToEdit.getLocationCity());
+        locationState.setText(locationToEdit.getLocationState());
+        locationZipCode.setText(locationToEdit.getLocationZipCode());
+    }
+
+    private void updateLocation() {
+        locationToEdit.setLocationName(locationName.getText());
+        locationToEdit.setLocationAddress(locationAddress.getText());
+        locationToEdit.setLocationCity(locationCity.getText());
+        locationToEdit.setLocationState(locationState.getText());
+        locationToEdit.setLocationZipCode(locationZipCode.getText());
         mainViewController.refreshLocationNames();
         stage.close();
     }

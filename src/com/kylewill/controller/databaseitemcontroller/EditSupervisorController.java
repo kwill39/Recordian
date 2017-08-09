@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditSupervisorController extends DatabaseItemController implements Initializable {
-    private String displayNameOfSupervisorToEdit;
-    private Supervisor supervisorToBeEdited;
+    private Supervisor supervisorToEdit;
     private @FXML Button saveButton;
     private @FXML Button cancelButton;
     private @FXML TextField supervisorFirstName;
@@ -28,23 +27,23 @@ public class EditSupervisorController extends DatabaseItemController implements 
 
     @Override
     protected void onMainViewControllerSet() {
-        displayNameOfSupervisorToEdit = mainViewController.supervisorChoiceBox.getValue().toString();
+        String displayNameOfSupervisorToEdit = mainViewController.supervisorChoiceBox.getValue().toString();
         List<Supervisor> supervisors = SupervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisors) {
             if (someSupervisor.getSupervisorDisplayName().equals(displayNameOfSupervisorToEdit)){
-                supervisorToBeEdited = someSupervisor;
+                supervisorToEdit = someSupervisor;
             }
         }
-        supervisorFirstName.setText(supervisorToBeEdited.getSupervisorFirstName());
-        supervisorLastName.setText(supervisorToBeEdited.getSupervisorLastName());
-        supervisorDisplayName.setText(supervisorToBeEdited.getSupervisorDisplayName());
+        supervisorFirstName.setText(supervisorToEdit.getSupervisorFirstName());
+        supervisorLastName.setText(supervisorToEdit.getSupervisorLastName());
+        supervisorDisplayName.setText(supervisorToEdit.getSupervisorDisplayName());
     }
 
     private void updateSupervisor() {
-        supervisorToBeEdited.setSupervisorFirstName(supervisorFirstName.getText());
-        supervisorToBeEdited.setSupervisorLastName(supervisorLastName.getText());
-        supervisorToBeEdited.setSupervisorDisplayName(supervisorDisplayName.getText());
-        SupervisorMapper.update(supervisorToBeEdited);
+        supervisorToEdit.setSupervisorFirstName(supervisorFirstName.getText());
+        supervisorToEdit.setSupervisorLastName(supervisorLastName.getText());
+        supervisorToEdit.setSupervisorDisplayName(supervisorDisplayName.getText());
+        SupervisorMapper.update(supervisorToEdit);
         mainViewController.refreshSupervisorDisplayNames();
         stage.close();
     }

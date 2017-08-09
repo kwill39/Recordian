@@ -12,30 +12,32 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditCompanyController extends DatabaseItemController implements Initializable {
-    private String nameOfCompanyToEdit;
+    private Company companyToEdit;
     private @FXML Button saveButton;
     private @FXML Button cancelButton;
     private @FXML TextField companyName;
-
-    public EditCompanyController() {
-        nameOfCompanyToEdit = mainViewController.companyChoiceBox.getValue().toString();
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         saveButton.setOnMouseClicked(event -> updateCompany());
         cancelButton.setOnMouseClicked(event -> stage.close());
-        companyName.setText(nameOfCompanyToEdit);
     }
 
-    private void updateCompany() {
+    @Override
+    protected void onMainViewControllerSet() {
+        String nameOfCompanyToEdit = mainViewController.companyChoiceBox.getValue().toString();
         List<Company> companies = CompanyMapper.readAll();
         for (Company someCompany : companies) {
             if (someCompany.getCompanyName().equals(nameOfCompanyToEdit)){
-                someCompany.setCompanyName(companyName.getText());
-                CompanyMapper.update(someCompany);
+                companyToEdit = someCompany;
             }
         }
+        companyName.setText(companyToEdit.getCompanyName());
+    }
+
+    private void updateCompany() {
+        companyToEdit.setCompanyName(companyName.getText());
+        CompanyMapper.update(companyToEdit);
         mainViewController.refreshCompanyNames();
         stage.close();
     }
