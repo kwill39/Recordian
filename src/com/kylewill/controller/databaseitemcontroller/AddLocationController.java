@@ -21,10 +21,6 @@ public class AddLocationController extends DatabaseItemController implements Ini
     @FXML private Button addButton;
     @FXML private Button cancelButton;
 
-    public AddLocationController(Stage stage, MainViewController mainViewController) {
-        super(stage, mainViewController);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addButton.setOnMouseClicked(event -> addLocation());

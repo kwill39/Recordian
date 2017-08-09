@@ -19,8 +19,7 @@ public class EditCompanyController extends DatabaseItemController implements Ini
     private @FXML Button cancelButton;
     private @FXML TextField companyName;
 
-    public EditCompanyController(Stage stage, MainViewController mainViewController) {
-        super(stage, mainViewController);
+    public EditCompanyController() {
         nameOfCompanyToEdit = mainViewController.companyChoiceBox.getValue().toString();
     }
 

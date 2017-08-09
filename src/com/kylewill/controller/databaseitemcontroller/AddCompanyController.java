@@ -17,10 +17,6 @@ public class AddCompanyController extends DatabaseItemController implements Init
     @FXML private Button addButton;
     @FXML private Button cancelButton;
 
-    public AddCompanyController(Stage stage, MainViewController mainViewController) {
-        super(stage, mainViewController);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addButton.setOnMouseClicked(event -> addCompany());

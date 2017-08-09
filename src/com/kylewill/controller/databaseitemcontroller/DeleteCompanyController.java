@@ -16,10 +16,6 @@ public class DeleteCompanyController extends DatabaseItemController implements I
     @FXML private Button deleteButton;
     @FXML private Button cancelButton;
 
-    public DeleteCompanyController(Stage stage, MainViewController mainViewController) {
-        super(stage, mainViewController);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         cancelButton.setOnMouseClicked(event -> stage.close());

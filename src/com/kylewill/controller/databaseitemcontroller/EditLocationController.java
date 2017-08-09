@@ -24,8 +24,7 @@ public class EditLocationController extends DatabaseItemController implements In
     private @FXML TextField locationState;
     private @FXML TextField locationZipCode;
 
-    public EditLocationController(Stage stage, MainViewController mainViewController) {
-        super(stage, mainViewController);
+    public EditLocationController() {
         nameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
         List<Location> locations = LocationMapper.readAll();
         for (Location someLocation : locations) {
