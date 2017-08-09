@@ -1,12 +1,10 @@
 package com.kylewill.controller.databaseitemcontroller;
 
-import com.kylewill.controller.MainViewController;
 import com.kylewill.model.Supervisor;
 import com.kylewill.objectrelationalmap.SupervisorMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.List;

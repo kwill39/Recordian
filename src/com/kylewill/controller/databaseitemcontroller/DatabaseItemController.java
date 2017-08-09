@@ -13,5 +13,9 @@ public abstract class DatabaseItemController {
 
     public void setMainViewController(MainViewController mainViewController) {
         this.mainViewController = mainViewController;
+        onMainViewControllerSet();
     }
+
+    // To be overridden by subclasses
+    protected void onMainViewControllerSet() {}
 }

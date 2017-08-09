@@ -1,6 +1,6 @@
 package com.kylewill.controller;
 
-import com.kylewill.controller.databaseitemcontroller.*;
+import com.kylewill.controller.databaseitemcontroller.DatabaseItemController;
 import com.kylewill.model.Company;
 import com.kylewill.model.Location;
 import com.kylewill.model.Supervisor;
@@ -22,7 +22,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -68,12 +69,12 @@ public class MainViewController implements Initializable{
         editLocation.setOnMouseClicked(event -> editLocation());
         deleteLocation.setOnMouseClicked(event -> deleteLocation());
         addSupervisor.setOnMouseClicked(event -> addSupervisor());
-        //editSupervisor.setOnMouseClicked(event -> editSupervisor());
+        editSupervisor.setOnMouseClicked(event -> editSupervisor());
         deleteSupervisor.setOnMouseClicked(event -> deleteSupervisor());
-        submit.setOnMouseClicked(event -> submitHours());
+        submit.setOnMouseClicked(event -> submit());
     }
 
-    @FXML private void submitHours(){
+    @FXML private void submit(){
         try {
             //TODO: Add error dialogs for Exceptions
             // Try appending to the current log file or create a new one if there is no log file
@@ -93,8 +94,9 @@ public class MainViewController implements Initializable{
                     + "Comments: " + comments.getText();
             fileWriter.append(logEntry);
             fileWriter.close();
-        } catch (IOException exception) {
-            System.err.println("Caught IOException: " + exception.getMessage());
+        } catch (IOException e) {
+            //TODO: Handle exception
+            System.err.println(e);
             System.exit(1);
         }
 
@@ -113,7 +115,6 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void editCompany(){
-        String companyName = companyChoiceBox.getValue();
         try {
             String viewPath = "/com/kylewill/view/editCompany.fxml";
             String stageTitle = "Edit Company";
@@ -179,9 +180,16 @@ public class MainViewController implements Initializable{
         }
     }
 
-    /*@FXML private void editSupervisor(){
-        // Updates a supervisor record inside the db
-    }*/
+    @FXML private void editSupervisor(){
+        try {
+            String viewPath = "/com/kylewill/view/editSupervisor.fxml";
+            String stageTitle = "Edit Supervisor";
+            createModifyDatabaseItemStage(viewPath, stageTitle);
+        }catch (IOException e){
+            //TODO: Handle exception
+            System.err.println(e);
+        }
+    }
 
     @FXML private void deleteSupervisor(){
         try {
