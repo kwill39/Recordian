@@ -2,6 +2,8 @@ package com.kylewill.model;
 
 /**
  * Represents a company which the user works for
+ * @author  Kyle
+ * @since   Version 2
  */
 public class Company implements DatabaseItem{
     private int companyID;

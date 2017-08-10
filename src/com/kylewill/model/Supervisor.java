@@ -2,11 +2,18 @@ package com.kylewill.model;
 
 /**
  * Represents a supervisor whom the user works under the supervision of
+ *
+ * @author  Kyle
+ * @since   Version 2
  */
 public class Supervisor implements DatabaseItem{
     private int supervisorID;
     private String supervisorFirstName;
     private String supervisorLastName;
+    /**
+     * The nickname of the supervisor that
+     * gets displayed to the user in a view
+     */
     private String supervisorDisplayName;
 
     public Supervisor(String supervisorDisplayName) {

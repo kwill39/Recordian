@@ -2,6 +2,9 @@ package com.kylewill.model;
 
 /**
  * Represents a location where the user works
+ *
+ * @author  Kyle
+ * @since   Version 2
  */
 public class Location implements DatabaseItem{
 
