@@ -1,5 +1,8 @@
 package com.kylewill.model;
 
+/**
+ * Represents a company which the user works for
+ */
 public class Company implements DatabaseItem{
     private int companyID;
     private String companyName;

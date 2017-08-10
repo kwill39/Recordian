@@ -1,5 +1,8 @@
 package com.kylewill.model;
 
+/**
+ * Represents a location where the user works
+ */
 public class Location implements DatabaseItem{
 
     private int locationID;

@@ -1,5 +1,8 @@
 package com.kylewill.model;
 
+/**
+ * Represents a supervisor whom the user works under the supervision of
+ */
 public class Supervisor implements DatabaseItem{
     private int supervisorID;
     private String supervisorFirstName;
