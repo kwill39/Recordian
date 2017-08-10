@@ -6,11 +6,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * DatabaseHelper is a helper class that contains methods used for
+ * setting up and tearing down an Hour Tracker SQLite database.
+ *
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
 public final class DatabaseHelper {
     public static final String DATABASE_CONNECTION_URL = "jdbc:sqlite:Hour_Tracker_Files/HourTracker.db";
 
     private DatabaseHelper(){}
 
+    /**
+     * Creates an Hour Tracker SQLite database - including the
+     * tables which are accessed and used throughout Kyle's Hour Tracker
+     */
     public static void createDatabase() {
         // Creates a new database file with appropriate tables
         new File("Hour_Tracker_Files").mkdir();
@@ -52,7 +63,11 @@ public final class DatabaseHelper {
         }
     }
 
-    // Deletes the database
+    /**
+     * Deletes the SQLite database used in Kyle's Hour Tracker.
+     * This method is commonly used by test classes in order to
+     * recreate the database for test methods to run on a fresh database.
+     */
     public static void deleteDatabase(){
         File databaseFile = new File("Hour_Tracker_Files/HourTracker.db");
         databaseFile.delete();

@@ -15,6 +15,7 @@ public class Main extends Application {
         // Create a new database file if one does not currently exist
         DatabaseHelper.createDatabase();
 
+        // Creates the main view of the application
         Parent root = FXMLLoader.load(getClass().getResource("view/mainView.fxml"));
         primaryStage.setTitle("Kyle's Hour Tracker");
         primaryStage.setScene(new Scene(root));
