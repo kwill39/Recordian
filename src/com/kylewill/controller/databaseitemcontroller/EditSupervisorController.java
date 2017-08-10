@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditSupervisorController extends DatabaseItemController implements Initializable {
+    private SupervisorMapper supervisorMapper = new SupervisorMapper();
     private Supervisor supervisorToEdit;
     private @FXML TextField supervisorFirstName;
     private @FXML TextField supervisorLastName;
@@ -28,7 +29,7 @@ public class EditSupervisorController extends DatabaseItemController implements 
     @Override
     protected void onMainViewControllerSet() {
         String displayNameOfSupervisorToEdit = mainViewController.supervisorChoiceBox.getValue().toString();
-        List<Supervisor> supervisors = SupervisorMapper.readAll();
+        List<Supervisor> supervisors = supervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisors) {
             if (someSupervisor.getSupervisorDisplayName().equals(displayNameOfSupervisorToEdit)){
                 supervisorToEdit = someSupervisor;
@@ -43,7 +44,7 @@ public class EditSupervisorController extends DatabaseItemController implements 
         supervisorToEdit.setSupervisorFirstName(supervisorFirstName.getText());
         supervisorToEdit.setSupervisorLastName(supervisorLastName.getText());
         supervisorToEdit.setSupervisorDisplayName(supervisorDisplayName.getText());
-        SupervisorMapper.update(supervisorToEdit);
+        supervisorMapper.update(supervisorToEdit);
         mainViewController.refreshSupervisorDisplayNames();
         stage.close();
     }

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeleteLocationController extends DatabaseItemController implements Initializable{
+    private LocationMapper locationMapper = new LocationMapper();
     private Location locationToDelete;
     @FXML private Label confirmationLabel;
     @FXML private Button deleteButton;
@@ -26,7 +27,7 @@ public class DeleteLocationController extends DatabaseItemController implements 
     @Override
     protected void onMainViewControllerSet() {
         String nameOfLocationToDelete = mainViewController.locationChoiceBox.getValue().toString();
-        List<Location> companies = LocationMapper.readAll();
+        List<Location> companies = locationMapper.readAll();
         for (Location someLocation : companies){
             if (someLocation.getLocationName().equals(nameOfLocationToDelete)){
                 locationToDelete = someLocation;
@@ -36,7 +37,7 @@ public class DeleteLocationController extends DatabaseItemController implements 
     }
 
     private void deleteLocation() {
-        LocationMapper.delete(locationToDelete);
+        locationMapper.delete(locationToDelete);
         mainViewController.refreshLocationNames();
         stage.close();
     }

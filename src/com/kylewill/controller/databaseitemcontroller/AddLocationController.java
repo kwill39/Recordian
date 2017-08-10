@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddLocationController extends DatabaseItemController implements Initializable{
+    private LocationMapper locationMapper = new LocationMapper();
     @FXML private TextField newLocationName;
     @FXML private TextField newLocationAddress;
     @FXML private TextField newLocationCity;
@@ -31,7 +32,7 @@ public class AddLocationController extends DatabaseItemController implements Ini
         newLocation.setLocationCity(newLocationCity.getText());
         newLocation.setLocationState(newLocationState.getText());
         newLocation.setLocationZipCode(newLocationZipCode.getText());
-        LocationMapper.create(newLocation);
+        locationMapper.create(newLocation);
         mainViewController.refreshLocationNames();
         stage.close();
     }

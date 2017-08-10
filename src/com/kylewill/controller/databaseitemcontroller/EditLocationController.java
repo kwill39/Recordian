@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditLocationController extends DatabaseItemController implements Initializable {
+    private LocationMapper locationMapper = new LocationMapper();
     private Location locationToEdit;
     private @FXML TextField locationName;
     private @FXML TextField locationAddress;
@@ -30,7 +31,7 @@ public class EditLocationController extends DatabaseItemController implements In
     @Override
     protected void onMainViewControllerSet() {
         String nameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
-        List<Location> locations = LocationMapper.readAll();
+        List<Location> locations = locationMapper.readAll();
         for (Location someLocation : locations) {
             if (someLocation.getLocationName().equals(nameOfLocationToEdit)){
                 locationToEdit = someLocation;
@@ -49,6 +50,7 @@ public class EditLocationController extends DatabaseItemController implements In
         locationToEdit.setLocationCity(locationCity.getText());
         locationToEdit.setLocationState(locationState.getText());
         locationToEdit.setLocationZipCode(locationZipCode.getText());
+        locationMapper.update(locationToEdit);
         mainViewController.refreshLocationNames();
         stage.close();
     }

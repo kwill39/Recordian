@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class SupervisorMapperTest implements MapperTest<Supervisor> {
+    private SupervisorMapper supervisorMapper = new SupervisorMapper();
     private Supervisor jimbo;
     private Supervisor frankie;
     private Supervisor bobby;
@@ -32,11 +33,11 @@ public class SupervisorMapperTest implements MapperTest<Supervisor> {
         bobby = new Supervisor("Bobby");
         bobby.setSupervisorFirstName("Bob");
         bobby.setSupervisorLastName("Bobberson");
-        SupervisorMapper.create(jimbo);
-        SupervisorMapper.create(frankie);
-        SupervisorMapper.create(bobby);
+        supervisorMapper.create(jimbo);
+        supervisorMapper.create(frankie);
+        supervisorMapper.create(bobby);
         // Read the records
-        supervisorList = SupervisorMapper.readAll();
+        supervisorList = supervisorMapper.readAll();
         dbJimbo = supervisorList.get(0);
         dbFrankie = supervisorList.get(1);
         dbBobby = supervisorList.get(2);
@@ -75,12 +76,12 @@ public class SupervisorMapperTest implements MapperTest<Supervisor> {
         dbBobby.setSupervisorLastName("C Last Name");
         dbBobby.setSupervisorDisplayName("C Display Name");
 
-        SupervisorMapper.update(dbJimbo);
-        SupervisorMapper.update(dbFrankie);
-        SupervisorMapper.update(dbBobby);
+        supervisorMapper.update(dbJimbo);
+        supervisorMapper.update(dbFrankie);
+        supervisorMapper.update(dbBobby);
 
         // Verify the records were updated
-        supervisorList = SupervisorMapper.readAll();
+        supervisorList = supervisorMapper.readAll();
         Supervisor updatedJimbo = supervisorList.get(0);
         Supervisor updatedFrankie = supervisorList.get(1);
         Supervisor updatedBobby = supervisorList.get(2);
@@ -92,18 +93,18 @@ public class SupervisorMapperTest implements MapperTest<Supervisor> {
     @Test
     public void delete() {
         // Delete the records one by one and verify that they were deleted along the way
-        SupervisorMapper.delete(dbJimbo);
-        supervisorList = SupervisorMapper.readAll();
+        supervisorMapper.delete(dbJimbo);
+        supervisorList = supervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisorList) {
             assertTrue(someSupervisor.getSupervisorID() != dbJimbo.getSupervisorID());
         }
-        SupervisorMapper.delete(dbFrankie);
-        supervisorList = SupervisorMapper.readAll();
+        supervisorMapper.delete(dbFrankie);
+        supervisorList = supervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisorList) {
             assertTrue(someSupervisor.getSupervisorID() != dbFrankie.getSupervisorID());
         }
-        SupervisorMapper.delete(dbBobby);
-        supervisorList = SupervisorMapper.readAll();
+        supervisorMapper.delete(dbBobby);
+        supervisorList = supervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisorList) {
             assertTrue(someSupervisor.getSupervisorID() != dbBobby.getSupervisorID());
         }

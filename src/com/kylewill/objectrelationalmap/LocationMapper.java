@@ -7,11 +7,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class LocationMapper {
+public final class LocationMapper implements ObjectMapper<Location> {
 
-    private LocationMapper() {}
-
-    public static void create(Location location) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param location a <code>Location<code/> object
+     */
+    public void create(Location location) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -39,7 +42,12 @@ public final class LocationMapper {
         }
     }
 
-    public static List<Location> readAll() {
+    /**
+     * {@inheritDoc}
+     *
+     * @return a <code>List</code> of <code>Location<code/> objects
+     */
+    public List<Location> readAll() {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -74,7 +82,12 @@ public final class LocationMapper {
         return null;
     }
 
-    public static void update(Location location) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param location a <code>Location<code/> object that has a valid primary key
+     */
+    public void update(Location location) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -107,7 +120,12 @@ public final class LocationMapper {
         }
     }
 
-    public static void delete(Location location) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param location a <code>Location<code/> object that has a valid primary key
+     */
+    public void delete(Location location) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);

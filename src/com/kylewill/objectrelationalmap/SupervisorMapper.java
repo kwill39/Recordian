@@ -7,11 +7,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SupervisorMapper {
+public final class SupervisorMapper implements ObjectMapper<Supervisor> {
 
-    private SupervisorMapper() {}
-
-    public static void create(Supervisor supervisor) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param supervisor a <code>Supervisor<code/> object
+     */
+    public void create(Supervisor supervisor) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -37,7 +40,12 @@ public final class SupervisorMapper {
         }
     }
 
-    public static List<Supervisor> readAll() {
+    /**
+     * {@inheritDoc}
+     *
+     * @return a <code>List</code> of <code>Supervisor<code/> objects
+     */
+    public List<Supervisor> readAll() {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -70,7 +78,12 @@ public final class SupervisorMapper {
         return null;
     }
 
-    public static void update(Supervisor supervisor) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param supervisor a <code>Supervisor<code/> object that has a valid primary key
+     */
+    public void update(Supervisor supervisor) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -99,7 +112,12 @@ public final class SupervisorMapper {
         }
     }
 
-    public static void delete(Supervisor supervisor) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param supervisor <code>Supervisor<code/> object that has a valid primary key
+     */
+    public void delete(Supervisor supervisor) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);

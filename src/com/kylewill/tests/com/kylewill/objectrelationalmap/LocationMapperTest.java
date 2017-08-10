@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class LocationMapperTest implements MapperTest<Location> {
+    private LocationMapper locationMapper = new LocationMapper();
     private Location snowland;
     private Location springland;
     private Location wetland;
@@ -40,12 +41,12 @@ public class LocationMapperTest implements MapperTest<Location> {
         wetland.setLocationCity("Atlantis");
         wetland.setLocationState("Under Da Sea");
         wetland.setLocationZipCode("33333");
-        LocationMapper.create(snowland);
-        LocationMapper.create(springland);
-        LocationMapper.create(wetland);
+        locationMapper.create(snowland);
+        locationMapper.create(springland);
+        locationMapper.create(wetland);
 
         // Read the records
-        locationList = LocationMapper.readAll();
+        locationList = locationMapper.readAll();
         dbSnowland = locationList.get(0);
         dbSpringland = locationList.get(1);
         dbWetland = locationList.get(2);
@@ -77,24 +78,24 @@ public class LocationMapperTest implements MapperTest<Location> {
         dbSnowland.setLocationCity("A City");
         dbSnowland.setLocationState("A State");
         dbSnowland.setLocationZipCode("A Zip Code");
-        LocationMapper.update(dbSnowland);
+        locationMapper.update(dbSnowland);
 
         dbSpringland.setLocationName("B Name");
         dbSpringland.setLocationAddress("B Street");
         dbSpringland.setLocationCity("B City");
         dbSpringland.setLocationState("B State");
         dbSpringland.setLocationZipCode("B Zip Code");
-        LocationMapper.update(dbSpringland);
+        locationMapper.update(dbSpringland);
 
         dbWetland.setLocationName("C Name");
         dbWetland.setLocationAddress("C Street");
         dbWetland.setLocationCity("C City");
         dbWetland.setLocationState("C State");
         dbWetland.setLocationZipCode("C Zip Code");
-        LocationMapper.update(dbWetland);
+        locationMapper.update(dbWetland);
 
         // Verify the records were updated
-        locationList = LocationMapper.readAll();
+        locationList = locationMapper.readAll();
         Location updatedSnowland = locationList.get(0);
         Location updatedSpringland = locationList.get(1);
         Location updatedWetland = locationList.get(2);
@@ -107,18 +108,18 @@ public class LocationMapperTest implements MapperTest<Location> {
     @Test
     public void delete(){
         // Delete the records one by one and verify that they were deleted along the way
-        LocationMapper.delete(dbWetland);
-        locationList = LocationMapper.readAll();
+        locationMapper.delete(dbWetland);
+        locationList = locationMapper.readAll();
         for (Location someLocation : locationList) {
             assertTrue(someLocation.getLocationID() != dbWetland.getLocationID());
         }
-        LocationMapper.delete(dbSnowland);
-        locationList = LocationMapper.readAll();
+        locationMapper.delete(dbSnowland);
+        locationList = locationMapper.readAll();
         for (Location someLocation : locationList) {
             assertTrue(someLocation.getLocationID() != dbSnowland.getLocationID());
         }
-        LocationMapper.delete(dbSpringland);
-        locationList = LocationMapper.readAll();
+        locationMapper.delete(dbSpringland);
+        locationList = locationMapper.readAll();
         for (Location someLocation : locationList) {
             assertTrue(someLocation.getLocationID() != dbSpringland.getLocationID());
         }

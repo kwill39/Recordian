@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class EditCompanyController extends DatabaseItemController implements Initializable {
+    private CompanyMapper companyMapper = new CompanyMapper();
     private Company companyToEdit;
     private @FXML TextField companyName;
     private @FXML Button saveButton;
@@ -26,7 +27,7 @@ public class EditCompanyController extends DatabaseItemController implements Ini
     @Override
     protected void onMainViewControllerSet() {
         String nameOfCompanyToEdit = mainViewController.companyChoiceBox.getValue().toString();
-        List<Company> companies = CompanyMapper.readAll();
+        List<Company> companies = companyMapper.readAll();
         for (Company someCompany : companies) {
             if (someCompany.getCompanyName().equals(nameOfCompanyToEdit)){
                 companyToEdit = someCompany;
@@ -37,7 +38,7 @@ public class EditCompanyController extends DatabaseItemController implements Ini
 
     private void updateCompany() {
         companyToEdit.setCompanyName(companyName.getText());
-        CompanyMapper.update(companyToEdit);
+        companyMapper.update(companyToEdit);
         mainViewController.refreshCompanyNames();
         stage.close();
     }

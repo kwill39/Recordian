@@ -2,16 +2,27 @@ package com.kylewill.objectrelationalmap;
 
 import com.kylewill.DatabaseHelper;
 import com.kylewill.model.Company;
+import com.kylewill.model.DatabaseItem;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class CompanyMapper {
+/**
+ * Data access object that interfaces between
+ * the SQLite database and <code>Company</code> objects
+ *
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public final class CompanyMapper implements ObjectMapper<Company> {
 
-    private CompanyMapper() {}
-
-    public static void create(Company company) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param company a <code>Company<code/> object
+     */
+    public void create(Company company) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -34,7 +45,12 @@ public final class CompanyMapper {
         }
     }
 
-    public static List<Company> readAll() {
+    /**
+     * {@inheritDoc}
+     *
+     * @return a <code>List</code> of <code>Company<code/> objects
+     */
+    public List<Company> readAll() {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -65,7 +81,12 @@ public final class CompanyMapper {
         return null;
     }
 
-    public static void update(Company company) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param company a <code>Company<code/> object that has a valid primary key
+     */
+    public void update(Company company) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
@@ -89,7 +110,12 @@ public final class CompanyMapper {
         }
     }
 
-    public static void delete(Company company) {
+    /**
+     * {@inheritDoc}
+     *
+     * @param company a <code>Company<code/> object that has a valid primary key
+     */
+    public void delete(Company company) {
         Connection dbConnection = null;
         try {
             dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);

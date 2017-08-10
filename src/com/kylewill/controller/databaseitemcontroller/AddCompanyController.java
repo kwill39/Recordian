@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddCompanyController extends DatabaseItemController implements Initializable{
+    private CompanyMapper companyMapper = new CompanyMapper();
     @FXML private TextField newCompanyName;
     @FXML private Button addButton;
     @FXML private Button cancelButton;
@@ -23,7 +24,7 @@ public class AddCompanyController extends DatabaseItemController implements Init
 
     private void addCompany() {
         Company newCompany = new Company(newCompanyName.getText());
-        CompanyMapper.create(newCompany);
+        companyMapper.create(newCompany);
         mainViewController.refreshCompanyNames();
         stage.close();
     }

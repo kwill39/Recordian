@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class CompanyMapperTest implements MapperTest<Company> {
+    private CompanyMapper companyMapper = new CompanyMapper();
     private Company snowRemover;
     private Company springRemover;
     private Company wetRemover;
@@ -27,12 +28,12 @@ public class CompanyMapperTest implements MapperTest<Company> {
         snowRemover = new Company("SnowRemover");
         springRemover = new Company("SpringRemover");
         wetRemover = new Company("WetRemover");
-        CompanyMapper.create(snowRemover);
-        CompanyMapper.create(springRemover);
-        CompanyMapper.create(wetRemover);
+        companyMapper.create(snowRemover);
+        companyMapper.create(springRemover);
+        companyMapper.create(wetRemover);
 
         // Read the records
-        companyList = CompanyMapper.readAll();
+        companyList = companyMapper.readAll();
         dbSnowRemover = companyList.get(0);
         dbSpringRemover = companyList.get(1);
         dbWetRemover = companyList.get(2);
@@ -62,12 +63,12 @@ public class CompanyMapperTest implements MapperTest<Company> {
         dbSnowRemover.setCompanyName("Sunnyland");
         dbSpringRemover.setCompanyName("Fallland");
         dbWetRemover.setCompanyName("Dryland");
-        CompanyMapper.update(dbSnowRemover);
-        CompanyMapper.update(dbSpringRemover);
-        CompanyMapper.update(dbWetRemover);
+        companyMapper.update(dbSnowRemover);
+        companyMapper.update(dbSpringRemover);
+        companyMapper.update(dbWetRemover);
 
         // Verify the records were updated
-        companyList = CompanyMapper.readAll();
+        companyList = companyMapper.readAll();
         Company updatedSnowRemover = companyList.get(0);
         Company updatedSpringRemover = companyList.get(1);
         Company updatedWetRemover = companyList.get(2);
@@ -79,18 +80,18 @@ public class CompanyMapperTest implements MapperTest<Company> {
     @Test
     public void delete() {
         // Delete the records one by one and verify that they were deleted along the way
-        CompanyMapper.delete(dbWetRemover);
-        companyList = CompanyMapper.readAll();
+        companyMapper.delete(dbWetRemover);
+        companyList = companyMapper.readAll();
         for (Company someCompany : companyList) {
             assertTrue(someCompany.getCompanyID() != dbWetRemover.getCompanyID());
         }
-        CompanyMapper.delete(dbSnowRemover);
-        companyList = CompanyMapper.readAll();
+        companyMapper.delete(dbSnowRemover);
+        companyList = companyMapper.readAll();
         for (Company someCompany : companyList) {
             assertTrue(someCompany.getCompanyID() != dbSnowRemover.getCompanyID());
         }
-        CompanyMapper.delete(dbSpringRemover);
-        companyList = CompanyMapper.readAll();
+        companyMapper.delete(dbSpringRemover);
+        companyList = companyMapper.readAll();
         for (Company someCompany : companyList) {
             assertTrue(someCompany.getCompanyID() != dbSpringRemover.getCompanyID());
         }

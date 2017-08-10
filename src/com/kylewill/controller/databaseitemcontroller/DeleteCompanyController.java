@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeleteCompanyController extends DatabaseItemController implements Initializable{
+    private CompanyMapper companyMapper = new CompanyMapper();
     private Company companyToDelete;
     @FXML private Label confirmationMessage;
     @FXML private Button deleteButton;
@@ -26,7 +27,7 @@ public class DeleteCompanyController extends DatabaseItemController implements I
     @Override
     protected void onMainViewControllerSet() {
         String nameOfcompanyToDelete = mainViewController.companyChoiceBox.getValue().toString();
-        List<Company> companies = CompanyMapper.readAll();
+        List<Company> companies = companyMapper.readAll();
         for (Company someCompany : companies){
             if (someCompany.getCompanyName().equals(nameOfcompanyToDelete)){
                 companyToDelete = someCompany;
@@ -36,7 +37,7 @@ public class DeleteCompanyController extends DatabaseItemController implements I
     }
 
     private void deleteCompany() {
-        CompanyMapper.delete(companyToDelete);
+        companyMapper.delete(companyToDelete);
         mainViewController.refreshCompanyNames();
         stage.close();
     }

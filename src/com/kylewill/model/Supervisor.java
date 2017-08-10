@@ -3,7 +3,7 @@ package com.kylewill.model;
 /**
  * Represents a supervisor whom the user works under the supervision of
  *
- * @author  Kyle
+ * @author  Kyle Williams
  * @since   Version 2
  */
 public class Supervisor implements DatabaseItem{

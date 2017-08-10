@@ -223,24 +223,27 @@ public class MainViewController implements Initializable{
     }
 
     public void refreshCompanyNames(){
+        CompanyMapper companyMapper = new CompanyMapper();
         companyNames.clear();
-        List<Company> companies = CompanyMapper.readAll();
+        List<Company> companies = companyMapper.readAll();
         for (Company someCompany : companies){
             companyNames.add(someCompany.getCompanyName());
         }
     }
 
     public void refreshLocationNames(){
+        LocationMapper locationMapper = new LocationMapper();
         locationNames.clear();
-        List<Location> locations = LocationMapper.readAll();
+        List<Location> locations = locationMapper.readAll();
         for (Location someLocation : locations) {
             locationNames.add(someLocation.getLocationName());
         }
     }
 
     public void refreshSupervisorDisplayNames(){
+        SupervisorMapper supervisorMapper = new SupervisorMapper();
         supervisorDisplayNames.clear();
-        List<Supervisor> supervisors = SupervisorMapper.readAll();
+        List<Supervisor> supervisors = supervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisors) {
             supervisorDisplayNames.add(someSupervisor.getSupervisorDisplayName());
         }

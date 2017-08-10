@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DeleteSupervisorController extends DatabaseItemController implements Initializable{
+    private SupervisorMapper supervisorMapper = new SupervisorMapper();
     private Supervisor supervisorToDelete;
     @FXML private Label confirmationLabel;
     @FXML private Button deleteButton;
@@ -26,7 +27,7 @@ public class DeleteSupervisorController extends DatabaseItemController implement
     @Override
     protected void onMainViewControllerSet() {
         String displayNameOfSupervisorToDelete = mainViewController.supervisorChoiceBox.getValue().toString();
-        List<Supervisor> supervisors = SupervisorMapper.readAll();
+        List<Supervisor> supervisors = supervisorMapper.readAll();
         for (Supervisor someSupervisor : supervisors){
             if (someSupervisor.getSupervisorDisplayName().equals(displayNameOfSupervisorToDelete)){
                 supervisorToDelete = someSupervisor;
@@ -36,7 +37,7 @@ public class DeleteSupervisorController extends DatabaseItemController implement
     }
 
     private void deleteSupervisor() {
-        SupervisorMapper.delete(supervisorToDelete);
+        supervisorMapper.delete(supervisorToDelete);
         mainViewController.refreshSupervisorDisplayNames();
         stage.close();
     }

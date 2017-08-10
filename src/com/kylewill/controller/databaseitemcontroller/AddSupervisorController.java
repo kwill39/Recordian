@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddSupervisorController extends DatabaseItemController implements Initializable{
+    private SupervisorMapper supervisorMapper = new SupervisorMapper();
     @FXML private TextField newSupervisorFirstName;
     @FXML private TextField newSupervisorLastName;
     @FXML private TextField newSupervisorDisplayName;
@@ -27,7 +28,7 @@ public class AddSupervisorController extends DatabaseItemController implements I
         Supervisor newSupervisor = new Supervisor(newSupervisorDisplayName.getText());
         newSupervisor.setSupervisorFirstName(newSupervisorFirstName.getText());
         newSupervisor.setSupervisorLastName(newSupervisorLastName.getText());
-        SupervisorMapper.create(newSupervisor);
+        supervisorMapper.create(newSupervisor);
         mainViewController.refreshSupervisorDisplayNames();
         stage.close();
     }

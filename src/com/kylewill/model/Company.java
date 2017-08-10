@@ -2,7 +2,7 @@ package com.kylewill.model;
 
 /**
  * Represents a company which the user works for
- * @author  Kyle
+ * @author  Kyle Williams
  * @since   Version 2
  */
 public class Company implements DatabaseItem{
