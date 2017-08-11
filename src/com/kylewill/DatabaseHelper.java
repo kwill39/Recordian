@@ -14,6 +14,9 @@ import java.sql.Statement;
  * @since   Version 2
  */
 public final class DatabaseHelper {
+    /**
+     * The url that leads to the SQLite database
+     */
     public static final String DATABASE_CONNECTION_URL = "jdbc:sqlite:Hour_Tracker_Files/HourTracker.db";
 
     private DatabaseHelper(){}

@@ -30,9 +30,25 @@ import java.time.Month;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
 public class MainViewController implements Initializable{
+    /**
+     * A list containing the name of each <code>Company</code> within the SQLite companies table.
+     * The strings in this list make up the items within <code>companyChoicebox</code>.
+     */
     private ObservableList<String> companyNames = FXCollections.observableArrayList();
+    /**
+     * A list containing the name of each <code>Location</code> within the SQLite locations table.
+     * The strings in this list make up the items within <code>locationChoicebox</code>.
+     */
     private ObservableList<String> locationNames = FXCollections.observableArrayList();
+    /**
+     * A list containing the display name of each <code>Supervisor</code> within the SQLite supervisors table.
+     * The strings in this list make up the items within <code>supervisorChoicebox</code>.
+     */
     private ObservableList<String> supervisorDisplayNames = FXCollections.observableArrayList();
     private ObservableList<String> sortedCompanyNames;
     private ObservableList<String> sortedLocationNames;
@@ -74,6 +90,10 @@ public class MainViewController implements Initializable{
         submit.setOnMouseClicked(event -> submit());
     }
 
+    /**
+     * Submits a work iteration, to the Hours_Worked log file, with all the
+     * information given by the user pertaining to the work iteration
+     */
     @FXML private void submit(){
         try {
             //TODO: Add error dialogs for Exceptions
@@ -107,7 +127,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/addCompany.fxml";
             String stageTitle = "Add Company";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -118,7 +138,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/editCompany.fxml";
             String stageTitle = "Edit Company";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         } catch (IOException e){
             //TODO: Handle Exception
             System.err.println(e);
@@ -129,7 +149,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/deleteCompany.fxml";
             String stageTitle = "Delete Company";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -140,7 +160,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/addLocation.fxml";
             String stageTitle = "Add Location";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -151,7 +171,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/editLocation.fxml";
             String stageTitle = "Edit Location";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         } catch (IOException e){
             //TODO: Handle Exception
             System.err.println(e);
@@ -162,7 +182,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/deleteLocation.fxml";
             String stageTitle = "Delete Location";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -173,7 +193,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/addSupervisor.fxml";
             String stageTitle = "Add Supervisor";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -184,7 +204,7 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/editSupervisor.fxml";
             String stageTitle = "Edit Supervisor";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
@@ -195,13 +215,16 @@ public class MainViewController implements Initializable{
         try {
             String viewPath = "/com/kylewill/view/deleteSupervisor.fxml";
             String stageTitle = "DeleteSupervisor";
-            createModifyDatabaseItemStage(viewPath, stageTitle);
+            createDatabaseItemModificationStage(viewPath, stageTitle);
         }catch (IOException e){
             //TODO: Handle exception
             System.err.println(e);
         }
     }
 
+    /**
+     * Sets the items for all choiceboxes in mainView
+     */
     private void setChoiceBoxItems(){
         // Set company choicebox items
         sortedCompanyNames = new SortedList<>(companyNames, String.CASE_INSENSITIVE_ORDER);
@@ -222,6 +245,10 @@ public class MainViewController implements Initializable{
         supervisorChoiceBox.setItems(sortedSupervisorDisplayNames);
     }
 
+    /**
+     * This method should be called in order to update <code>companyNames<code/>
+     * whenever the SQLite companies table is changed.
+     */
     public void refreshCompanyNames(){
         CompanyMapper companyMapper = new CompanyMapper();
         companyNames.clear();
@@ -231,6 +258,10 @@ public class MainViewController implements Initializable{
         }
     }
 
+    /**
+     * This method should be called in order to update <code>locationNames<code/>
+     * whenever the SQLite locations table is changed.
+     */
     public void refreshLocationNames(){
         LocationMapper locationMapper = new LocationMapper();
         locationNames.clear();
@@ -240,6 +271,10 @@ public class MainViewController implements Initializable{
         }
     }
 
+    /**
+     * This method should be called in order to update <code>supervisorDisplayNames<code/>
+     * whenever the SQLite supervisors table is changed.
+     */
     public void refreshSupervisorDisplayNames(){
         SupervisorMapper supervisorMapper = new SupervisorMapper();
         supervisorDisplayNames.clear();
@@ -249,7 +284,7 @@ public class MainViewController implements Initializable{
         }
     }
 
-    private void createModifyDatabaseItemStage(String viewPath, String stageTitle) throws IOException{
+    private void createDatabaseItemModificationStage(String viewPath, String stageTitle) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
         Stage newStage = new Stage();
         newStage.setTitle(stageTitle);
