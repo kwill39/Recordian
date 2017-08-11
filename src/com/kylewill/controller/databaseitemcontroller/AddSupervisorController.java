@@ -10,7 +10,11 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddSupervisorController extends DatabaseItemController implements Initializable{
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class AddSupervisorController extends DatabaseItemModificationController implements Initializable{
     private SupervisorMapper supervisorMapper = new SupervisorMapper();
     @FXML private TextField newSupervisorFirstName;
     @FXML private TextField newSupervisorLastName;

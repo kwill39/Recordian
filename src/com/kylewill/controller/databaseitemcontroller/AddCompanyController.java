@@ -10,7 +10,11 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddCompanyController extends DatabaseItemController implements Initializable{
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class AddCompanyController extends DatabaseItemModificationController implements Initializable{
     private CompanyMapper companyMapper = new CompanyMapper();
     @FXML private TextField newCompanyName;
     @FXML private Button addButton;

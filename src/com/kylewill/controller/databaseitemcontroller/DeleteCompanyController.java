@@ -11,7 +11,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DeleteCompanyController extends DatabaseItemController implements Initializable{
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class DeleteCompanyController extends DatabaseItemModificationController implements Initializable{
     private CompanyMapper companyMapper = new CompanyMapper();
     private Company companyToDelete;
     @FXML private Label confirmationMessage;

@@ -11,7 +11,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DeleteSupervisorController extends DatabaseItemController implements Initializable{
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class DeleteSupervisorController extends DatabaseItemModificationController implements Initializable{
     private SupervisorMapper supervisorMapper = new SupervisorMapper();
     private Supervisor supervisorToDelete;
     @FXML private Label confirmationLabel;

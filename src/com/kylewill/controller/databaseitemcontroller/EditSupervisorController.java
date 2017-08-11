@@ -11,7 +11,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class EditSupervisorController extends DatabaseItemController implements Initializable {
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class EditSupervisorController extends DatabaseItemModificationController implements Initializable {
     private SupervisorMapper supervisorMapper = new SupervisorMapper();
     private Supervisor supervisorToEdit;
     private @FXML TextField supervisorFirstName;

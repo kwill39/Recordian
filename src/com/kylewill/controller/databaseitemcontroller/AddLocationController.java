@@ -10,7 +10,11 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddLocationController extends DatabaseItemController implements Initializable{
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class AddLocationController extends DatabaseItemModificationController implements Initializable{
     private LocationMapper locationMapper = new LocationMapper();
     @FXML private TextField newLocationName;
     @FXML private TextField newLocationAddress;

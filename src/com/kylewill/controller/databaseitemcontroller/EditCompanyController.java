@@ -11,7 +11,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class EditCompanyController extends DatabaseItemController implements Initializable {
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class EditCompanyController extends DatabaseItemModificationController implements Initializable {
     private CompanyMapper companyMapper = new CompanyMapper();
     private Company companyToEdit;
     private @FXML TextField companyName;

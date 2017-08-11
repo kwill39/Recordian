@@ -11,7 +11,11 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class DeleteLocationController extends DatabaseItemController implements Initializable{
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
+public class DeleteLocationController extends DatabaseItemModificationController implements Initializable{
     private LocationMapper locationMapper = new LocationMapper();
     private Location locationToDelete;
     @FXML private Label confirmationLabel;

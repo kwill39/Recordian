@@ -1,6 +1,6 @@
 package com.kylewill.controller;
 
-import com.kylewill.controller.databaseitemcontroller.DatabaseItemController;
+import com.kylewill.controller.databaseitemcontroller.DatabaseItemModificationController;
 import com.kylewill.model.Company;
 import com.kylewill.model.Location;
 import com.kylewill.model.Supervisor;
@@ -289,9 +289,9 @@ public class MainViewController implements Initializable{
         Stage newStage = new Stage();
         newStage.setTitle(stageTitle);
         newStage.setScene(new Scene(loader.load()));
-        DatabaseItemController databaseItemController = loader.getController();
-        databaseItemController.setMainViewController(this);
-        databaseItemController.setStage(newStage);
+        DatabaseItemModificationController databaseItemModificationController = loader.getController();
+        databaseItemModificationController.setMainViewController(this);
+        databaseItemModificationController.setStage(newStage);
         newStage.show();
     }
 }
