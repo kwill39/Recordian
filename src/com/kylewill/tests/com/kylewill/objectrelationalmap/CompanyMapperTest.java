@@ -10,6 +10,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
 public class CompanyMapperTest implements MapperTest<Company> {
     private CompanyMapper companyMapper = new CompanyMapper();
     private Company snowRemover;

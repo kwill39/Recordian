@@ -10,6 +10,10 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
 public class LocationMapperTest implements MapperTest<Location> {
     private LocationMapper locationMapper = new LocationMapper();
     private Location snowland;
