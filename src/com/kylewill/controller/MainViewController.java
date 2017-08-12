@@ -96,22 +96,65 @@ public class MainViewController implements Initializable{
      */
     @FXML private void submit(){
         try {
-            //TODO: Add error dialogs for Exceptions
-            // Try appending to the current log file or create a new one if there is no log file
-            FileWriter fileWriter = new FileWriter("Hours_Worked.txt", true);
+            // TODO: Add error dialogs for issues - such as the hours field being blank
+            // TODO: maybe an entire function dedicated to field checking --- ex.  checkFields()
+
+            // The string that will be written to the log file
+            String logEntry = "";
+
+            // Append the date
             LocalDateTime localDateTime = LocalDateTime.now();
             int day = localDateTime.getDayOfMonth();
             Month month = localDateTime.getMonth();
             int year = localDateTime.getYear();
-            String logEntry = System.lineSeparator() + System.lineSeparator()
-                    + month.toString() + " "
-                    + day + ", "
-                    + year + System.lineSeparator()
-                    + "Hours: " + hours.getCharacters().toString() + System.lineSeparator()
-                    + "Location: " + locationChoiceBox.getValue() + System.lineSeparator()
-                    + "Company: " + companyChoiceBox.getValue() + System.lineSeparator()
-                    + "Supervisor: " + supervisorChoiceBox.getValue() + System.lineSeparator()
-                    + "Comments: " + comments.getText();
+            logEntry = logEntry.concat(System.lineSeparator() + System.lineSeparator()
+                    + "Date: " + month.toString() + " " + day + ", " + year);
+
+            // Append the hours
+            logEntry = logEntry.concat(System.lineSeparator()
+                    + "Hours: " + hours.getCharacters().toString());
+
+            // Append the company
+            if (companyChoiceBox.getValue() != null) {
+                CompanyMapper companyMapper = new CompanyMapper();
+                Company company = companyMapper.read(companyChoiceBox.getValue().toString());
+                logEntry = logEntry.concat(System.lineSeparator()
+                        + "Company: " + company.getCompanyName());
+            }
+
+            // Append the location
+            if (locationChoiceBox.getValue() != null) {
+                LocationMapper locationMapper = new LocationMapper();
+                Location location = locationMapper.read(locationChoiceBox.getValue().toString());
+                logEntry = logEntry.concat(System.lineSeparator()
+                        + "Location: " + System.lineSeparator()
+                        + location.getLocationName() + System.lineSeparator()
+                        + location.getLocationAddress() + System.lineSeparator()
+                        + location.getLocationCity() + ", " + location.getLocationState()
+                        + " " + location.getLocationZipCode()
+                );
+            }
+
+            // Append the supervisor
+            if (supervisorChoiceBox.getValue() != null) {
+                SupervisorMapper supervisorMapper = new SupervisorMapper();
+                Supervisor supervisor = supervisorMapper.read(supervisorChoiceBox.getValue());
+                logEntry = logEntry.concat(System.lineSeparator()
+                        + "Supervisor: " + supervisor.getSupervisorDisplayName() + " ("
+                        + supervisor.getSupervisorFirstName() + " "
+                        + supervisor.getSupervisorLastName() + ")"
+                );
+            }
+
+            // Append the comments
+            if (!comments.getText().isEmpty()) {
+                logEntry = logEntry.concat(System.lineSeparator()
+                        + "Comments: " + comments.getText()
+                );
+            }
+
+            // Try appending to the current log file or create a new one if no log file exists
+            FileWriter fileWriter = new FileWriter("Hours_Worked.txt", true);
             fileWriter.append(logEntry);
             fileWriter.close();
         } catch (IOException e) {
