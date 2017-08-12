@@ -1,7 +1,5 @@
 package com.kylewill.objectrelationalmap;
 
-import com.kylewill.model.DatabaseItem;
-
 import java.util.List;
 
 /**
