@@ -31,12 +31,7 @@ public class DeleteCompanyController extends DatabaseItemModificationController 
     @Override
     protected void onMainViewControllerSet() {
         String nameOfcompanyToDelete = mainViewController.companyChoiceBox.getValue().toString();
-        List<Company> companies = companyMapper.readAll();
-        for (Company someCompany : companies){
-            if (someCompany.getCompanyName().equals(nameOfcompanyToDelete)){
-                companyToDelete = someCompany;
-            }
-        }
+        companyToDelete = companyMapper.read(nameOfcompanyToDelete);
         confirmationMessage.setText("Are you sure you want to delete " + companyToDelete.getCompanyName() + "?");
     }
 

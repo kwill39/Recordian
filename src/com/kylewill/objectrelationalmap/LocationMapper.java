@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class LocationMapper implements ObjectMapper<Location> {
+public final class LocationMapper implements DatabaseItemMapper<Location> {
 
     /**
      * {@inheritDoc}

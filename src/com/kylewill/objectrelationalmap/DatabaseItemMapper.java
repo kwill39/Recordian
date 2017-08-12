@@ -5,13 +5,13 @@ import com.kylewill.model.DatabaseItem;
 import java.util.List;
 
 /**
- * <code>ObjectMapper</code> is the data access object (DAO) interface
+ * <code>DatabaseItemMapper</code> is the data access object (DAO) interface
  * that is implemented by all DAO concrete classes in Kyle's Hour Tracker
  *
  * @author  Kyle Williams
  * @since   Version 2
  */
-interface ObjectMapper<T> {
+interface DatabaseItemMapper<T> {
     String url = "jdbc:sqlite:Hour_Tracker_Files/HourTracker.db";
 
     /**

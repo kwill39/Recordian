@@ -33,12 +33,7 @@ public class EditSupervisorController extends DatabaseItemModificationController
     @Override
     protected void onMainViewControllerSet() {
         String displayNameOfSupervisorToEdit = mainViewController.supervisorChoiceBox.getValue().toString();
-        List<Supervisor> supervisors = supervisorMapper.readAll();
-        for (Supervisor someSupervisor : supervisors) {
-            if (someSupervisor.getSupervisorDisplayName().equals(displayNameOfSupervisorToEdit)){
-                supervisorToEdit = someSupervisor;
-            }
-        }
+        supervisorToEdit = supervisorMapper.read(displayNameOfSupervisorToEdit);
         supervisorFirstName.setText(supervisorToEdit.getSupervisorFirstName());
         supervisorLastName.setText(supervisorToEdit.getSupervisorLastName());
         supervisorDisplayName.setText(supervisorToEdit.getSupervisorDisplayName());

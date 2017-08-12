@@ -31,12 +31,7 @@ public class DeleteSupervisorController extends DatabaseItemModificationControll
     @Override
     protected void onMainViewControllerSet() {
         String displayNameOfSupervisorToDelete = mainViewController.supervisorChoiceBox.getValue().toString();
-        List<Supervisor> supervisors = supervisorMapper.readAll();
-        for (Supervisor someSupervisor : supervisors){
-            if (someSupervisor.getSupervisorDisplayName().equals(displayNameOfSupervisorToDelete)){
-                supervisorToDelete = someSupervisor;
-            }
-        }
+        supervisorToDelete = supervisorMapper.read(displayNameOfSupervisorToDelete);
         confirmationLabel.setText("Are you sure you want to delete " + supervisorToDelete.getSupervisorDisplayName() + "?");
     }
 

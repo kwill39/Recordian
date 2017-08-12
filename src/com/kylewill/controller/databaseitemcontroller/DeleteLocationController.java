@@ -31,12 +31,7 @@ public class DeleteLocationController extends DatabaseItemModificationController
     @Override
     protected void onMainViewControllerSet() {
         String nameOfLocationToDelete = mainViewController.locationChoiceBox.getValue().toString();
-        List<Location> companies = locationMapper.readAll();
-        for (Location someLocation : companies){
-            if (someLocation.getLocationName().equals(nameOfLocationToDelete)){
-                locationToDelete = someLocation;
-            }
-        }
+        locationToDelete = locationMapper.read(nameOfLocationToDelete);
         confirmationLabel.setText("Are you sure you want to delete " + locationToDelete.getLocationName() + "?");
     }
 

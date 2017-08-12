@@ -35,12 +35,7 @@ public class EditLocationController extends DatabaseItemModificationController i
     @Override
     protected void onMainViewControllerSet() {
         String nameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
-        List<Location> locations = locationMapper.readAll();
-        for (Location someLocation : locations) {
-            if (someLocation.getLocationName().equals(nameOfLocationToEdit)){
-                locationToEdit = someLocation;
-            }
-        }
+        locationToEdit = locationMapper.read(nameOfLocationToEdit);
         locationName.setText(locationToEdit.getLocationName());
         locationAddress.setText(locationToEdit.getLocationAddress());
         locationCity.setText(locationToEdit.getLocationCity());

@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SupervisorMapper implements ObjectMapper<Supervisor> {
+public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
 
     /**
      * {@inheritDoc}

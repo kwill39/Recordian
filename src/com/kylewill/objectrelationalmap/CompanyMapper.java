@@ -2,7 +2,6 @@ package com.kylewill.objectrelationalmap;
 
 import com.kylewill.DatabaseHelper;
 import com.kylewill.model.Company;
-import com.kylewill.model.DatabaseItem;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.List;
  * @author  Kyle Williams
  * @since   Version 2
  */
-public final class CompanyMapper implements ObjectMapper<Company> {
+public final class CompanyMapper implements DatabaseItemMapper<Company> {
 
     /**
      * {@inheritDoc}

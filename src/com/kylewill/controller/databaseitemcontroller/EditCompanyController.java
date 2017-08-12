@@ -31,12 +31,7 @@ public class EditCompanyController extends DatabaseItemModificationController im
     @Override
     protected void onMainViewControllerSet() {
         String nameOfCompanyToEdit = mainViewController.companyChoiceBox.getValue().toString();
-        List<Company> companies = companyMapper.readAll();
-        for (Company someCompany : companies) {
-            if (someCompany.getCompanyName().equals(nameOfCompanyToEdit)){
-                companyToEdit = someCompany;
-            }
-        }
+        companyToEdit = companyMapper.read(nameOfCompanyToEdit);
         companyName.setText(companyToEdit.getCompanyName());
     }
 
