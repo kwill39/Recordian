@@ -52,6 +52,27 @@ public class CompanyMapperTest implements MapperTest<Company> {
     // inherently tests to see that the records were created properly.
     // As a result, there is no need for a separate test method to test
     // the create method of the mapper class.
+
+    @Test
+    public void readUsingCompanyId() {
+        Company dbSnowRemoverRetrievedUsingCompanyID = companyMapper.read(dbSnowRemover.getCompanyID());
+        Company dbSpringRemoverRetrievedUsingCompanyID = companyMapper.read(dbSpringRemover.getCompanyID());
+        Company dbWetRemoverRetrievedUsingCompanyID = companyMapper.read(dbWetRemover.getCompanyID());
+        assertTrue(objectsAreEqual(dbSnowRemover, dbSnowRemoverRetrievedUsingCompanyID));
+        assertTrue(objectsAreEqual(dbSpringRemover, dbSpringRemoverRetrievedUsingCompanyID));
+        assertTrue(objectsAreEqual(dbWetRemover, dbWetRemoverRetrievedUsingCompanyID));
+    }
+
+    @Test
+    public void readUsingCompanyName() {
+        Company dbSnowRemoverRetrievedUsingCompanyName = companyMapper.read(dbSnowRemover.getCompanyName());
+        Company dbSpringRemoverRetrievedUsingCompanyName = companyMapper.read(dbSpringRemover.getCompanyName());
+        Company dbWetRemoverRetrievedUsingCompanyName = companyMapper.read(dbWetRemover.getCompanyName());
+        assertTrue(objectsAreEqual(dbSnowRemover, dbSnowRemoverRetrievedUsingCompanyName));
+        assertTrue(objectsAreEqual(dbSpringRemover, dbSpringRemoverRetrievedUsingCompanyName));
+        assertTrue(objectsAreEqual(dbWetRemover, dbWetRemoverRetrievedUsingCompanyName));
+    }
+
     @Test
     public void readAll(){
         // All records are created and read during the Before method.

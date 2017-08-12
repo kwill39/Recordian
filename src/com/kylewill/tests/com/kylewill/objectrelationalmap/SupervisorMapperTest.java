@@ -56,6 +56,27 @@ public class SupervisorMapperTest implements MapperTest<Supervisor> {
     // inherently tests to see that the records were created properly.
     // As a result, there is no need for a separate test method to test
     // the create method of the mapper class.
+
+    @Test
+    public void readUsingSupervisorId() {
+        Supervisor dbJimboRetrievedUsingSupervisorName = supervisorMapper.read(dbJimbo.getSupervisorID());
+        Supervisor dbFrankieRetrievedUsingSupervisorName = supervisorMapper.read(dbFrankie.getSupervisorID());
+        Supervisor dbBobbyRetrievedUsingSupervisorName = supervisorMapper.read(dbBobby.getSupervisorID());
+        assertTrue(objectsAreEqual(dbJimbo, dbJimboRetrievedUsingSupervisorName));
+        assertTrue(objectsAreEqual(dbFrankie, dbFrankieRetrievedUsingSupervisorName));
+        assertTrue(objectsAreEqual(dbBobby, dbBobbyRetrievedUsingSupervisorName));
+    }
+
+    @Test
+    public void readUsingSupervisorDisplayName() {
+        Supervisor dbJimboRetrievedUsingSupervisorName = supervisorMapper.read(dbJimbo.getSupervisorDisplayName());
+        Supervisor dbFrankieRetrievedUsingSupervisorName = supervisorMapper.read(dbFrankie.getSupervisorDisplayName());
+        Supervisor dbBobbyRetrievedUsingSupervisorName = supervisorMapper.read(dbBobby.getSupervisorDisplayName());
+        assertTrue(objectsAreEqual(dbJimbo, dbJimboRetrievedUsingSupervisorName));
+        assertTrue(objectsAreEqual(dbFrankie, dbFrankieRetrievedUsingSupervisorName));
+        assertTrue(objectsAreEqual(dbBobby, dbBobbyRetrievedUsingSupervisorName));
+    }
+
     @Test
     public void readAll() {
         // All records are created and read during the Before method.

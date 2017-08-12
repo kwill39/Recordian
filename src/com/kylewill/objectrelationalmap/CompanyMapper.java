@@ -48,6 +48,74 @@ public final class CompanyMapper implements ObjectMapper<Company> {
     /**
      * {@inheritDoc}
      *
+     * @param   companyID the ID of the <code>Company</code>
+     * @return  the <code>Company</code> whose ID matches that of <code>companyID</code>
+     */
+    @Override
+    public Company read(int companyID) {
+        Connection dbConnection = null;
+        try {
+            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+            String sqlRead = "SELECT * FROM companies WHERE companyID = ?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+            preparedStatement.setInt(1, companyID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Company fetchedCompany = new Company(resultSet.getString("companyName"));
+            fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
+            return fetchedCompany;
+        } catch (SQLException e) {
+            // TODO: Handle exceptions
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (dbConnection != null) {
+                    dbConnection.close();
+                }
+            } catch (SQLException e) {
+                // TODO: Handle exceptions
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param   companyName the unique name of the <code>Company</code>
+     * @return  the <code>Company</code> whose <code>companyName</code> matches that of <code>companyName</code>
+     */
+    @Override
+    public Company read(String companyName) {
+        Connection dbConnection = null;
+        try {
+            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+            String sqlRead = "SELECT * FROM companies WHERE companyName = ?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+            preparedStatement.setString(1, companyName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Company fetchedCompany = new Company(resultSet.getString("companyName"));
+            fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
+            return fetchedCompany;
+        } catch (SQLException e) {
+            // TODO: Handle exceptions
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (dbConnection != null) {
+                    dbConnection.close();
+                }
+            } catch (SQLException e) {
+                // TODO: Handle exceptions
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return a <code>List</code> of <code>Company<code/> objects
      */
     public List<Company> readAll() {

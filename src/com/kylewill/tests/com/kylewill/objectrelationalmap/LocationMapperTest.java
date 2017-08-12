@@ -65,6 +65,27 @@ public class LocationMapperTest implements MapperTest<Location> {
     // inherently tests to see that the records were created properly.
     // As a result, there is no need for a separate test method to test
     // the create method of the mapper class.
+
+    @Test
+    public void readUsingLocationId() {
+        Location dbSnowlandRetrievedUsingLocationName = locationMapper.read(dbSnowland.getLocationID());
+        Location dbSpringlandRetrievedUsingLocationName = locationMapper.read(dbSpringland.getLocationID());
+        Location dbWetlandRetrievedUsingLocationName = locationMapper.read(dbWetland.getLocationID());
+        assertTrue(objectsAreEqual(dbSnowland, dbSnowlandRetrievedUsingLocationName));
+        assertTrue(objectsAreEqual(dbSpringland, dbSpringlandRetrievedUsingLocationName));
+        assertTrue(objectsAreEqual(dbWetland, dbWetlandRetrievedUsingLocationName));
+    }
+
+    @Test
+    public void readUsingLocationName() {
+        Location dbSnowlandRetrievedUsingLocationName = locationMapper.read(dbSnowland.getLocationName());
+        Location dbSpringlandRetrievedUsingLocationName = locationMapper.read(dbSpringland.getLocationName());
+        Location dbWetlandRetrievedUsingLocationName = locationMapper.read(dbWetland.getLocationName());
+        assertTrue(objectsAreEqual(dbSnowland, dbSnowlandRetrievedUsingLocationName));
+        assertTrue(objectsAreEqual(dbSpringland, dbSpringlandRetrievedUsingLocationName));
+        assertTrue(objectsAreEqual(dbWetland, dbWetlandRetrievedUsingLocationName));
+    }
+
     @Test
     public void readAll() {
         // All records are created and read during the Before method.

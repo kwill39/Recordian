@@ -45,6 +45,82 @@ public final class LocationMapper implements ObjectMapper<Location> {
     /**
      * {@inheritDoc}
      *
+     * @param   locationID the ID of the <code>Location</code>
+     * @return  the <code>Location</code> whose ID matches that of <code>locationID</code>
+     */
+    @Override
+    public Location read(int locationID) {
+        Connection dbConnection = null;
+        try {
+            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+            String sqlRead = "SELECT * FROM locations WHERE locationID = ?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+            preparedStatement.setInt(1, locationID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Location fetchedLocation = new Location(resultSet.getString("locationName"));
+            fetchedLocation.setLocationID(resultSet.getInt("locationID"));
+            fetchedLocation.setLocationAddress(resultSet.getString("locationAddress"));
+            fetchedLocation.setLocationCity(resultSet.getString("locationCity"));
+            fetchedLocation.setLocationState(resultSet.getString("locationState"));
+            fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
+            return fetchedLocation;
+        } catch (SQLException e) {
+            // TODO: Handle exceptions
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (dbConnection != null) {
+                    dbConnection.close();
+                }
+            } catch (SQLException e) {
+                // TODO: Handle exceptions
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param   locationName the unique name of the <code>Location</code>
+     * @return  the <code>Location</code> whose <code>locationName</code> matches that of <code>locationName</code>
+     */
+    @Override
+    public Location read(String locationName) {
+        Connection dbConnection = null;
+        try {
+            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+            String sqlRead = "SELECT * FROM locations WHERE locationName = ?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+            preparedStatement.setString(1, locationName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Location fetchedLocation = new Location(resultSet.getString("locationName"));
+            fetchedLocation.setLocationID(resultSet.getInt("locationID"));
+            fetchedLocation.setLocationAddress(resultSet.getString("locationAddress"));
+            fetchedLocation.setLocationCity(resultSet.getString("locationCity"));
+            fetchedLocation.setLocationState(resultSet.getString("locationState"));
+            fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
+            return fetchedLocation;
+        } catch (SQLException e) {
+            // TODO: Handle exceptions
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (dbConnection != null) {
+                    dbConnection.close();
+                }
+            } catch (SQLException e) {
+                // TODO: Handle exceptions
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return a <code>List</code> of <code>Location<code/> objects
      */
     public List<Location> readAll() {

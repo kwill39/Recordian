@@ -43,6 +43,78 @@ public final class SupervisorMapper implements ObjectMapper<Supervisor> {
     /**
      * {@inheritDoc}
      *
+     * @param   supervisorID the ID of the <code>DatabaseItem</code>
+     * @return  the <code>Supervisor</code> whose ID matches that of <code>supervisorID</code>
+     */
+    @Override
+    public Supervisor read(int supervisorID) {
+        Connection dbConnection = null;
+        try {
+            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+            String sqlRead = "SELECT * FROM supervisors WHERE supervisorID = ?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+            preparedStatement.setInt(1, supervisorID);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Supervisor fetchedSupervisor = new Supervisor(resultSet.getString("supervisorDisplayName"));
+            fetchedSupervisor.setSupervisorID(resultSet.getInt("supervisorID"));
+            fetchedSupervisor.setSupervisorFirstName(resultSet.getString("supervisorFirstName"));
+            fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
+            return fetchedSupervisor;
+        } catch (SQLException e) {
+            // TODO: Handle exceptions
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (dbConnection != null) {
+                    dbConnection.close();
+                }
+            } catch (SQLException e) {
+                // TODO: Handle exceptions
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param   supervisorDisplayName the unique name of the <code>DatabaseItem</code>
+     * @return  the <code>Supervisor</code> whose <code>supervisorDisplayName</code> matches that of <code>supervisorDisplayName</code>
+     */
+    @Override
+    public Supervisor read(String supervisorDisplayName) {
+        Connection dbConnection = null;
+        try {
+            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+            String sqlRead = "SELECT * FROM supervisors WHERE supervisorDisplayName = ?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+            preparedStatement.setString(1, supervisorDisplayName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            Supervisor fetchedSupervisor = new Supervisor(resultSet.getString("supervisorDisplayName"));
+            fetchedSupervisor.setSupervisorID(resultSet.getInt("supervisorID"));
+            fetchedSupervisor.setSupervisorFirstName(resultSet.getString("supervisorFirstName"));
+            fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
+            return fetchedSupervisor;
+        } catch (SQLException e) {
+            // TODO: Handle exceptions
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                if (dbConnection != null) {
+                    dbConnection.close();
+                }
+            } catch (SQLException e) {
+                // TODO: Handle exceptions
+                System.err.println(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
      * @return a <code>List</code> of <code>Supervisor<code/> objects
      */
     public List<Supervisor> readAll() {
