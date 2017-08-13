@@ -54,14 +54,14 @@ public final class DatabaseHelper {
                     + ");";
             statement.execute(createSupervisorsTable);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

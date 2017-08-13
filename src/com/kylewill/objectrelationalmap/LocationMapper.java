@@ -28,16 +28,14 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             preparedStatement.setString(5, location.getLocationZipCode());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -65,16 +63,14 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
             return fetchedLocation;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -103,16 +99,14 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
             return fetchedLocation;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -143,16 +137,14 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             }
             return locationList;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -182,16 +174,14 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             preparedStatement.setInt(6, location.getLocationID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -210,16 +200,14 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             preparedStatement.setInt(1, location.getLocationID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

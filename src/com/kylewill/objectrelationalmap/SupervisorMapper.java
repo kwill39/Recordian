@@ -26,16 +26,14 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             preparedStatement.setString(3, supervisor.getSupervisorDisplayName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -61,16 +59,14 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
             return fetchedSupervisor;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -97,16 +93,14 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
             return fetchedSupervisor;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -135,16 +129,14 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             }
             return supervisorList;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -170,16 +162,14 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             preparedStatement.setInt(4, supervisor.getSupervisorID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -198,16 +188,14 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             preparedStatement.setInt(1, supervisor.getSupervisorID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

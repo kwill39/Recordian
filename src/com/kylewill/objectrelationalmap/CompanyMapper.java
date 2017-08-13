@@ -30,16 +30,14 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             preparedStatement.setString(1, company.getCompanyName());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -63,16 +61,14 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
             return fetchedCompany;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -97,16 +93,14 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
             return fetchedCompany;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -133,16 +127,14 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             }
             return companyList;
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
         return null;
@@ -163,16 +155,14 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             preparedStatement.setInt(2, company.getCompanyID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -191,16 +181,14 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             preparedStatement.setInt(1, company.getCompanyID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            // TODO: Handle exceptions
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (dbConnection != null) {
                     dbConnection.close();
                 }
             } catch (SQLException e) {
-                // TODO: Handle exceptions
-                System.err.println(e.getMessage());
+                e.printStackTrace();
             }
         }
     }

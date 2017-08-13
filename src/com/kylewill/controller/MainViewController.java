@@ -143,8 +143,6 @@ public class MainViewController implements Initializable{
             return;
         }
         try {
-            // TODO: Add error dialogs for issues - such as the hours field being blank
-            // TODO: maybe an entire function dedicated to field checking --- ex.  checkFields()
 
             // The string that will be written to the log file
             String logEntry = "";
