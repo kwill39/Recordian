@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.FileWriter;
@@ -363,6 +364,7 @@ public class MainViewController implements Initializable{
             DatabaseItemModificationController databaseItemModificationController = loader.getController();
             databaseItemModificationController.setMainViewController(this);
             databaseItemModificationController.setStage(newStage);
+            newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.show();
         } catch (IOException e) {
             createErrorStage();
@@ -377,6 +379,7 @@ public class MainViewController implements Initializable{
             errorStage.setScene(new Scene(loader.load()));
             ErrorController errorController = loader.getController();
             errorController.setStage(errorStage);
+            errorStage.initModality(Modality.APPLICATION_MODAL);
             errorStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -392,6 +395,7 @@ public class MainViewController implements Initializable{
             ErrorController errorController = loader.getController();
             errorController.setCustomErrorMessage(customErrorMessage);
             errorController.setStage(errorStage);
+            errorStage.initModality(Modality.APPLICATION_MODAL);
             errorStage.show();
         } catch (IOException e) {
             e.printStackTrace();
