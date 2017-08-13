@@ -178,6 +178,9 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void editCompany(){
+        if (companyChoiceBox.getValue() == null) {
+            return;
+        }
         try {
             String viewPath = "/com/kylewill/view/editCompany.fxml";
             String stageTitle = "Edit Company";
@@ -189,6 +192,9 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void deleteCompany(){
+        if (companyChoiceBox.getValue() == null) {
+            return;
+        }
         try {
             String viewPath = "/com/kylewill/view/deleteCompany.fxml";
             String stageTitle = "Delete Company";
@@ -211,6 +217,9 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void editLocation(){
+        if (locationChoiceBox.getValue() == null) {
+            return;
+        }
         try {
             String viewPath = "/com/kylewill/view/editLocation.fxml";
             String stageTitle = "Edit Location";
@@ -222,6 +231,9 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void deleteLocation(){
+        if (locationChoiceBox.getValue() == null) {
+            return;
+        }
         try {
             String viewPath = "/com/kylewill/view/deleteLocation.fxml";
             String stageTitle = "Delete Location";
@@ -244,6 +256,9 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void editSupervisor(){
+        if (supervisorChoiceBox.getValue() == null) {
+            return;
+        }
         try {
             String viewPath = "/com/kylewill/view/editSupervisor.fxml";
             String stageTitle = "Edit Supervisor";
@@ -255,6 +270,9 @@ public class MainViewController implements Initializable{
     }
 
     @FXML private void deleteSupervisor(){
+        if (supervisorChoiceBox.getValue() == null) {
+            return;
+        }
         try {
             String viewPath = "/com/kylewill/view/deleteSupervisor.fxml";
             String stageTitle = "DeleteSupervisor";
