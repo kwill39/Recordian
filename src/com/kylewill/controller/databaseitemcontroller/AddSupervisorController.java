@@ -26,6 +26,20 @@ public class AddSupervisorController extends DatabaseItemModificationController 
     public void initialize(URL location, ResourceBundle resources) {
         addButton.setOnMouseClicked(event -> addSupervisor());
         cancelButton.setOnMouseClicked(event -> stage.close());
+        newSupervisorFirstName.setOnKeyReleased(event -> {
+            String displayNameValue = newSupervisorFirstName.getText();
+            if (!newSupervisorLastName.getText().isEmpty()) {
+                displayNameValue = newSupervisorFirstName.getText() + " "  + newSupervisorLastName.getText();
+            }
+            newSupervisorDisplayName.setText(displayNameValue.trim());
+        });
+        newSupervisorLastName.setOnKeyReleased(event -> {
+            String displayNameValue = newSupervisorLastName.getText();
+            if (!newSupervisorFirstName.getText().isEmpty()) {
+                displayNameValue = newSupervisorFirstName.getText() + " "  + newSupervisorLastName.getText();
+            }
+            newSupervisorDisplayName.setText(displayNameValue.trim());
+        });
     }
 
     private void addSupervisor() {

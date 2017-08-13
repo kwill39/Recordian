@@ -8,7 +8,7 @@
    <children>
       <Label text="First Name" />
        <Label text="Last Name" GridPane.rowIndex="1" />
-       <Label text="Display Name" GridPane.rowIndex="2" />
+       <Label text="Display As" GridPane.rowIndex="2" />
        <TextField fx:id="newSupervisorFirstName" GridPane.columnIndex="1" />
        <TextField fx:id="newSupervisorLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
        <TextField fx:id="newSupervisorDisplayName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
