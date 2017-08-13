@@ -40,16 +40,16 @@ public final class DatabaseHelper {
             String createLocationsTable = "CREATE TABLE IF NOT EXISTS locations("
                     + "locationID integer primary key,"
                     + "locationName text NOT NULL UNIQUE,"
-                    + "locationAddress text,"
-                    + "locationCity text,"
-                    + "locationState text,"
-                    + "locationZipCode text"
+                    + "locationAddress text NOT NULL,"
+                    + "locationCity text NOT NULL,"
+                    + "locationState text NOT NULL,"
+                    + "locationZipCode text NOT NULL"
                     + ");";
             statement.execute(createLocationsTable);
             String createSupervisorsTable = "CREATE TABLE IF NOT EXISTS supervisors("
                     + "supervisorID integer primary key,"
-                    + "supervisorFirstName text,"
-                    + "supervisorLastName text,"
+                    + "supervisorFirstName text NOT NULL,"
+                    + "supervisorLastName text NOT NULL,"
                     + "supervisorDisplayName text NOT NULL UNIQUE"
                     + ");";
             statement.execute(createSupervisorsTable);
