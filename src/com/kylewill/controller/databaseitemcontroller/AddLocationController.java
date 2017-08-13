@@ -5,6 +5,7 @@ import com.kylewill.objectrelationalmap.LocationMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -21,6 +22,7 @@ public class AddLocationController extends DatabaseItemModificationController im
     @FXML private TextField newLocationCity;
     @FXML private TextField newLocationState;
     @FXML private TextField newLocationZipCode;
+    @FXML private Label errorLabel;
     @FXML private Button addButton;
     @FXML private Button cancelButton;
 
@@ -31,14 +33,22 @@ public class AddLocationController extends DatabaseItemModificationController im
     }
 
     private void addLocation() {
-        Location newLocation = new Location(newLocationName.getText());
-        newLocation.setLocationAddress(newLocationAddress.getText());
-        newLocation.setLocationCity(newLocationCity.getText());
-        newLocation.setLocationState(newLocationState.getText());
-        newLocation.setLocationZipCode(newLocationZipCode.getText());
-        locationMapper.create(newLocation);
-        mainViewController.refreshLocationNames();
-        mainViewController.locationChoiceBox.setValue(newLocation.getLocationName());
-        stage.close();
+        if (newLocationName.getText().isEmpty()
+                || newLocationAddress.getText().isEmpty()
+                || newLocationCity.getText().isEmpty()
+                || newLocationState.getText().isEmpty()
+                || newLocationZipCode.getText().isEmpty()) {
+            errorLabel.setVisible(true);
+        } else {
+            Location newLocation = new Location(newLocationName.getText());
+            newLocation.setLocationAddress(newLocationAddress.getText());
+            newLocation.setLocationCity(newLocationCity.getText());
+            newLocation.setLocationState(newLocationState.getText());
+            newLocation.setLocationZipCode(newLocationZipCode.getText());
+            locationMapper.create(newLocation);
+            mainViewController.refreshLocationNames();
+            mainViewController.locationChoiceBox.setValue(newLocation.getLocationName());
+            stage.close();
+        }
     }
 }

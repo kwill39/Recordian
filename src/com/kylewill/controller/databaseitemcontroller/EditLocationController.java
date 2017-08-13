@@ -5,6 +5,7 @@ import com.kylewill.objectrelationalmap.LocationMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -17,13 +18,14 @@ import java.util.ResourceBundle;
 public class EditLocationController extends DatabaseItemModificationController implements Initializable {
     private LocationMapper locationMapper = new LocationMapper();
     private Location locationToEdit;
-    private @FXML TextField locationName;
-    private @FXML TextField locationAddress;
-    private @FXML TextField locationCity;
-    private @FXML TextField locationState;
-    private @FXML TextField locationZipCode;
-    private @FXML Button saveButton;
-    private @FXML Button cancelButton;
+    @FXML private TextField locationName;
+    @FXML private TextField locationAddress;
+    @FXML private TextField locationCity;
+    @FXML private TextField locationState;
+    @FXML private TextField locationZipCode;
+    @FXML private Label errorLabel;
+    @FXML private Button saveButton;
+    @FXML private Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,13 +45,21 @@ public class EditLocationController extends DatabaseItemModificationController i
     }
 
     private void updateLocation() {
-        locationToEdit.setLocationName(locationName.getText());
-        locationToEdit.setLocationAddress(locationAddress.getText());
-        locationToEdit.setLocationCity(locationCity.getText());
-        locationToEdit.setLocationState(locationState.getText());
-        locationToEdit.setLocationZipCode(locationZipCode.getText());
-        locationMapper.update(locationToEdit);
-        mainViewController.refreshLocationNames();
-        stage.close();
+        if (locationName.getText().isEmpty()
+                || locationAddress.getText().isEmpty()
+                || locationCity.getText().isEmpty()
+                || locationState.getText().isEmpty()
+                || locationZipCode.getText().isEmpty()) {
+            errorLabel.setVisible(true);
+        } else {
+            locationToEdit.setLocationName(locationName.getText());
+            locationToEdit.setLocationAddress(locationAddress.getText());
+            locationToEdit.setLocationCity(locationCity.getText());
+            locationToEdit.setLocationState(locationState.getText());
+            locationToEdit.setLocationZipCode(locationZipCode.getText());
+            locationMapper.update(locationToEdit);
+            mainViewController.refreshLocationNames();
+            stage.close();
+        }
     }
 }

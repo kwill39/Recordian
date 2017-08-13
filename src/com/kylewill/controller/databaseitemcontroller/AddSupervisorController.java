@@ -5,6 +5,7 @@ import com.kylewill.objectrelationalmap.SupervisorMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -19,6 +20,7 @@ public class AddSupervisorController extends DatabaseItemModificationController 
     @FXML private TextField newSupervisorFirstName;
     @FXML private TextField newSupervisorLastName;
     @FXML private TextField newSupervisorDisplayName;
+    @FXML private Label errorLabel;
     @FXML private Button addButton;
     @FXML private Button cancelButton;
 
@@ -43,12 +45,18 @@ public class AddSupervisorController extends DatabaseItemModificationController 
     }
 
     private void addSupervisor() {
-        Supervisor newSupervisor = new Supervisor(newSupervisorDisplayName.getText());
-        newSupervisor.setSupervisorFirstName(newSupervisorFirstName.getText());
-        newSupervisor.setSupervisorLastName(newSupervisorLastName.getText());
-        supervisorMapper.create(newSupervisor);
-        mainViewController.refreshSupervisorDisplayNames();
-        mainViewController.supervisorChoiceBox.setValue(newSupervisor.getSupervisorDisplayName());
-        stage.close();
+        if (newSupervisorFirstName.getText().isEmpty()
+                || newSupervisorLastName.getText().isEmpty()
+                || newSupervisorDisplayName.getText().isEmpty()) {
+            errorLabel.setVisible(true);
+        } else {
+            Supervisor newSupervisor = new Supervisor(newSupervisorDisplayName.getText());
+            newSupervisor.setSupervisorFirstName(newSupervisorFirstName.getText());
+            newSupervisor.setSupervisorLastName(newSupervisorLastName.getText());
+            supervisorMapper.create(newSupervisor);
+            mainViewController.refreshSupervisorDisplayNames();
+            mainViewController.supervisorChoiceBox.setValue(newSupervisor.getSupervisorDisplayName());
+            stage.close();
+        }
     }
 }

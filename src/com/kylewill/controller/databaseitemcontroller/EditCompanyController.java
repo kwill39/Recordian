@@ -5,6 +5,7 @@ import com.kylewill.objectrelationalmap.CompanyMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -17,9 +18,10 @@ import java.util.ResourceBundle;
 public class EditCompanyController extends DatabaseItemModificationController implements Initializable {
     private CompanyMapper companyMapper = new CompanyMapper();
     private Company companyToEdit;
-    private @FXML TextField companyName;
-    private @FXML Button saveButton;
-    private @FXML Button cancelButton;
+    @FXML private TextField companyName;
+    @FXML private Label errorLabel;
+    @FXML private Button saveButton;
+    @FXML private Button cancelButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,9 +37,13 @@ public class EditCompanyController extends DatabaseItemModificationController im
     }
 
     private void updateCompany() {
-        companyToEdit.setCompanyName(companyName.getText());
-        companyMapper.update(companyToEdit);
-        mainViewController.refreshCompanyNames();
-        stage.close();
+        if (companyName.getText().isEmpty()) {
+            errorLabel.setVisible(true);
+        } else {
+            companyToEdit.setCompanyName(companyName.getText());
+            companyMapper.update(companyToEdit);
+            mainViewController.refreshCompanyNames();
+            stage.close();
+        }
     }
 }
