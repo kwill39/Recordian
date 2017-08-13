@@ -29,6 +29,8 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * @author  Kyle Williams
@@ -77,7 +79,7 @@ public class MainViewController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setChoiceBoxItems();
+        setAllChoiceBoxItems();
         addCompany.setOnMouseClicked(event -> addCompany());
         editCompany.setOnMouseClicked(event -> editCompany());
         deleteCompany.setOnMouseClicked(event -> deleteCompany());
@@ -284,29 +286,6 @@ public class MainViewController implements Initializable{
     }
 
     /**
-     * Sets the items for all choiceboxes in mainView
-     */
-    private void setChoiceBoxItems(){
-        // Set company choicebox items
-        sortedCompanyNames = new SortedList<>(companyNames, String.CASE_INSENSITIVE_ORDER);
-        sortedCompanyNames.addListener((ListChangeListener<String>) c ->
-                companyChoiceBox.setItems(sortedCompanyNames));
-        companyChoiceBox.setItems(sortedCompanyNames);
-
-        // Set location choicebox items
-        sortedLocationNames = new SortedList<>(locationNames, String.CASE_INSENSITIVE_ORDER);
-        sortedLocationNames.addListener((ListChangeListener<String>) c ->
-                locationChoiceBox.setItems(sortedLocationNames));
-        locationChoiceBox.setItems(sortedLocationNames);
-
-        // Set supervisor choicebox items
-        sortedSupervisorDisplayNames = new SortedList<>(supervisorDisplayNames, String.CASE_INSENSITIVE_ORDER);
-        sortedSupervisorDisplayNames.addListener((ListChangeListener<String>) c ->
-                supervisorChoiceBox.setItems(sortedSupervisorDisplayNames));
-        supervisorChoiceBox.setItems(sortedSupervisorDisplayNames);
-    }
-
-    /**
      * This method should be called in order to update <code>companyNames<code/>
      * whenever the SQLite companies table is changed.
      */
@@ -343,6 +322,40 @@ public class MainViewController implements Initializable{
         for (Supervisor someSupervisor : supervisors) {
             supervisorDisplayNames.add(someSupervisor.getSupervisorDisplayName());
         }
+    }
+
+    /**
+     * Sets the items for all choiceboxes in mainView
+     */
+    private void setAllChoiceBoxItems(){
+
+        Consumer<ChoiceBox<String>> disableChoiceboxIfEmpty = (choiceBox) -> {
+            if (choiceBox.getItems().isEmpty()) {
+                choiceBox.setDisable(true);
+            } else {choiceBox.setDisable(false);}
+        };
+
+        // Establish process for populating a choicebox
+        BiConsumer<ChoiceBox<String>, ObservableList<String>> setChoiceBoxItems = (choiceBox, observableList) -> {
+            observableList.addListener((ListChangeListener<String>) c -> {
+                choiceBox.setItems(observableList);
+                disableChoiceboxIfEmpty.accept(choiceBox);
+            });
+            choiceBox.setItems(observableList);
+            disableChoiceboxIfEmpty.accept(choiceBox);
+        };
+
+        // Set company choicebox items
+        sortedCompanyNames = new SortedList<>(companyNames, String.CASE_INSENSITIVE_ORDER);
+        setChoiceBoxItems.accept(companyChoiceBox, sortedCompanyNames);
+
+        // Set location choicebox items
+        sortedLocationNames = new SortedList<>(locationNames, String.CASE_INSENSITIVE_ORDER);
+        setChoiceBoxItems.accept(locationChoiceBox, sortedLocationNames);
+
+        // Set supervisor choicebox items
+        sortedSupervisorDisplayNames = new SortedList<>(supervisorDisplayNames, String.CASE_INSENSITIVE_ORDER);
+        setChoiceBoxItems.accept(supervisorChoiceBox, sortedSupervisorDisplayNames);
     }
 
     private void createDatabaseItemModificationStage(String viewPath, String stageTitle) throws IOException{
