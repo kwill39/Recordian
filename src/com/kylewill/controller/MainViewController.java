@@ -203,129 +203,82 @@ public class MainViewController implements Initializable{
             fileWriter.append(logEntry);
             fileWriter.close();
         } catch (IOException e) {
-            //TODO: Handle exception
-            System.err.println(e);
-            System.exit(1);
+            createErrorStage();
         }
 
         Platform.exit();
     }
 
     @FXML private void addCompany(){
-        try {
-            String viewPath = "/com/kylewill/view/addCompany.fxml";
-            String stageTitle = "Add Company";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        }catch (IOException e){
-            //TODO: Handle exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/addCompany.fxml";
+        String stageTitle = "Add Company";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void editCompany(){
         if (companyChoiceBox.getValue() == null) {
             return;
         }
-        try {
-            String viewPath = "/com/kylewill/view/editCompany.fxml";
-            String stageTitle = "Edit Company";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        } catch (IOException e){
-            //TODO: Handle Exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/editCompany.fxml";
+        String stageTitle = "Edit Company";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void deleteCompany(){
         if (companyChoiceBox.getValue() == null) {
             return;
         }
-        try {
-            String viewPath = "/com/kylewill/view/deleteCompany.fxml";
-            String stageTitle = "Delete Company";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        }catch (IOException e){
-            //TODO: Handle exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/deleteCompany.fxml";
+        String stageTitle = "Delete Company";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void addLocation(){
-        try {
-            String viewPath = "/com/kylewill/view/addLocation.fxml";
-            String stageTitle = "Add Location";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        }catch (IOException e){
-            //TODO: Handle exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/addLocation.fxml";
+        String stageTitle = "Add Location";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void editLocation(){
         if (locationChoiceBox.getValue() == null) {
             return;
         }
-        try {
-            String viewPath = "/com/kylewill/view/editLocation.fxml";
-            String stageTitle = "Edit Location";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        } catch (IOException e){
-            //TODO: Handle Exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/editLocation.fxml";
+        String stageTitle = "Edit Location";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void deleteLocation(){
         if (locationChoiceBox.getValue() == null) {
             return;
         }
-        try {
-            String viewPath = "/com/kylewill/view/deleteLocation.fxml";
-            String stageTitle = "Delete Location";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        }catch (IOException e){
-            //TODO: Handle exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/deleteLocation.fxml";
+        String stageTitle = "Delete Location";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void addSupervisor(){
-        try {
-            String viewPath = "/com/kylewill/view/addSupervisor.fxml";
-            String stageTitle = "Add Supervisor";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        }catch (IOException e){
-            //TODO: Handle exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/addSupervisor.fxml";
+        String stageTitle = "Add Supervisor";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void editSupervisor(){
         if (supervisorChoiceBox.getValue() == null) {
             return;
         }
-        try {
-            String viewPath = "/com/kylewill/view/editSupervisor.fxml";
-            String stageTitle = "Edit Supervisor";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        }catch (IOException e){
-            //TODO: Handle exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/editSupervisor.fxml";
+        String stageTitle = "Edit Supervisor";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     @FXML private void deleteSupervisor(){
         if (supervisorChoiceBox.getValue() == null) {
             return;
         }
-        try {
-            String viewPath = "/com/kylewill/view/deleteSupervisor.fxml";
-            String stageTitle = "DeleteSupervisor";
-            createDatabaseItemModificationStage(viewPath, stageTitle);
-        }catch (IOException e){
-            //TODO: Handle exception
-            System.err.println(e);
-        }
+        String viewPath = "/com/kylewill/view/deleteSupervisor.fxml";
+        String stageTitle = "Delete Supervisor";
+        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     /**
@@ -401,14 +354,47 @@ public class MainViewController implements Initializable{
         setChoiceBoxItems.accept(supervisorChoiceBox, sortedSupervisorDisplayNames);
     }
 
-    private void createDatabaseItemModificationStage(String viewPath, String stageTitle) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
-        Stage newStage = new Stage();
-        newStage.setTitle(stageTitle);
-        newStage.setScene(new Scene(loader.load()));
-        DatabaseItemModificationController databaseItemModificationController = loader.getController();
-        databaseItemModificationController.setMainViewController(this);
-        databaseItemModificationController.setStage(newStage);
-        newStage.show();
+    private void createDatabaseItemModificationStage(String viewPath, String stageTitle) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+            Stage newStage = new Stage();
+            newStage.setTitle(stageTitle);
+            newStage.setScene(new Scene(loader.load()));
+            DatabaseItemModificationController databaseItemModificationController = loader.getController();
+            databaseItemModificationController.setMainViewController(this);
+            databaseItemModificationController.setStage(newStage);
+            newStage.show();
+        } catch (IOException e) {
+            createErrorStage();
+        }
+    }
+
+    private void createErrorStage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/error.fxml"));
+            Stage errorStage = new Stage();
+            errorStage.setTitle("Error");
+            errorStage.setScene(new Scene(loader.load()));
+            ErrorController errorController = loader.getController();
+            errorController.setStage(errorStage);
+            errorStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createErrorStage(String customErrorMessage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/kylewill/view/error.fxml"));
+            Stage errorStage = new Stage();
+            errorStage.setTitle("Error");
+            errorStage.setScene(new Scene(loader.load()));
+            ErrorController errorController = loader.getController();
+            errorController.setCustomErrorMessage(customErrorMessage);
+            errorController.setStage(errorStage);
+            errorStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

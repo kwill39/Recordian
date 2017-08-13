@@ -23,7 +23,7 @@ public class ErrorController implements Initializable {
      * @param errorMessage a String that gets displayed to
      *                     the user through errorLabel
      */
-    public void setErrorMessage(String errorMessage) {
+    public void setCustomErrorMessage(String errorMessage) {
         errorLabel.setText(errorMessage);
     }
 

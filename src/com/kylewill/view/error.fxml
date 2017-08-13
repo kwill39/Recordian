@@ -15,7 +15,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Label fx:id="errorLabel" text="An error has occurred.&#xD;&#xD;If this continues to happen, you may&#xD;need to restart Kyle's Hour Tracker." textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+      <Label fx:id="errorLabel" text="An error has occurred. Please try again.&#xD;&#xD;If this continues to happen, you may&#xD;need to restart Kyle's Hour Tracker." textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
       <Button fx:id="okButton" mnemonicParsing="false" prefWidth="50.0" text="OK" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
    </children>
 </GridPane>
