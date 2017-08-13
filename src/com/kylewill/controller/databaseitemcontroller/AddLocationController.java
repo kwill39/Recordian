@@ -38,6 +38,7 @@ public class AddLocationController extends DatabaseItemModificationController im
         newLocation.setLocationZipCode(newLocationZipCode.getText());
         locationMapper.create(newLocation);
         mainViewController.refreshLocationNames();
+        mainViewController.locationChoiceBox.setValue(newLocation.getLocationName());
         stage.close();
     }
 }

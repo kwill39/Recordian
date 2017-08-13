@@ -30,6 +30,7 @@ public class AddCompanyController extends DatabaseItemModificationController imp
         Company newCompany = new Company(newCompanyName.getText());
         companyMapper.create(newCompany);
         mainViewController.refreshCompanyNames();
+        mainViewController.companyChoiceBox.setValue(newCompany.getCompanyName());
         stage.close();
     }
 }
