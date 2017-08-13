@@ -161,12 +161,11 @@ public class MainViewController implements Initializable{
             logEntry = logEntry.concat(System.lineSeparator()
                     + "Hours: " + hours.getCharacters().toString());
 
-            // Append the company
-            if (companyChoiceBox.getValue() != null) {
-                CompanyMapper companyMapper = new CompanyMapper();
-                Company company = companyMapper.read(companyChoiceBox.getValue().toString());
+            // Append the comments
+            if (!comments.getText().isEmpty()) {
                 logEntry = logEntry.concat(System.lineSeparator()
-                        + "Company: " + company.getCompanyName());
+                        + "Comments: " + comments.getText()
+                );
             }
 
             // Append the location
@@ -182,6 +181,14 @@ public class MainViewController implements Initializable{
                 );
             }
 
+            // Append the company
+            if (companyChoiceBox.getValue() != null) {
+                CompanyMapper companyMapper = new CompanyMapper();
+                Company company = companyMapper.read(companyChoiceBox.getValue().toString());
+                logEntry = logEntry.concat(System.lineSeparator()
+                        + "Company: " + company.getCompanyName());
+            }
+
             // Append the supervisor
             if (supervisorChoiceBox.getValue() != null) {
                 SupervisorMapper supervisorMapper = new SupervisorMapper();
@@ -190,13 +197,6 @@ public class MainViewController implements Initializable{
                         + "Supervisor: " + supervisor.getSupervisorDisplayName() + " ("
                         + supervisor.getSupervisorFirstName() + " "
                         + supervisor.getSupervisorLastName() + ")"
-                );
-            }
-
-            // Append the comments
-            if (!comments.getText().isEmpty()) {
-                logEntry = logEntry.concat(System.lineSeparator()
-                        + "Comments: " + comments.getText()
                 );
             }
 

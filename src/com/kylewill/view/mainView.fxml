@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="center" hgap="10" prefHeight="450.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kylewill.controller.MainViewController">
+<GridPane alignment="center" hgap="10" prefHeight="328.0" prefWidth="650.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kylewill.controller.MainViewController">
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
    <children>
        <Label text="Hours Worked" GridPane.columnIndex="0" GridPane.rowIndex="0" />
        <TextField fx:id="hours" GridPane.columnIndex="1" GridPane.rowIndex="0" />
        <Label text="Comments:" GridPane.rowIndex="1" />
-       <TextArea fx:id="comments" minHeight="-Infinity" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+       <TextArea fx:id="comments" minHeight="-Infinity" prefHeight="53.0" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
       <Label text="Location" GridPane.rowIndex="3" />
       <ChoiceBox fx:id="locationChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
        <Button fx:id="addLocation" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" />
