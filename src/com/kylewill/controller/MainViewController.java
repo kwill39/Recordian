@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
@@ -80,6 +81,8 @@ public class MainViewController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setAllChoiceBoxItems();
+
+        // Set button onClick events
         addCompany.setOnMouseClicked(event -> addCompany());
         editCompany.setOnMouseClicked(event -> editCompany());
         deleteCompany.setOnMouseClicked(event -> deleteCompany());
@@ -90,6 +93,46 @@ public class MainViewController implements Initializable{
         editSupervisor.setOnMouseClicked(event -> editSupervisor());
         deleteSupervisor.setOnMouseClicked(event -> deleteSupervisor());
         submit.setOnMouseClicked(event -> submit());
+
+        /* If a choicebox start outs out with a null value,
+         * then disable its Edit/Delete buttons. Also, set the action listener
+         * of the choicebox to enable the buttons when the choicebox
+         * does not have a null value and disable the buttons when the
+         * choicebox does have a null value.
+         */
+        BiConsumer<ChoiceBox<String>, List<Button>> disableButtonsIfChoiceboxValueIsNull = (choiceBox, buttons) -> {
+            if (choiceBox.getValue() == null) {
+                for (Button button : buttons) {
+                    button.setDisable(true);
+                }
+            }
+            choiceBox.setOnAction(event -> {
+                if (choiceBox.getValue() == null) {
+                    for (Button button : buttons) {
+                        button.setDisable(true);
+                    }
+                } else {
+                    for (Button button : buttons) {
+                        button.setDisable(false);
+                    }
+                }
+            });
+        };
+
+        List<Button> companyButtons = new ArrayList<>();
+        companyButtons.add(editCompany);
+        companyButtons.add(deleteCompany);
+        disableButtonsIfChoiceboxValueIsNull.accept(companyChoiceBox, companyButtons);
+
+        List<Button> locationButtons = new ArrayList<>();
+        locationButtons.add(editLocation);
+        locationButtons.add(deleteLocation);
+        disableButtonsIfChoiceboxValueIsNull.accept(locationChoiceBox, locationButtons);
+
+        List<Button> supervisorButtons = new ArrayList<>();
+        supervisorButtons.add(editSupervisor);
+        supervisorButtons.add(deleteSupervisor);
+        disableButtonsIfChoiceboxValueIsNull.accept(supervisorChoiceBox, supervisorButtons);
     }
 
     /**
