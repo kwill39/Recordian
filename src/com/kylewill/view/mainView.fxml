@@ -14,17 +14,17 @@
        <Label text="Comments:" GridPane.rowIndex="1" />
        <TextArea fx:id="comments" minHeight="-Infinity" prefHeight="53.0" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
       <Label text="Location" GridPane.rowIndex="3" />
-      <ChoiceBox fx:id="locationChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <ChoiceBox fx:id="locationChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
        <Button fx:id="addLocation" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" />
        <Button fx:id="editLocation" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="3" />
        <Button fx:id="deleteLocation" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="3" />
       <Label text="Company" GridPane.rowIndex="4" />
-      <ChoiceBox fx:id="companyChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <ChoiceBox fx:id="companyChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
        <Button fx:id="addCompany" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="4" />
        <Button fx:id="editCompany" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="4" />
        <Button fx:id="deleteCompany" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="4" />
       <Label text="Supervisor" GridPane.rowIndex="5" />
-      <ChoiceBox fx:id="supervisorChoiceBox" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <ChoiceBox fx:id="supervisorChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
        <Button fx:id="addSupervisor" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="5" />
        <Button fx:id="editSupervisor" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="5" />
        <Button fx:id="deleteSupervisor" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="5" />
