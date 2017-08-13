@@ -16,10 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.FileWriter;
@@ -57,6 +54,7 @@ public class MainViewController implements Initializable{
     private ObservableList<String> sortedLocationNames;
     private ObservableList<String> sortedSupervisorDisplayNames;
     @FXML private TextField hours;
+    @FXML private TextArea comments;
     @FXML public ChoiceBox<String> companyChoiceBox;
     @FXML public ChoiceBox<String> locationChoiceBox;
     @FXML public ChoiceBox<String> supervisorChoiceBox;
@@ -69,7 +67,7 @@ public class MainViewController implements Initializable{
     @FXML private Button deleteCompany;
     @FXML private Button deleteLocation;
     @FXML private Button deleteSupervisor;
-    @FXML private TextArea comments;
+    @FXML private Label errorLabel;
     @FXML private Button submit;
 
     public MainViewController(){
@@ -140,6 +138,10 @@ public class MainViewController implements Initializable{
      * information given by the user pertaining to the work iteration
      */
     @FXML private void submit(){
+        if (hours.getText().isEmpty()) {
+            errorLabel.setVisible(true);
+            return;
+        }
         try {
             // TODO: Add error dialogs for issues - such as the hours field being blank
             // TODO: maybe an entire function dedicated to field checking --- ex.  checkFields()
