@@ -20,22 +20,29 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * @author  Kyle Williams
  * @since   Version 2
  */
 public class MainViewController implements Initializable{
+    private final String DEFAULTS_FILE_PATH = "Hour_Tracker_Files/defaults.ser";
+    /**
+     * Used for finding a default choicebox item
+     */
+    private enum DatabaseItemType{COMPANY, LOCATION, SUPERVISOR}
     /**
      * A list containing the name of each <code>Company</code> within the SQLite companies table.
      * The strings in this list make up the items within <code>companyChoicebox</code>.
@@ -68,6 +75,9 @@ public class MainViewController implements Initializable{
     @FXML private Button deleteCompany;
     @FXML private Button deleteLocation;
     @FXML private Button deleteSupervisor;
+    @FXML private CheckBox locationDefaultCheckbox;
+    @FXML private CheckBox companyDefaultCheckbox;
+    @FXML private CheckBox supervisorDefaultCheckbox;
     @FXML private Label errorLabel;
     @FXML private Button submit;
 
@@ -400,5 +410,85 @@ public class MainViewController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // TODO: add javadoc
+    private boolean isChoiceboxItemDefault(DatabaseItemType databaseItemType, String choiceboxValue){
+        return true;
+    }
+
+    // TODO: add javadoc (include image of dfa showing how all the trys/catches work)
+    private void defaultCheckboxClicked(CheckBox clickedCheckbox,
+                                        Integer databaseItemID, DatabaseItemType databaseItemType){
+
+        // Creates a new defaults file with a fresh
+        // defaults HashMap stored inside the file
+        Runnable writeNewDefaultsFile = () -> {
+            HashMap<DatabaseItemType, Integer> defaultsHashMap = new HashMap<>();
+            defaultsHashMap.put(DatabaseItemType.COMPANY, null);
+            defaultsHashMap.put(DatabaseItemType.LOCATION, null);
+            defaultsHashMap.put(DatabaseItemType.SUPERVISOR, null);
+            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(DEFAULTS_FILE_PATH))) {
+                out.writeObject(defaultsHashMap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        };
+
+        /*
+         * Reads from the defaults file and returns either a HashMap<DatabaseItemType, Integer> representing the default
+         * choices for each DatabaseItem choicebox or null if either a defaults file does not exist or
+         * no HashMap<DatabaseItemType, Integer> was found in the preexisting defaults file
+         */
+        Supplier<HashMap<DatabaseItemType, Integer>> readFromDefaultsFile = () -> {
+            File df = new File(DEFAULTS_FILE_PATH);
+            if (df.exists()) {
+                try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(DEFAULTS_FILE_PATH))) {
+                    return (HashMap<DatabaseItemType, Integer>) in.readObject();
+                } catch (IOException io) {
+                    io.printStackTrace();
+                } catch (ClassNotFoundException cnf) {
+                    writeNewDefaultsFile.run();
+                }
+            }
+            return null;
+        };
+
+        /*
+         * Writes the passed HashMap<DatabaseItemType, Integer>, representing the default
+         * choices for each DatabaseItem choicebox, to the defaults file.
+         * Returns true if the file was successfully written to;
+         * false if the file was not successfully written to
+         */
+        Function<HashMap<DatabaseItemType, Integer>, Boolean> writeToDefaultsFile = (defaultsHashMap) -> {
+            File df = new File(DEFAULTS_FILE_PATH);
+            if (!df.exists()) {
+                writeNewDefaultsFile.run();
+            }
+            try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(df))) {
+                out.writeObject(defaultsHashMap);
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        };
+
+        // If a defaults file does not exist, we'll need to create a new one.
+        File defaultsFile = new File(DEFAULTS_FILE_PATH);
+        if (!defaultsFile.exists()){
+            writeNewDefaultsFile.run();
+        }
+
+        HashMap<DatabaseItemType, Integer> defaultsHashMap = readFromDefaultsFile.get();
+        // If the user has unchecked the default checkbox
+        // then they're only trying to remove the current default
+        // for that choicebox - not set a new one. Thus, the new
+        // value for that choicebox default should be null.
+        if (!clickedCheckbox.isSelected()) {
+            databaseItemID = null;
+        }
+        defaultsHashMap.put(databaseItemType, databaseItemID);
+        writeToDefaultsFile.apply(defaultsHashMap);
     }
 }
