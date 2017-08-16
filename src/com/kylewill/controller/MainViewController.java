@@ -156,62 +156,59 @@ public class MainViewController implements Initializable{
         try {
 
             // The string that will be written to the log file
-            String logEntry = "";
+            StringBuilder logEntry = new StringBuilder();
+            String newLine = System.lineSeparator();
 
             // Append the date
             LocalDateTime localDateTime = LocalDateTime.now();
             int day = localDateTime.getDayOfMonth();
             Month month = localDateTime.getMonth();
             int year = localDateTime.getYear();
-            logEntry = logEntry.concat(System.lineSeparator() + System.lineSeparator()
-                    + "Date: " + month.toString() + " " + day + ", " + year);
+            logEntry.append(newLine).append(newLine)
+                    .append("Date: ").append(month).append(" ")
+                    .append(day).append(", ").append(year);
 
             // Append the hours
-            logEntry = logEntry.concat(System.lineSeparator()
-                    + "Hours: " + hours.getCharacters().toString());
+            // TODO: find out what hours.toString() returns
+            logEntry.append(newLine).append("Hours: ").append(hours.getCharacters());
 
             // Append the comments
             if (!comments.getText().isEmpty()) {
-                logEntry = logEntry.concat(System.lineSeparator()
-                        + "Comments: " + comments.getText()
-                );
+                logEntry.append(newLine).append("Comments: ").append(comments.getText());
             }
 
             // Append the location
             if (locationChoiceBox.getValue() != null) {
                 LocationMapper locationMapper = new LocationMapper();
                 Location location = locationMapper.read(locationChoiceBox.getValue().toString());
-                logEntry = logEntry.concat(System.lineSeparator()
-                        + "Location: " + System.lineSeparator()
-                        + location.getLocationName() + System.lineSeparator()
-                        + location.getLocationAddress() + System.lineSeparator()
-                        + location.getLocationCity() + ", " + location.getLocationState()
-                        + " " + location.getLocationZipCode()
-                );
+                logEntry.append(newLine).append("Location:").append(newLine)
+                        .append(location.getLocationName()).append(newLine)
+                        .append(location.getLocationAddress()).append(newLine)
+                        .append(location.getLocationCity()).append(", ")
+                        .append(location.getLocationState()).append(" ")
+                        .append(location.getLocationZipCode());
             }
 
             // Append the company
             if (companyChoiceBox.getValue() != null) {
                 CompanyMapper companyMapper = new CompanyMapper();
                 Company company = companyMapper.read(companyChoiceBox.getValue().toString());
-                logEntry = logEntry.concat(System.lineSeparator()
-                        + "Company: " + company.getCompanyName());
+                logEntry.append(newLine).append("Company: ").append(company.getCompanyName());
             }
 
             // Append the supervisor
             if (supervisorChoiceBox.getValue() != null) {
                 SupervisorMapper supervisorMapper = new SupervisorMapper();
                 Supervisor supervisor = supervisorMapper.read(supervisorChoiceBox.getValue());
-                logEntry = logEntry.concat(System.lineSeparator()
-                        + "Supervisor: " + supervisor.getSupervisorDisplayName() + " ("
-                        + supervisor.getSupervisorFirstName() + " "
-                        + supervisor.getSupervisorLastName() + ")"
-                );
+                logEntry.append(newLine).append("Supervisor: ")
+                        .append(supervisor.getSupervisorDisplayName()).append(" (")
+                        .append(supervisor.getSupervisorFirstName()).append(" ")
+                        .append(supervisor.getSupervisorLastName()).append(")");
             }
 
             // Try appending to the current log file or create a new one if no log file exists
             FileWriter fileWriter = new FileWriter("Hours_Worked.txt", true);
-            fileWriter.append(logEntry);
+            fileWriter.append(logEntry.toString());
             fileWriter.close();
         } catch (IOException e) {
             createErrorStage();
