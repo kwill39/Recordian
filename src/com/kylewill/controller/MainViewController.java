@@ -1,7 +1,9 @@
 package com.kylewill.controller;
 
 import com.kylewill.controller.databaseitemcontroller.DatabaseItemModificationController;
+import com.kylewill.databasemanagement.DatabaseChangeObserver;
 import com.kylewill.model.Company;
+import com.kylewill.model.DatabaseItem;
 import com.kylewill.model.Location;
 import com.kylewill.model.Supervisor;
 import com.kylewill.databasemanagement.objectrelationalmap.CompanyMapper;
@@ -35,8 +37,9 @@ import java.util.function.Consumer;
  * @author  Kyle Williams
  * @since   Version 2
  */
-public class MainViewController implements Initializable{
+public class MainViewController implements Initializable, DatabaseChangeObserver {
     private final String DEFAULTS_FILE_PATH = "Hour_Tracker_Files/defaults.ser";
+
     /**
      * Used for finding a default choicebox item
      */
@@ -228,7 +231,7 @@ public class MainViewController implements Initializable{
      * This method should be called in order to update <code>companyNames<code/>
      * whenever the SQLite companies table is changed.
      */
-    public void refreshCompanyNames(){
+    private void refreshCompanyNames(){
         CompanyMapper companyMapper = new CompanyMapper();
         companyNames.clear();
         List<Company> companies = companyMapper.readAll();
@@ -241,7 +244,7 @@ public class MainViewController implements Initializable{
      * This method should be called in order to update <code>locationNames<code/>
      * whenever the SQLite locations table is changed.
      */
-    public void refreshLocationNames(){
+    private void refreshLocationNames(){
         LocationMapper locationMapper = new LocationMapper();
         locationNames.clear();
         List<Location> locations = locationMapper.readAll();
@@ -254,7 +257,7 @@ public class MainViewController implements Initializable{
      * This method should be called in order to update <code>supervisorDisplayNames<code/>
      * whenever the SQLite supervisors table is changed.
      */
-    public void refreshSupervisorDisplayNames(){
+    private void refreshSupervisorDisplayNames(){
         SupervisorMapper supervisorMapper = new SupervisorMapper();
         supervisorDisplayNames.clear();
         List<Supervisor> supervisors = supervisorMapper.readAll();
@@ -439,5 +442,44 @@ public class MainViewController implements Initializable{
             e.printStackTrace();
             return false;
         }
-    };
+    }
+
+    @Override
+    public void databaseItemWasCreated(DatabaseItem databaseItem) {
+        if (databaseItem instanceof Company) {
+            refreshCompanyNames();
+            Company newCompany = (Company) databaseItem;
+            companyChoiceBox.setValue(newCompany.getCompanyName());
+        } else if (databaseItem instanceof Location) {
+            refreshLocationNames();
+            Location newLocation = (Location) databaseItem;
+            locationChoiceBox.setValue(newLocation.getLocationName());
+        } else if (databaseItem instanceof Supervisor) {
+            refreshSupervisorDisplayNames();
+            Supervisor newSupervisor = (Supervisor) databaseItem;
+            supervisorChoiceBox.setValue(newSupervisor.getSupervisorDisplayName());
+        }
+    }
+
+    @Override
+    public void databaseItemWasUpdated(DatabaseItem databaseItem) {
+        if (databaseItem instanceof Company) {
+            refreshCompanyNames();
+        } else if (databaseItem instanceof Location) {
+            refreshLocationNames();
+        } else if (databaseItem instanceof Supervisor) {
+            refreshSupervisorDisplayNames();
+        }
+    }
+
+    @Override
+    public void databaseItemWasDeleted(DatabaseItem databaseItem) {
+        if (databaseItem instanceof Company) {
+            refreshCompanyNames();
+        } else if (databaseItem instanceof Location) {
+            refreshLocationNames();
+        } else if (databaseItem instanceof Supervisor) {
+            refreshSupervisorDisplayNames();
+        }
+    }
 }
