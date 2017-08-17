@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -18,6 +19,7 @@ import java.util.ResourceBundle;
 public class EditSupervisorController extends DatabaseItemModificationController implements Initializable {
     private SupervisorMapper supervisorMapper = new SupervisorMapper();
     private Supervisor supervisorToEdit;
+    private String oldDisplayNameOfSupervisorToEdit;
     @FXML private TextField supervisorFirstName;
     @FXML private TextField supervisorLastName;
     @FXML private TextField supervisorDisplayName;
@@ -33,8 +35,8 @@ public class EditSupervisorController extends DatabaseItemModificationController
 
     @Override
     protected void onMainViewControllerSet() {
-        String displayNameOfSupervisorToEdit = mainViewController.supervisorChoiceBox.getValue().toString();
-        supervisorToEdit = supervisorMapper.read(displayNameOfSupervisorToEdit);
+        oldDisplayNameOfSupervisorToEdit = mainViewController.supervisorChoiceBox.getValue().toString();
+        supervisorToEdit = supervisorMapper.read(oldDisplayNameOfSupervisorToEdit);
         supervisorFirstName.setText(supervisorToEdit.getSupervisorFirstName());
         supervisorLastName.setText(supervisorToEdit.getSupervisorLastName());
         supervisorDisplayName.setText(supervisorToEdit.getSupervisorDisplayName());
@@ -44,13 +46,23 @@ public class EditSupervisorController extends DatabaseItemModificationController
         if (supervisorFirstName.getText().isEmpty()
                 || supervisorLastName.getText().isEmpty()
                 || supervisorDisplayName.getText().isEmpty()) {
+            errorLabel.setText("Please fill in all fields");
             errorLabel.setVisible(true);
-        } else {
-            supervisorToEdit.setSupervisorFirstName(supervisorFirstName.getText());
-            supervisorToEdit.setSupervisorLastName(supervisorLastName.getText());
-            supervisorToEdit.setSupervisorDisplayName(supervisorDisplayName.getText());
-            supervisorMapper.update(supervisorToEdit);
-            stage.close();
+            return;
         }
+        List<Supervisor> supervisors = supervisorMapper.readAll();
+        for (Supervisor supervisor : supervisors) {
+            if (!supervisor.getSupervisorDisplayName().equals(oldDisplayNameOfSupervisorToEdit)
+                    && supervisor.getSupervisorDisplayName().equals(supervisorDisplayName.getText())) {
+                errorLabel.setText("Supervisor \"Display As\" name already exists");
+                errorLabel.setVisible(true);
+                return;
+            }
+        }
+        supervisorToEdit.setSupervisorFirstName(supervisorFirstName.getText());
+        supervisorToEdit.setSupervisorLastName(supervisorLastName.getText());
+        supervisorToEdit.setSupervisorDisplayName(supervisorDisplayName.getText());
+        supervisorMapper.update(supervisorToEdit);
+        stage.close();
     }
 }

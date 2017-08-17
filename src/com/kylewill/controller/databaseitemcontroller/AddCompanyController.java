@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -30,11 +31,20 @@ public class AddCompanyController extends DatabaseItemModificationController imp
 
     private void addCompany() {
         if (newCompanyName.getText().isEmpty()) {
+            errorLabel.setText("Please fill in all fields");
             errorLabel.setVisible(true);
-        } else {
-            Company newCompany = new Company(newCompanyName.getText());
-            companyMapper.create(newCompany);
-            stage.close();
+            return;
         }
+        List<Company> companies = companyMapper.readAll();
+        for (Company company : companies) {
+            if (company.getCompanyName().equals(newCompanyName.getText())){
+                errorLabel.setText("Company name already exists");
+                errorLabel.setVisible(true);
+                return;
+            }
+        }
+        Company newCompany = new Company(newCompanyName.getText());
+        companyMapper.create(newCompany);
+        stage.close();
     }
 }

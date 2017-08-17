@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -38,15 +39,24 @@ public class AddLocationController extends DatabaseItemModificationController im
                 || newLocationCity.getText().isEmpty()
                 || newLocationState.getText().isEmpty()
                 || newLocationZipCode.getText().isEmpty()) {
+            errorLabel.setText("Please fill in all fields");
             errorLabel.setVisible(true);
-        } else {
-            Location newLocation = new Location(newLocationName.getText());
-            newLocation.setLocationAddress(newLocationAddress.getText());
-            newLocation.setLocationCity(newLocationCity.getText());
-            newLocation.setLocationState(newLocationState.getText());
-            newLocation.setLocationZipCode(newLocationZipCode.getText());
-            locationMapper.create(newLocation);
-            stage.close();
+            return;
         }
+        List<Location> locations = locationMapper.readAll();
+        for (Location location : locations) {
+            if (location.getLocationName().equals(newLocationName.getText())) {
+                errorLabel.setText("Location name already exists");
+                errorLabel.setVisible(true);
+                return;
+            }
+        }
+        Location newLocation = new Location(newLocationName.getText());
+        newLocation.setLocationAddress(newLocationAddress.getText());
+        newLocation.setLocationCity(newLocationCity.getText());
+        newLocation.setLocationState(newLocationState.getText());
+        newLocation.setLocationZipCode(newLocationZipCode.getText());
+        locationMapper.create(newLocation);
+        stage.close();
     }
 }

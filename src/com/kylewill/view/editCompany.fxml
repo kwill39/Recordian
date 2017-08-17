@@ -23,7 +23,7 @@
    <children>
       <Label text="Company Name" />
       <TextField fx:id="companyName" GridPane.columnIndex="1" />
-      <Label fx:id="errorLabel" text="Please fill in all fields" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Label fx:id="errorLabel" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.rowIndex="2" />
       <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>

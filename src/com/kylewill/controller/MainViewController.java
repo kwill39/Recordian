@@ -546,10 +546,16 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
     public void databaseItemWasUpdated(DatabaseItem databaseItem) {
         if (databaseItem instanceof Company) {
             refreshCompanyNames();
+            Company updatedCompany = (Company) databaseItem;
+            companyChoiceBox.setValue(updatedCompany.getCompanyName());
         } else if (databaseItem instanceof Location) {
             refreshLocationNames();
+            Location updatedLocation = (Location) databaseItem;
+            locationChoiceBox.setValue(updatedLocation.getLocationName());
         } else if (databaseItem instanceof Supervisor) {
             refreshSupervisorDisplayNames();
+            Supervisor updatedSupervisor = (Supervisor) databaseItem;
+            supervisorChoiceBox.setValue(updatedSupervisor.getSupervisorDisplayName());
         }
     }
 

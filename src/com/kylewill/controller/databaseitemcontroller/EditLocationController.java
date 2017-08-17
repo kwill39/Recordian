@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -18,6 +19,7 @@ import java.util.ResourceBundle;
 public class EditLocationController extends DatabaseItemModificationController implements Initializable {
     private LocationMapper locationMapper = new LocationMapper();
     private Location locationToEdit;
+    private String oldNameOfLocationToEdit;
     @FXML private TextField locationName;
     @FXML private TextField locationAddress;
     @FXML private TextField locationCity;
@@ -35,8 +37,8 @@ public class EditLocationController extends DatabaseItemModificationController i
 
     @Override
     protected void onMainViewControllerSet() {
-        String nameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
-        locationToEdit = locationMapper.read(nameOfLocationToEdit);
+        oldNameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
+        locationToEdit = locationMapper.read(oldNameOfLocationToEdit);
         locationName.setText(locationToEdit.getLocationName());
         locationAddress.setText(locationToEdit.getLocationAddress());
         locationCity.setText(locationToEdit.getLocationCity());
@@ -50,15 +52,25 @@ public class EditLocationController extends DatabaseItemModificationController i
                 || locationCity.getText().isEmpty()
                 || locationState.getText().isEmpty()
                 || locationZipCode.getText().isEmpty()) {
+            errorLabel.setText("Please fill in all fields");
             errorLabel.setVisible(true);
-        } else {
-            locationToEdit.setLocationName(locationName.getText());
-            locationToEdit.setLocationAddress(locationAddress.getText());
-            locationToEdit.setLocationCity(locationCity.getText());
-            locationToEdit.setLocationState(locationState.getText());
-            locationToEdit.setLocationZipCode(locationZipCode.getText());
-            locationMapper.update(locationToEdit);
-            stage.close();
+            return;
         }
+        List<Location> locations = locationMapper.readAll();
+        for (Location location : locations) {
+            if (!location.getLocationName().equals(oldNameOfLocationToEdit)
+                    && location.getLocationName().equals(locationName.getText())) {
+                errorLabel.setText("Location name already exists");
+                errorLabel.setVisible(true);
+                return;
+            }
+        }
+        locationToEdit.setLocationName(locationName.getText());
+        locationToEdit.setLocationAddress(locationAddress.getText());
+        locationToEdit.setLocationCity(locationCity.getText());
+        locationToEdit.setLocationState(locationState.getText());
+        locationToEdit.setLocationZipCode(locationZipCode.getText());
+        locationMapper.update(locationToEdit);
+        stage.close();
     }
 }

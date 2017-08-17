@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -48,13 +49,22 @@ public class AddSupervisorController extends DatabaseItemModificationController 
         if (newSupervisorFirstName.getText().isEmpty()
                 || newSupervisorLastName.getText().isEmpty()
                 || newSupervisorDisplayName.getText().isEmpty()) {
+            errorLabel.setText("Please fill in all fields");
             errorLabel.setVisible(true);
-        } else {
-            Supervisor newSupervisor = new Supervisor(newSupervisorDisplayName.getText());
-            newSupervisor.setSupervisorFirstName(newSupervisorFirstName.getText());
-            newSupervisor.setSupervisorLastName(newSupervisorLastName.getText());
-            supervisorMapper.create(newSupervisor);
-            stage.close();
+            return;
         }
+        List<Supervisor> supervisors = supervisorMapper.readAll();
+        for (Supervisor supervisor : supervisors) {
+            if (supervisor.getSupervisorDisplayName().equals(newSupervisorDisplayName.getText())) {
+                errorLabel.setText("Supervisor \"Display As\" name already exists");
+                errorLabel.setVisible(true);
+                return;
+            }
+        }
+        Supervisor newSupervisor = new Supervisor(newSupervisorDisplayName.getText());
+        newSupervisor.setSupervisorFirstName(newSupervisorFirstName.getText());
+        newSupervisor.setSupervisorLastName(newSupervisorLastName.getText());
+        supervisorMapper.create(newSupervisor);
+        stage.close();
     }
 }
