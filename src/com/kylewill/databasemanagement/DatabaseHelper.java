@@ -1,4 +1,4 @@
-package com.kylewill;
+package com.kylewill.databasemanagement;
 
 import java.io.File;
 import java.sql.Connection;

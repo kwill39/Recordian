@@ -8,5 +8,5 @@ package com.kylewill.model;
  * @author  Kyle Williams
  * @since   Version 2
  */
-interface DatabaseItem {
+public interface DatabaseItem {
 }

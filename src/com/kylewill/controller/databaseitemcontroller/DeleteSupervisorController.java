@@ -1,7 +1,7 @@
 package com.kylewill.controller.databaseitemcontroller;
 
 import com.kylewill.model.Supervisor;
-import com.kylewill.objectrelationalmap.SupervisorMapper;
+import com.kylewill.databasemanagement.objectrelationalmap.SupervisorMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

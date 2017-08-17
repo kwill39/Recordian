@@ -1,5 +1,6 @@
 package com.kylewill;
 
+import com.kylewill.databasemanagement.DatabaseHelper;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

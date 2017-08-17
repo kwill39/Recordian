@@ -1,6 +1,6 @@
-package com.kylewill.objectrelationalmap;
+package com.kylewill.databasemanagement.objectrelationalmap;
 
-import com.kylewill.DatabaseHelper;
+import com.kylewill.databasemanagement.DatabaseHelper;
 import com.kylewill.model.Location;
 
 import java.sql.*;

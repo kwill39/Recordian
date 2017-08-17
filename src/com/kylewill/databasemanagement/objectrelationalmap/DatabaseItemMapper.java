@@ -1,4 +1,4 @@
-package com.kylewill.objectrelationalmap;
+package com.kylewill.databasemanagement.objectrelationalmap;
 
 import java.util.List;
 

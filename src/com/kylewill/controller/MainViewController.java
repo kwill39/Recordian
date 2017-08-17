@@ -4,9 +4,9 @@ import com.kylewill.controller.databaseitemcontroller.DatabaseItemModificationCo
 import com.kylewill.model.Company;
 import com.kylewill.model.Location;
 import com.kylewill.model.Supervisor;
-import com.kylewill.objectrelationalmap.CompanyMapper;
-import com.kylewill.objectrelationalmap.LocationMapper;
-import com.kylewill.objectrelationalmap.SupervisorMapper;
+import com.kylewill.databasemanagement.objectrelationalmap.CompanyMapper;
+import com.kylewill.databasemanagement.objectrelationalmap.LocationMapper;
+import com.kylewill.databasemanagement.objectrelationalmap.SupervisorMapper;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;

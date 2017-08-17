@@ -1,7 +1,7 @@
 package com.kylewill.controller.databaseitemcontroller;
 
 import com.kylewill.model.Company;
-import com.kylewill.objectrelationalmap.CompanyMapper;
+import com.kylewill.databasemanagement.objectrelationalmap.CompanyMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
