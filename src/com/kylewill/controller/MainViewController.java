@@ -1,6 +1,7 @@
 package com.kylewill.controller;
 
 import com.kylewill.controller.databaseitemcontroller.DatabaseItemModificationController;
+import com.kylewill.databasemanagement.DatabaseChangeObservable;
 import com.kylewill.databasemanagement.DatabaseChangeObserver;
 import com.kylewill.model.Company;
 import com.kylewill.model.DatabaseItem;
@@ -14,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -86,6 +88,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         refreshCompanyNames();
         refreshLocationNames();
         refreshSupervisorDisplayNames();
+        DatabaseChangeObservable.registerObserver(this);
     }
 
     @Override
@@ -111,6 +114,28 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
                 "/com/kylewill/view/editSupervisor.fxml", "Edit Supervisor"));
         deleteSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/deleteSupervisor.fxml", "Delete Supervisor"));
+
+        companyDefaultCheckbox.setOnAction(e -> {
+            String companyName = companyChoiceBox.getValue();
+            CompanyMapper companyMapper = new CompanyMapper();
+            Integer companyID  = companyMapper.read(companyName).getCompanyID();
+            defaultCheckboxClicked(companyDefaultCheckbox, companyID, DatabaseItemType.COMPANY);
+        });
+
+        locationDefaultCheckbox.setOnAction(e -> {
+            String locationName = locationChoiceBox.getValue();
+            LocationMapper locationMapper = new LocationMapper();
+            Integer locationID = locationMapper.read(locationName).getLocationID();
+            defaultCheckboxClicked(locationDefaultCheckbox, locationID, DatabaseItemType.LOCATION);
+        });
+
+        supervisorDefaultCheckbox.setOnAction(e -> {
+            String supervisorDisplayName = supervisorChoiceBox.getValue();
+            SupervisorMapper supervisorMapper = new SupervisorMapper();
+            Integer supervisorID = supervisorMapper.read(supervisorDisplayName).getSupervisorID();
+            defaultCheckboxClicked(supervisorDefaultCheckbox, supervisorID, DatabaseItemType.SUPERVISOR);
+        });
+
         submit.setOnMouseClicked(event -> submit());
 
         /* If a choicebox start outs out with a null value,
@@ -125,7 +150,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
                     button.setDisable(true);
                 }
             }
-            choiceBox.setOnAction(event -> {
+            choiceBox.addEventHandler(ActionEvent.ACTION, event -> {
                 if (choiceBox.getValue() == null) {
                     for (Button button : buttons) {
                         button.setDisable(true);
@@ -152,6 +177,48 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         supervisorButtons.add(editSupervisorButton);
         supervisorButtons.add(deleteSupervisorButton);
         disableButtonsIfChoiceboxValueIsNull.accept(supervisorChoiceBox, supervisorButtons);
+
+        companyChoiceBox.addEventHandler(ActionEvent.ACTION, e -> {
+            Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
+            if (defaultCompanyID != null && companyChoiceBox.getValue() != null) {
+                CompanyMapper companyMapper = new CompanyMapper();
+                Company defaultCompany = companyMapper.read(defaultCompanyID);
+                if (companyChoiceBox.getValue().equals(defaultCompany.getCompanyName())) {
+                    companyDefaultCheckbox.setSelected(true);
+                } else {
+                    companyDefaultCheckbox.setSelected(false);
+                }
+            }
+        });
+
+        locationChoiceBox.addEventHandler(ActionEvent.ACTION, e-> {
+            Integer defaultLocationID = getDefaultChoiceboxItemID(DatabaseItemType.LOCATION);
+            if (defaultLocationID != null && locationChoiceBox.getValue() != null) {
+                LocationMapper locationMapper = new LocationMapper();
+                Location defaultLocation = locationMapper.read(defaultLocationID);
+                locationChoiceBox.getValue();
+                if (locationChoiceBox.getValue().equals(defaultLocation.getLocationName())) {
+                    locationDefaultCheckbox.setSelected(true);
+                } else {
+                    locationDefaultCheckbox.setSelected(false);
+                }
+            }
+        });
+
+        supervisorChoiceBox.addEventHandler(ActionEvent.ACTION, e-> {
+            Integer defaultSupervisorID = getDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR);
+            if (defaultSupervisorID != null && supervisorChoiceBox.getValue() != null) {
+                SupervisorMapper supervisorMapper = new SupervisorMapper();
+                Supervisor defaultSupervisor = supervisorMapper.read(defaultSupervisorID);
+                if (supervisorChoiceBox.getValue().equals(defaultSupervisor.getSupervisorDisplayName())) {
+                    supervisorDefaultCheckbox.setSelected(true);
+                } else {
+                    supervisorDefaultCheckbox.setSelected(false);
+                }
+            }
+        });
+
+        fillChoiceboxesWithDefaultChoices();
     }
 
     /**
@@ -347,32 +414,51 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
-    // TODO: Address the issue of defaults not being updated if a default DatabaseItem was deleted
-    /*
+    // TODO: add javadoc
+    private Integer getDefaultChoiceboxItemID(DatabaseItemType databaseItemType) {
+        HashMap<DatabaseItemType, Integer> defaults = readFromDefaultsFile();
+        return defaults.get(databaseItemType);
+    }
+
+    // TODO: add javadoc
+    private void setDefaultChoiceboxItemID(DatabaseItemType databaseItemType, Integer databaseItemID) {
+        HashMap<DatabaseItemType, Integer> defaultsHashMap = readFromDefaultsFile();
+        defaultsHashMap.put(databaseItemType, databaseItemID);
+        writeToDefaultsFile(defaultsHashMap);
+    }
+
+    // TODO: add javadoc
     private void fillChoiceboxesWithDefaultChoices() {
-        CompanyMapper companyMapper = new CompanyMapper();
-        LocationMapper locationMapper = new LocationMapper();
-        SupervisorMapper supervisorMapper = new SupervisorMapper();
-        HashMap<DatabaseItemType, Integer> defaultsHashmap = readFromDefaultsFile();
-        Company defaultCompany = companyMapper.read(defaultsHashmap.get(DatabaseItemType.COMPANY));
-        Location defaultLocation = locationMapper.read(defaultsHashmap.get(DatabaseItemType.LOCATION));
-        Supervisor defaultSupervisor = supervisorMapper.read(defaultsHashmap.get(DatabaseItemType.SUPERVISOR));
-        companyChoiceBox.setValue(defaultCompany.getCompanyName());
-        locationChoiceBox.setValue(defaultLocation.getLocationName());
-        supervisorChoiceBox.setValue(defaultSupervisor.getSupervisorDisplayName());
-    }*/
+        Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
+        Integer defaultLocationID = getDefaultChoiceboxItemID(DatabaseItemType.LOCATION);
+        Integer defaultSupervisorID = getDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR);
+
+        if (defaultCompanyID != null) {
+            CompanyMapper companyMapper = new CompanyMapper();
+            Company defaultCompany = companyMapper.read(defaultCompanyID);
+            companyChoiceBox.setValue(defaultCompany.getCompanyName());
+        }
+        if (defaultLocationID != null) {
+            LocationMapper locationMapper = new LocationMapper();
+            Location defaultLocation = locationMapper.read(defaultLocationID);
+            locationChoiceBox.setValue(defaultLocation.getLocationName());
+        }
+        if(defaultSupervisorID != null){
+            SupervisorMapper supervisorMapper = new SupervisorMapper();
+            Supervisor defaultSupervisor = supervisorMapper.read(defaultSupervisorID);
+            supervisorChoiceBox.setValue(defaultSupervisor.getSupervisorDisplayName());
+        }
+    }
 
     // TODO: add javadoc
     private void defaultCheckboxClicked(CheckBox clickedCheckbox,
                                         Integer databaseItemID, DatabaseItemType databaseItemType){
-
         // If a defaults file does not exist, we'll need to create a new one.
         File defaultsFile = new File(DEFAULTS_FILE_PATH);
         if (!defaultsFile.exists()){
             writeNewDefaultsFile();
         }
 
-        HashMap<DatabaseItemType, Integer> defaultsHashMap = readFromDefaultsFile();
         // If the user has unchecked the default checkbox
         // then they're only trying to remove the current default
         // for that choicebox - not set a new one. Thus, the new
@@ -380,8 +466,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         if (!clickedCheckbox.isSelected()) {
             databaseItemID = null;
         }
-        defaultsHashMap.put(databaseItemType, databaseItemID);
-        writeToDefaultsFile(defaultsHashMap);
+        setDefaultChoiceboxItemID(databaseItemType, databaseItemID);
     }
 
     /**
@@ -426,10 +511,8 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
      *
      * @param defaultsHashMap a <code>HashMap&lt;DatabaseItemType, Integer&gt;</code>
      * representing the default choices for each DatabaseItem choicebox
-     * @return true if the file was successfully written to;
-     * false if the file was not successfully written to
      */
-    private Boolean writeToDefaultsFile(HashMap<DatabaseItemType, Integer> defaultsHashMap) {
+    private void writeToDefaultsFile(HashMap<DatabaseItemType, Integer> defaultsHashMap) {
         File defaultsFile = new File(DEFAULTS_FILE_PATH);
         // If a defaults file does not exist, we'll need to create a new one.
         if (!defaultsFile.exists()) {
@@ -437,10 +520,8 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(defaultsFile))) {
             out.writeObject(defaultsHashMap);
-            return true;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
     }
 
@@ -476,10 +557,34 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
     public void databaseItemWasDeleted(DatabaseItem databaseItem) {
         if (databaseItem instanceof Company) {
             refreshCompanyNames();
+            // If the deleted DatabaseItem was a default for its
+            // choicebox, then we need to remove it from the defaults.
+            Company oldCompany = (Company) databaseItem;
+            Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
+            if (defaultCompanyID.equals(oldCompany.getCompanyID())) {
+                setDefaultChoiceboxItemID(DatabaseItemType.COMPANY, null);
+                companyDefaultCheckbox.setSelected(false);
+            }
         } else if (databaseItem instanceof Location) {
             refreshLocationNames();
+            // If the deleted DatabaseItem was a default for its
+            // choicebox, then we need to remove it from the defaults.
+            Location oldLocation = (Location) databaseItem;
+            Integer defaultLocationID = getDefaultChoiceboxItemID(DatabaseItemType.LOCATION);
+            if (defaultLocationID.equals(oldLocation.getLocationID())) {
+                setDefaultChoiceboxItemID(DatabaseItemType.LOCATION, null);
+                locationDefaultCheckbox.setSelected(false);
+            }
         } else if (databaseItem instanceof Supervisor) {
             refreshSupervisorDisplayNames();
+            // If the deleted DatabaseItem was a default for its
+            // choicebox, then we need to remove it from the defaults.
+            Supervisor oldSupervisor = (Supervisor) databaseItem;
+            Integer defaultSupervisorId = getDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR);
+            if (defaultSupervisorId.equals(oldSupervisor.getSupervisorID())) {
+                setDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR, null);
+                supervisorDefaultCheckbox.setSelected(false);
+            }
         }
     }
 }

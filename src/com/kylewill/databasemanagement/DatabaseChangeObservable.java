@@ -19,7 +19,6 @@ public final class DatabaseChangeObservable {
     }
 
     public static void notifyOfCreation(DatabaseItem databaseItem) {
-        CompanyMapper companyMapper = new CompanyMapper();
         for (DatabaseChangeObserver observer : observers) {
             observer.databaseItemWasCreated(databaseItem);
         }
