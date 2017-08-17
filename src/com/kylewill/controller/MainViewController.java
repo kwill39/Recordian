@@ -91,16 +91,25 @@ public class MainViewController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         setAllChoiceBoxItems();
 
-        // Set button onClick events
-        addCompany.setOnMouseClicked(event -> addCompany());
-        editCompany.setOnMouseClicked(event -> editCompany());
-        deleteCompany.setOnMouseClicked(event -> deleteCompany());
-        addLocation.setOnMouseClicked(event -> addLocation());
-        editLocation.setOnMouseClicked(event -> editLocation());
-        deleteLocation.setOnMouseClicked(event -> deleteLocation());
-        addSupervisor.setOnMouseClicked(event -> addSupervisor());
-        editSupervisor.setOnMouseClicked(event -> editSupervisor());
-        deleteSupervisor.setOnMouseClicked(event -> deleteSupervisor());
+        // Set button onClick events to open associated JavaFX stages
+        addCompany.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/addCompany.fxml", "Add Company"));
+        editCompany.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/editCompany.fxml", "Edit Company"));
+        deleteCompany.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/deleteCompany.fxml", "Delete Company"));
+        addLocation.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/addLocation.fxml", "Add Location"));
+        editLocation.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/editLocation.fxml", "Edit Location"));
+        deleteLocation.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/deleteLocation.fxml", "Delete Location"));
+        addSupervisor.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/addSupervisor.fxml", "Add Supervisor"));
+        editSupervisor.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/editSupervisor.fxml", "Edit Supervisor"));
+        deleteSupervisor.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+                "/com/kylewill/view/deleteSupervisor.fxml", "Delete Supervisor"));
         submit.setOnMouseClicked(event -> submit());
 
         /* If a choicebox start outs out with a null value,
@@ -215,78 +224,6 @@ public class MainViewController implements Initializable{
         }
 
         Platform.exit();
-    }
-
-    @FXML private void addCompany(){
-        String viewPath = "/com/kylewill/view/addCompany.fxml";
-        String stageTitle = "Add Company";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void editCompany(){
-        if (companyChoiceBox.getValue() == null) {
-            return;
-        }
-        String viewPath = "/com/kylewill/view/editCompany.fxml";
-        String stageTitle = "Edit Company";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void deleteCompany(){
-        if (companyChoiceBox.getValue() == null) {
-            return;
-        }
-        String viewPath = "/com/kylewill/view/deleteCompany.fxml";
-        String stageTitle = "Delete Company";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void addLocation(){
-        String viewPath = "/com/kylewill/view/addLocation.fxml";
-        String stageTitle = "Add Location";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void editLocation(){
-        if (locationChoiceBox.getValue() == null) {
-            return;
-        }
-        String viewPath = "/com/kylewill/view/editLocation.fxml";
-        String stageTitle = "Edit Location";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void deleteLocation(){
-        if (locationChoiceBox.getValue() == null) {
-            return;
-        }
-        String viewPath = "/com/kylewill/view/deleteLocation.fxml";
-        String stageTitle = "Delete Location";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void addSupervisor(){
-        String viewPath = "/com/kylewill/view/addSupervisor.fxml";
-        String stageTitle = "Add Supervisor";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void editSupervisor(){
-        if (supervisorChoiceBox.getValue() == null) {
-            return;
-        }
-        String viewPath = "/com/kylewill/view/editSupervisor.fxml";
-        String stageTitle = "Edit Supervisor";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
-    }
-
-    @FXML private void deleteSupervisor(){
-        if (supervisorChoiceBox.getValue() == null) {
-            return;
-        }
-        String viewPath = "/com/kylewill/view/deleteSupervisor.fxml";
-        String stageTitle = "Delete Supervisor";
-        createDatabaseItemModificationStage(viewPath, stageTitle);
     }
 
     /**
