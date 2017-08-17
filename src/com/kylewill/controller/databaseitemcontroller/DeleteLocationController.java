@@ -36,7 +36,6 @@ public class DeleteLocationController extends DatabaseItemModificationController
 
     private void deleteLocation() {
         locationMapper.delete(locationToDelete);
-        mainViewController.refreshLocationNames();
         stage.close();
     }
 }

@@ -50,7 +50,6 @@ public class EditSupervisorController extends DatabaseItemModificationController
             supervisorToEdit.setSupervisorLastName(supervisorLastName.getText());
             supervisorToEdit.setSupervisorDisplayName(supervisorDisplayName.getText());
             supervisorMapper.update(supervisorToEdit);
-            mainViewController.refreshSupervisorDisplayNames();
             stage.close();
         }
     }

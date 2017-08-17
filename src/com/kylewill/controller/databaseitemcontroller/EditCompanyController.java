@@ -42,7 +42,6 @@ public class EditCompanyController extends DatabaseItemModificationController im
         } else {
             companyToEdit.setCompanyName(companyName.getText());
             companyMapper.update(companyToEdit);
-            mainViewController.refreshCompanyNames();
             stage.close();
         }
     }

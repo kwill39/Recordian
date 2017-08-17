@@ -54,8 +54,6 @@ public class AddSupervisorController extends DatabaseItemModificationController 
             newSupervisor.setSupervisorFirstName(newSupervisorFirstName.getText());
             newSupervisor.setSupervisorLastName(newSupervisorLastName.getText());
             supervisorMapper.create(newSupervisor);
-            mainViewController.refreshSupervisorDisplayNames();
-            mainViewController.supervisorChoiceBox.setValue(newSupervisor.getSupervisorDisplayName());
             stage.close();
         }
     }

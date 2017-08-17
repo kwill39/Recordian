@@ -36,7 +36,6 @@ public class DeleteCompanyController extends DatabaseItemModificationController 
 
     private void deleteCompany() {
         companyMapper.delete(companyToDelete);
-        mainViewController.refreshCompanyNames();
         stage.close();
     }
 }

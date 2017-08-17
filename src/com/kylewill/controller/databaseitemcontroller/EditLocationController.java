@@ -58,7 +58,6 @@ public class EditLocationController extends DatabaseItemModificationController i
             locationToEdit.setLocationState(locationState.getText());
             locationToEdit.setLocationZipCode(locationZipCode.getText());
             locationMapper.update(locationToEdit);
-            mainViewController.refreshLocationNames();
             stage.close();
         }
     }

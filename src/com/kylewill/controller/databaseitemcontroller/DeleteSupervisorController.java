@@ -36,7 +36,6 @@ public class DeleteSupervisorController extends DatabaseItemModificationControll
 
     private void deleteSupervisor() {
         supervisorMapper.delete(supervisorToDelete);
-        mainViewController.refreshSupervisorDisplayNames();
         stage.close();
     }
 }
