@@ -1,5 +1,7 @@
 package com.kylewill.databasemanagement.objectrelationalmap;
 
+import com.kylewill.databasemanagement.DatabaseChangeObservable;
+import com.kylewill.databasemanagement.DatabaseChangeObserver;
 import com.kylewill.databasemanagement.DatabaseHelper;
 import com.kylewill.model.Company;
 
@@ -29,6 +31,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
             preparedStatement.setString(1, company.getCompanyName());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfCreation(read(company.getCompanyName()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -154,6 +157,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             preparedStatement.setString(1, company.getCompanyName());
             preparedStatement.setInt(2, company.getCompanyID());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfUpdate(company);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -180,6 +184,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
             preparedStatement.setInt(1, company.getCompanyID());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfDelete(company);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

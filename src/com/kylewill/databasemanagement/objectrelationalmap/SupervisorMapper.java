@@ -1,5 +1,6 @@
 package com.kylewill.databasemanagement.objectrelationalmap;
 
+import com.kylewill.databasemanagement.DatabaseChangeObservable;
 import com.kylewill.databasemanagement.DatabaseHelper;
 import com.kylewill.model.Supervisor;
 
@@ -25,6 +26,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             preparedStatement.setString(2, supervisor.getSupervisorLastName());
             preparedStatement.setString(3, supervisor.getSupervisorDisplayName());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfCreation(read(supervisor.getSupervisorDisplayName()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -161,6 +163,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             preparedStatement.setString(3, supervisor.getSupervisorDisplayName());
             preparedStatement.setInt(4, supervisor.getSupervisorID());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfUpdate(supervisor);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -187,6 +190,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
             preparedStatement.setInt(1, supervisor.getSupervisorID());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfDelete(supervisor);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

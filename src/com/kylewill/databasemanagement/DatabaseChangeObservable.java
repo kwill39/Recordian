@@ -1,43 +1,37 @@
 package com.kylewill.databasemanagement;
 
+import com.kylewill.databasemanagement.objectrelationalmap.CompanyMapper;
 import com.kylewill.model.DatabaseItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseChangeObservable {
-    private static DatabaseChangeObservable observableInstance = new DatabaseChangeObservable();
+public final class DatabaseChangeObservable {
 
-    public static DatabaseChangeObservable getInstance() {
-        return observableInstance;
-    }
+    private static List<DatabaseChangeObserver> observers = new ArrayList<>();
 
-    private DatabaseChangeObservable() {
-    }
-
-    private List<DatabaseChangeObserver> observers = new ArrayList<>();
-
-    public void registerObserver(DatabaseChangeObserver observer) {
+    public static void registerObserver(DatabaseChangeObserver observer) {
         observers.add(observer);
     }
 
-    public void removeObserver(DatabaseChangeObserver observer) {
+    public static void removeObserver(DatabaseChangeObserver observer) {
         observers.remove(observer);
     }
 
-    public void notifyOfCreation(DatabaseItem databaseItem) {
+    public static void notifyOfCreation(DatabaseItem databaseItem) {
+        CompanyMapper companyMapper = new CompanyMapper();
         for (DatabaseChangeObserver observer : observers) {
             observer.databaseItemWasCreated(databaseItem);
         }
     }
 
-    public void notifyOfUpdate(DatabaseItem databaseItem) {
+    public static void notifyOfUpdate(DatabaseItem databaseItem) {
         for (DatabaseChangeObserver observer : observers) {
             observer.databaseItemWasUpdated(databaseItem);
         }
     }
 
-    public void notifyOfDelete(DatabaseItem databaseItem) {
+    public static void notifyOfDelete(DatabaseItem databaseItem) {
         for (DatabaseChangeObserver observer : observers) {
             observer.databaseItemWasDeleted(databaseItem);
         }

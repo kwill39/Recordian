@@ -1,5 +1,6 @@
 package com.kylewill.databasemanagement.objectrelationalmap;
 
+import com.kylewill.databasemanagement.DatabaseChangeObservable;
 import com.kylewill.databasemanagement.DatabaseHelper;
 import com.kylewill.model.Location;
 
@@ -27,6 +28,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             preparedStatement.setString(4, location.getLocationState());
             preparedStatement.setString(5, location.getLocationZipCode());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfCreation(read(location.getLocationName()));
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -173,6 +175,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             preparedStatement.setString(5, location.getLocationZipCode());
             preparedStatement.setInt(6, location.getLocationID());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfUpdate(location);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -199,6 +202,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
             preparedStatement.setInt(1, location.getLocationID());
             preparedStatement.executeUpdate();
+            DatabaseChangeObservable.notifyOfDelete(location);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
