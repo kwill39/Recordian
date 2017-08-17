@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class DeleteCompanyController extends DatabaseItemModificationController implements Initializable{
     private CompanyMapper companyMapper = new CompanyMapper();
     private Company companyToDelete;
-    @FXML private Label confirmationMessage;
+    @FXML private Label confirmationLabel;
     @FXML private Button deleteButton;
     @FXML private Button cancelButton;
 
@@ -31,7 +31,7 @@ public class DeleteCompanyController extends DatabaseItemModificationController 
     protected void onMainViewControllerSet() {
         String nameOfcompanyToDelete = mainViewController.companyChoiceBox.getValue().toString();
         companyToDelete = companyMapper.read(nameOfcompanyToDelete);
-        confirmationMessage.setText("Are you sure you want to delete " + companyToDelete.getCompanyName() + "?");
+        confirmationLabel.setText("Are you sure you want to delete " + companyToDelete.getCompanyName() + "?");
     }
 
     private void deleteCompany() {

@@ -16,7 +16,7 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Label fx:id="confirmationMessage" text="Are you sure you want to delete this company?" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
+      <Label fx:id="confirmationLabel" text="Are you sure you want to delete this company?" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
       <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" GridPane.rowIndex="1" />
    </children>

@@ -30,8 +30,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 /**
  * @author  Kyle Williams
@@ -66,15 +64,15 @@ public class MainViewController implements Initializable{
     @FXML public ChoiceBox<String> companyChoiceBox;
     @FXML public ChoiceBox<String> locationChoiceBox;
     @FXML public ChoiceBox<String> supervisorChoiceBox;
-    @FXML private Button addCompany;
-    @FXML private Button addLocation;
-    @FXML private Button addSupervisor;
-    @FXML private Button editCompany;
-    @FXML private Button editLocation;
-    @FXML private Button editSupervisor;
-    @FXML private Button deleteCompany;
-    @FXML private Button deleteLocation;
-    @FXML private Button deleteSupervisor;
+    @FXML private Button addCompanyButton;
+    @FXML private Button addLocationButton;
+    @FXML private Button addSupervisorButton;
+    @FXML private Button editCompanyButton;
+    @FXML private Button editLocationButton;
+    @FXML private Button editSupervisorButton;
+    @FXML private Button deleteCompanyButton;
+    @FXML private Button deleteLocationButton;
+    @FXML private Button deleteSupervisorButton;
     @FXML private CheckBox locationDefaultCheckbox;
     @FXML private CheckBox companyDefaultCheckbox;
     @FXML private CheckBox supervisorDefaultCheckbox;
@@ -92,23 +90,23 @@ public class MainViewController implements Initializable{
         setAllChoiceBoxItems();
 
         // Set button onClick events to open associated JavaFX stages
-        addCompany.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        addCompanyButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/addCompany.fxml", "Add Company"));
-        editCompany.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        editCompanyButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/editCompany.fxml", "Edit Company"));
-        deleteCompany.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        deleteCompanyButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/deleteCompany.fxml", "Delete Company"));
-        addLocation.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        addLocationButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/addLocation.fxml", "Add Location"));
-        editLocation.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        editLocationButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/editLocation.fxml", "Edit Location"));
-        deleteLocation.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        deleteLocationButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/deleteLocation.fxml", "Delete Location"));
-        addSupervisor.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        addSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/addSupervisor.fxml", "Add Supervisor"));
-        editSupervisor.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        editSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/editSupervisor.fxml", "Edit Supervisor"));
-        deleteSupervisor.setOnMouseClicked(event -> createDatabaseItemModificationStage(
+        deleteSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/com/kylewill/view/deleteSupervisor.fxml", "Delete Supervisor"));
         submit.setOnMouseClicked(event -> submit());
 
@@ -138,18 +136,18 @@ public class MainViewController implements Initializable{
         };
 
         List<Button> companyButtons = new ArrayList<>();
-        companyButtons.add(editCompany);
-        companyButtons.add(deleteCompany);
+        companyButtons.add(editCompanyButton);
+        companyButtons.add(deleteCompanyButton);
         disableButtonsIfChoiceboxValueIsNull.accept(companyChoiceBox, companyButtons);
 
         List<Button> locationButtons = new ArrayList<>();
-        locationButtons.add(editLocation);
-        locationButtons.add(deleteLocation);
+        locationButtons.add(editLocationButton);
+        locationButtons.add(deleteLocationButton);
         disableButtonsIfChoiceboxValueIsNull.accept(locationChoiceBox, locationButtons);
 
         List<Button> supervisorButtons = new ArrayList<>();
-        supervisorButtons.add(editSupervisor);
-        supervisorButtons.add(deleteSupervisor);
+        supervisorButtons.add(editSupervisorButton);
+        supervisorButtons.add(deleteSupervisorButton);
         disableButtonsIfChoiceboxValueIsNull.accept(supervisorChoiceBox, supervisorButtons);
     }
 
