@@ -1,0 +1,24 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+
+sourceSets {
+    main {
+        java.srcDirs = ['src']
+    }
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.hibernate.dialect/sqlite-dialect
+    compile group: 'org.hibernate.dialect', name: 'sqlite-dialect', version: '0.1.0'
+    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.20.0'
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-core
+    compile group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'
+    // https://mvnrepository.com/artifact/junit/junit
+    compile group: 'junit', name: 'junit', version: '4.12'
+
+}
+
+repositories {
+    mavenCentral()
+}
