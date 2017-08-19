@@ -138,45 +138,41 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
 
         submit.setOnMouseClicked(event -> submit());
 
+
+
         /* If a choicebox start outs out with a null value,
-         * then disable its Edit/Delete buttons. Also, set the action listener
-         * of the choicebox to enable the buttons when the choicebox
-         * does not have a null value and disable the buttons when the
-         * choicebox does have a null value.
+         * then disable its Edit/Delete buttons and default checkbox.
+         * Also, set the action listener of the choicebox to enable
+         * the buttons/checkbox when the choicebox does not have a null value
+         * and disable the buttons/checkbox when the choicebox does have a null value.
          */
-        BiConsumer<ChoiceBox<String>, List<Button>> disableButtonsIfChoiceboxValueIsNull = (choiceBox, buttons) -> {
-            if (choiceBox.getValue() == null) {
-                for (Button button : buttons) {
-                    button.setDisable(true);
-                }
-            }
-            choiceBox.addEventHandler(ActionEvent.ACTION, event -> {
-                if (choiceBox.getValue() == null) {
-                    for (Button button : buttons) {
-                        button.setDisable(true);
-                    }
-                } else {
-                    for (Button button : buttons) {
-                        button.setDisable(false);
-                    }
-                }
-            });
-        };
 
-        List<Button> companyButtons = new ArrayList<>();
-        companyButtons.add(editCompanyButton);
-        companyButtons.add(deleteCompanyButton);
-        disableButtonsIfChoiceboxValueIsNull.accept(companyChoiceBox, companyButtons);
+        editCompanyButton.setDisable(companyChoiceBox.getValue() == null);
+        deleteCompanyButton.setDisable(companyChoiceBox.getValue() == null);
+        companyDefaultCheckbox.setDisable(companyChoiceBox.getValue() == null);
+        companyChoiceBox.addEventHandler(ActionEvent.ACTION, event -> {
+            editCompanyButton.setDisable(companyChoiceBox.getValue() == null);
+            deleteCompanyButton.setDisable(companyChoiceBox.getValue() == null);
+            companyDefaultCheckbox.setDisable(companyChoiceBox.getValue() == null);
+        });
 
-        List<Button> locationButtons = new ArrayList<>();
-        locationButtons.add(editLocationButton);
-        locationButtons.add(deleteLocationButton);
-        disableButtonsIfChoiceboxValueIsNull.accept(locationChoiceBox, locationButtons);
+        editLocationButton.setDisable(locationChoiceBox.getValue() == null);
+        deleteLocationButton.setDisable(locationChoiceBox.getValue() == null);
+        locationDefaultCheckbox.setDisable(locationChoiceBox.getValue() == null);
+        locationChoiceBox.addEventHandler(ActionEvent.ACTION, event -> {
+            editLocationButton.setDisable(locationChoiceBox.getValue() == null);
+            deleteLocationButton.setDisable(locationChoiceBox.getValue() == null);
+            locationDefaultCheckbox.setDisable(locationChoiceBox.getValue() == null);
+        });
 
-        List<Button> supervisorButtons = new ArrayList<>();
-        supervisorButtons.add(editSupervisorButton);
-        supervisorButtons.add(deleteSupervisorButton);
-        disableButtonsIfChoiceboxValueIsNull.accept(supervisorChoiceBox, supervisorButtons);
+        editSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
+        deleteSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
+        supervisorDefaultCheckbox.setDisable(supervisorChoiceBox.getValue() == null);
+        supervisorChoiceBox.addEventHandler(ActionEvent.ACTION, event -> {
+            editSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
+            deleteSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
+            supervisorDefaultCheckbox.setDisable(supervisorChoiceBox.getValue() == null);
+        });
 
         companyChoiceBox.addEventHandler(ActionEvent.ACTION, e -> {
             Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
