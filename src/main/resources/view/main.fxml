@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="328.0" prefWidth="693.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
+    <children>
+        <Label prefWidth="100.0" text="Hours Worked" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="hours" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label text="Comments:" GridPane.rowIndex="1" />
+        <TextArea fx:id="comments" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="53.0" prefWidth="559.0" wrapText="true" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+        <Label text="Location" GridPane.rowIndex="3" />
+        <ChoiceBox fx:id="locationChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Button fx:id="addLocationButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+        <Button fx:id="editLocationButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        <Button fx:id="deleteLocationButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+        <CheckBox fx:id="locationDefaultCheckbox" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+        <Label text="Company" GridPane.rowIndex="4" />
+        <ChoiceBox fx:id="companyChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Button fx:id="addCompanyButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+        <Button fx:id="editCompanyButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+        <Button fx:id="deleteCompanyButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+        <CheckBox fx:id="companyDefaultCheckbox" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+        <Label text="Supervisor" GridPane.rowIndex="5" />
+        <ChoiceBox fx:id="supervisorChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Button fx:id="addSupervisorButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+        <Button fx:id="editSupervisorButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+        <Button fx:id="deleteSupervisorButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+        <CheckBox fx:id="supervisorDefaultCheckbox" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+        <Label fx:id="errorLabel" text="Please enter amount of hours worked" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+        <Button fx:id="submit" text="Submit" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+    </children>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
+</GridPane>
