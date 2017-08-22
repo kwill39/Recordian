@@ -115,6 +115,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         deleteSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/view/deleteSupervisor.fxml", "Delete Supervisor"));
 
+        // Sets/Removes the company default
         companyDefaultCheckbox.setOnAction(e -> {
             String companyName = companyChoiceBox.getValue();
             CompanyMapper companyMapper = new CompanyMapper();
@@ -122,6 +123,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
             defaultCheckboxClicked(companyDefaultCheckbox, companyID, DatabaseItemType.COMPANY);
         });
 
+        // Sets/Removes the location default
         locationDefaultCheckbox.setOnAction(e -> {
             String locationName = locationChoiceBox.getValue();
             LocationMapper locationMapper = new LocationMapper();
@@ -129,6 +131,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
             defaultCheckboxClicked(locationDefaultCheckbox, locationID, DatabaseItemType.LOCATION);
         });
 
+        // Sets/Removes the supervisor default
         supervisorDefaultCheckbox.setOnAction(e -> {
             String supervisorDisplayName = supervisorChoiceBox.getValue();
             SupervisorMapper supervisorMapper = new SupervisorMapper();
@@ -142,9 +145,9 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
 
         /* If a choicebox start outs out with a null value,
          * then disable its Edit/Delete buttons and default checkbox.
-         * Also, set the action listener of the choicebox to enable
-         * the buttons/checkbox when the choicebox does not have a null value
-         * and disable the buttons/checkbox when the choicebox does have a null value.
+         * Also, set the action listener of the choicebox to enable/re-enable
+         * the buttons/default checkbox when the choicebox does not have a null value
+         * and disable the buttons/default checkbox when the choicebox does have a null value.
          */
 
         editCompanyButton.setDisable(companyChoiceBox.getValue() == null);
@@ -173,6 +176,14 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
             deleteSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
             supervisorDefaultCheckbox.setDisable(supervisorChoiceBox.getValue() == null);
         });
+
+
+
+        /* If a choicebox's item is displaying the
+         * default choice for that choicebox, then set the
+         * corresponding default checkbox to checked.
+         * Otherwise, remove the check mark.
+         */
 
         companyChoiceBox.addEventHandler(ActionEvent.ACTION, e -> {
             Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
@@ -242,7 +253,6 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
                     .append(day).append(", ").append(year);
 
             // Append the hours
-            // TODO: find out what hours.toString() returns
             logEntry.append(newLine).append("Hours: ").append(hours.getCharacters());
 
             // Append the comments
@@ -364,6 +374,12 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         setChoiceBoxItems.accept(supervisorChoiceBox, sortedSupervisorDisplayNames);
     }
 
+    /**
+     * Creates a new JavaFX stage for adding/editing/deleting a <code>DatabaseItem</code>
+     *
+     * @param viewPath      the path to the xml file representing the view
+     * @param stageTitle    the title to be shown at the top of the stage
+     */
     private void createDatabaseItemModificationStage(String viewPath, String stageTitle) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
@@ -381,6 +397,9 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
+    /**
+     * Creates error stage with default error message
+     */
     private void createErrorStage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/error.fxml"));
@@ -396,6 +415,11 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
+    /**
+     * Creates error stage with a custom message
+     *
+     * @param customErrorMessage the error message to be shown to the user
+     */
     private void createErrorStage(String customErrorMessage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/error.fxml"));
@@ -412,20 +436,37 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
-    // TODO: add javadoc
+    /**
+     * Gets the ID of the <code>DatabaseItem</code> that is the
+     * default choice for the choicebox that represents
+     * DatabaseItems of type <code>databaseItemType</code>
+     *
+     * @param databaseItemType the type of DatabaseItem
+     * @return a DatabaseItem ID
+     */
     private Integer getDefaultChoiceboxItemID(DatabaseItemType databaseItemType) {
         HashMap<DatabaseItemType, Integer> defaults = readFromDefaultsFile();
         return defaults.get(databaseItemType);
     }
 
-    // TODO: add javadoc
+    /**
+     * Sets the default choice for the choicebox that represents
+     * DatabaseItems of type <code>DatabaseItemType</code> to
+     * the DatabaseItem represented by <code>databaseItemID</code>
+     *
+     * @param databaseItemType  the type of DatabaseItem
+     * @param databaseItemID    a DatabaseItem ID
+     */
     private void setDefaultChoiceboxItemID(DatabaseItemType databaseItemType, Integer databaseItemID) {
         HashMap<DatabaseItemType, Integer> defaultsHashMap = readFromDefaultsFile();
         defaultsHashMap.put(databaseItemType, databaseItemID);
         writeToDefaultsFile(defaultsHashMap);
     }
 
-    // TODO: add javadoc
+    /**
+     * Loads any default choices into their
+     * corresponding choiceboxes.
+     */
     private void fillChoiceboxesWithDefaultChoices() {
         Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
         Integer defaultLocationID = getDefaultChoiceboxItemID(DatabaseItemType.LOCATION);
@@ -448,7 +489,20 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
-    // TODO: add javadoc
+    /**
+     * Sets/Removes the default choice of the choicebox
+     * associated with the clicked default checkbox.
+     * <p>
+     * If the checkbox check mark was removed by the user,
+     * then the user is trying to remove the default.
+     * Otherwise, the user is trying to set the default.
+     *
+     * @param clickedCheckbox   the checkbox that was clicked by the user
+     * @param databaseItemID    the ID of the DatabaseItem in the choicebox
+     *                          associated with <code>clickedCheckbox</code> at
+     *                          the time when the user clicked <code>clickedCheckbox</code>
+     * @param databaseItemType  the type of DatabaseItem represented by <code>databaseItemID</code>
+     */
     private void defaultCheckboxClicked(CheckBox clickedCheckbox,
                                         Integer databaseItemID, DatabaseItemType databaseItemType){
         // If a defaults file does not exist, we'll need to create a new one.
@@ -523,6 +577,13 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
+    /**
+     * The method that is called each time a
+     * <code>DatabaseItem</code> is created in the database
+     *
+     * @param databaseItem the <code>DatabaseItem</code> that
+     *                     was just created in the database
+     */
     @Override
     public void databaseItemWasCreated(DatabaseItem databaseItem) {
         if (databaseItem instanceof Company) {
@@ -540,6 +601,13 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
+    /**
+     * The method that is called each time a
+     * <code>DatabaseItem</code> is updated in the database
+     *
+     * @param databaseItem the <code>DatabaseItem</code> that
+     *                     was just updated in the database
+     */
     @Override
     public void databaseItemWasUpdated(DatabaseItem databaseItem) {
         if (databaseItem instanceof Company) {
@@ -557,6 +625,13 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
         }
     }
 
+    /**
+     * The method that is called each time a
+     * <code>DatabaseItem</code> is deleted from the database
+     *
+     * @param databaseItem the <code>DatabaseItem</code> that
+     *                     was just deleted from the database
+     */
     @Override
     public void databaseItemWasDeleted(DatabaseItem databaseItem) {
         if (databaseItem instanceof Company) {
