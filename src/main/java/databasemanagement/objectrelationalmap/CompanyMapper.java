@@ -1,7 +1,6 @@
 package databasemanagement.objectrelationalmap;
 
 import databasemanagement.DatabaseChangeObservable;
-import databasemanagement.DatabaseChangeObserver;
 import databasemanagement.DatabaseHelper;
 import model.Company;
 

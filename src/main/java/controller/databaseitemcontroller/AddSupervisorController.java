@@ -1,12 +1,12 @@
 package controller.databaseitemcontroller;
 
-import model.Supervisor;
 import databasemanagement.objectrelationalmap.SupervisorMapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.Supervisor;
 
 import java.net.URL;
 import java.util.List;

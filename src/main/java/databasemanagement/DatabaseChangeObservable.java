@@ -1,6 +1,5 @@
 package databasemanagement;
 
-import databasemanagement.objectrelationalmap.CompanyMapper;
 import model.DatabaseItem;
 
 import java.util.ArrayList;

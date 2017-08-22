@@ -9,11 +9,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: org.hibernate.dialect:sqlite-dialect:0.1.0" level="project" />
+    <orderEntry type="module" module-name="com.kylewill_main" />
+    <orderEntry type="library" name="Gradle: org.xerial:sqlite-jdbc:3.20.0" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" name="Gradle: org.xerial:sqlite-jdbc:3.20.0" level="project" />
-    <orderEntry type="module" module-name="com.kylewill_main" scope="TEST" />
   </component>
   <component name="TestModuleProperties" production-module="com.kylewill_main" />
 </module>
