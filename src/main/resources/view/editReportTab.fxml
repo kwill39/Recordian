@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditReportTabController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="70.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="80.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="120.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -19,13 +19,13 @@
   </rowConstraints>
     <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
    <children>
-      <TextArea prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <TextArea fx:id="editLogFileTextArea" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
       </TextArea>
-      <Button mnemonicParsing="false" text="Generate Report" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Save" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Button mnemonicParsing="false" text="Cancel" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+      <Button fx:id="generateReportButton" mnemonicParsing="false" text="Generate Report..." GridPane.rowIndex="1" />
+      <Button fx:id="saveButton" mnemonicParsing="false" text="Save" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+      <Button fx:id="undoChangesButton" mnemonicParsing="false" text="Undo Changes" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
    </children>
 </GridPane>

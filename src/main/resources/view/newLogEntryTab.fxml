@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane alignment="CENTER" hgap="10" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="693.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainViewController">
+<GridPane alignment="CENTER" hgap="10" minHeight="-Infinity" minWidth="-Infinity" prefHeight="328.0" prefWidth="693.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewLogEntryTabController">
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
     <children>
         <Label prefWidth="100.0" text="Hours Worked" GridPane.columnIndex="0" GridPane.rowIndex="0" />

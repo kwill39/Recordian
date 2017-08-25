@@ -1,6 +1,6 @@
 package controller.databaseitemcontroller;
 
-import controller.MainViewController;
+import controller.NewLogEntryTabController;
 import javafx.stage.Stage;
 
 /**
@@ -14,11 +14,11 @@ public abstract class DatabaseItemModificationController {
     protected Stage stage;
     /**
      * A <code>DatabaseItem</code> modification controller needs to be able
-     * to communicate to its <code>MainViewController</code> to tell its <code>MainViewController</code>
+     * to communicate to its <code>NewLogEntryTabController</code> to tell its <code>NewLogEntryTabController</code>
      * that it has updated the database. This is so that the choiceboxes in
-     * mainView can reflect this change in the database.
+     * logEntryTab view can reflect this change in the database.
      */
-    protected MainViewController mainViewController;
+    protected NewLogEntryTabController newLogEntryTabController;
 
     /**
      * @param stage the JavaFX <code>stage</code> that contains the
@@ -29,19 +29,19 @@ public abstract class DatabaseItemModificationController {
     }
 
     /**
-     * @param mainViewController the <code>MainViewController</code> that
+     * @param newLogEntryTabController the <code>NewLogEntryTabController</code> that
      *                           created the <code>stage</code> of this controller
      */
-    public void setMainViewController(MainViewController mainViewController) {
-        this.mainViewController = mainViewController;
-        onMainViewControllerSet();
+    public void setNewLogEntryTabController(NewLogEntryTabController newLogEntryTabController) {
+        this.newLogEntryTabController = newLogEntryTabController;
+        onNewLogEntryTabControllerSet();
     }
 
     /**
      * Used by the <code>DatabaseItem</code> modification controller to
      * perform certain actions that can only be done once
      * the controller has access to the fields and methods of the
-     * <code>MainViewController</code> which created its <code>stage</code>.
+     * <code>NewLogEntryTabController</code> which created its <code>stage</code>.
      */
-    protected void onMainViewControllerSet() {}
+    protected void onNewLogEntryTabControllerSet() {}
 }

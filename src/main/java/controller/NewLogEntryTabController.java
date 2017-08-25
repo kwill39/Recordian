@@ -38,7 +38,7 @@ import java.util.function.Consumer;
  * @author  Kyle Williams
  * @since   Version 2
  */
-public class MainViewController implements Initializable, DatabaseChangeObserver {
+public class NewLogEntryTabController implements Initializable, DatabaseChangeObserver {
     private final String DEFAULTS_FILE_PATH = "Hour_Tracker_Files/defaults.ser";
 
     /**
@@ -83,7 +83,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
     @FXML private Label errorLabel;
     @FXML private Button submit;
 
-    public MainViewController(){
+    public NewLogEntryTabController(){
         refreshCompanyNames();
         refreshLocationNames();
         refreshSupervisorDisplayNames();
@@ -340,7 +340,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
     }
 
     /**
-     * Sets the items for all choiceboxes in mainView
+     * Sets the items for all choiceboxes in logEntryTab view
      */
     private void setAllChoiceBoxItems(){
 
@@ -386,7 +386,7 @@ public class MainViewController implements Initializable, DatabaseChangeObserver
             newStage.setTitle(stageTitle);
             newStage.setScene(new Scene(loader.load()));
             DatabaseItemModificationController databaseItemModificationController = loader.getController();
-            databaseItemModificationController.setMainViewController(this);
+            databaseItemModificationController.setNewLogEntryTabController(this);
             databaseItemModificationController.setStage(newStage);
             newStage.initModality(Modality.APPLICATION_MODAL);
             newStage.show();

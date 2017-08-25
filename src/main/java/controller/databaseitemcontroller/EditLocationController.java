@@ -36,8 +36,8 @@ public class EditLocationController extends DatabaseItemModificationController i
     }
 
     @Override
-    protected void onMainViewControllerSet() {
-        oldNameOfLocationToEdit = mainViewController.locationChoiceBox.getValue().toString();
+    protected void onNewLogEntryTabControllerSet() {
+        oldNameOfLocationToEdit = newLogEntryTabController.locationChoiceBox.getValue().toString();
         locationToEdit = locationMapper.read(oldNameOfLocationToEdit);
         locationName.setText(locationToEdit.getLocationName());
         locationAddress.setText(locationToEdit.getLocationAddress());

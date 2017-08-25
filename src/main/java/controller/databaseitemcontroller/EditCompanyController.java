@@ -32,8 +32,8 @@ public class EditCompanyController extends DatabaseItemModificationController im
     }
 
     @Override
-    protected void onMainViewControllerSet() {
-        oldNameOfCompanyToEdit = mainViewController.companyChoiceBox.getValue().toString();
+    protected void onNewLogEntryTabControllerSet() {
+        oldNameOfCompanyToEdit = newLogEntryTabController.companyChoiceBox.getValue().toString();
         companyToEdit = companyMapper.read(oldNameOfCompanyToEdit);
         companyName.setText(companyToEdit.getCompanyName());
     }

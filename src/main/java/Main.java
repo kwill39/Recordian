@@ -15,9 +15,11 @@ public class Main extends Application {
         DatabaseHelper.createDatabase();
 
         // Creates the main view of the application
-        Parent root = FXMLLoader.load(getClass().getResource("view/logEntryTab.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/mainTabPane.fxml"));
         primaryStage.setTitle("Kyle's Hour Tracker");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setMinHeight(449);
+        primaryStage.setMinWidth(679);
         primaryStage.setOnCloseRequest(event -> Platform.exit());
         primaryStage.show();
     }

@@ -9,17 +9,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="679.0" fx:controller="controller.MainTabPaneController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TabPane prefHeight="449.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
+          <Tab text="New Log">
                <content>
-                  <fx:include source="logEntryTab.fxml" />
+                  <fx:include source="newLogEntryTab.fxml" />
                </content></Tab>
-          <Tab text="Untitled Tab 2">
+          <Tab text="Edit Logs">
                <content>
-                  <fx:include source="reportTab.fxml" />
+                  <fx:include fx:id="editReportTab" source="editReportTab.fxml" />
                </content></Tab>
         </tabs>
       </TabPane>
