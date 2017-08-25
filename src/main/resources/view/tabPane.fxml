@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane prefHeight="449.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Untitled Tab 1">
+               <content>
+                  <fx:include source="logEntryTab.fxml" />
+               </content></Tab>
+          <Tab text="Untitled Tab 2">
+               <content>
+                  <fx:include source="reportTab.fxml" />
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</StackPane>
