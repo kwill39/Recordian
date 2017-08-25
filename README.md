@@ -8,6 +8,9 @@ Since the invention of this application, my father has been successful in routin
 
 ## Getting Started
 
+#### Tutorial
+There is a [video tutorial](https://youtu.be/LlQkCYRwqOw) available that shows how to download and use the hour tracker.
+
 #### Prerequisites
 You must have [Java](https://java.com/en/download/) installed on your computer.
 
