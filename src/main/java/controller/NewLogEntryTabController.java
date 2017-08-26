@@ -242,13 +242,19 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             StringBuilder logEntry = new StringBuilder();
             String newLine = System.lineSeparator();
 
+            // If the log file exists, indent two lines
+            // before appending to the end of it
+            File logFile = new File("Hours_Worked.txt");
+            if (logFile.exists() && !logFile.isDirectory()) {
+                logEntry.append(newLine).append(newLine);
+            }
+
             // Append the date
             LocalDateTime localDateTime = LocalDateTime.now();
             int day = localDateTime.getDayOfMonth();
             Month month = localDateTime.getMonth();
             int year = localDateTime.getYear();
-            logEntry.append(newLine).append(newLine)
-                    .append("Date: ").append(month).append(" ")
+            logEntry.append("Date: ").append(month).append(" ")
                     .append(day).append(", ").append(year);
 
             // Append the hours
