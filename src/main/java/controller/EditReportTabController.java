@@ -1,5 +1,6 @@
 package controller;
 
+import databasemanagement.LogFileHelper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -25,11 +26,14 @@ import java.util.function.Function;
 
 public class EditReportTabController implements Initializable {
     private Stage currentStage;
-    private String logFilePath = "Hours_Worked.txt";
     @FXML private TextArea editLogFileTextArea;
     @FXML private Button generateReportButton;
     @FXML private Button saveButton;
     @FXML private Button undoChangesButton;
+
+    void setCurrentStage(Stage stage) {
+        this.currentStage = stage;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,13 +44,15 @@ public class EditReportTabController implements Initializable {
         undoChangesButton.setDisable(true);
 
         saveButton.setOnMouseClicked(event -> {
-            saveNewLogFileText();
+            // Overwrites the log file with the contents of editLogFileTextArea
+            LogFileHelper.setLogFileText(editLogFileTextArea.getText());
+
             saveButton.setDisable(true);
             undoChangesButton.setDisable(true);
             generateReportButton.setDisable(false);
         });
 
-        editLogFileTextArea.setText(getLogFileText());
+        editLogFileTextArea.setText(LogFileHelper.getLogFileText());
         // When changes are made, enable the options to save or
         // cancel those changes and disable the option to generate
         // a report until the changes are saved or canceled.
@@ -61,58 +67,11 @@ public class EditReportTabController implements Initializable {
         undoChangesButton.setOnMouseClicked(event -> {
             saveButton.setDisable(true);
             undoChangesButton.setDisable(true);
-            editLogFileTextArea.setText(getLogFileText());
+            editLogFileTextArea.setText(LogFileHelper.getLogFileText());
             generateReportButton.setDisable(false);
         });
 
         generateReportButton.setOnMouseClicked(event -> generateReport());
-    }
-
-    public void setCurrentStage(Stage stage) {
-        this.currentStage = stage;
-    }
-
-    /**
-     * Overwrites the log file with the contents of editLogFileTextArea
-     */
-    private void saveNewLogFileText() {
-        String newLogFileText = editLogFileTextArea.getText();
-        try (FileWriter fileWriter = new FileWriter(logFilePath)) {
-            File logFile = new File(logFilePath);
-            // Creates a new log file if one does not exist
-            logFile.createNewFile();
-            fileWriter.write(newLogFileText);
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Reads in the text from the log file
-     *
-     * @return String representing the text in the log file
-     */
-    private String getLogFileText() {
-        File logFile = new File(logFilePath);
-        if (!logFile.exists()) {
-            return "";
-        }
-        try (
-                FileInputStream fileInputStream = new FileInputStream(logFilePath);
-                Scanner scanner = new Scanner(fileInputStream)
-        ) {
-            StringBuilder logFileText = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                logFileText.append(scanner.nextLine());
-                // Add the newline which scanner removed
-                logFileText.append(System.lineSeparator());
-            }
-            return logFileText.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     /**
@@ -169,7 +128,7 @@ public class EditReportTabController implements Initializable {
         };
 
         // Get logfile text
-        BufferedReader bufferedReader = new BufferedReader(new StringReader(getLogFileText()));
+        BufferedReader bufferedReader = new BufferedReader(new StringReader(LogFileHelper.getLogFileText()));
 
         // Prepare the PDDocument, PDPage, and PDPageContentStream
         PDDocument document = new PDDocument();

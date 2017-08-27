@@ -3,6 +3,7 @@ package controller;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
+import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.CompanyMapper;
 import databasemanagement.objectrelationalmap.LocationMapper;
 import databasemanagement.objectrelationalmap.SupervisorMapper;
@@ -228,7 +229,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Submits a work iteration, to the Hours_Worked log file, with all the
+     * Submits a work iteration, to the log file, with all the
      * information given by the user pertaining to the work iteration
      */
     @FXML private void submit(){
@@ -244,7 +245,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
             // If the log file exists, indent two lines
             // before appending to the end of it
-            File logFile = new File("Hours_Worked.txt");
+            File logFile = new File(LogFileHelper.logFilePath);
             if (logFile.exists() && !logFile.isDirectory()) {
                 logEntry.append(newLine).append(newLine);
             }
@@ -295,7 +296,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             }
 
             // Try appending to the current log file or create a new one if no log file exists
-            FileWriter fileWriter = new FileWriter("Hours_Worked.txt", true);
+            FileWriter fileWriter = new FileWriter(LogFileHelper.logFilePath, true);
             fileWriter.append(logEntry.toString());
             fileWriter.close();
         } catch (IOException e) {
