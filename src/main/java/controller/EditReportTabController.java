@@ -141,6 +141,10 @@ public class EditReportTabController implements Initializable {
         // of running off of the edge of the page.
         int maximumLineLength = 40;
         String aLineFromTheLogFile = bufferedReader.readLine();
+        if (aLineFromTheLogFile == null) {
+            // Create a blank page if the log file is empty
+            document.addPage(page);
+        }
         while (aLineFromTheLogFile != null) {
             // Use Apache Commons' WordUtils.wrap method to ensure that any line longer than
             // the maximum line length gets wrapped before being written to the current PDF page.
