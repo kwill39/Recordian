@@ -237,72 +237,70 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             errorLabel.setVisible(true);
             return;
         }
-        try {
 
-            // The string that will be written to the log file
-            StringBuilder logEntry = new StringBuilder();
-            String newLine = System.lineSeparator();
+        // The string that will be written to the log file
+        StringBuilder logEntry = new StringBuilder();
+        String newLine = System.lineSeparator();
 
-            // If the log file exists, indent two lines
-            // before appending to the end of it
-            File logFile = new File(LogFileHelper.logFilePath);
-            if (logFile.exists() && !logFile.isDirectory()) {
-                logEntry.append(newLine).append(newLine);
-            }
+        // Append the date
+        LocalDateTime localDateTime = LocalDateTime.now();
+        int day = localDateTime.getDayOfMonth();
+        Month month = localDateTime.getMonth();
+        int year = localDateTime.getYear();
+        logEntry.append("Date: ").append(month).append(" ")
+                .append(day).append(", ").append(year);
 
-            // Append the date
-            LocalDateTime localDateTime = LocalDateTime.now();
-            int day = localDateTime.getDayOfMonth();
-            Month month = localDateTime.getMonth();
-            int year = localDateTime.getYear();
-            logEntry.append("Date: ").append(month).append(" ")
-                    .append(day).append(", ").append(year);
+        // Append the hours
+        logEntry.append(newLine).append("Hours: ").append(hours.getCharacters());
 
-            // Append the hours
-            logEntry.append(newLine).append("Hours: ").append(hours.getCharacters());
-
-            // Append the comments
-            if (!comments.getText().isEmpty()) {
-                logEntry.append(newLine).append("Comments: ").append(comments.getText());
-            }
-
-            // Append the location
-            if (locationChoiceBox.getValue() != null) {
-                LocationMapper locationMapper = new LocationMapper();
-                Location location = locationMapper.read(locationChoiceBox.getValue().toString());
-                logEntry.append(newLine).append("Location:").append(newLine)
-                        .append(location.getLocationName()).append(newLine)
-                        .append(location.getLocationAddress()).append(newLine)
-                        .append(location.getLocationCity()).append(", ")
-                        .append(location.getLocationState()).append(" ")
-                        .append(location.getLocationZipCode());
-            }
-
-            // Append the company
-            if (companyChoiceBox.getValue() != null) {
-                CompanyMapper companyMapper = new CompanyMapper();
-                Company company = companyMapper.read(companyChoiceBox.getValue().toString());
-                logEntry.append(newLine).append("Company: ").append(company.getCompanyName());
-            }
-
-            // Append the supervisor
-            if (supervisorChoiceBox.getValue() != null) {
-                SupervisorMapper supervisorMapper = new SupervisorMapper();
-                Supervisor supervisor = supervisorMapper.read(supervisorChoiceBox.getValue());
-                logEntry.append(newLine).append("Supervisor: ")
-                        .append(supervisor.getSupervisorDisplayName()).append(" (")
-                        .append(supervisor.getSupervisorFirstName()).append(" ")
-                        .append(supervisor.getSupervisorLastName()).append(")");
-            }
-
-            // Try appending to the current log file or create a new one if no log file exists
-            FileWriter fileWriter = new FileWriter(LogFileHelper.logFilePath, true);
-            fileWriter.append(logEntry.toString());
-            fileWriter.close();
-        } catch (IOException e) {
-            createErrorStage();
-            e.printStackTrace();
+        // Append the comments
+        if (!comments.getText().isEmpty()) {
+            logEntry.append(newLine).append("Comments: ").append(comments.getText());
         }
+
+        // Append the location
+        if (locationChoiceBox.getValue() != null) {
+            LocationMapper locationMapper = new LocationMapper();
+            Location location = locationMapper.read(locationChoiceBox.getValue().toString());
+            logEntry.append(newLine).append("Location:").append(newLine)
+                    .append(location.getLocationName()).append(newLine)
+                    .append(location.getLocationAddress()).append(newLine)
+                    .append(location.getLocationCity()).append(", ")
+                    .append(location.getLocationState()).append(" ")
+                    .append(location.getLocationZipCode());
+        }
+
+        // Append the company
+        if (companyChoiceBox.getValue() != null) {
+            CompanyMapper companyMapper = new CompanyMapper();
+            Company company = companyMapper.read(companyChoiceBox.getValue().toString());
+            logEntry.append(newLine).append("Company: ").append(company.getCompanyName());
+        }
+
+        // Append the supervisor
+        if (supervisorChoiceBox.getValue() != null) {
+            SupervisorMapper supervisorMapper = new SupervisorMapper();
+            Supervisor supervisor = supervisorMapper.read(supervisorChoiceBox.getValue());
+            logEntry.append(newLine).append("Supervisor: ")
+                    .append(supervisor.getSupervisorDisplayName()).append(" (")
+                    .append(supervisor.getSupervisorFirstName()).append(" ")
+                    .append(supervisor.getSupervisorLastName()).append(")");
+        }
+
+        /* If the log file exists, append two new lines
+         * to the new entry so it can be easily distinguished
+         * from the previous entry when the user reads the log file.
+         */
+        if (LogFileHelper.logFileExists()) {
+            logEntry.append(newLine).append(newLine);
+        }
+
+        // Append the current log file text so that the new
+        // entry will appear on the top of any previous entries
+        logEntry.append(LogFileHelper.getLogFileText());
+
+        // Update the log file to reflect the new entry
+        LogFileHelper.setLogFileText(logEntry.toString());
 
         Platform.exit();
     }
