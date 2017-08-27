@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 
 public class MainTabPaneController implements Initializable {
     private Stage currentStage;
-    @FXML private EditReportTabController editEditReportTabController;
+    @FXML private EditLogEntriesTabController editEditLogEntriesTabController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -17,6 +17,6 @@ public class MainTabPaneController implements Initializable {
 
     public void setCurrentStage(Stage stage) {
         this.currentStage = stage;
-        editEditReportTabController.setCurrentStage(currentStage);
+        editEditLogEntriesTabController.setCurrentStage(currentStage);
     }
 }
