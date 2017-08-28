@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Company;
@@ -106,6 +107,12 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         // Give focus to hours
         Platform.runLater(() -> hours.requestFocus());
+
+        hours.setOnKeyReleased(keyReleased -> {
+            if (keyReleased.getCode() == KeyCode.ENTER) {
+                submit();
+            }
+        });
 
         // Datepicker defaults to today
         theDatePicker.setValue(LocalDate.now());
