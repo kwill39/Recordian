@@ -7,7 +7,6 @@ import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.CompanyMapper;
 import databasemanagement.objectrelationalmap.LocationMapper;
 import databasemanagement.objectrelationalmap.SupervisorMapper;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -40,6 +39,8 @@ import java.util.function.Consumer;
  * @since   Version 2
  */
 public class NewLogEntryTabController implements Initializable, DatabaseChangeObserver {
+    private Stage currentStage;
+    private MainTabPaneController parentTabPaneController;
     private final String DEFAULTS_FILE_PATH = "Hour_Tracker_Files/defaults.ser";
 
     /**
@@ -89,6 +90,14 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         refreshLocationNames();
         refreshSupervisorDisplayNames();
         DatabaseChangeObservable.registerObserver(this);
+    }
+
+    public void setCurrentStage(Stage currentStage) {
+        this.currentStage = currentStage;
+    }
+
+    public void setParentTabPaneController(MainTabPaneController parentTabPaneController) {
+        this.parentTabPaneController = parentTabPaneController;
     }
 
     @Override
@@ -302,7 +311,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         // Update the log file to reflect the new entry
         LogFileHelper.setLogFileText(logEntry.toString());
 
-        Platform.exit();
+        parentTabPaneController.logEntryWasSubmitted();
     }
 
     /**

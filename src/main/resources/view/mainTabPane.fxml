@@ -7,14 +7,10 @@
    <children>
       <TabPane prefHeight="449.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="New Log">
-               <content>
-                  <fx:include source="newLogEntryTab.fxml" />
-               </content></Tab>
-          <Tab text="Edit Logs">
-               <content>
-                  <fx:include fx:id="editReportTab" source="editLogEntriesTab.fxml" />
-               </content></Tab>
+          <Tab fx:id="newLogTab" text="New Log">
+          </Tab>
+          <Tab fx:id="editLogEntriesTab" text="Edit Logs">
+          </Tab>
         </tabs>
       </TabPane>
    </children>

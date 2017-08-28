@@ -23,6 +23,7 @@ import java.util.function.BiFunction;
 
 public class EditLogEntriesTabController implements Initializable {
     private Stage currentStage;
+    private MainTabPaneController parentTabPaneController;
     @FXML private TextArea editLogFileTextArea;
     @FXML private Button generateReportButton;
     @FXML private Button saveButton;
@@ -30,6 +31,10 @@ public class EditLogEntriesTabController implements Initializable {
 
     void setCurrentStage(Stage stage) {
         this.currentStage = stage;
+    }
+
+    void setParentTabPaneController(MainTabPaneController parentTabPane) {
+        this.parentTabPaneController = parentTabPane;
     }
 
     @Override
