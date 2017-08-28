@@ -7,6 +7,7 @@ import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.CompanyMapper;
 import databasemanagement.objectrelationalmap.LocationMapper;
 import databasemanagement.objectrelationalmap.SupervisorMapper;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -102,6 +103,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // Give focus to hours
+        Platform.runLater(() -> hours.requestFocus());
 
         // Datepicker defaults to today
         theDatePicker.setValue(LocalDate.now());
