@@ -1,0 +1,32 @@
+.databaseItemButton {
+}
+
+.blueButton {
+    -fx-background-color: #457dd7;
+    -fx-text-fill: white;
+}
+
+.blueButton:pressed {
+    -fx-background-color: #3c6dbb;
+}
+
+#mainPane {
+    -fx-background-color: #fafafa;
+}
+
+#successLabel {
+    -fx-text-fill: white;
+}
+
+#tempVbox {
+    -fx-background-color: #457dd7;
+}
+
+#newLogButton {
+    -fx-background-color: white;
+    -fx-text-fill: #457dd7;
+}
+
+#newLogButton:pressed {
+    -fx-background-color: #e8e8e8;
+}

@@ -7,11 +7,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SuccessfulLogSubmissionController">
+<VBox id="tempVbox" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SuccessfulLogSubmissionController">
    <children>
-      <Label text="Success!" textFill="#008e00">
+      <Label id="successLabel" text="Success!">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="32.0" />
          </font></Label>
       <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,6 +20,12 @@
          <VBox.margin>
             <Insets bottom="50.0" left="50.0" right="50.0" top="30.0" />
          </VBox.margin></ImageView>
-      <Button fx:id="newLogButton" mnemonicParsing="false" text="Create New Log" />
+      <Button id="newLogButton" fx:id="newLogButton" mnemonicParsing="false" text="Create New Log">
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Button>
    </children>
 </VBox>
