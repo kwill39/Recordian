@@ -16,7 +16,7 @@ public class MainTabPaneController implements Initializable {
     @FXML private Tab editLogEntriesTab;
     @FXML private NewLogEntryTabController newLogEntryTabController;
     @FXML private SuccessfulLogSubmissionController successfulLogSubmissionController;
-    @FXML private EditLogEntriesTabController editEditLogEntriesTabController;
+    @FXML private EditLogEntriesTabController editLogEntriesTabController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -33,8 +33,8 @@ public class MainTabPaneController implements Initializable {
         // tab pane in order to communicate back to it
         newLogEntryTabController = newLogEntryTabLoader.getController();
         newLogEntryTabController.setParentTabPaneController(this);
-        editEditLogEntriesTabController = editLogEntriesTabLoader.getController();
-        editEditLogEntriesTabController.setParentTabPaneController(this);
+        editLogEntriesTabController = editLogEntriesTabLoader.getController();
+        editLogEntriesTabController.setParentTabPaneController(this);
     }
 
     public Stage getCurrentStage() {
@@ -45,17 +45,17 @@ public class MainTabPaneController implements Initializable {
         currentStage = stage;
         // Some of the tabs may need to know their stage
         newLogEntryTabController.setCurrentStage(currentStage);
-        editEditLogEntriesTabController.setCurrentStage(currentStage);
+        editLogEntriesTabController.setCurrentStage(currentStage);
     }
 
     /**
-     * Changes the current New Log tab view to the successfulLogSubmission view
-     *
+     * Performs certain actions that need to occur whenever a log entry
+     * gets submitted by the user
+     * <p>
      * This method should be called whenever a log entry gets submitted by the user.
      */
     void logEntryWasSubmitted() {
-        // kill the current Edit Logs tab scene and start a fresh one
-        // change New Logs tab to a "Success!" kind of scene
+        // Show the successful submission view
         FXMLLoader successViewLoader = new FXMLLoader(getClass().getResource("/view/successfulLogSubmission.fxml"));
         try {
             newLogTab.setContent(successViewLoader.load());
@@ -64,11 +64,22 @@ public class MainTabPaneController implements Initializable {
         }
         successfulLogSubmissionController = successViewLoader.getController();
         successfulLogSubmissionController.setParentTabPaneController(this);
+
+        // Reset the Edit Logs tab so that it displays the most recent submission
+        FXMLLoader editLogEntriesTabLoader = new FXMLLoader(getClass().getResource("/view/editLogEntriesTab.fxml"));
+        try {
+            editLogEntriesTab.setContent(editLogEntriesTabLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        editLogEntriesTabController = editLogEntriesTabLoader.getController();
+        editLogEntriesTabController.setCurrentStage(currentStage);
+        editLogEntriesTabController.setParentTabPaneController(this);
     }
 
     /**
      * Changes the current New Log tab view to the newLogEntryTab view
-     *
+     * <p>
      * This method should be called after the user acknowledges a
      * successful log entry submission
      */
