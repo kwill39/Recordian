@@ -26,8 +26,7 @@ import model.Supervisor;
 
 import java.io.*;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -66,6 +65,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     private ObservableList<String> sortedLocationNames;
     private ObservableList<String> sortedSupervisorDisplayNames;
     @FXML private TextField hours;
+    @FXML private DatePicker theDatePicker;
     @FXML private TextArea comments;
     @FXML public ChoiceBox<String> companyChoiceBox;
     @FXML public ChoiceBox<String> locationChoiceBox;
@@ -102,6 +102,10 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // Datepicker defaults to today
+        theDatePicker.setValue(LocalDate.now());
+
         setAllChoiceBoxItems();
 
         // Set button onClick events to open associated JavaFX stages
@@ -252,12 +256,10 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         String newLine = System.lineSeparator();
 
         // Append the date
-        LocalDateTime localDateTime = LocalDateTime.now();
-        int day = localDateTime.getDayOfMonth();
-        Month month = localDateTime.getMonth();
-        int year = localDateTime.getYear();
-        logEntry.append("Date: ").append(month).append(" ")
-                .append(day).append(", ").append(year);
+        LocalDate localDate = theDatePicker.getValue();
+        logEntry.append("Date: ").append(localDate.getMonth()).append(" ")
+                .append(localDate.getDayOfMonth()).append(", ")
+                .append(localDate.getYear());
 
         // Append the hours
         logEntry.append(newLine).append("Hours: ").append(hours.getCharacters());

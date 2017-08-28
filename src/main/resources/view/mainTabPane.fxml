@@ -3,9 +3,9 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.StackPane?>
-<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="679.0" fx:controller="controller.MainTabPaneController" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainTabPaneController">
    <children>
-      <TabPane prefHeight="449.0" prefWidth="679.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="newLogTab" text="New Log">
           </Tab>
