@@ -9,6 +9,10 @@ import javafx.scene.input.KeyCode;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class SuccessfulLogSubmissionController implements Initializable {
     private MainTabPaneController parentTabPaneController;
     @FXML private Button newLogButton;

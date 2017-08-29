@@ -9,6 +9,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class ErrorController implements Initializable {
     private Stage stage;
     @FXML private Label errorLabel;

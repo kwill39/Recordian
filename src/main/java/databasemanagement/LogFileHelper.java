@@ -6,6 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public final class LogFileHelper {
 
     public static String logFilePath = "Hours_Worked.txt";

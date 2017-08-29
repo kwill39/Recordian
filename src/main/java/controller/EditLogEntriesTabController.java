@@ -21,6 +21,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class EditLogEntriesTabController implements Initializable {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;
