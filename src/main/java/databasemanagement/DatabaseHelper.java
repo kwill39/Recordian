@@ -28,41 +28,49 @@ public final class DatabaseHelper {
     public static void createDatabase() {
         // Creates a new database file with appropriate tables
         new File("Hour_Tracker_Files").mkdir();
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DATABASE_CONNECTION_URL);
-            String createCompaniesTable = "CREATE TABLE IF NOT EXISTS companies ("
-                    + "companyID integer primary key,"
-                    + "companyName text NOT NULL UNIQUE"
-                    + ");";
+        try (Connection dbConnection = DriverManager.getConnection(DATABASE_CONNECTION_URL);) {
             Statement statement = dbConnection.createStatement();
-            statement.execute(createCompaniesTable);
-            String createLocationsTable = "CREATE TABLE IF NOT EXISTS locations("
-                    + "locationID integer primary key,"
-                    + "locationName text NOT NULL UNIQUE,"
-                    + "locationAddress text NOT NULL,"
-                    + "locationCity text NOT NULL,"
-                    + "locationState text NOT NULL,"
-                    + "locationZipCode text NOT NULL"
-                    + ");";
-            statement.execute(createLocationsTable);
-            String createSupervisorsTable = "CREATE TABLE IF NOT EXISTS supervisors("
-                    + "supervisorID integer primary key,"
-                    + "supervisorFirstName text NOT NULL,"
-                    + "supervisorLastName text NOT NULL,"
-                    + "supervisorDisplayName text NOT NULL UNIQUE"
-                    + ");";
-            statement.execute(createSupervisorsTable);
+
+            // Creates Companies table
+            StringBuilder createCompaniesTable = new StringBuilder("CREATE TABLE IF NOT EXISTS companies (")
+                    .append("companyID integer primary key,")
+                    .append("companyName text NOT NULL UNIQUE")
+                    .append(");");
+            statement.execute(createCompaniesTable.toString());
+
+            // Creates Locations table
+            StringBuilder createLocationsTable = new StringBuilder("CREATE TABLE IF NOT EXISTS locations(")
+                    .append("locationID integer primary key,")
+                    .append("locationName text NOT NULL UNIQUE,")
+                    .append("locationAddress text NOT NULL,")
+                    .append("locationCity text NOT NULL,")
+                    .append("locationState text NOT NULL,")
+                    .append("locationZipCode text NOT NULL")
+                    .append(");");
+            statement.execute(createLocationsTable.toString());
+
+            // Creates Supervisors table
+            StringBuilder createSupervisorsTable = new StringBuilder("CREATE TABLE IF NOT EXISTS supervisors(")
+                    .append("supervisorID integer primary key,")
+                    .append("supervisorFirstName text NOT NULL,")
+                    .append("supervisorLastName text NOT NULL,")
+                    .append("supervisorDisplayName text NOT NULL UNIQUE")
+                    .append(");");
+            statement.execute(createSupervisorsTable.toString());
+
+            // Creates Log Entries table
+            StringBuilder createLogEntriesTable = new StringBuilder("CREATE TABLE IF NOT EXISTS logEntries(")
+                    .append("logEntryID integer primary key,")
+                    .append("logEntryDate text NOT NULL,")
+                    .append("logEntryHours text NOT NULL,")
+                    .append("logEntryComments text,")
+                    .append("logEntryCompanyID integer,")
+                    .append("logEntryLocationID integer,")
+                    .append("logEntrySupervisorID integer")
+                    .append(");");
+            statement.execute(createLogEntriesTable.toString());
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
