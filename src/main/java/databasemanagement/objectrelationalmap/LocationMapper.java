@@ -16,9 +16,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      * @param location a <code>Location<code/> object
      */
     public void create(Location location) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlInsert = "INSERT INTO locations(locationName, locationAddress, locationCity,"
                     + "locationState, locationZipCode) VALUES(?,?,?,?,?);";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
@@ -31,14 +29,6 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             DatabaseChangeObservable.notifyOfCreation(read(location.getLocationName()));
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -50,9 +40,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     @Override
     public Location read(int locationID) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlRead = "SELECT * FROM locations WHERE locationID = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
             preparedStatement.setInt(1, locationID);
@@ -66,14 +54,6 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             return fetchedLocation;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -86,9 +66,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     @Override
     public Location read(String locationName) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlRead = "SELECT * FROM locations WHERE locationName = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
             preparedStatement.setString(1, locationName);
@@ -102,14 +80,6 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             return fetchedLocation;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -120,9 +90,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      * @return a <code>List</code> of <code>Location<code/> objects
      */
     public List<Location> readAll() {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlQuery = "SELECT * FROM locations";
             Statement statement = dbConnection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -140,14 +108,6 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             return locationList;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -158,9 +118,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      * @param location a <code>Location<code/> object that has a valid primary key
      */
     public void update(Location location) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlUpdate = "UPDATE locations SET locationName = ?,"
                     + "locationAddress = ?,"
                     + "locationCity = ?,"
@@ -178,14 +136,6 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             DatabaseChangeObservable.notifyOfUpdate(location);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -195,9 +145,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      * @param location a <code>Location<code/> object that has a valid primary key
      */
     public void delete(Location location) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlDelete = "DELETE FROM locations WHERE locationID = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
             preparedStatement.setInt(1, location.getLocationID());
@@ -205,14 +153,6 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             DatabaseChangeObservable.notifyOfDelete(location);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

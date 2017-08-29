@@ -16,9 +16,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      * @param supervisor a <code>Supervisor<code/> object
      */
     public void create(Supervisor supervisor) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlInsert = "INSERT INTO supervisors(supervisorFirstName,supervisorLastName,"
                     + "supervisorDisplayName) VALUES(?,?,?)";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
@@ -29,14 +27,6 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             DatabaseChangeObservable.notifyOfCreation(read(supervisor.getSupervisorDisplayName()));
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -48,9 +38,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      */
     @Override
     public Supervisor read(int supervisorID) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlRead = "SELECT * FROM supervisors WHERE supervisorID = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
             preparedStatement.setInt(1, supervisorID);
@@ -62,14 +50,6 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             return fetchedSupervisor;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -82,9 +62,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      */
     @Override
     public Supervisor read(String supervisorDisplayName) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlRead = "SELECT * FROM supervisors WHERE supervisorDisplayName = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
             preparedStatement.setString(1, supervisorDisplayName);
@@ -96,14 +74,6 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             return fetchedSupervisor;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -114,9 +84,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      * @return a <code>List</code> of <code>Supervisor<code/> objects
      */
     public List<Supervisor> readAll() {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlQuery = "SELECT * FROM supervisors";
             Statement statement = dbConnection.createStatement();
             ResultSet resultSet = statement.executeQuery(sqlQuery);
@@ -132,14 +100,6 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             return supervisorList;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -150,9 +110,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      * @param supervisor a <code>Supervisor<code/> object that has a valid primary key
      */
     public void update(Supervisor supervisor) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlUpdate = "UPDATE supervisors SET supervisorFirstName = ?,"
                     + "supervisorLastName = ?,"
                     + "supervisorDisplayName = ?"
@@ -166,14 +124,6 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             DatabaseChangeObservable.notifyOfUpdate(supervisor);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -183,9 +133,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      * @param supervisor <code>Supervisor<code/> object that has a valid primary key
      */
     public void delete(Supervisor supervisor) {
-        Connection dbConnection = null;
-        try {
-            dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlDelete = "DELETE FROM supervisors WHERE supervisorID = ?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
             preparedStatement.setInt(1, supervisor.getSupervisorID());
@@ -193,14 +141,6 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             DatabaseChangeObservable.notifyOfDelete(supervisor);
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (dbConnection != null) {
-                    dbConnection.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
