@@ -389,7 +389,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Sets the items for all choiceboxes in logEntryTab view
+     * Sets the items for all choiceboxes in newLogEntryTab view
      */
     private void setAllChoiceBoxItems(){
 

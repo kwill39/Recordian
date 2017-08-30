@@ -1,5 +1,7 @@
 package controller;
 
+import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.JFXTreeTableView;
 import databasemanagement.LogFileHelper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -7,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Company;
+import model.Location;
+import model.Supervisor;
 import org.apache.commons.text.WordUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -18,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
 
@@ -28,7 +34,7 @@ import java.util.function.BiFunction;
 public class EditLogEntriesTabController implements Initializable {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;
-    @FXML private TextArea editLogFileTextArea;
+    @FXML private JFXTreeTableView<?> editLogsTable;
     @FXML private Button generateReportButton;
     @FXML private Button saveButton;
     @FXML private Button undoChangesButton;
@@ -43,41 +49,51 @@ public class EditLogEntriesTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Keep the save and cancel buttons disabled if the contents of
-        // editLogFileTextArea matches the contents of the log file
-        // Disable the buttons initially since no changes were made
+        // TODO: Re-comment this
         saveButton.setDisable(true);
         undoChangesButton.setDisable(true);
 
+        // TODO: Re-comment this
         saveButton.setOnMouseClicked(event -> {
-            // Overwrites the log file with the contents of editLogFileTextArea
-            LogFileHelper.setLogFileText(editLogFileTextArea.getText());
-
             saveButton.setDisable(true);
             undoChangesButton.setDisable(true);
             generateReportButton.setDisable(false);
         });
 
-        editLogFileTextArea.setText(LogFileHelper.getLogFileText());
-        // When changes are made, enable the options to save or
-        // cancel those changes and disable the option to generate
-        // a report until the changes are saved or canceled.
-        editLogFileTextArea.setOnKeyPressed(event -> {
-            saveButton.setDisable(false);
-            undoChangesButton.setDisable(false);
-            generateReportButton.setDisable(true);
-        });
-
-        // Onclick: reset editLogFileTextArea to match
-        // the contents of the log file, disable the save button
+        // TODO: Re-comment this
         undoChangesButton.setOnMouseClicked(event -> {
             saveButton.setDisable(true);
             undoChangesButton.setDisable(true);
-            editLogFileTextArea.setText(LogFileHelper.getLogFileText());
             generateReportButton.setDisable(false);
         });
 
         generateReportButton.setOnMouseClicked(event -> generateReport());
+
+        // Generate table columns
+        JFXTreeTableColumn<String, String> date = new JFXTreeTableColumn<>("Date");
+        JFXTreeTableColumn<String, String> hours = new JFXTreeTableColumn<>("Hours");
+        JFXTreeTableColumn<Location, String> locationName = new JFXTreeTableColumn<>("Location");
+        JFXTreeTableColumn<Location, String> locationAddress = new JFXTreeTableColumn<>("Address");
+        JFXTreeTableColumn<Location, String> locationCity = new JFXTreeTableColumn<>("City");
+        JFXTreeTableColumn<Location, String> locationState = new JFXTreeTableColumn<>("State");
+        JFXTreeTableColumn<Location, String> locationZipCode = new JFXTreeTableColumn<>("Zip");
+        JFXTreeTableColumn<Company, String> companyName = new JFXTreeTableColumn<>("Company");
+        JFXTreeTableColumn<Supervisor, String> supervsiorDisplayName = new JFXTreeTableColumn<>("Supervisor Display Name");
+        JFXTreeTableColumn<Supervisor, String> supervisorFirstName = new JFXTreeTableColumn<>("Supervisor First Name");
+        JFXTreeTableColumn<Supervisor, String> supervisorLastName = new JFXTreeTableColumn<>("Supervisor Last Name");
+
+        // Set preferred column widths
+        date.setPrefWidth(150);
+        hours.setPrefWidth(150);
+        locationName.setPrefWidth(150);
+        locationAddress.setPrefWidth(150);
+        locationCity.setPrefWidth(150);
+        locationState.setPrefWidth(150);
+        locationZipCode.setPrefWidth(150);
+        companyName.setPrefWidth(150);
+        supervsiorDisplayName.setPrefWidth(150);
+        supervisorFirstName.setPrefWidth(150);
+        supervisorLastName.setPrefWidth(150);
     }
 
     /**
