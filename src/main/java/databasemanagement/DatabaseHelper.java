@@ -64,9 +64,9 @@ public final class DatabaseHelper {
                     .append("logEntryDate text NOT NULL,")
                     .append("logEntryHours text NOT NULL,")
                     .append("logEntryComments text,")
-                    .append("logEntryCompanyID integer,")
-                    .append("logEntryLocationID integer,")
-                    .append("logEntrySupervisorID integer")
+                    .append("logEntryCompanyName text,")
+                    .append("logEntryLocationName text,")
+                    .append("logEntrySupervisorDisplayName text")
                     .append(");");
             statement.execute(createLogEntriesTable.toString());
         } catch (SQLException e) {

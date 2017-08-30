@@ -3,6 +3,7 @@ package controller;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
+import databasemanagement.DatabaseHelper;
 import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.CompanyMapper;
 import databasemanagement.objectrelationalmap.LocationMapper;
@@ -28,6 +29,10 @@ import model.Supervisor;
 
 import java.io.*;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -268,8 +273,10 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         // Append the date
         LocalDate localDate = theDatePicker.getValue();
-        logEntry.append("Date: ").append(localDate.getMonth()).append(" ")
-                .append(localDate.getDayOfMonth()).append(", ")
+        logEntry.append("Date: ").append(localDate.getMonth())
+                .append(" ")
+                .append(localDate.getDayOfMonth())
+                .append(", ")
                 .append(localDate.getYear());
 
         // Append the hours
@@ -323,6 +330,21 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         // Update the log file to reflect the new entry
         LogFileHelper.setLogFileText(logEntry.toString());
+
+        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
+            String sqlInsert = "INSERT INTO logEntries(logEntryDate, logEntryHours, logEntryComments,"
+                    + "logEntryCompanyName, logEntryLocationName, logEntrySupervisorDisplayName) VALUES(?,?,?,?,?,?);";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
+            preparedStatement.setString(1, localDate.toString());
+            preparedStatement.setString(2, hours.getText());
+            preparedStatement.setString(3, comments.getText());
+            preparedStatement.setString(4, companyChoiceBox.getValue());
+            preparedStatement.setString(5, locationChoiceBox.getValue());
+            preparedStatement.setString(6, supervisorChoiceBox.getValue());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         parentTabPaneController.logEntryWasSubmitted();
     }
