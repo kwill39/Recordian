@@ -29,31 +29,31 @@ public class Supervisor implements DatabaseItem{
         this.supervisorID = supervisorID;
     }
 
-    public SimpleStringProperty supervisorFirstNameProperty() {
-        return supervisorFirstName;
-    }
     public String getSupervisorFirstName() {
         return supervisorFirstName.get();
+    }
+    public SimpleStringProperty supervisorFirstNameProperty() {
+        return supervisorFirstName;
     }
     public void setSupervisorFirstName(String supervisorFirstName) {
         this.supervisorFirstName.set(supervisorFirstName);
     }
 
-    public SimpleStringProperty supervisorLastNameProperty() {
-        return supervisorLastName;
-    }
     public String getSupervisorLastName() {
         return supervisorLastName.get();
+    }
+    public SimpleStringProperty supervisorLastNameProperty() {
+        return supervisorLastName;
     }
     public void setSupervisorLastName(String supervisorLastName) {
         this.supervisorLastName.set(supervisorLastName);
     }
 
-    public SimpleStringProperty supervisorDisplayNameProperty() {
-        return supervisorDisplayName;
-    }
     public String getSupervisorDisplayName() {
         return supervisorDisplayName.get();
+    }
+    public SimpleStringProperty supervisorDisplayNameProperty() {
+        return supervisorDisplayName;
     }
     public void setSupervisorDisplayName(String supervisorDisplayName) {
         this.supervisorDisplayName.set(supervisorDisplayName);

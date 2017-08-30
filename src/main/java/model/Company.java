@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Represents a company which the user works for
+ *
  * @author  Kyle Williams
  * @since   Version 2
  */
@@ -22,11 +23,11 @@ public class Company implements DatabaseItem{
         this.companyID = companyID;
     }
 
-    public SimpleStringProperty companyNameProperty() {
-        return companyName;
-    }
     public String getCompanyName() {
         return companyName.get();
+    }
+    public SimpleStringProperty companyNameProperty() {
+        return companyName;
     }
     public void setCompanyName(String companyName) {
         this.companyName.set(companyName);
