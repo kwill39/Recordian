@@ -15,6 +15,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      *
      * @param location a <code>Location<code/> object
      */
+    @Override
     public void create(Location location) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlInsert = "INSERT INTO locations(locationName, locationAddress, locationCity,"
@@ -59,12 +60,11 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
     }
 
     /**
-     * {@inheritDoc}
+     * Retrieves the {@link Location} whose location name matches the location name given as an argument
      *
      * @param   locationName the unique name of the <code>Location</code>
      * @return  the <code>Location</code> whose <code>locationName</code> matches that of <code>locationName</code>
      */
-    @Override
     public Location read(String locationName) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlRead = "SELECT * FROM locations WHERE locationName = ?";
@@ -89,6 +89,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      *
      * @return a <code>List</code> of <code>Location<code/> objects
      */
+    @Override
     public List<Location> readAll() {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlQuery = "SELECT * FROM locations";
@@ -117,6 +118,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      *
      * @param location a <code>Location<code/> object that has a valid primary key
      */
+    @Override
     public void update(Location location) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlUpdate = "UPDATE locations SET locationName = ?,"
@@ -144,6 +146,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      *
      * @param location a <code>Location<code/> object that has a valid primary key
      */
+    @Override
     public void delete(Location location) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlDelete = "DELETE FROM locations WHERE locationID = ?";

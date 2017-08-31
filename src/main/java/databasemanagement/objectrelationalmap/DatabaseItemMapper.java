@@ -28,14 +28,6 @@ interface DatabaseItemMapper<T> {
     T read(int databaseItemID);
 
     /**
-     * Retrieves the <code>DatabaseItem</code> whose name matches <code>databaseItemUniqueName</code>
-     *
-     * @param   databaseItemUniqueName the unique name of the <code>DatabaseItem</code>
-     * @return  the <code>DatabaseItem</code> whose unique name matches that of <code>databaseItemUniqueName</code>
-     */
-    T read(String databaseItemUniqueName);
-
-    /**
      * Retrieves all records which the DAO concrete class interfaces for
      *
      * @return  a <code>List</code> of objects associated with the specific DAO

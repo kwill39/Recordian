@@ -22,6 +22,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      *
      * @param company a <code>Company<code/> object
      */
+    @Override
     public void create(Company company) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlInsert = "INSERT INTO companies(companyName) VALUES(?)";
@@ -57,12 +58,11 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     }
 
     /**
-     * {@inheritDoc}
+     * Retrieves the {@link Company} whose company name matches <code>companyName</code>
      *
      * @param   companyName the unique name of the <code>Company</code>
      * @return  the <code>Company</code> whose <code>companyName</code> matches that of <code>companyName</code>
      */
-    @Override
     public Company read(String companyName) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlRead = "SELECT * FROM companies WHERE companyName = ?";
@@ -83,6 +83,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      *
      * @return a <code>List</code> of <code>Company<code/> objects
      */
+    @Override
     public List<Company> readAll() {
 
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
@@ -108,6 +109,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      *
      * @param company a <code>Company<code/> object that has a valid primary key
      */
+    @Override
     public void update(Company company) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlUpdate = "UPDATE companies SET companyName = ? WHERE companyID = ?";
@@ -126,6 +128,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      *
      * @param company a <code>Company<code/> object that has a valid primary key
      */
+    @Override
     public void delete(Company company) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlDelete = "DELETE FROM companies WHERE companyID = ?";

@@ -15,6 +15,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      *
      * @param supervisor a <code>Supervisor<code/> object
      */
+    @Override
     public void create(Supervisor supervisor) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlInsert = "INSERT INTO supervisors(supervisorFirstName,supervisorLastName,"
@@ -55,12 +56,11 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
     }
 
     /**
-     * {@inheritDoc}
+     * Retrieves the {@link Supervisor} whose supervisor name matches the supervisor name given as an argument
      *
      * @param   supervisorDisplayName the unique name of the <code>DatabaseItem</code>
      * @return  the <code>Supervisor</code> whose <code>supervisorDisplayName</code> matches that of <code>supervisorDisplayName</code>
      */
-    @Override
     public Supervisor read(String supervisorDisplayName) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlRead = "SELECT * FROM supervisors WHERE supervisorDisplayName = ?";
@@ -83,6 +83,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      *
      * @return a <code>List</code> of <code>Supervisor<code/> objects
      */
+    @Override
     public List<Supervisor> readAll() {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlQuery = "SELECT * FROM supervisors";
@@ -109,6 +110,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      *
      * @param supervisor a <code>Supervisor<code/> object that has a valid primary key
      */
+    @Override
     public void update(Supervisor supervisor) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlUpdate = "UPDATE supervisors SET supervisorFirstName = ?,"
@@ -132,6 +134,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      *
      * @param supervisor <code>Supervisor<code/> object that has a valid primary key
      */
+    @Override
     public void delete(Supervisor supervisor) {
         try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
             String sqlDelete = "DELETE FROM supervisors WHERE supervisorID = ?";
