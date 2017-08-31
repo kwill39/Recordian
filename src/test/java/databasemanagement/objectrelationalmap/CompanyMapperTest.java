@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  * @author  Kyle Williams
  * @since   Version 2
  */
-public class CompanyMapperTest implements MapperTest<Company> {
+public class CompanyMapperTest implements DatabaseItemMapperTest<Company> {
     private CompanyMapper companyMapper = new CompanyMapper();
     private Company snowRemover;
     private Company springRemover;

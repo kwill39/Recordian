@@ -6,7 +6,7 @@ package databasemanagement.objectrelationalmap;
  *
  * @param <T> a <code>DatabaseItem</code>
  */
-interface MapperTest<T> {
+interface DatabaseItemMapperTest<T> {
 
     /**
      * Checks to see that param1 and param2 have the same

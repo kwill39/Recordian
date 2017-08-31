@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  * @author  Kyle Williams
  * @since   Version 2
  */
-public class LocationMapperTest implements MapperTest<Location> {
+public class LocationMapperTest implements DatabaseItemMapperTest<Location> {
     private LocationMapper locationMapper = new LocationMapper();
     private Location snowland;
     private Location springland;
@@ -68,12 +68,12 @@ public class LocationMapperTest implements MapperTest<Location> {
 
     @Test
     public void readUsingLocationId() {
-        Location dbSnowlandRetrievedUsingLocationName = locationMapper.read(dbSnowland.getLocationID());
-        Location dbSpringlandRetrievedUsingLocationName = locationMapper.read(dbSpringland.getLocationID());
-        Location dbWetlandRetrievedUsingLocationName = locationMapper.read(dbWetland.getLocationID());
-        assertTrue(objectsAreEqual(dbSnowland, dbSnowlandRetrievedUsingLocationName));
-        assertTrue(objectsAreEqual(dbSpringland, dbSpringlandRetrievedUsingLocationName));
-        assertTrue(objectsAreEqual(dbWetland, dbWetlandRetrievedUsingLocationName));
+        Location dbSnowlandRetrievedUsingLocationID = locationMapper.read(dbSnowland.getLocationID());
+        Location dbSpringlandRetrievedUsingLocationID = locationMapper.read(dbSpringland.getLocationID());
+        Location dbWetlandRetrievedUsingLocationID = locationMapper.read(dbWetland.getLocationID());
+        assertTrue(objectsAreEqual(dbSnowland, dbSnowlandRetrievedUsingLocationID));
+        assertTrue(objectsAreEqual(dbSpringland, dbSpringlandRetrievedUsingLocationID));
+        assertTrue(objectsAreEqual(dbWetland, dbWetlandRetrievedUsingLocationID));
     }
 
     @Test

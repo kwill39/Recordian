@@ -10,18 +10,18 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class LogEntry implements DatabaseItem {
     private int logEntryID;
-    private SimpleStringProperty logEntryDate;
-    private SimpleStringProperty logEntryHours;
-    private SimpleStringProperty logEntryComments;
-    private SimpleStringProperty logEntryLocationName;
-    private SimpleStringProperty logEntryLocationAddress;
-    private SimpleStringProperty logEntryLocationCity;
-    private SimpleStringProperty logEntryLocationState;
-    private SimpleStringProperty logEntryLocationZipCode;
-    private SimpleStringProperty logEntryCompanyName;
-    private SimpleStringProperty logEntrySupervisorDisplayName;
-    private SimpleStringProperty logEntrySupervisorFirstName;
-    private SimpleStringProperty logEntrySupervisorLastName;
+    private SimpleStringProperty logEntryDate = new SimpleStringProperty();
+    private SimpleStringProperty logEntryHours = new SimpleStringProperty();
+    private SimpleStringProperty logEntryComments = new SimpleStringProperty();
+    private SimpleStringProperty logEntryLocationName = new SimpleStringProperty();
+    private SimpleStringProperty logEntryLocationAddress = new SimpleStringProperty();
+    private SimpleStringProperty logEntryLocationCity = new SimpleStringProperty();
+    private SimpleStringProperty logEntryLocationState = new SimpleStringProperty();
+    private SimpleStringProperty logEntryLocationZipCode = new SimpleStringProperty();
+    private SimpleStringProperty logEntryCompanyName = new SimpleStringProperty();
+    private SimpleStringProperty logEntrySupervisorDisplayName = new SimpleStringProperty();
+    private SimpleStringProperty logEntrySupervisorFirstName = new SimpleStringProperty();
+    private SimpleStringProperty logEntrySupervisorLastName = new SimpleStringProperty();
 
     public LogEntry(String logEntryDate, String logEntryHours) {
         this.logEntryDate.set(logEntryDate);

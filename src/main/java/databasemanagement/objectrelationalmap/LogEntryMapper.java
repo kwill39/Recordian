@@ -55,7 +55,6 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
-                // TODO: verify that you don't need to use getLong(1)
                 logEntry.setLogEntryID(generatedKeys.getInt(1));
             }
             DatabaseChangeObservable.notifyOfCreation(logEntry);
