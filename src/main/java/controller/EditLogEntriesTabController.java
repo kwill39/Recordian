@@ -2,16 +2,19 @@ package controller;
 
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import databasemanagement.LogFileHelper;
+import databasemanagement.objectrelationalmap.LogEntryMapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TreeItem;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import model.Company;
-import model.Location;
-import model.Supervisor;
+import model.LogEntry;
 import org.apache.commons.text.WordUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -23,7 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
 
@@ -34,7 +36,7 @@ import java.util.function.BiFunction;
 public class EditLogEntriesTabController implements Initializable {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;
-    @FXML private JFXTreeTableView<?> editLogsTable;
+    @FXML private JFXTreeTableView<LogEntry> logEntriesTreeTableView;
     @FXML private Button generateReportButton;
     @FXML private Button saveButton;
     @FXML private Button undoChangesButton;
@@ -70,30 +72,59 @@ public class EditLogEntriesTabController implements Initializable {
         generateReportButton.setOnMouseClicked(event -> generateReport());
 
         // Generate table columns
-        JFXTreeTableColumn<String, String> date = new JFXTreeTableColumn<>("Date");
-        JFXTreeTableColumn<String, String> hours = new JFXTreeTableColumn<>("Hours");
-        JFXTreeTableColumn<Location, String> locationName = new JFXTreeTableColumn<>("Location");
-        JFXTreeTableColumn<Location, String> locationAddress = new JFXTreeTableColumn<>("Address");
-        JFXTreeTableColumn<Location, String> locationCity = new JFXTreeTableColumn<>("City");
-        JFXTreeTableColumn<Location, String> locationState = new JFXTreeTableColumn<>("State");
-        JFXTreeTableColumn<Location, String> locationZipCode = new JFXTreeTableColumn<>("Zip");
-        JFXTreeTableColumn<Company, String> companyName = new JFXTreeTableColumn<>("Company");
-        JFXTreeTableColumn<Supervisor, String> supervsiorDisplayName = new JFXTreeTableColumn<>("Supervisor Display Name");
-        JFXTreeTableColumn<Supervisor, String> supervisorFirstName = new JFXTreeTableColumn<>("Supervisor First Name");
-        JFXTreeTableColumn<Supervisor, String> supervisorLastName = new JFXTreeTableColumn<>("Supervisor Last Name");
+        JFXTreeTableColumn<LogEntry, String> dateColumn = new JFXTreeTableColumn<>("Date");
+        JFXTreeTableColumn<LogEntry, String> hoursColumn = new JFXTreeTableColumn<>("Hours");
+        JFXTreeTableColumn<LogEntry, String> commentsColumn = new JFXTreeTableColumn<>("Comments");
+        JFXTreeTableColumn<LogEntry, String> locationNameColumn = new JFXTreeTableColumn<>("Location");
+        JFXTreeTableColumn<LogEntry, String> locationAddressColumn = new JFXTreeTableColumn<>("Address");
+        JFXTreeTableColumn<LogEntry, String> locationCityColumn = new JFXTreeTableColumn<>("City");
+        JFXTreeTableColumn<LogEntry, String> locationStateColumn = new JFXTreeTableColumn<>("State");
+        JFXTreeTableColumn<LogEntry, String> locationZipCodeColumn = new JFXTreeTableColumn<>("Zip");
+        JFXTreeTableColumn<LogEntry, String> companyNameColumn = new JFXTreeTableColumn<>("Company");
+        JFXTreeTableColumn<LogEntry, String> supervsiorDisplayNameColumn = new JFXTreeTableColumn<>("Supervisor Display Name");
+        JFXTreeTableColumn<LogEntry, String> supervisorFirstNameColumn = new JFXTreeTableColumn<>("Supervisor First Name");
+        JFXTreeTableColumn<LogEntry, String> supervisorLastNameColumn = new JFXTreeTableColumn<>("Supervisor Last Name");
 
         // Set preferred column widths
-        date.setPrefWidth(150);
-        hours.setPrefWidth(150);
-        locationName.setPrefWidth(150);
-        locationAddress.setPrefWidth(150);
-        locationCity.setPrefWidth(150);
-        locationState.setPrefWidth(150);
-        locationZipCode.setPrefWidth(150);
-        companyName.setPrefWidth(150);
-        supervsiorDisplayName.setPrefWidth(150);
-        supervisorFirstName.setPrefWidth(150);
-        supervisorLastName.setPrefWidth(150);
+        int standardWidth = 100;
+        dateColumn.setPrefWidth(standardWidth);
+        hoursColumn.setPrefWidth(standardWidth);
+        commentsColumn.setPrefWidth(standardWidth);
+        locationNameColumn.setPrefWidth(standardWidth);
+        locationAddressColumn.setPrefWidth(standardWidth);
+        locationCityColumn.setPrefWidth(standardWidth);
+        locationStateColumn.setPrefWidth(standardWidth);
+        locationZipCodeColumn.setPrefWidth(standardWidth);
+        companyNameColumn.setPrefWidth(standardWidth);
+        supervsiorDisplayNameColumn.setPrefWidth(standardWidth);
+        supervisorFirstNameColumn.setPrefWidth(standardWidth);
+        supervisorLastNameColumn.setPrefWidth(standardWidth);
+
+        // Set cell value factories
+        dateColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryDateProperty());
+        hoursColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryHoursProperty());
+        commentsColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryCommentsProperty());
+        locationNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryLocationNameProperty());
+        locationAddressColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryLocationAddressProperty());
+        locationCityColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryLocationCityProperty());
+        locationStateColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryLocationStateProperty());
+        locationZipCodeColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryLocationZipCodeProperty());
+        companyNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryCompanyNameProperty());
+        supervsiorDisplayNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntrySupervisorDisplayNameProperty());
+        supervisorFirstNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntrySupervisorFirstNameProperty());
+        supervisorLastNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntrySupervisorLastNameProperty());
+
+        // Create the observable list, made up of all log entries, for use within the table
+        LogEntryMapper logEntryMapper = new LogEntryMapper();
+        ObservableList<LogEntry> logEntryObservableList = FXCollections.observableArrayList(logEntryMapper.readAll());
+
+        final TreeItem<LogEntry> root = new RecursiveTreeItem<>(logEntryObservableList, RecursiveTreeObject::getChildren);
+        logEntriesTreeTableView.getColumns().setAll(dateColumn, hoursColumn, commentsColumn, locationNameColumn,
+                locationAddressColumn, locationCityColumn, locationStateColumn, locationZipCodeColumn, companyNameColumn,
+                supervsiorDisplayNameColumn, supervisorFirstNameColumn, supervisorLastNameColumn
+        );
+        logEntriesTreeTableView.setRoot(root);
+        logEntriesTreeTableView.setShowRoot(false);
     }
 
     /**

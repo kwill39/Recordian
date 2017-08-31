@@ -1,5 +1,6 @@
 package model;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -8,7 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author  Kyle Williams
  * @since   Version 3
  */
-public class LogEntry implements DatabaseItem {
+public class LogEntry extends RecursiveTreeObject<LogEntry> implements DatabaseItem {
     private int logEntryID;
     private SimpleStringProperty logEntryDate = new SimpleStringProperty();
     private SimpleStringProperty logEntryHours = new SimpleStringProperty();

@@ -3,10 +3,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.scene.layout.*?>
 <GridPane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditLogEntriesTabController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -19,9 +16,9 @@
   </rowConstraints>
     <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
    <children>
-      <JFXTreeTableView fx:id="editLogsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" />
       <Button fx:id="generateReportButton" mnemonicParsing="false" text="Export As PDF..." GridPane.rowIndex="1" />
       <Button fx:id="saveButton" mnemonicParsing="false" styleClass="blueButton" text="Save Changes" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Button fx:id="undoChangesButton" mnemonicParsing="false" text="Undo Changes" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+      <JFXTreeTableView fx:id="logEntriesTreeTableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" />
    </children>
 </GridPane>

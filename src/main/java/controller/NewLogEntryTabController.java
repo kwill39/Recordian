@@ -3,10 +3,10 @@ package controller;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
-import databasemanagement.DatabaseHelper;
 import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.CompanyMapper;
 import databasemanagement.objectrelationalmap.LocationMapper;
+import databasemanagement.objectrelationalmap.LogEntryMapper;
 import databasemanagement.objectrelationalmap.SupervisorMapper;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -22,17 +22,10 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Company;
-import model.DatabaseItem;
-import model.Location;
-import model.Supervisor;
+import model.*;
 
 import java.io.*;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -331,20 +324,31 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         // Update the log file to reflect the new entry
         LogFileHelper.setLogFileText(logEntry.toString());
 
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlInsert = "INSERT INTO logEntries(logEntryDate, logEntryHours, logEntryComments,"
-                    + "logEntryCompanyName, logEntryLocationName, logEntrySupervisorDisplayName) VALUES(?,?,?,?,?,?);";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
-            preparedStatement.setString(1, localDate.toString());
-            preparedStatement.setString(2, hours.getText());
-            preparedStatement.setString(3, comments.getText());
-            preparedStatement.setString(4, companyChoiceBox.getValue());
-            preparedStatement.setString(5, locationChoiceBox.getValue());
-            preparedStatement.setString(6, supervisorChoiceBox.getValue());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        LogEntry newLogEntry = new LogEntry(localDate.toString(), hours.getText());
+        newLogEntry.setLogEntryComments(comments.getText());
+        if (locationChoiceBox.getValue() != null) {
+            LocationMapper locationMapper = new LocationMapper();
+            Location theLocation = locationMapper.read(locationChoiceBox.getValue());
+            newLogEntry.setLogEntryLocationName(theLocation.getLocationName());
+            newLogEntry.setLogEntryLocationAddress(theLocation.getLocationAddress());
+            newLogEntry.setLogEntryLocationCity(theLocation.getLocationCity());
+            newLogEntry.setLogEntryLocationState(theLocation.getLocationState());
+            newLogEntry.setLogEntryLocationZipCode(theLocation.getLocationZipCode());
         }
+        if (companyChoiceBox.getValue() != null) {
+            CompanyMapper companyMapper = new CompanyMapper();
+            Company theCompany = companyMapper.read(companyChoiceBox.getValue());
+            newLogEntry.setLogEntryCompanyName(theCompany.getCompanyName());
+        }
+        if (supervisorChoiceBox.getValue() != null) {
+            SupervisorMapper supervisorMapper = new SupervisorMapper();
+            Supervisor theSupervisor = supervisorMapper.read(supervisorChoiceBox.getValue());
+            newLogEntry.setLogEntrySupervisorFirstName(theSupervisor.getSupervisorFirstName());
+            newLogEntry.setLogEntrySupervisorLastName(theSupervisor.getSupervisorLastName());
+            newLogEntry.setLogEntrySupervisorDisplayName(theSupervisor.getSupervisorDisplayName());
+        }
+        LogEntryMapper logEntryMapper = new LogEntryMapper();
+        logEntryMapper.create(newLogEntry);
 
         parentTabPaneController.logEntryWasSubmitted();
     }
