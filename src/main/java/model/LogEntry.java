@@ -23,6 +23,18 @@ public class LogEntry implements DatabaseItem {
     private SimpleStringProperty logEntrySupervisorFirstName;
     private SimpleStringProperty logEntrySupervisorLastName;
 
+    public LogEntry(String logEntryDate, String logEntryHours) {
+        this.logEntryDate.set(logEntryDate);
+        this.logEntryHours.set(logEntryHours);
+    }
+
+    public int getLogEntryID() {
+        return logEntryID;
+    }
+    public void setLogEntryID(int logEntryID) {
+        this.logEntryID = logEntryID;
+    }
+
     public String getLogEntryDate() {
         return logEntryDate.get();
     }
