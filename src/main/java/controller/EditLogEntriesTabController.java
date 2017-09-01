@@ -3,6 +3,8 @@ package controller;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.LogEntryMapper;
@@ -26,6 +28,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.BiFunction;
 
@@ -81,24 +85,29 @@ public class EditLogEntriesTabController implements Initializable {
         JFXTreeTableColumn<LogEntry, String> locationStateColumn = new JFXTreeTableColumn<>("State");
         JFXTreeTableColumn<LogEntry, String> locationZipCodeColumn = new JFXTreeTableColumn<>("Zip");
         JFXTreeTableColumn<LogEntry, String> companyNameColumn = new JFXTreeTableColumn<>("Company");
-        JFXTreeTableColumn<LogEntry, String> supervsiorDisplayNameColumn = new JFXTreeTableColumn<>("Supervisor Display Name");
+        JFXTreeTableColumn<LogEntry, String> supervisorDisplayNameColumn = new JFXTreeTableColumn<>("Supervisor Display Name");
         JFXTreeTableColumn<LogEntry, String> supervisorFirstNameColumn = new JFXTreeTableColumn<>("Supervisor First Name");
         JFXTreeTableColumn<LogEntry, String> supervisorLastNameColumn = new JFXTreeTableColumn<>("Supervisor Last Name");
 
-        // Set preferred column widths
-        int standardWidth = 100;
-        dateColumn.setPrefWidth(standardWidth);
-        hoursColumn.setPrefWidth(standardWidth);
-        commentsColumn.setPrefWidth(standardWidth);
-        locationNameColumn.setPrefWidth(standardWidth);
-        locationAddressColumn.setPrefWidth(standardWidth);
-        locationCityColumn.setPrefWidth(standardWidth);
-        locationStateColumn.setPrefWidth(standardWidth);
-        locationZipCodeColumn.setPrefWidth(standardWidth);
-        companyNameColumn.setPrefWidth(standardWidth);
-        supervsiorDisplayNameColumn.setPrefWidth(standardWidth);
-        supervisorFirstNameColumn.setPrefWidth(standardWidth);
-        supervisorLastNameColumn.setPrefWidth(standardWidth);
+        // TODO: if (columnListFile does not exist)
+
+        List<JFXTreeTableColumn<LogEntry, String>> columnList = new ArrayList<>();
+        columnList.add(dateColumn);
+        columnList.add(hoursColumn);
+        columnList.add(commentsColumn);
+        columnList.add(locationNameColumn);
+        columnList.add(locationAddressColumn);
+        columnList.add(locationCityColumn);
+        columnList.add(locationStateColumn);
+        columnList.add(locationZipCodeColumn);
+        columnList.add(companyNameColumn);
+        columnList.add(supervisorDisplayNameColumn);
+        columnList.add(supervisorFirstNameColumn);
+        columnList.add(supervisorLastNameColumn);
+
+        // TODO: write this one to new columnList file
+
+        // TODO: else, load in columnList file list
 
         // Set cell value factories
         dateColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryDateProperty());
@@ -110,21 +119,84 @@ public class EditLogEntriesTabController implements Initializable {
         locationStateColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryLocationStateProperty());
         locationZipCodeColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryLocationZipCodeProperty());
         companyNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntryCompanyNameProperty());
-        supervsiorDisplayNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntrySupervisorDisplayNameProperty());
+        supervisorDisplayNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntrySupervisorDisplayNameProperty());
         supervisorFirstNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntrySupervisorFirstNameProperty());
         supervisorLastNameColumn.setCellValueFactory(cellDataFeatures -> cellDataFeatures.getValue().getValue().logEntrySupervisorLastNameProperty());
 
-        // Create the observable list, made up of all log entries, for use within the table
+        // Get mapper object to be used when fields are edited
         LogEntryMapper logEntryMapper = new LogEntryMapper();
+
+        // Set onEditCommit changes
+        dateColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryDate(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        hoursColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryHours(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        commentsColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryComments(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        locationNameColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryLocationName(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        locationAddressColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryLocationAddress(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        locationCityColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryLocationCity(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        locationStateColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryLocationState(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        locationZipCodeColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntryLocationZipCode(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        supervisorDisplayNameColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntrySupervisorDisplayName(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        supervisorFirstNameColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntrySupervisorFirstName(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+        supervisorLastNameColumn.setOnEditCommit(event -> {
+            LogEntry logEntry = event.getTreeTableView().getTreeItem(event.getTreeTablePosition().getRow()).getValue();
+            logEntry.setLogEntrySupervisorLastName(event.getNewValue());
+            logEntryMapper.update(logEntry);
+        });
+
+        // Set column cell factories and width preference
+        for (JFXTreeTableColumn<LogEntry, String> column : columnList) {
+            column.setCellFactory(param -> new GenericEditableTreeTableCell<>(new TextFieldEditorBuilder()));
+            column.setPrefWidth(100);
+        }
+
+        // Create the observable list, made up of all log entries, for use within the table
         ObservableList<LogEntry> logEntryObservableList = FXCollections.observableArrayList(logEntryMapper.readAll());
 
         final TreeItem<LogEntry> root = new RecursiveTreeItem<>(logEntryObservableList, RecursiveTreeObject::getChildren);
-        logEntriesTreeTableView.getColumns().setAll(dateColumn, hoursColumn, commentsColumn, locationNameColumn,
-                locationAddressColumn, locationCityColumn, locationStateColumn, locationZipCodeColumn, companyNameColumn,
-                supervsiorDisplayNameColumn, supervisorFirstNameColumn, supervisorLastNameColumn
-        );
+        logEntriesTreeTableView.getColumns().setAll(columnList);
         logEntriesTreeTableView.setRoot(root);
         logEntriesTreeTableView.setShowRoot(false);
+        logEntriesTreeTableView.setEditable(true);
     }
 
     /**

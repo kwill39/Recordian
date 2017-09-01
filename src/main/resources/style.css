@@ -30,3 +30,12 @@
 #newLogButton:pressed {
     -fx-background-color: #e8e8e8;
 }
+
+.tree-table-view:focused .tree-table-row-cell:selected .tree-table-cell {
+    -fx-text-fill: WHITE;
+}
+
+.tree-table-view:focused .tree-table-row-cell:selected{
+    -fx-background-color: #457dd7;
+    -fx-table-cell-border-color: #457dd7;
+}

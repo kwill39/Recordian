@@ -19,6 +19,6 @@
       <Button fx:id="generateReportButton" mnemonicParsing="false" text="Export As PDF..." GridPane.rowIndex="1" />
       <Button fx:id="saveButton" mnemonicParsing="false" styleClass="blueButton" text="Save Changes" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <Button fx:id="undoChangesButton" mnemonicParsing="false" text="Undo Changes" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-      <JFXTreeTableView fx:id="logEntriesTreeTableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" />
+      <JFXTreeTableView fx:id="logEntriesTreeTableView" GridPane.columnSpan="2147483647" />
    </children>
 </GridPane>

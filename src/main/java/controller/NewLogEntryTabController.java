@@ -593,8 +593,8 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
      * Reads in the defaults for each DatabaseItem choicebox
      *
      * @return either a <code>HashMap&lt;DatabaseItemType, Integer&gt;</code> representing the default
-     * choices for each DatabaseItem choicebox or null if either a defaults file does not exist or
-     * no <code>HashMap&lt;DatabaseItemType, Integer&gt;</code> was found in the preexisting defaults file
+     * choices for each DatabaseItem choicebox or null if no <code>HashMap&lt;DatabaseItemType, Integer&gt;</code>
+     * was found in the defaults file
      */
     private HashMap<DatabaseItemType, Integer> readFromDefaultsFile() {
         File defaultsFile = new File(DEFAULTS_FILE_PATH);
