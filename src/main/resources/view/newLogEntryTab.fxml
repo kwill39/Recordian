@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewLogEntryTabController">
     <VBox maxHeight="-Infinity" maxWidth="-Infinity">
         <GridPane alignment="CENTER" hgap="10" vgap="10">
@@ -15,34 +25,28 @@
                 <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Comments" GridPane.rowIndex="2" />
                 <TextArea fx:id="comments" minHeight="-Infinity" prefHeight="53.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Location" GridPane.rowIndex="3" />
-                <ChoiceBox fx:id="locationChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <Button fx:id="addLocationButton" mnemonicParsing="false" styleClass="databaseItemButton" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                 <Button fx:id="editLocationButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                 <Button fx:id="deleteLocationButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                <CheckBox fx:id="locationDefaultCheckbox" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                <JFXCheckBox fx:id="locationDefaultCheckbox" checkedColor="#6c93e4" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="3" />
                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Company" GridPane.rowIndex="4" />
                 <ChoiceBox fx:id="companyChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                 <Button fx:id="addCompanyButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                 <Button fx:id="editCompanyButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                 <Button fx:id="deleteCompanyButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                <CheckBox fx:id="companyDefaultCheckbox" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                <JFXCheckBox fx:id="companyDefaultCheckbox" checkedColor="#6c93e4" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="4" />
                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Supervisor" GridPane.rowIndex="5" />
                 <ChoiceBox fx:id="supervisorChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <Button fx:id="addSupervisorButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                 <Button fx:id="editSupervisorButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                 <Button fx:id="deleteSupervisorButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                <CheckBox fx:id="supervisorDefaultCheckbox" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                <JFXCheckBox fx:id="supervisorDefaultCheckbox" checkedColor="#6c93e4" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="5" />
                 <Label fx:id="errorLabel" text="Please enter amount of hours worked" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-                <Button fx:id="submit" styleClass="blueButton" text="Submit" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
+            <JFXButton id="submitButton" fx:id="submitButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="WHITE" text="Submit" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                <padding>
                   <Insets bottom="7.0" left="17.0" right="17.0" top="7.0" />
-               </padding></Button>
+               </padding></JFXButton>
+            <ChoiceBox fx:id="locationChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
             <columnConstraints>
                 <ColumnConstraints />
@@ -50,7 +54,7 @@
                 <ColumnConstraints />
                 <ColumnConstraints />
                 <ColumnConstraints />
-                <ColumnConstraints maxWidth="-Infinity" minWidth="72.0" prefWidth="72.0" />
+                <ColumnConstraints maxWidth="-Infinity" minWidth="72.0" prefWidth="90.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints />

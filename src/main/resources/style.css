@@ -2,7 +2,7 @@
 }
 
 .blueButton {
-    -fx-background-color: #457dd7;
+    -fx-background-color: #3566b2;
     -fx-text-fill: white;
 }
 
@@ -11,7 +11,7 @@
 }
 
 #mainPane {
-    -fx-background-color: #fafafa;
+    -fx-background-color: #f4f4f4;
 }
 
 #successLabel {
@@ -19,12 +19,12 @@
 }
 
 #tempVbox {
-    -fx-background-color: #457dd7;
+    -fx-background-color: #3566b2;
 }
 
 #newLogButton {
     -fx-background-color: white;
-    -fx-text-fill: #457dd7;
+    -fx-text-fill: #3566b2;
 }
 
 #newLogButton:pressed {
@@ -36,6 +36,11 @@
 }
 
 .tree-table-view:focused .tree-table-row-cell:selected{
-    -fx-background-color: #457dd7;
-    -fx-table-cell-border-color: #457dd7;
+    -fx-background-color: #3566b2;
+    -fx-table-cell-border-color: #3566b2;
+}
+
+#submitButton {
+    -fx-background-color: #3566b2;
+    -fx-text-fill: WHITE;
 }

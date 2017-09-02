@@ -1,5 +1,7 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
@@ -79,11 +81,11 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     @FXML private Button deleteCompanyButton;
     @FXML private Button deleteLocationButton;
     @FXML private Button deleteSupervisorButton;
-    @FXML private CheckBox locationDefaultCheckbox;
-    @FXML private CheckBox companyDefaultCheckbox;
-    @FXML private CheckBox supervisorDefaultCheckbox;
+    @FXML private JFXCheckBox locationDefaultCheckbox;
+    @FXML private JFXCheckBox companyDefaultCheckbox;
+    @FXML private JFXCheckBox supervisorDefaultCheckbox;
     @FXML private Label errorLabel;
-    @FXML private Button submit;
+    @FXML private JFXButton submitButton;
 
     public NewLogEntryTabController(){
         refreshCompanyNames();
@@ -161,7 +163,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             defaultCheckboxClicked(supervisorDefaultCheckbox, supervisorID, DatabaseItemType.SUPERVISOR);
         });
 
-        submit.setOnMouseClicked(event -> submit());
+        submitButton.setOnMouseClicked(event -> submit());
 
 
 
