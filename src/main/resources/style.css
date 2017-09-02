@@ -44,3 +44,21 @@
     -fx-background-color: #3566b2;
     -fx-text-fill: WHITE;
 }
+
+.choice-box {
+    -fx-background-color: WHITE;
+    -fx-border-color: #b6b6b6;
+    -fx-border-radius: 3px;
+}
+.choice-box:focused {
+    -fx-border-color: #6c93e4;
+    -fx-effect: dropshadow(three-pass-box, #6c93e4, 3, 0, 0, 0);
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #6c93e4;
+}
+
+.appTextField:focused {
+    -fx-focus-color: #6c93e4;
+}

@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDatePicker;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
@@ -67,7 +68,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     private ObservableList<String> sortedLocationNames;
     private ObservableList<String> sortedSupervisorDisplayNames;
     @FXML private TextField hours;
-    @FXML private DatePicker theDatePicker;
+    @FXML private JFXDatePicker theDatePicker;
     @FXML private TextArea comments;
     @FXML public ChoiceBox<String> companyChoiceBox;
     @FXML public ChoiceBox<String> locationChoiceBox;
