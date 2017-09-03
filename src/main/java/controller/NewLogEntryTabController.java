@@ -23,7 +23,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.*;
@@ -68,7 +67,6 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     private ObservableList<String> sortedCompanyNames;
     private ObservableList<String> sortedLocationNames;
     private ObservableList<String> sortedSupervisorDisplayNames;
-    @FXML private StackPane rootPane;
     @FXML private TextField hours;
     @FXML private JFXDatePicker theDatePicker;
     @FXML private TextArea comments;
@@ -260,7 +258,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
      * information given by the user pertaining to the work iteration
      */
     @FXML private void submit(){
-        if (hours.getText().isEmpty()) {
+        if (hours.getText().isEmpty() || theDatePicker.getValue() == null) {
             errorLabel.setVisible(true);
             return;
         }
