@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewLogEntryTabController">
     <VBox maxHeight="-Infinity" maxWidth="-Infinity">
         <GridPane alignment="CENTER" hgap="10" vgap="10">
@@ -24,29 +15,101 @@
                 <Label alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Comments" GridPane.rowIndex="2" />
                 <TextArea fx:id="comments" minHeight="-Infinity" prefHeight="53.0" styleClass="appTextField" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Location" GridPane.rowIndex="3" />
-                <Button fx:id="addLocationButton" mnemonicParsing="false" styleClass="databaseItemButton" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <Button fx:id="editLocationButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                <Button fx:id="deleteLocationButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                <JFXCheckBox fx:id="locationDefaultCheckbox" checkedColor="#6c93e4" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                <JFXCheckBox fx:id="locationDefaultCheckbox" checkedColor="#3566b2" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="3" />
                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Company" GridPane.rowIndex="4" />
                 <ChoiceBox fx:id="companyChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Button fx:id="addCompanyButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                <Button fx:id="editCompanyButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                <Button fx:id="deleteCompanyButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                <JFXCheckBox fx:id="companyDefaultCheckbox" checkedColor="#6c93e4" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                <JFXCheckBox fx:id="companyDefaultCheckbox" checkedColor="#3566b2" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="4" />
                 <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Supervisor" GridPane.rowIndex="5" />
                 <ChoiceBox fx:id="supervisorChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                <Button fx:id="addSupervisorButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                <Button fx:id="editSupervisorButton" mnemonicParsing="false" text="Edit" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                <Button fx:id="deleteSupervisorButton" mnemonicParsing="false" text="Delete" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                <JFXCheckBox fx:id="supervisorDefaultCheckbox" checkedColor="#6c93e4" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                <JFXCheckBox fx:id="supervisorDefaultCheckbox" checkedColor="#3566b2" mnemonicParsing="false" text="Default" GridPane.columnIndex="5" GridPane.rowIndex="5" />
                 <Label fx:id="errorLabel" text="Please enter amount of hours worked" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-            <JFXButton id="submitButton" fx:id="submitButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="WHITE" text="Submit" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+            <JFXButton id="submitButton" fx:id="submitButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="WHITE" text="SUBMIT" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                <padding>
-                  <Insets bottom="7.0" left="17.0" right="17.0" top="7.0" />
+                  <Insets bottom="12.0" left="17.0" right="17.0" top="12.0" />
                </padding></JFXButton>
             <ChoiceBox fx:id="locationChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <JFXDatePicker fx:id="theDatePicker" defaultColor="#6c93e4" GridPane.columnIndex="1" />
+            <JFXDatePicker fx:id="theDatePicker" defaultColor="#3566b2" GridPane.columnIndex="1" />
+            <JFXButton fx:id="addLocationButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <styleClass>
+                  <String fx:value="addDatabaseItemButton" />
+                  <String fx:value="databaseItemButton" />
+               </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+            </JFXButton>
+                <JFXButton fx:id="editLocationButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                    <styleClass>
+                        <String fx:value="editDatabaseItemButton" />
+                        <String fx:value="databaseItemButton" />
+                    </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+                </JFXButton>
+                <JFXButton fx:id="deleteLocationButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="4" GridPane.rowIndex="3">
+                    <styleClass>
+                        <String fx:value="deleteDatabaseItemButton" />
+                        <String fx:value="databaseItemButton" />
+                    </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+                </JFXButton>
+            <JFXButton fx:id="addCompanyButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <styleClass>
+                  <String fx:value="addDatabaseItemButton" />
+                  <String fx:value="databaseItemButton" />
+               </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+            </JFXButton>
+                <JFXButton fx:id="editCompanyButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                    <styleClass>
+                        <String fx:value="editDatabaseItemButton" />
+                        <String fx:value="databaseItemButton" />
+                    </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+                </JFXButton>
+                <JFXButton fx:id="deleteCompanyButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                    <styleClass>
+                        <String fx:value="deleteDatabaseItemButton" />
+                        <String fx:value="databaseItemButton" />
+                    </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+                </JFXButton>
+            <JFXButton fx:id="addSupervisorButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <styleClass>
+                  <String fx:value="addDatabaseItemButton" />
+                  <String fx:value="databaseItemButton" />
+               </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="editSupervisorButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <styleClass>
+                  <String fx:value="editDatabaseItemButton" />
+                  <String fx:value="databaseItemButton" />
+               </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+            </JFXButton>
+            <JFXButton fx:id="deleteSupervisorButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="4" GridPane.rowIndex="5">
+               <styleClass>
+                  <String fx:value="deleteDatabaseItemButton" />
+                  <String fx:value="databaseItemButton" />
+               </styleClass>
+               <GridPane.margin>
+                  <Insets left="2.0" right="2.0" />
+               </GridPane.margin>
+            </JFXButton>
             </children>
             <columnConstraints>
                 <ColumnConstraints />
