@@ -37,6 +37,11 @@
     -fx-table-cell-border-color: #3566b2;
 }
 
+.blueLabel {
+    -fx-text-fill: #3566b2;
+    -fx-font-weight: bold;
+}
+
 .appTextField:focused {
     -fx-focus-color: #3566b2;
 }
