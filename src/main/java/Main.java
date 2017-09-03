@@ -18,8 +18,6 @@ public class Main extends Application {
         FXMLLoader root = new FXMLLoader(getClass().getResource("/view/mainTabPane.fxml"));
         primaryStage.setTitle("Kyle's Hour Tracker");
         primaryStage.setScene(new Scene(root.load()));
-        primaryStage.setMinWidth(630);
-        primaryStage.setMinHeight(450);
         primaryStage.setOnCloseRequest(event -> Platform.exit());
         MainTabPaneController mainTabPaneController = root.getController();
         mainTabPaneController.setCurrentStage(primaryStage);
