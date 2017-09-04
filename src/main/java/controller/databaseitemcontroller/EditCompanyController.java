@@ -33,7 +33,7 @@ public class EditCompanyController extends DatabaseItemModificationController im
 
     @Override
     protected void onNewLogEntryTabControllerSet() {
-        oldNameOfCompanyToEdit = newLogEntryTabController.companyChoiceBox.getValue().toString();
+        oldNameOfCompanyToEdit = newLogEntryTabController.companyComboBox.getValue().toString();
         companyToEdit = companyMapper.read(oldNameOfCompanyToEdit);
         companyName.setText(companyToEdit.getCompanyName());
     }

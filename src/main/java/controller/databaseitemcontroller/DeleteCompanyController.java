@@ -29,7 +29,7 @@ public class DeleteCompanyController extends DatabaseItemModificationController 
 
     @Override
     protected void onNewLogEntryTabControllerSet() {
-        String nameOfcompanyToDelete = newLogEntryTabController.companyChoiceBox.getValue().toString();
+        String nameOfcompanyToDelete = newLogEntryTabController.companyComboBox.getValue().toString();
         companyToDelete = companyMapper.read(nameOfcompanyToDelete);
         confirmationLabel.setText("Are you sure you want to delete " + companyToDelete.getCompanyName() + "?");
     }

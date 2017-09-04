@@ -16,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,22 +45,22 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     private final String DEFAULTS_FILE_PATH = "Hour_Tracker_Files/defaults.ser";
 
     /**
-     * Used for finding a default choicebox item
+     * Used for finding a default combo box item
      */
     private enum DatabaseItemType{COMPANY, LOCATION, SUPERVISOR}
     /**
      * A list containing the name of each <code>Company</code> within the SQLite companies table.
-     * The strings in this list make up the items within <code>companyChoicebox</code>.
+     * The strings in this list make up the items within <code>companyComboBox</code>.
      */
     private ObservableList<String> companyNames = FXCollections.observableArrayList();
     /**
      * A list containing the name of each <code>Location</code> within the SQLite locations table.
-     * The strings in this list make up the items within <code>locationChoicebox</code>.
+     * The strings in this list make up the items within <code>locationComboBox</code>.
      */
     private ObservableList<String> locationNames = FXCollections.observableArrayList();
     /**
      * A list containing the display name of each <code>Supervisor</code> within the SQLite supervisors table.
-     * The strings in this list make up the items within <code>supervisorChoicebox</code>.
+     * The strings in this list make up the items within <code>supervisorComboBox</code>.
      */
     private ObservableList<String> supervisorDisplayNames = FXCollections.observableArrayList();
     private ObservableList<String> sortedCompanyNames;
@@ -70,9 +69,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     @FXML private TextField hours;
     @FXML private JFXDatePicker theDatePicker;
     @FXML private TextArea comments;
-    @FXML public ChoiceBox<String> companyChoiceBox;
-    @FXML public ChoiceBox<String> locationChoiceBox;
-    @FXML public ChoiceBox<String> supervisorChoiceBox;
+    @FXML public ComboBox<String> companyComboBox;
+    @FXML public ComboBox<String> locationComboBox;
+    @FXML public ComboBox<String> supervisorComboBox;
     @FXML private JFXButton addCompanyButton;
     @FXML private JFXButton addLocationButton;
     @FXML private JFXButton addSupervisorButton;
@@ -118,7 +117,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         // Datepicker defaults to today
         theDatePicker.setValue(LocalDate.now());
 
-        setAllChoiceBoxItems();
+        setAllComboBoxItems();
 
         // Set button onClick events to open associated JavaFX stages
         addCompanyButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
@@ -142,7 +141,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         // Sets/Removes the company default
         companyDefaultCheckbox.setOnAction(e -> {
-            String companyName = companyChoiceBox.getValue();
+            String companyName = companyComboBox.getValue();
             CompanyMapper companyMapper = new CompanyMapper();
             Integer companyID  = companyMapper.read(companyName).getCompanyID();
             defaultCheckboxClicked(companyDefaultCheckbox, companyID, DatabaseItemType.COMPANY);
@@ -150,7 +149,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         // Sets/Removes the location default
         locationDefaultCheckbox.setOnAction(e -> {
-            String locationName = locationChoiceBox.getValue();
+            String locationName = locationComboBox.getValue();
             LocationMapper locationMapper = new LocationMapper();
             Integer locationID = locationMapper.read(locationName).getLocationID();
             defaultCheckboxClicked(locationDefaultCheckbox, locationID, DatabaseItemType.LOCATION);
@@ -158,7 +157,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         // Sets/Removes the supervisor default
         supervisorDefaultCheckbox.setOnAction(e -> {
-            String supervisorDisplayName = supervisorChoiceBox.getValue();
+            String supervisorDisplayName = supervisorComboBox.getValue();
             SupervisorMapper supervisorMapper = new SupervisorMapper();
             Integer supervisorID = supervisorMapper.read(supervisorDisplayName).getSupervisorID();
             defaultCheckboxClicked(supervisorDefaultCheckbox, supervisorID, DatabaseItemType.SUPERVISOR);
@@ -168,54 +167,54 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
 
 
-        /* If a choicebox start outs out with a null value,
+        /* If a combo box start outs out with a null value,
          * then disable its Edit/Delete buttons and default checkbox.
-         * Also, set the action listener of the choicebox to enable/re-enable
-         * the buttons/default checkbox when the choicebox does not have a null value
-         * and disable the buttons/default checkbox when the choicebox does have a null value.
+         * Also, set the action listener of the combo box to enable/re-enable
+         * the buttons/default checkbox when the combo box does not have a null value
+         * and disable the buttons/default checkbox when the combo box does have a null value.
          */
 
-        editCompanyButton.setDisable(companyChoiceBox.getValue() == null);
-        deleteCompanyButton.setDisable(companyChoiceBox.getValue() == null);
-        companyDefaultCheckbox.setDisable(companyChoiceBox.getValue() == null);
-        companyChoiceBox.addEventHandler(ActionEvent.ACTION, event -> {
-            editCompanyButton.setDisable(companyChoiceBox.getValue() == null);
-            deleteCompanyButton.setDisable(companyChoiceBox.getValue() == null);
-            companyDefaultCheckbox.setDisable(companyChoiceBox.getValue() == null);
+        editCompanyButton.setDisable(companyComboBox.getValue() == null);
+        deleteCompanyButton.setDisable(companyComboBox.getValue() == null);
+        companyDefaultCheckbox.setDisable(companyComboBox.getValue() == null);
+        companyComboBox.valueProperty().addListener(event -> {
+            editCompanyButton.setDisable(companyComboBox.getValue() == null);
+            deleteCompanyButton.setDisable(companyComboBox.getValue() == null);
+            companyDefaultCheckbox.setDisable(companyComboBox.getValue() == null);
         });
 
-        editLocationButton.setDisable(locationChoiceBox.getValue() == null);
-        deleteLocationButton.setDisable(locationChoiceBox.getValue() == null);
-        locationDefaultCheckbox.setDisable(locationChoiceBox.getValue() == null);
-        locationChoiceBox.addEventHandler(ActionEvent.ACTION, event -> {
-            editLocationButton.setDisable(locationChoiceBox.getValue() == null);
-            deleteLocationButton.setDisable(locationChoiceBox.getValue() == null);
-            locationDefaultCheckbox.setDisable(locationChoiceBox.getValue() == null);
+        editLocationButton.setDisable(locationComboBox.getValue() == null);
+        deleteLocationButton.setDisable(locationComboBox.getValue() == null);
+        locationDefaultCheckbox.setDisable(locationComboBox.getValue() == null);
+        locationComboBox.valueProperty().addListener(event -> {
+            editLocationButton.setDisable(locationComboBox.getValue() == null);
+            deleteLocationButton.setDisable(locationComboBox.getValue() == null);
+            locationDefaultCheckbox.setDisable(locationComboBox.getValue() == null);
         });
 
-        editSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
-        deleteSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
-        supervisorDefaultCheckbox.setDisable(supervisorChoiceBox.getValue() == null);
-        supervisorChoiceBox.addEventHandler(ActionEvent.ACTION, event -> {
-            editSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
-            deleteSupervisorButton.setDisable(supervisorChoiceBox.getValue() == null);
-            supervisorDefaultCheckbox.setDisable(supervisorChoiceBox.getValue() == null);
+        editSupervisorButton.setDisable(supervisorComboBox.getValue() == null);
+        deleteSupervisorButton.setDisable(supervisorComboBox.getValue() == null);
+        supervisorDefaultCheckbox.setDisable(supervisorComboBox.getValue() == null);
+        supervisorComboBox.valueProperty().addListener(event -> {
+            editSupervisorButton.setDisable(supervisorComboBox.getValue() == null);
+            deleteSupervisorButton.setDisable(supervisorComboBox.getValue() == null);
+            supervisorDefaultCheckbox.setDisable(supervisorComboBox.getValue() == null);
         });
 
 
 
-        /* If a choicebox's item is displaying the
-         * default choice for that choicebox, then set the
+        /* If a combo box's item is displaying the
+         * default choice for that combo box, then set the
          * corresponding default checkbox to checked.
          * Otherwise, remove the check mark.
          */
 
-        companyChoiceBox.addEventHandler(ActionEvent.ACTION, e -> {
-            Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
-            if (defaultCompanyID != null && companyChoiceBox.getValue() != null) {
+        companyComboBox.valueProperty().addListener(event -> {
+            Integer defaultCompanyID = getDefaultComboBoxItemID(DatabaseItemType.COMPANY);
+            if (defaultCompanyID != null && companyComboBox.getValue() != null) {
                 CompanyMapper companyMapper = new CompanyMapper();
                 Company defaultCompany = companyMapper.read(defaultCompanyID);
-                if (companyChoiceBox.getValue().equals(defaultCompany.getCompanyName())) {
+                if (companyComboBox.getValue().equals(defaultCompany.getCompanyName())) {
                     companyDefaultCheckbox.setSelected(true);
                 } else {
                     companyDefaultCheckbox.setSelected(false);
@@ -223,13 +222,13 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             }
         });
 
-        locationChoiceBox.addEventHandler(ActionEvent.ACTION, e-> {
-            Integer defaultLocationID = getDefaultChoiceboxItemID(DatabaseItemType.LOCATION);
-            if (defaultLocationID != null && locationChoiceBox.getValue() != null) {
+        locationComboBox.valueProperty().addListener(event -> {
+            Integer defaultLocationID = getDefaultComboBoxItemID(DatabaseItemType.LOCATION);
+            if (defaultLocationID != null && locationComboBox.getValue() != null) {
                 LocationMapper locationMapper = new LocationMapper();
                 Location defaultLocation = locationMapper.read(defaultLocationID);
-                locationChoiceBox.getValue();
-                if (locationChoiceBox.getValue().equals(defaultLocation.getLocationName())) {
+                locationComboBox.getValue();
+                if (locationComboBox.getValue().equals(defaultLocation.getLocationName())) {
                     locationDefaultCheckbox.setSelected(true);
                 } else {
                     locationDefaultCheckbox.setSelected(false);
@@ -237,12 +236,12 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             }
         });
 
-        supervisorChoiceBox.addEventHandler(ActionEvent.ACTION, e-> {
-            Integer defaultSupervisorID = getDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR);
-            if (defaultSupervisorID != null && supervisorChoiceBox.getValue() != null) {
+        supervisorComboBox.valueProperty().addListener(event -> {
+            Integer defaultSupervisorID = getDefaultComboBoxItemID(DatabaseItemType.SUPERVISOR);
+            if (defaultSupervisorID != null && supervisorComboBox.getValue() != null) {
                 SupervisorMapper supervisorMapper = new SupervisorMapper();
                 Supervisor defaultSupervisor = supervisorMapper.read(defaultSupervisorID);
-                if (supervisorChoiceBox.getValue().equals(defaultSupervisor.getSupervisorDisplayName())) {
+                if (supervisorComboBox.getValue().equals(defaultSupervisor.getSupervisorDisplayName())) {
                     supervisorDefaultCheckbox.setSelected(true);
                 } else {
                     supervisorDefaultCheckbox.setSelected(false);
@@ -250,7 +249,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             }
         });
 
-        fillChoiceboxesWithDefaultChoices();
+        fillComboBoxesWithDefaultChoices();
     }
 
     /**
@@ -284,9 +283,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         }
 
         // Append the location
-        if (locationChoiceBox.getValue() != null) {
+        if (locationComboBox.getValue() != null) {
             LocationMapper locationMapper = new LocationMapper();
-            Location location = locationMapper.read(locationChoiceBox.getValue().toString());
+            Location location = locationMapper.read(locationComboBox.getValue().toString());
             logEntry.append(newLine).append("Location:").append(newLine)
                     .append(location.getLocationName()).append(newLine)
                     .append(location.getLocationAddress()).append(newLine)
@@ -296,16 +295,16 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         }
 
         // Append the company
-        if (companyChoiceBox.getValue() != null) {
+        if (companyComboBox.getValue() != null) {
             CompanyMapper companyMapper = new CompanyMapper();
-            Company company = companyMapper.read(companyChoiceBox.getValue().toString());
+            Company company = companyMapper.read(companyComboBox.getValue().toString());
             logEntry.append(newLine).append("Company: ").append(company.getCompanyName());
         }
 
         // Append the supervisor
-        if (supervisorChoiceBox.getValue() != null) {
+        if (supervisorComboBox.getValue() != null) {
             SupervisorMapper supervisorMapper = new SupervisorMapper();
-            Supervisor supervisor = supervisorMapper.read(supervisorChoiceBox.getValue());
+            Supervisor supervisor = supervisorMapper.read(supervisorComboBox.getValue());
             logEntry.append(newLine).append("Supervisor: ")
                     .append(supervisor.getSupervisorDisplayName()).append(" (")
                     .append(supervisor.getSupervisorFirstName()).append(" ")
@@ -329,23 +328,23 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         LogEntry newLogEntry = new LogEntry(localDate.toString(), hours.getText());
         newLogEntry.setLogEntryComments(comments.getText());
-        if (locationChoiceBox.getValue() != null) {
+        if (locationComboBox.getValue() != null) {
             LocationMapper locationMapper = new LocationMapper();
-            Location theLocation = locationMapper.read(locationChoiceBox.getValue());
+            Location theLocation = locationMapper.read(locationComboBox.getValue());
             newLogEntry.setLogEntryLocationName(theLocation.getLocationName());
             newLogEntry.setLogEntryLocationAddress(theLocation.getLocationAddress());
             newLogEntry.setLogEntryLocationCity(theLocation.getLocationCity());
             newLogEntry.setLogEntryLocationState(theLocation.getLocationState());
             newLogEntry.setLogEntryLocationZipCode(theLocation.getLocationZipCode());
         }
-        if (companyChoiceBox.getValue() != null) {
+        if (companyComboBox.getValue() != null) {
             CompanyMapper companyMapper = new CompanyMapper();
-            Company theCompany = companyMapper.read(companyChoiceBox.getValue());
+            Company theCompany = companyMapper.read(companyComboBox.getValue());
             newLogEntry.setLogEntryCompanyName(theCompany.getCompanyName());
         }
-        if (supervisorChoiceBox.getValue() != null) {
+        if (supervisorComboBox.getValue() != null) {
             SupervisorMapper supervisorMapper = new SupervisorMapper();
-            Supervisor theSupervisor = supervisorMapper.read(supervisorChoiceBox.getValue());
+            Supervisor theSupervisor = supervisorMapper.read(supervisorComboBox.getValue());
             newLogEntry.setLogEntrySupervisorFirstName(theSupervisor.getSupervisorFirstName());
             newLogEntry.setLogEntrySupervisorLastName(theSupervisor.getSupervisorLastName());
             newLogEntry.setLogEntrySupervisorDisplayName(theSupervisor.getSupervisorDisplayName());
@@ -396,37 +395,37 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Sets the items for all choiceboxes in newLogEntryTab view
+     * Sets the items for all combo boxes in newLogEntryTab view
      */
-    private void setAllChoiceBoxItems(){
+    private void setAllComboBoxItems(){
 
-        Consumer<ChoiceBox<String>> disableChoiceboxIfEmpty = (choiceBox) -> {
-            if (choiceBox.getItems().isEmpty()) {
-                choiceBox.setDisable(true);
-            } else {choiceBox.setDisable(false);}
+        Consumer<ComboBox<String>> disableComboBoxIfEmpty = (comboBox) -> {
+            if (comboBox.getItems().isEmpty()) {
+                comboBox.setDisable(true);
+            } else {comboBox.setDisable(false);}
         };
 
-        // Establish process for populating a choicebox
-        BiConsumer<ChoiceBox<String>, ObservableList<String>> setChoiceBoxItems = (choiceBox, observableList) -> {
+        // Establish process for populating a combo box
+        BiConsumer<ComboBox<String>, ObservableList<String>> setComboBoxItems = (comboBox, observableList) -> {
             observableList.addListener((ListChangeListener<String>) c -> {
-                choiceBox.setItems(observableList);
-                disableChoiceboxIfEmpty.accept(choiceBox);
+                comboBox.setItems(observableList);
+                disableComboBoxIfEmpty.accept(comboBox);
             });
-            choiceBox.setItems(observableList);
-            disableChoiceboxIfEmpty.accept(choiceBox);
+            comboBox.setItems(observableList);
+            disableComboBoxIfEmpty.accept(comboBox);
         };
 
-        // Set company choicebox items
+        // Set company combo box items
         sortedCompanyNames = new SortedList<>(companyNames, String.CASE_INSENSITIVE_ORDER);
-        setChoiceBoxItems.accept(companyChoiceBox, sortedCompanyNames);
+        setComboBoxItems.accept(companyComboBox, sortedCompanyNames);
 
-        // Set location choicebox items
+        // Set location combo box items
         sortedLocationNames = new SortedList<>(locationNames, String.CASE_INSENSITIVE_ORDER);
-        setChoiceBoxItems.accept(locationChoiceBox, sortedLocationNames);
+        setComboBoxItems.accept(locationComboBox, sortedLocationNames);
 
-        // Set supervisor choicebox items
+        // Set supervisor combo box items
         sortedSupervisorDisplayNames = new SortedList<>(supervisorDisplayNames, String.CASE_INSENSITIVE_ORDER);
-        setChoiceBoxItems.accept(supervisorChoiceBox, sortedSupervisorDisplayNames);
+        setComboBoxItems.accept(supervisorComboBox, sortedSupervisorDisplayNames);
     }
 
     /**
@@ -493,26 +492,26 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
     /**
      * Gets the ID of the <code>DatabaseItem</code> that is the
-     * default choice for the choicebox that represents
+     * default choice for the combo box that represents
      * DatabaseItems of type <code>databaseItemType</code>
      *
      * @param databaseItemType the type of DatabaseItem
      * @return a DatabaseItem ID
      */
-    private Integer getDefaultChoiceboxItemID(DatabaseItemType databaseItemType) {
+    private Integer getDefaultComboBoxItemID(DatabaseItemType databaseItemType) {
         HashMap<DatabaseItemType, Integer> defaults = readFromDefaultsFile();
         return defaults.get(databaseItemType);
     }
 
     /**
-     * Sets the default choice for the choicebox that represents
+     * Sets the default choice for the combo box that represents
      * DatabaseItems of type <code>DatabaseItemType</code> to
      * the DatabaseItem represented by <code>databaseItemID</code>
      *
      * @param databaseItemType  the type of DatabaseItem
      * @param databaseItemID    a DatabaseItem ID
      */
-    private void setDefaultChoiceboxItemID(DatabaseItemType databaseItemType, Integer databaseItemID) {
+    private void setDefaultComboBoxItemID(DatabaseItemType databaseItemType, Integer databaseItemID) {
         HashMap<DatabaseItemType, Integer> defaultsHashMap = readFromDefaultsFile();
         defaultsHashMap.put(databaseItemType, databaseItemID);
         writeToDefaultsFile(defaultsHashMap);
@@ -520,32 +519,32 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
     /**
      * Loads any default choices into their
-     * corresponding choiceboxes.
+     * corresponding combo boxes.
      */
-    private void fillChoiceboxesWithDefaultChoices() {
-        Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
-        Integer defaultLocationID = getDefaultChoiceboxItemID(DatabaseItemType.LOCATION);
-        Integer defaultSupervisorID = getDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR);
+    private void fillComboBoxesWithDefaultChoices() {
+        Integer defaultCompanyID = getDefaultComboBoxItemID(DatabaseItemType.COMPANY);
+        Integer defaultLocationID = getDefaultComboBoxItemID(DatabaseItemType.LOCATION);
+        Integer defaultSupervisorID = getDefaultComboBoxItemID(DatabaseItemType.SUPERVISOR);
 
         if (defaultCompanyID != null) {
             CompanyMapper companyMapper = new CompanyMapper();
             Company defaultCompany = companyMapper.read(defaultCompanyID);
-            companyChoiceBox.setValue(defaultCompany.getCompanyName());
+            companyComboBox.setValue(defaultCompany.getCompanyName());
         }
         if (defaultLocationID != null) {
             LocationMapper locationMapper = new LocationMapper();
             Location defaultLocation = locationMapper.read(defaultLocationID);
-            locationChoiceBox.setValue(defaultLocation.getLocationName());
+            locationComboBox.setValue(defaultLocation.getLocationName());
         }
         if(defaultSupervisorID != null){
             SupervisorMapper supervisorMapper = new SupervisorMapper();
             Supervisor defaultSupervisor = supervisorMapper.read(defaultSupervisorID);
-            supervisorChoiceBox.setValue(defaultSupervisor.getSupervisorDisplayName());
+            supervisorComboBox.setValue(defaultSupervisor.getSupervisorDisplayName());
         }
     }
 
     /**
-     * Sets/Removes the default choice of the choicebox
+     * Sets/Removes the default choice of the combo box
      * associated with the clicked default checkbox.
      * <p>
      * If the checkbox check mark was removed by the user,
@@ -553,7 +552,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
      * Otherwise, the user is trying to set the default.
      *
      * @param clickedCheckbox   the checkbox that was clicked by the user
-     * @param databaseItemID    the ID of the DatabaseItem in the choicebox
+     * @param databaseItemID    the ID of the DatabaseItem in the combo box
      *                          associated with <code>clickedCheckbox</code> at
      *                          the time when the user clicked <code>clickedCheckbox</code>
      * @param databaseItemType  the type of DatabaseItem represented by <code>databaseItemID</code>
@@ -568,12 +567,12 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
         // If the user has unchecked the default checkbox
         // then they're only trying to remove the current default
-        // for that choicebox - not set a new one. Thus, the new
-        // value for that choicebox default should be null.
+        // for that combo box - not set a new one. Thus, the new
+        // value for that combo box default should be null.
         if (!clickedCheckbox.isSelected()) {
             databaseItemID = null;
         }
-        setDefaultChoiceboxItemID(databaseItemType, databaseItemID);
+        setDefaultComboBoxItemID(databaseItemType, databaseItemID);
     }
 
     /**
@@ -593,10 +592,10 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Reads in the defaults for each DatabaseItem choicebox
+     * Reads in the defaults for each DatabaseItem combo box
      *
      * @return either a <code>HashMap&lt;DatabaseItemType, Integer&gt;</code> representing the default
-     * choices for each DatabaseItem choicebox or null if no <code>HashMap&lt;DatabaseItemType, Integer&gt;</code>
+     * choices for each DatabaseItem combo box or null if no <code>HashMap&lt;DatabaseItemType, Integer&gt;</code>
      * was found in the defaults file
      */
     private HashMap<DatabaseItemType, Integer> readFromDefaultsFile() {
@@ -614,10 +613,10 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Writes the defaults for the DatabaseItem choiceboxes to the defaults file
+     * Writes the defaults for the DatabaseItem combo boxes to the defaults file
      *
      * @param defaultsHashMap a <code>HashMap&lt;DatabaseItemType, Integer&gt;</code>
-     * representing the default choices for each DatabaseItem choicebox
+     * representing the default choices for each DatabaseItem combo box
      */
     private void writeToDefaultsFile(HashMap<DatabaseItemType, Integer> defaultsHashMap) {
         File defaultsFile = new File(DEFAULTS_FILE_PATH);
@@ -644,15 +643,15 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         if (databaseItem instanceof Company) {
             refreshCompanyNames();
             Company newCompany = (Company) databaseItem;
-            companyChoiceBox.setValue(newCompany.getCompanyName());
+            companyComboBox.setValue(newCompany.getCompanyName());
         } else if (databaseItem instanceof Location) {
             refreshLocationNames();
             Location newLocation = (Location) databaseItem;
-            locationChoiceBox.setValue(newLocation.getLocationName());
+            locationComboBox.setValue(newLocation.getLocationName());
         } else if (databaseItem instanceof Supervisor) {
             refreshSupervisorDisplayNames();
             Supervisor newSupervisor = (Supervisor) databaseItem;
-            supervisorChoiceBox.setValue(newSupervisor.getSupervisorDisplayName());
+            supervisorComboBox.setValue(newSupervisor.getSupervisorDisplayName());
         }
     }
 
@@ -668,15 +667,15 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         if (databaseItem instanceof Company) {
             refreshCompanyNames();
             Company updatedCompany = (Company) databaseItem;
-            companyChoiceBox.setValue(updatedCompany.getCompanyName());
+            companyComboBox.setValue(updatedCompany.getCompanyName());
         } else if (databaseItem instanceof Location) {
             refreshLocationNames();
             Location updatedLocation = (Location) databaseItem;
-            locationChoiceBox.setValue(updatedLocation.getLocationName());
+            locationComboBox.setValue(updatedLocation.getLocationName());
         } else if (databaseItem instanceof Supervisor) {
             refreshSupervisorDisplayNames();
             Supervisor updatedSupervisor = (Supervisor) databaseItem;
-            supervisorChoiceBox.setValue(updatedSupervisor.getSupervisorDisplayName());
+            supervisorComboBox.setValue(updatedSupervisor.getSupervisorDisplayName());
         }
     }
 
@@ -692,31 +691,31 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
         if (databaseItem instanceof Company) {
             refreshCompanyNames();
             // If the deleted DatabaseItem was a default for its
-            // choicebox, then we need to remove it from the defaults.
+            // combo box, then we need to remove it from the defaults.
             Company oldCompany = (Company) databaseItem;
-            Integer defaultCompanyID = getDefaultChoiceboxItemID(DatabaseItemType.COMPANY);
+            Integer defaultCompanyID = getDefaultComboBoxItemID(DatabaseItemType.COMPANY);
             if ((defaultCompanyID != null) && (defaultCompanyID == oldCompany.getCompanyID())) {
-                setDefaultChoiceboxItemID(DatabaseItemType.COMPANY, null);
+                setDefaultComboBoxItemID(DatabaseItemType.COMPANY, null);
                 companyDefaultCheckbox.setSelected(false);
             }
         } else if (databaseItem instanceof Location) {
             refreshLocationNames();
             // If the deleted DatabaseItem was a default for its
-            // choicebox, then we need to remove it from the defaults.
+            // combo box, then we need to remove it from the defaults.
             Location oldLocation = (Location) databaseItem;
-            Integer defaultLocationID = getDefaultChoiceboxItemID(DatabaseItemType.LOCATION);
+            Integer defaultLocationID = getDefaultComboBoxItemID(DatabaseItemType.LOCATION);
             if ((defaultLocationID != null) && (defaultLocationID == oldLocation.getLocationID())) {
-                setDefaultChoiceboxItemID(DatabaseItemType.LOCATION, null);
+                setDefaultComboBoxItemID(DatabaseItemType.LOCATION, null);
                 locationDefaultCheckbox.setSelected(false);
             }
         } else if (databaseItem instanceof Supervisor) {
             refreshSupervisorDisplayNames();
             // If the deleted DatabaseItem was a default for its
-            // choicebox, then we need to remove it from the defaults.
+            // combo box, then we need to remove it from the defaults.
             Supervisor oldSupervisor = (Supervisor) databaseItem;
-            Integer defaultSupervisorId = getDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR);
+            Integer defaultSupervisorId = getDefaultComboBoxItemID(DatabaseItemType.SUPERVISOR);
             if ((defaultSupervisorId != null) && (defaultSupervisorId == oldSupervisor.getSupervisorID())) {
-                setDefaultChoiceboxItemID(DatabaseItemType.SUPERVISOR, null);
+                setDefaultComboBoxItemID(DatabaseItemType.SUPERVISOR, null);
                 supervisorDefaultCheckbox.setSelected(false);
             }
         }

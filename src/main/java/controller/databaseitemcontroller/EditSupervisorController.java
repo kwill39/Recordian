@@ -35,7 +35,7 @@ public class EditSupervisorController extends DatabaseItemModificationController
 
     @Override
     protected void onNewLogEntryTabControllerSet() {
-        oldDisplayNameOfSupervisorToEdit = newLogEntryTabController.supervisorChoiceBox.getValue().toString();
+        oldDisplayNameOfSupervisorToEdit = newLogEntryTabController.supervisorComboBox.getValue().toString();
         supervisorToEdit = supervisorMapper.read(oldDisplayNameOfSupervisorToEdit);
         supervisorFirstName.setText(supervisorToEdit.getSupervisorFirstName());
         supervisorLastName.setText(supervisorToEdit.getSupervisorLastName());

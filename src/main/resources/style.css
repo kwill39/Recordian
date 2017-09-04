@@ -3,8 +3,14 @@
     src: url("font/roboto/Roboto-Bold.ttf");
 }
 
+.root {
+        -lightBlue: #6c93e4;
+        -blue: #3566b2;
+        -darkBlue: #003c82;
+}
+
 .blueButton {
-    -fx-background-color: #3566b2;
+    -fx-background-color: -blue;
     -fx-text-fill: WHITE;
 }
 
@@ -21,42 +27,48 @@
 }
 
 .tree-table-view:focused .tree-table-row-cell:selected{
-    -fx-background-color: #3566b2;
-    -fx-table-cell-border-color: #3566b2;
+    -fx-background-color: -blue;
+    -fx-table-cell-border-color: -blue;
 }
 
 .blueLabel {
-    -fx-text-fill: #3566b2;
+    -fx-text-fill: -blue;
     -fx-font-weight: BOLD;
 }
 
 .darkBlueButton {
-    -fx-background-color: #003c82;
+    -fx-background-color: -darkBlue;
     -fx-text-fill: WHITE;
     -fx-padding: 12 17 12 17;
     -fx-font-family: 'Roboto';
 }
 
 .appTextField:focused {
-    -fx-focus-color: #3566b2;
+    -fx-focus-color: -blue;
 }
 
-.choice-box {
+.combo-box {
     -fx-background-color: WHITE;
     -fx-border-color: #b6b6b6;
     -fx-border-radius: 3px;
 }
-.choice-box:focused {
-    -fx-border-color: #3566b2;
-    -fx-effect: dropshadow(three-pass-box, #3566b2, 3, 0, 0, 0);
+.combo-box:focused {
+    -fx-border-color: -blue;
+    -fx-effect: dropshadow(three-pass-box, -blue, 3, 0, 0, 0);
 }
 
-.choice-box .menu-item:focused {
-    -fx-background-color: #3566b2;
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: WHITE;
+    -fx-text-fill: #323232;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: -blue;
+    -fx-text-fill: WHITE;
 }
 
 .databaseItemButton{
-    -fx-background-color: #3566b2;
+    -fx-background-color: -blue;
     -fx-min-width: 21;
     -fx-min-height: 20;
     -fx-pref-width: 21;
@@ -78,5 +90,5 @@
 }
 
 #successLabel {
-    -fx-text-fill: #3566b2;
+    -fx-text-fill: -blue;
 }

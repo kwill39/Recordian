@@ -29,7 +29,7 @@ public class DeleteLocationController extends DatabaseItemModificationController
 
     @Override
     protected void onNewLogEntryTabControllerSet() {
-        String nameOfLocationToDelete = newLogEntryTabController.locationChoiceBox.getValue().toString();
+        String nameOfLocationToDelete = newLogEntryTabController.locationComboBox.getValue().toString();
         locationToDelete = locationMapper.read(nameOfLocationToDelete);
         confirmationLabel.setText("Are you sure you want to delete " + locationToDelete.getLocationName() + "?");
     }

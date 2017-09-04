@@ -20,6 +20,6 @@
          <VBox.margin>
             <Insets bottom="50.0" left="50.0" right="50.0" top="30.0" />
          </VBox.margin></ImageView>
-      <JFXButton fx:id="newLogButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="CREATE NEW LOG" />
+      <JFXButton fx:id="newLogButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="NEW LOG" />
    </children>
 </VBox>

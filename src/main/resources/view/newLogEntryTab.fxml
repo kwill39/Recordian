@@ -40,14 +40,11 @@
             <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" styleClass="blueLabel" text="Location" GridPane.rowIndex="3" />
             <JFXCheckBox fx:id="locationDefaultCheckbox" checkedColor="#3566b2" mnemonicParsing="false" text="Default" textFill="#3566b2" unCheckedColor="#3566b2" GridPane.columnIndex="5" GridPane.rowIndex="3" />
             <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" styleClass="blueLabel" text="Company" GridPane.rowIndex="4" />
-            <ChoiceBox fx:id="companyChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <JFXCheckBox fx:id="companyDefaultCheckbox" checkedColor="#3566b2" mnemonicParsing="false" text="Default" textFill="#3566b2" unCheckedColor="#3566b2" GridPane.columnIndex="5" GridPane.rowIndex="4" />
             <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" styleClass="blueLabel" text="Supervisor" GridPane.rowIndex="5" />
-            <ChoiceBox fx:id="supervisorChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <JFXCheckBox fx:id="supervisorDefaultCheckbox" checkedColor="#3566b2" mnemonicParsing="false" text="Default" textFill="#3566b2" unCheckedColor="#3566b2" GridPane.columnIndex="5" GridPane.rowIndex="5" />
             <Label fx:id="errorLabel" text="Please fill in fields marked with *" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
         <JFXButton fx:id="submitButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="SUBMIT" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-        <ChoiceBox fx:id="locationChoiceBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <JFXDatePicker fx:id="theDatePicker" defaultColor="#3566b2" GridPane.columnIndex="1" />
         <JFXButton fx:id="addLocationButton" mnemonicParsing="false" ripplerFill="#3566b2" GridPane.columnIndex="2" GridPane.rowIndex="3">
            <styleClass>
@@ -130,6 +127,9 @@
               <Insets left="2.0" right="2.0" />
            </GridPane.margin>
         </JFXButton>
+         <ComboBox fx:id="locationComboBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+         <ComboBox fx:id="companyComboBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         <ComboBox fx:id="supervisorComboBox" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         </children>
         <columnConstraints>
             <ColumnConstraints />
