@@ -3,10 +3,17 @@
     src: url("font/roboto/Roboto-Bold.ttf");
 }
 
+/***************************************************************************
+ *                                                                         *
+ * Colors			                                                       *
+ *                                                                         *
+ **************************************************************************/
+
 .root {
         -lightBlue: #6c93e4;
         -blue: #3566b2;
         -darkBlue: #003c82;
+        -lightGrey: #f4f4f4;
 }
 
 .blueButton {
@@ -19,16 +26,39 @@
 }
 
 .greyPane {
-    -fx-background-color: #f4f4f4;
+    -fx-background-color: -lightGrey;
 }
 
-.tree-table-view:focused .tree-table-row-cell:selected .tree-table-cell {
+.tab:selected {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+/***************************************************************************
+ *                                                                         *
+ * Edit Logs Table View                                                    *
+ *                                                                         *
+ **************************************************************************/
+
+.table-view:focused {
+    -fx-focus-color: #c8c8c8;
+    -fx-faint-focus-color: transparent;
+}
+
+.table-view .column-header {
+    -fx-background-color: -blue;
+}
+
+.table-view .column-header .label {
     -fx-text-fill: WHITE;
 }
 
-.tree-table-view:focused .tree-table-row-cell:selected{
-    -fx-background-color: -blue;
-    -fx-table-cell-border-color: -blue;
+.table-view .column-header .arrow {
+    -fx-background-color: WHITE;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: -lightBlue;
 }
 
 .blueLabel {
