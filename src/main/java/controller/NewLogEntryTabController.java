@@ -1,8 +1,6 @@
 package controller;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.*;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
@@ -22,6 +20,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.*;
@@ -66,6 +67,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     private ObservableList<String> sortedCompanyNames;
     private ObservableList<String> sortedLocationNames;
     private ObservableList<String> sortedSupervisorDisplayNames;
+    @FXML private StackPane tabRootPane;
     @FXML private TextField hours;
     @FXML private JFXDatePicker theDatePicker;
     @FXML private TextArea comments;
@@ -103,7 +105,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL locationURL, ResourceBundle resources) {
 
         // Give focus to hours
         Platform.runLater(() -> hours.requestFocus());
@@ -124,20 +126,101 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
                 "/view/addCompany.fxml", "Add Company"));
         editCompanyButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/view/editCompany.fxml", "Edit Company"));
-        deleteCompanyButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
-                "/view/deleteCompany.fxml", "Delete Company"));
+        deleteCompanyButton.setOnMouseClicked(event -> {
+            CompanyMapper companyMapper = new CompanyMapper();
+            Company company = companyMapper.read(companyComboBox.getValue());
+            JFXDialogLayout dialogLayout = new JFXDialogLayout();
+            dialogLayout.setHeading(new Text("Delete Company"));
+            Text body = new Text("Are you sure you want to delete " + company.getCompanyName() + "?");
+            dialogLayout.setBody(body);
+
+            JFXDialog dialog = new JFXDialog(tabRootPane, dialogLayout, JFXDialog.DialogTransition.CENTER);
+
+            JFXButton deleteButton = new JFXButton("DELETE");
+            deleteButton.setOnMouseClicked(deleteEvent -> {
+                companyMapper.delete(company);
+                dialog.close();
+            });
+            // Light blue text fill
+            deleteButton.setTextFill(Color.valueOf("#6c93e4"));
+            deleteButton.getStyleClass().add("dialogButton");
+
+            JFXButton cancelButton = new JFXButton("CANCEL");
+            cancelButton.setOnMouseClicked(cancelEvent -> {
+                dialog.close();
+            });
+            cancelButton.getStyleClass().add("dialogButton");
+
+            dialogLayout.setActions(deleteButton, cancelButton);
+
+            dialog.show();
+        });
         addLocationButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/view/addLocation.fxml", "Add Location"));
         editLocationButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/view/editLocation.fxml", "Edit Location"));
-        deleteLocationButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
-                "/view/deleteLocation.fxml", "Delete Location"));
+        deleteLocationButton.setOnMouseClicked(event -> {
+            LocationMapper locationMapper = new LocationMapper();
+            Location location = locationMapper.read(locationComboBox.getValue());
+            JFXDialogLayout dialogLayout = new JFXDialogLayout();
+            dialogLayout.setHeading(new Text("Delete Location"));
+            Text body = new Text("Are you sure you want to delete " + location.getLocationName() + "?");
+            dialogLayout.setBody(body);
+
+            JFXDialog dialog = new JFXDialog(tabRootPane, dialogLayout, JFXDialog.DialogTransition.CENTER);
+
+            JFXButton deleteButton = new JFXButton("DELETE");
+            deleteButton.setOnMouseClicked(deleteEvent -> {
+                locationMapper.delete(location);
+                dialog.close();
+            });
+            // Light blue text fill
+            deleteButton.setTextFill(Color.valueOf("#6c93e4"));
+            deleteButton.getStyleClass().add("dialogButton");
+
+            JFXButton cancelButton = new JFXButton("CANCEL");
+            cancelButton.setOnMouseClicked(cancelEvent -> {
+                dialog.close();
+            });
+            cancelButton.getStyleClass().add("dialogButton");
+
+            dialogLayout.setActions(deleteButton, cancelButton);
+
+            dialog.show();
+        });
         addSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/view/addSupervisor.fxml", "Add Supervisor"));
         editSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
                 "/view/editSupervisor.fxml", "Edit Supervisor"));
-        deleteSupervisorButton.setOnMouseClicked(event -> createDatabaseItemModificationStage(
-                "/view/deleteSupervisor.fxml", "Delete Supervisor"));
+        deleteSupervisorButton.setOnMouseClicked(event -> {
+            SupervisorMapper supervisorMapper = new SupervisorMapper();
+            Supervisor supervisor = supervisorMapper.read(supervisorComboBox.getValue());
+            JFXDialogLayout dialogLayout = new JFXDialogLayout();
+            dialogLayout.setHeading(new Text("Delete Supervisor"));
+            Text body = new Text("Are you sure you want to delete " + supervisor.getSupervisorDisplayName() + "?");
+            dialogLayout.setBody(body);
+
+            JFXDialog dialog = new JFXDialog(tabRootPane, dialogLayout, JFXDialog.DialogTransition.CENTER);
+
+            JFXButton deleteButton = new JFXButton("DELETE");
+            deleteButton.setOnMouseClicked(deleteEvent -> {
+                supervisorMapper.delete(supervisor);
+                dialog.close();
+            });
+            // Light blue text fill
+            deleteButton.setTextFill(Color.valueOf("#6c93e4"));
+            deleteButton.getStyleClass().add("dialogButton");
+
+            JFXButton cancelButton = new JFXButton("CANCEL");
+            cancelButton.setOnMouseClicked(cancelEvent -> {
+                dialog.close();
+            });
+            cancelButton.getStyleClass().add("dialogButton");
+
+            dialogLayout.setActions(deleteButton, cancelButton);
+
+            dialog.show();
+        });
 
         // Sets/Removes the company default
         companyDefaultCheckbox.setOnAction(e -> {

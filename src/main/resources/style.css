@@ -16,6 +16,11 @@
         -lightGrey: #f4f4f4;
 }
 
+.dialogButton {
+    -fx-font-family: "Roboto";
+    -fx-font-size: 13;
+}
+
 .blueButton {
     -fx-background-color: -blue;
     -fx-text-fill: WHITE;
