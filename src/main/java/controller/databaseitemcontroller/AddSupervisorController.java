@@ -46,10 +46,8 @@ public class AddSupervisorController extends DatabaseItemModificationController 
     }
 
     private void addSupervisor() {
-        if (newSupervisorFirstName.getText().isEmpty()
-                || newSupervisorLastName.getText().isEmpty()
-                || newSupervisorDisplayName.getText().isEmpty()) {
-            errorLabel.setText("Please fill in all fields");
+        if (newSupervisorDisplayName.getText().isEmpty()) {
+            errorLabel.setText("Please fill in fields marked with *");
             errorLabel.setVisible(true);
             return;
         }

@@ -34,12 +34,8 @@ public class AddLocationController extends DatabaseItemModificationController im
     }
 
     private void addLocation() {
-        if (newLocationName.getText().isEmpty()
-                || newLocationAddress.getText().isEmpty()
-                || newLocationCity.getText().isEmpty()
-                || newLocationState.getText().isEmpty()
-                || newLocationZipCode.getText().isEmpty()) {
-            errorLabel.setText("Please fill in all fields");
+        if (newLocationName.getText().isEmpty()) {
+            errorLabel.setText("Please fill in fields marked with *");
             errorLabel.setVisible(true);
             return;
         }

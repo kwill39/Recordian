@@ -21,7 +21,19 @@
         <RowConstraints />
     </rowConstraints>
     <children>
-        <Label text="Company Name" />
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="NEVER" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <Label text="Company Name" />
+            <Label text="*" textFill="RED" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
         <TextField fx:id="companyName" GridPane.columnIndex="1" />
         <Label fx:id="errorLabel" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <HBox alignment="CENTER_RIGHT" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">

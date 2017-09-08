@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <GridPane hgap="10" prefHeight="100.0" prefWidth="450.0" styleClass="root" stylesheets="@../style.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.databaseitemcontroller.EditSupervisorController">
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
     <children>
-        <Label text="First Name" />
+        <Label alignment="CENTER" text="First Name" />
         <Label text="Last Name" GridPane.rowIndex="1" />
-        <Label text="Display As" GridPane.rowIndex="2" />
+      <GridPane GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="NEVER" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <Label text="Display As" />
+            <Label text="*" textFill="RED" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
         <TextField fx:id="supervisorFirstName" GridPane.columnIndex="1" />
         <TextField fx:id="supervisorLastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField fx:id="supervisorDisplayName" GridPane.columnIndex="1" GridPane.rowIndex="2" />

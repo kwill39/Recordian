@@ -40,7 +40,7 @@ public class EditCompanyController extends DatabaseItemModificationController im
 
     private void updateCompany() {
         if (companyName.getText().isEmpty()) {
-            errorLabel.setText("Please fill in all fields");
+            errorLabel.setText("Please fill in fields marked with *");
             errorLabel.setVisible(true);
             return;
         }

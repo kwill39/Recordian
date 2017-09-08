@@ -12,7 +12,19 @@
 <GridPane hgap="10" prefHeight="100.0" prefWidth="450.0" styleClass="root" stylesheets="@../style.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.databaseitemcontroller.AddCompanyController">
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
     <children>
-        <Label text="Company Name" />
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="NEVER" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+              <Label text="Company Name" />
+            <Label text="*" textFill="RED" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
         <TextField fx:id="newCompanyName" GridPane.columnIndex="1" />
         <Label fx:id="errorLabel" textFill="#eb0000" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <HBox alignment="CENTER_RIGHT" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">

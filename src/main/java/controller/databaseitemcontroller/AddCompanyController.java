@@ -31,7 +31,7 @@ public class AddCompanyController extends DatabaseItemModificationController imp
 
     private void addCompany() {
         if (newCompanyName.getText().isEmpty()) {
-            errorLabel.setText("Please fill in all fields");
+            errorLabel.setText("Please fill in fields marked with *");
             errorLabel.setVisible(true);
             return;
         }
