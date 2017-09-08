@@ -13,6 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.DefaultStringConverter;
@@ -207,14 +208,21 @@ public class EditLogEntriesTabController implements Initializable {
                         Text text = new Text();
                         text.wrappingWidthProperty().bind(column.widthProperty());
                         text.textProperty().bind(itemProperty());
+                        text.setTextAlignment(TextAlignment.CENTER);
                         return text;
                     }
                 };
                 cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
                 return cell;
             });
-            column.setPrefWidth(100);
+            // Default Width
+            column.setPrefWidth(140);
         }
+
+        dateColumn.setPrefWidth(100);
+        hoursColumn.setPrefWidth(70);
+        locationStateColumn.setPrefWidth(70);
+        locationZipCodeColumn.setPrefWidth(70);
 
         // Create the observable list, made up of all log entries, for use within the table
         ObservableList<LogEntry> logEntryObservableList = FXCollections.observableArrayList(logEntryMapper.readAll());

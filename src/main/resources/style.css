@@ -40,13 +40,17 @@
  *                                                                         *
  **************************************************************************/
 
-.table-view:focused {
-    -fx-focus-color: #c8c8c8;
-    -fx-faint-focus-color: transparent;
+.table-view .table-column {
+    -fx-alignment: CENTER;
 }
 
 .table-view .column-header {
     -fx-background-color: -blue;
+}
+
+.table-view:focused {
+    -fx-focus-color: #c8c8c8;
+    -fx-faint-focus-color: transparent;
 }
 
 .table-view .column-header .label {
@@ -55,6 +59,10 @@
 
 .table-view .column-header .arrow {
     -fx-background-color: WHITE;
+}
+
+.table-cell {
+    -fx-border-color: -lightGrey;
 }
 
 .table-row-cell:selected {
