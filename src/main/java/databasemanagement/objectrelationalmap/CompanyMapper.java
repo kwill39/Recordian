@@ -24,9 +24,11 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      */
     @Override
     public void create(Company company) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlInsert = "INSERT INTO companies(companyName) VALUES(?)";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
+        String sqlInsert = "INSERT INTO companies(companyName) VALUES(?)";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert)
+        ) {
             preparedStatement.setString(1, company.getCompanyName());
             preparedStatement.executeUpdate();
             DatabaseChangeObservable.notifyOfCreation(read(company.getCompanyName()));
@@ -43,9 +45,11 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      */
     @Override
     public Company read(int companyID) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlRead = "SELECT * FROM companies WHERE companyID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+        String sqlRead = "SELECT * FROM companies WHERE companyID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
+        ) {
             preparedStatement.setInt(1, companyID);
             ResultSet resultSet = preparedStatement.executeQuery();
             Company fetchedCompany = new Company(resultSet.getString("companyName"));
@@ -64,9 +68,11 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      * @return  the <code>Company</code> whose <code>companyName</code> matches that of <code>companyName</code>
      */
     public Company read(String companyName) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlRead = "SELECT * FROM companies WHERE companyName = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+        String sqlRead = "SELECT * FROM companies WHERE companyName = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
+        ) {
             preparedStatement.setString(1, companyName);
             ResultSet resultSet = preparedStatement.executeQuery();
             Company fetchedCompany = new Company(resultSet.getString("companyName"));
@@ -85,10 +91,11 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      */
     @Override
     public List<Company> readAll() {
-
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlQuery = "SELECT * FROM companies";
-            Statement statement = dbConnection.createStatement();
+        String sqlQuery = "SELECT * FROM companies";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                Statement statement = dbConnection.createStatement()
+        ) {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             List<Company> companyList = new ArrayList<>();
             Company someCompany;
@@ -111,9 +118,11 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      */
     @Override
     public void update(Company company) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlUpdate = "UPDATE companies SET companyName = ? WHERE companyID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlUpdate);
+        String sqlUpdate = "UPDATE companies SET companyName = ? WHERE companyID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlUpdate)
+        ) {
             preparedStatement.setString(1, company.getCompanyName());
             preparedStatement.setInt(2, company.getCompanyID());
             preparedStatement.executeUpdate();
@@ -130,9 +139,11 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      */
     @Override
     public void delete(Company company) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlDelete = "DELETE FROM companies WHERE companyID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
+        String sqlDelete = "DELETE FROM companies WHERE companyID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete)
+        ) {
             preparedStatement.setInt(1, company.getCompanyID());
             preparedStatement.executeUpdate();
             DatabaseChangeObservable.notifyOfDelete(company);

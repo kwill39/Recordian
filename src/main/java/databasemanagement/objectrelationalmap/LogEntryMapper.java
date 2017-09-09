@@ -6,6 +6,7 @@ import model.LogEntry;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -24,22 +25,24 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
      */
     @Override
     public void create(LogEntry logEntry) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            StringBuilder sqlInsert = new StringBuilder("INSERT INTO logEntries(")
-                    .append("logEntryDate,")
-                    .append("logEntryHours,")
-                    .append("logEntryComments,")
-                    .append("logEntryLocationName,")
-                    .append("logEntryLocationAddress,")
-                    .append("logEntryLocationCity,")
-                    .append("logEntryLocationState,")
-                    .append("logEntryLocationZipCode,")
-                    .append("logEntryCompanyName,")
-                    .append("logEntrySupervisorFirstName,")
-                    .append("logEntrySupervisorLastName,")
-                    .append("logEntrySupervisorDisplayName)")
-                    .append(" VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert.toString(), Statement.RETURN_GENERATED_KEYS);
+        StringBuilder sqlInsert = new StringBuilder("INSERT INTO logEntries(")
+                .append("logEntryDate,")
+                .append("logEntryHours,")
+                .append("logEntryComments,")
+                .append("logEntryLocationName,")
+                .append("logEntryLocationAddress,")
+                .append("logEntryLocationCity,")
+                .append("logEntryLocationState,")
+                .append("logEntryLocationZipCode,")
+                .append("logEntryCompanyName,")
+                .append("logEntrySupervisorFirstName,")
+                .append("logEntrySupervisorLastName,")
+                .append("logEntrySupervisorDisplayName)")
+                .append(" VALUES(?,?,?,?,?,?,?,?,?,?,?,?);");
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert.toString(), Statement.RETURN_GENERATED_KEYS)
+        ) {
             preparedStatement.setString(1, logEntry.getLogEntryDate());
             preparedStatement.setString(2, logEntry.getLogEntryHours());
             preparedStatement.setString(3, logEntry.getLogEntryComments());
@@ -71,9 +74,11 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
      */
     @Override
     public LogEntry read(int logEntryID) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlRead = "SELECT * FROM logEntries WHERE logEntryID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+        String sqlRead = "SELECT * FROM logEntries WHERE logEntryID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
+        ) {
             preparedStatement.setInt(1, logEntryID);
             ResultSet resultSet = preparedStatement.executeQuery();
             LogEntry fetchedLogEntry = new LogEntry(resultSet.getString("logEntryDate"),
@@ -103,9 +108,11 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
      */
     @Override
     public List<LogEntry> readAll() {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlQuery = "SELECT * FROM logEntries";
-            Statement statement = dbConnection.createStatement();
+        String sqlQuery = "SELECT * FROM logEntries";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                Statement statement = dbConnection.createStatement()
+        ) {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             List<LogEntry> logEntryList = new ArrayList<>();
             LogEntry someLogEntry;
@@ -139,21 +146,23 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
      */
     @Override
     public void update(LogEntry logEntry) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            StringBuilder sqlUpdate = new StringBuilder("UPDATE logEntries SET logEntryDate = ?,")
-                    .append("logEntryHours = ?,")
-                    .append("logEntryComments = ?,")
-                    .append("logEntryLocationName = ?,")
-                    .append("logEntryLocationAddress = ?,")
-                    .append("logEntryLocationCity = ?,")
-                    .append("logEntryLocationState = ?,")
-                    .append("logEntryLocationZipCode = ?,")
-                    .append("logEntryCompanyName = ?,")
-                    .append("logEntrySupervisorFirstName = ?,")
-                    .append("logEntrySupervisorLastName = ?,")
-                    .append("logEntrySupervisorDisplayName = ?")
-                    .append("WHERE logEntryID = ?");
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlUpdate.toString());
+        StringBuilder sqlUpdate = new StringBuilder("UPDATE logEntries SET logEntryDate = ?,")
+                .append("logEntryHours = ?,")
+                .append("logEntryComments = ?,")
+                .append("logEntryLocationName = ?,")
+                .append("logEntryLocationAddress = ?,")
+                .append("logEntryLocationCity = ?,")
+                .append("logEntryLocationState = ?,")
+                .append("logEntryLocationZipCode = ?,")
+                .append("logEntryCompanyName = ?,")
+                .append("logEntrySupervisorFirstName = ?,")
+                .append("logEntrySupervisorLastName = ?,")
+                .append("logEntrySupervisorDisplayName = ?")
+                .append("WHERE logEntryID = ?");
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlUpdate.toString())
+        ) {
             preparedStatement.setString(1, logEntry.getLogEntryDate());
             preparedStatement.setString(2, logEntry.getLogEntryHours());
             preparedStatement.setString(3, logEntry.getLogEntryComments());
@@ -181,9 +190,11 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
      */
     @Override
     public void delete(LogEntry logEntry) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlDelete = "DELETE FROM logEntries WHERE logEntryID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
+        String sqlDelete = "DELETE FROM logEntries WHERE logEntryID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete)
+        ) {
             preparedStatement.setInt(1, logEntry.getLogEntryID());
             preparedStatement.executeUpdate();
             DatabaseChangeObservable.notifyOfDelete(logEntry);

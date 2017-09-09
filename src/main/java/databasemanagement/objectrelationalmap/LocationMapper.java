@@ -17,10 +17,12 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     @Override
     public void create(Location location) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlInsert = "INSERT INTO locations(locationName, locationAddress, locationCity,"
-                    + "locationState, locationZipCode) VALUES(?,?,?,?,?);";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert);
+        String sqlInsert = "INSERT INTO locations(locationName, locationAddress, locationCity,"
+                + "locationState, locationZipCode) VALUES(?,?,?,?,?);";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlInsert)
+        ) {
             preparedStatement.setString(1, location.getLocationName());
             preparedStatement.setString(2, location.getLocationAddress());
             preparedStatement.setString(3, location.getLocationCity());
@@ -41,9 +43,11 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     @Override
     public Location read(int locationID) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlRead = "SELECT * FROM locations WHERE locationID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+        String sqlRead = "SELECT * FROM locations WHERE locationID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
+        ) {
             preparedStatement.setInt(1, locationID);
             ResultSet resultSet = preparedStatement.executeQuery();
             Location fetchedLocation = new Location(resultSet.getString("locationName"));
@@ -66,9 +70,11 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      * @return  the <code>Location</code> whose <code>locationName</code> matches that of <code>locationName</code>
      */
     public Location read(String locationName) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlRead = "SELECT * FROM locations WHERE locationName = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead);
+        String sqlRead = "SELECT * FROM locations WHERE locationName = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
+        ) {
             preparedStatement.setString(1, locationName);
             ResultSet resultSet = preparedStatement.executeQuery();
             Location fetchedLocation = new Location(resultSet.getString("locationName"));
@@ -91,9 +97,11 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     @Override
     public List<Location> readAll() {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlQuery = "SELECT * FROM locations";
-            Statement statement = dbConnection.createStatement();
+        String sqlQuery = "SELECT * FROM locations";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                Statement statement = dbConnection.createStatement()
+        ) {
             ResultSet resultSet = statement.executeQuery(sqlQuery);
             List<Location> locationList = new ArrayList<>();
             Location someLocation;
@@ -120,14 +128,16 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     @Override
     public void update(Location location) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlUpdate = "UPDATE locations SET locationName = ?,"
-                    + "locationAddress = ?,"
-                    + "locationCity = ?,"
-                    + "locationState = ?,"
-                    + "locationZipCode = ?"
-                    + "WHERE locationID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlUpdate);
+        StringBuilder sqlUpdate = new StringBuilder("UPDATE locations SET locationName = ?,")
+                .append("locationAddress = ?,")
+                .append("locationCity = ?,")
+                .append("locationState = ?,")
+                .append("locationZipCode = ?")
+                .append("WHERE locationID = ?");
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlUpdate.toString());
+        ) {
             preparedStatement.setString(1, location.getLocationName());
             preparedStatement.setString(2, location.getLocationAddress());
             preparedStatement.setString(3, location.getLocationCity());
@@ -148,9 +158,11 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     @Override
     public void delete(Location location) {
-        try (Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL)) {
-            String sqlDelete = "DELETE FROM locations WHERE locationID = ?";
-            PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete);
+        String sqlDelete = "DELETE FROM locations WHERE locationID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete)
+        ) {
             preparedStatement.setInt(1, location.getLocationID());
             preparedStatement.executeUpdate();
             DatabaseChangeObservable.notifyOfDelete(location);
