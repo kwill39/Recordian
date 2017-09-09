@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -103,7 +104,7 @@ public class LogEntryMapperTest implements DatabaseItemMapperTest<LogEntry> {
     }
 
     @Test
-    public void update(){
+    public void update() {
         // Update the records
         dbLogEntry1.setLogEntryDate("2017-09-4");
         dbLogEntry1.setLogEntryHours("4");
@@ -159,7 +160,7 @@ public class LogEntryMapperTest implements DatabaseItemMapperTest<LogEntry> {
     }
 
     @Test
-    public void delete(){
+    public void delete() {
         // Delete the records one by one and verify that they were deleted along the way
         logEntryMapper.delete(dbLogEntry1);
         logEntryList = logEntryMapper.readAll();
@@ -175,6 +176,21 @@ public class LogEntryMapperTest implements DatabaseItemMapperTest<LogEntry> {
         logEntryList = logEntryMapper.readAll();
         for (LogEntry someLogEntry : logEntryList) {
             assertTrue(someLogEntry.getLogEntryID() != dbLogEntry3.getLogEntryID());
+        }
+    }
+
+    @Test
+    public void deleteCollection() {
+        List<LogEntry> logEntriesToBeDeleted = new ArrayList<>();
+        logEntriesToBeDeleted.add(dbLogEntry1);
+        logEntriesToBeDeleted.add(dbLogEntry2);
+        logEntriesToBeDeleted.add(dbLogEntry3);
+        logEntryMapper.delete(logEntriesToBeDeleted);
+        logEntryList = logEntryMapper.readAll();
+        for (LogEntry someLogEntry : logEntryList) {
+            for (LogEntry deletedLogEntry : logEntriesToBeDeleted) {
+                assertTrue(someLogEntry.getLogEntryID() != deletedLogEntry.getLogEntryID());
+            }
         }
     }
 

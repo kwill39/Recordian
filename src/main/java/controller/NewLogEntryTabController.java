@@ -715,11 +715,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * The method that is called each time a
-     * <code>DatabaseItem</code> is created in the database
+     * {@inheritDoc}
      *
-     * @param databaseItem the <code>DatabaseItem</code> that
-     *                     was just created in the database
+     * @param databaseItem the {@link DatabaseItem} that was just created in the database
      */
     @Override
     public void databaseItemWasCreated(DatabaseItem databaseItem) {
@@ -739,11 +737,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * The method that is called each time a
-     * <code>DatabaseItem</code> is updated in the database
+     * {@inheritDoc}
      *
-     * @param databaseItem the <code>DatabaseItem</code> that
-     *                     was just updated in the database
+     * @param databaseItem the {@link DatabaseItem} that was just updated in the database
      */
     @Override
     public void databaseItemWasUpdated(DatabaseItem databaseItem) {
@@ -763,11 +759,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * The method that is called each time a
-     * <code>DatabaseItem</code> is deleted from the database
+     * {@inheritDoc}
      *
-     * @param databaseItem the <code>DatabaseItem</code> that
-     *                     was just deleted from the database
+     * @param databaseItem the {@link DatabaseItem} that was just deleted from the database
      */
     @Override
     public void databaseItemWasDeleted(DatabaseItem databaseItem) {
@@ -800,6 +794,47 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             if ((defaultSupervisorId != null) && (defaultSupervisorId == oldSupervisor.getSupervisorID())) {
                 setDefaultComboBoxItemID(DatabaseItemType.SUPERVISOR, null);
                 supervisorDefaultCheckbox.setSelected(false);
+            }
+        }
+    }
+
+    @Override
+    public void databaseItemsWereDeleted(List<? extends DatabaseItem> databaseItems) {
+        if (databaseItems.get(0) instanceof Company) {
+            refreshCompanyNames();
+            for (DatabaseItem databaseItem : databaseItems) {
+                // If the deleted DatabaseItem was a default for its
+                // combo box, then we need to remove it from the defaults.
+                Company oldCompany = (Company) databaseItem;
+                Integer defaultCompanyID = getDefaultComboBoxItemID(DatabaseItemType.COMPANY);
+                if ((defaultCompanyID != null) && (defaultCompanyID == oldCompany.getCompanyID())) {
+                    setDefaultComboBoxItemID(DatabaseItemType.COMPANY, null);
+                    companyDefaultCheckbox.setSelected(false);
+                }
+            }
+        } else if (databaseItems.get(0) instanceof Location) {
+            refreshLocationNames();
+            for (DatabaseItem databaseItem : databaseItems) {
+                // If the deleted DatabaseItem was a default for its
+                // combo box, then we need to remove it from the defaults.
+                Location oldLocation = (Location) databaseItem;
+                Integer defaultLocationID = getDefaultComboBoxItemID(DatabaseItemType.LOCATION);
+                if ((defaultLocationID != null) && (defaultLocationID == oldLocation.getLocationID())) {
+                    setDefaultComboBoxItemID(DatabaseItemType.LOCATION, null);
+                    locationDefaultCheckbox.setSelected(false);
+                }
+            }
+        } else if (databaseItems.get(0) instanceof Supervisor) {
+            refreshSupervisorDisplayNames();
+            for (DatabaseItem databaseItem : databaseItems) {
+                // If the deleted DatabaseItem was a default for its
+                // combo box, then we need to remove it from the defaults.
+                Supervisor oldSupervisor = (Supervisor) databaseItem;
+                Integer defaultSupervisorId = getDefaultComboBoxItemID(DatabaseItemType.SUPERVISOR);
+                if ((defaultSupervisorId != null) && (defaultSupervisorId == oldSupervisor.getSupervisorID())) {
+                    setDefaultComboBoxItemID(DatabaseItemType.SUPERVISOR, null);
+                    supervisorDefaultCheckbox.setSelected(false);
+                }
             }
         }
     }

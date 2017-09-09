@@ -6,7 +6,6 @@ import model.LogEntry;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -198,6 +197,31 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
             preparedStatement.setInt(1, logEntry.getLogEntryID());
             preparedStatement.executeUpdate();
             DatabaseChangeObservable.notifyOfDelete(logEntry);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Deletes the objects, given in the passed collection, from the database
+     *
+     * @param logEntriesToBeDeleted a collection containing {@link LogEntry}s
+     *                              to be deleted from the database.
+     *                              A valid primary key must be available for each
+     *                              {@link LogEntry} in the collection.
+     */
+    public void delete(List<LogEntry> logEntriesToBeDeleted) {
+        String sqlDelete = "DELETE FROM logEntries WHERE logEntryID = ?";
+        try (
+                Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
+                PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlDelete)
+        ) {
+            for (LogEntry logEntry : logEntriesToBeDeleted) {
+                preparedStatement.setInt(1, logEntry.getLogEntryID());
+                preparedStatement.addBatch();
+            }
+            preparedStatement.executeBatch();
+            DatabaseChangeObservable.notifyOfDelete(logEntriesToBeDeleted);
         } catch (SQLException e) {
             e.printStackTrace();
         }

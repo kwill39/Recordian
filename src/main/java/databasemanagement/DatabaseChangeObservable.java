@@ -34,4 +34,10 @@ public final class DatabaseChangeObservable {
             observer.databaseItemWasDeleted(databaseItem);
         }
     }
+
+    public static void notifyOfDelete(List<? extends DatabaseItem> databaseItems) {
+        for (DatabaseChangeObserver observer : observers) {
+            observer.databaseItemsWereDeleted(databaseItems);
+        }
+    }
 }

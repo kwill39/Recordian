@@ -25,7 +25,7 @@ public class CompanyMapperTest implements DatabaseItemMapperTest<Company> {
     private List<Company> companyList;
 
     @Before
-    public void populateDatabase(){
+    public void populateDatabase() {
         DatabaseHelper.deleteDatabase();
         DatabaseHelper.createDatabase();
         // Create the records
@@ -74,7 +74,7 @@ public class CompanyMapperTest implements DatabaseItemMapperTest<Company> {
     }
 
     @Test
-    public void readAll(){
+    public void readAll() {
         // All records are created and read during the Before method.
         // This method only serves to verify that the records were properly read.
         assertTrue(dbSnowRemover.getCompanyID() == 1 && objectsAreEqual(dbSnowRemover, snowRemover));
