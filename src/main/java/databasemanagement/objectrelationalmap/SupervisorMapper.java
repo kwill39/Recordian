@@ -52,6 +52,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             fetchedSupervisor.setSupervisorID(resultSet.getInt("supervisorID"));
             fetchedSupervisor.setSupervisorFirstName(resultSet.getString("supervisorFirstName"));
             fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
+            resultSet.close();
             return fetchedSupervisor;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,6 +78,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
             fetchedSupervisor.setSupervisorID(resultSet.getInt("supervisorID"));
             fetchedSupervisor.setSupervisorFirstName(resultSet.getString("supervisorFirstName"));
             fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
+            resultSet.close();
             return fetchedSupervisor;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,9 +96,9 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
         String sqlQuery = "SELECT * FROM supervisors";
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-                Statement statement = dbConnection.createStatement()
+                Statement statement = dbConnection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sqlQuery)
         ) {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
             List<Supervisor> supervisorList = new ArrayList<>();
             Supervisor someSupervisor;
             while(resultSet.next()){

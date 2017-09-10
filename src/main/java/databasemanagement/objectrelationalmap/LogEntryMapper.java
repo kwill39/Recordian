@@ -59,6 +59,7 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
             if (generatedKeys.next()) {
                 logEntry.setLogEntryID(generatedKeys.getInt(1));
             }
+            generatedKeys.close();
             DatabaseChangeObservable.notifyOfCreation(logEntry);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,6 +94,7 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
             fetchedLogEntry.setLogEntrySupervisorFirstName(resultSet.getString("logEntrySupervisorFirstName"));
             fetchedLogEntry.setLogEntrySupervisorLastName(resultSet.getString("logEntrySupervisorLastName"));
             fetchedLogEntry.setLogEntrySupervisorDisplayName(resultSet.getString("logEntrySupervisorDisplayName"));
+            resultSet.close();
             return fetchedLogEntry;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,9 +112,9 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
         String sqlQuery = "SELECT * FROM logEntries";
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-                Statement statement = dbConnection.createStatement()
+                Statement statement = dbConnection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sqlQuery)
         ) {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
             List<LogEntry> logEntryList = new ArrayList<>();
             LogEntry someLogEntry;
             while(resultSet.next()){

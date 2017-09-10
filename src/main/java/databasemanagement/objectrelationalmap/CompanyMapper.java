@@ -54,6 +54,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             ResultSet resultSet = preparedStatement.executeQuery();
             Company fetchedCompany = new Company(resultSet.getString("companyName"));
             fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
+            resultSet.close();
             return fetchedCompany;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,6 +78,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
             ResultSet resultSet = preparedStatement.executeQuery();
             Company fetchedCompany = new Company(resultSet.getString("companyName"));
             fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
+            resultSet.close();
             return fetchedCompany;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -94,9 +96,9 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
         String sqlQuery = "SELECT * FROM companies";
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-                Statement statement = dbConnection.createStatement()
+                Statement statement = dbConnection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sqlQuery)
         ) {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
             List<Company> companyList = new ArrayList<>();
             Company someCompany;
             while(resultSet.next()){

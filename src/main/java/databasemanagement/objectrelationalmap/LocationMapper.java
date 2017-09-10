@@ -56,6 +56,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             fetchedLocation.setLocationCity(resultSet.getString("locationCity"));
             fetchedLocation.setLocationState(resultSet.getString("locationState"));
             fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
+            resultSet.close();
             return fetchedLocation;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,6 +84,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
             fetchedLocation.setLocationCity(resultSet.getString("locationCity"));
             fetchedLocation.setLocationState(resultSet.getString("locationState"));
             fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
+            resultSet.close();
             return fetchedLocation;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,9 +102,9 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
         String sqlQuery = "SELECT * FROM locations";
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
-                Statement statement = dbConnection.createStatement()
+                Statement statement = dbConnection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sqlQuery)
         ) {
-            ResultSet resultSet = statement.executeQuery(sqlQuery);
             List<Location> locationList = new ArrayList<>();
             Location someLocation;
             while(resultSet.next()){
