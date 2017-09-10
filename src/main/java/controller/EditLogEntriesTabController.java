@@ -2,14 +2,12 @@ package controller;
 
 import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.LogEntryMapper;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.text.Text;
@@ -75,6 +73,9 @@ public class EditLogEntriesTabController implements Initializable {
         });
 
         generateReportButton.setOnMouseClicked(event -> generateReport());
+
+        // Make selecting multiple table rows possible
+        logEntriesTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         // Generate table columns
         TableColumn<LogEntry, String> dateColumn = new TableColumn<>("Date");
@@ -218,6 +219,29 @@ public class EditLogEntriesTabController implements Initializable {
             // Default Width
             column.setPrefWidth(140);
         }
+
+        logEntriesTableView.setRowFactory(callback -> {
+            TableRow<LogEntry> row = new TableRow<>();
+            ContextMenu rowContextMenu = new ContextMenu();
+            MenuItem deleteEntry = new MenuItem("Delete");
+            deleteEntry.setOnAction(handler -> {
+                LogEntryMapper logEntryMapper1 = new LogEntryMapper();
+                ObservableList<LogEntry> logEntriesToBeDeleted = logEntriesTableView.getSelectionModel().getSelectedItems();
+                Thread deleteLogEntriesThread = new Thread(() -> {
+                    logEntryMapper1.delete(logEntriesToBeDeleted);
+                });
+                deleteLogEntriesThread.run();
+                logEntriesTableView.getItems().removeAll(logEntriesToBeDeleted);
+            });
+            rowContextMenu.getItems().addAll(deleteEntry);
+
+            // Display context menu only for items that are not null
+            row.contextMenuProperty().bind(
+                    Bindings.when(Bindings.isNotNull(row.itemProperty()))
+                            .then(rowContextMenu)
+                            .otherwise((ContextMenu) null));
+            return row;
+        });
 
         dateColumn.setPrefWidth(100);
         hoursColumn.setPrefWidth(70);
