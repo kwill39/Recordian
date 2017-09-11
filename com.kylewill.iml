@@ -37,10 +37,78 @@
     <orderEntry type="module-library" scope="PROVIDED">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/unresolved dependency - org.hibernate.dialect sqlite-dialect 0.1.0"/>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/pdfbox/2.0.7/b1beed06441f7404a7702a069823ab56782aee2e/pdfbox-2.0.7.jar!/"/>
         </CLASSES>
         <JAVADOC/>
-        <SOURCES/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/pdfbox/2.0.7/5e0764518c2bc1130bafad8e64a7ab0954837de3/pdfbox-2.0.7-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.1/c336bf600f44b88af356c8a85eef4af822b06a4d/commons-text-1.1.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.1/f0770f7f0472bf120ada47beecadce4056fbd20a/commons-text-1.1-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.jfoenix/jfoenix/1.7.0/50f8df2297af3b3ac7f37d1ab7a9ff6b0d875395/jfoenix-1.7.0.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.jfoenix/jfoenix/1.7.0/8a4e948a03252ef1238eed565c7d4aa725049cb0/jfoenix-1.7.0-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.12/ff7d78e2142e7b0c213b235a6980e34b896896b5/itextpdf-5.5.12.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.12/f0011fb10421fcb3281c5abf3995202f32ca6adc/itextpdf-5.5.12-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/fontbox/2.0.7/99321d36cfbd7f2c15f24b67fdcc88c66b453379/fontbox-2.0.7.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/fontbox/2.0.7/9bcc4e389e0c01b253b02ab8da5194f2a1824acf/fontbox-2.0.7-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.5/6c6c702c89bfff3cd9e80b04d668c5e190d588c6/commons-lang3-3.5.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.5/f7d878153e86a1cdddf6b37850e00a9f8bff726f/commons-lang3-3.5-sources.jar!/"/>
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="RUNTIME">
@@ -68,10 +136,78 @@
     <orderEntry type="module-library" scope="RUNTIME">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/unresolved dependency - org.hibernate.dialect sqlite-dialect 0.1.0"/>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/pdfbox/2.0.7/b1beed06441f7404a7702a069823ab56782aee2e/pdfbox-2.0.7.jar!/"/>
         </CLASSES>
         <JAVADOC/>
-        <SOURCES/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/pdfbox/2.0.7/5e0764518c2bc1130bafad8e64a7ab0954837de3/pdfbox-2.0.7-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.1/c336bf600f44b88af356c8a85eef4af822b06a4d/commons-text-1.1.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.1/f0770f7f0472bf120ada47beecadce4056fbd20a/commons-text-1.1-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.jfoenix/jfoenix/1.7.0/50f8df2297af3b3ac7f37d1ab7a9ff6b0d875395/jfoenix-1.7.0.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.jfoenix/jfoenix/1.7.0/8a4e948a03252ef1238eed565c7d4aa725049cb0/jfoenix-1.7.0-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.12/ff7d78e2142e7b0c213b235a6980e34b896896b5/itextpdf-5.5.12.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.12/f0011fb10421fcb3281c5abf3995202f32ca6adc/itextpdf-5.5.12-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/fontbox/2.0.7/99321d36cfbd7f2c15f24b67fdcc88c66b453379/fontbox-2.0.7.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/fontbox/2.0.7/9bcc4e389e0c01b253b02ab8da5194f2a1824acf/fontbox-2.0.7-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="RUNTIME">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.5/6c6c702c89bfff3cd9e80b04d668c5e190d588c6/commons-lang3-3.5.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.5/f7d878153e86a1cdddf6b37850e00a9f8bff726f/commons-lang3-3.5-sources.jar!/"/>
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library" scope="TEST">
@@ -110,10 +246,78 @@
     <orderEntry type="module-library" scope="TEST">
       <library>
         <CLASSES>
-          <root url="file://$MODULE_DIR$/unresolved dependency - org.hibernate.dialect sqlite-dialect 0.1.0"/>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/pdfbox/2.0.7/b1beed06441f7404a7702a069823ab56782aee2e/pdfbox-2.0.7.jar!/"/>
         </CLASSES>
         <JAVADOC/>
-        <SOURCES/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/pdfbox/2.0.7/5e0764518c2bc1130bafad8e64a7ab0954837de3/pdfbox-2.0.7-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.1/c336bf600f44b88af356c8a85eef4af822b06a4d/commons-text-1.1.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-text/1.1/f0770f7f0472bf120ada47beecadce4056fbd20a/commons-text-1.1-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.jfoenix/jfoenix/1.7.0/50f8df2297af3b3ac7f37d1ab7a9ff6b0d875395/jfoenix-1.7.0.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.jfoenix/jfoenix/1.7.0/8a4e948a03252ef1238eed565c7d4aa725049cb0/jfoenix-1.7.0-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.12/ff7d78e2142e7b0c213b235a6980e34b896896b5/itextpdf-5.5.12.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.12/f0011fb10421fcb3281c5abf3995202f32ca6adc/itextpdf-5.5.12-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/fontbox/2.0.7/99321d36cfbd7f2c15f24b67fdcc88c66b453379/fontbox-2.0.7.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.pdfbox/fontbox/2.0.7/9bcc4e389e0c01b253b02ab8da5194f2a1824acf/fontbox-2.0.7-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/4bfc12adfe4842bf07b657f0369c4cb522955686/commons-logging-1.2.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/commons-logging/commons-logging/1.2/ecf26c7507d67782a3bbd148d170b31dfad001aa/commons-logging-1.2-sources.jar!/"/>
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.5/6c6c702c89bfff3cd9e80b04d668c5e190d588c6/commons-lang3-3.5.jar!/"/>
+        </CLASSES>
+        <JAVADOC/>
+        <SOURCES>
+          <root url="jar:///home/kyle/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.5/f7d878153e86a1cdddf6b37850e00a9f8bff726f/commons-lang3-3.5-sources.jar!/"/>
+        </SOURCES>
       </library>
     </orderEntry>
   </component>
