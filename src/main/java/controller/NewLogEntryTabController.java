@@ -4,7 +4,6 @@ import com.jfoenix.controls.*;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
-import databasemanagement.LogFileHelper;
 import databasemanagement.objectrelationalmap.CompanyMapper;
 import databasemanagement.objectrelationalmap.LocationMapper;
 import databasemanagement.objectrelationalmap.LogEntryMapper;
@@ -131,7 +130,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             Company company = companyMapper.read(companyComboBox.getValue());
             JFXDialogLayout dialogLayout = new JFXDialogLayout();
             dialogLayout.setHeading(new Text("Delete Company"));
-            Text body = new Text("Are you sure you want to delete " + company.getCompanyName() + "?");
+            Text body = new Text("Are you sure you want to delete " + '"' + company.getCompanyName() + '"' + "?");
             dialogLayout.setBody(body);
 
             JFXDialog dialog = new JFXDialog(tabRootPane, dialogLayout, JFXDialog.DialogTransition.CENTER);
@@ -164,7 +163,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             Location location = locationMapper.read(locationComboBox.getValue());
             JFXDialogLayout dialogLayout = new JFXDialogLayout();
             dialogLayout.setHeading(new Text("Delete Location"));
-            Text body = new Text("Are you sure you want to delete " + location.getLocationName() + "?");
+            Text body = new Text("Are you sure you want to delete " + '"' + location.getLocationName() + '"' + "?");
             dialogLayout.setBody(body);
 
             JFXDialog dialog = new JFXDialog(tabRootPane, dialogLayout, JFXDialog.DialogTransition.CENTER);
@@ -197,7 +196,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             Supervisor supervisor = supervisorMapper.read(supervisorComboBox.getValue());
             JFXDialogLayout dialogLayout = new JFXDialogLayout();
             dialogLayout.setHeading(new Text("Delete Supervisor"));
-            Text body = new Text("Are you sure you want to delete " + supervisor.getSupervisorDisplayName() + "?");
+            Text body = new Text("Are you sure you want to delete " + '"' + supervisor.getSupervisorDisplayName() + '"' + "?");
             dialogLayout.setBody(body);
 
             JFXDialog dialog = new JFXDialog(tabRootPane, dialogLayout, JFXDialog.DialogTransition.CENTER);
@@ -345,70 +344,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             return;
         }
 
-        // The string that will be written to the log file
-        StringBuilder logEntry = new StringBuilder();
-        String newLine = System.lineSeparator();
-
-        // Append the date
         LocalDate localDate = theDatePicker.getValue();
-        logEntry.append("Date: ").append(localDate.getMonth())
-                .append(" ")
-                .append(localDate.getDayOfMonth())
-                .append(", ")
-                .append(localDate.getYear());
-
-        // Append the hours
-        logEntry.append(newLine).append("Hours: ").append(hours.getCharacters());
-
-        // Append the comments
-        if (!comments.getText().isEmpty()) {
-            logEntry.append(newLine).append("Comments: ").append(comments.getText());
-        }
-
-        // Append the location
-        if (locationComboBox.getValue() != null) {
-            LocationMapper locationMapper = new LocationMapper();
-            Location location = locationMapper.read(locationComboBox.getValue().toString());
-            logEntry.append(newLine).append("Location:").append(newLine)
-                    .append(location.getLocationName()).append(newLine)
-                    .append(location.getLocationAddress()).append(newLine)
-                    .append(location.getLocationCity()).append(", ")
-                    .append(location.getLocationState()).append(" ")
-                    .append(location.getLocationZipCode());
-        }
-
-        // Append the company
-        if (companyComboBox.getValue() != null) {
-            CompanyMapper companyMapper = new CompanyMapper();
-            Company company = companyMapper.read(companyComboBox.getValue().toString());
-            logEntry.append(newLine).append("Company: ").append(company.getCompanyName());
-        }
-
-        // Append the supervisor
-        if (supervisorComboBox.getValue() != null) {
-            SupervisorMapper supervisorMapper = new SupervisorMapper();
-            Supervisor supervisor = supervisorMapper.read(supervisorComboBox.getValue());
-            logEntry.append(newLine).append("Supervisor: ")
-                    .append(supervisor.getSupervisorDisplayName()).append(" (")
-                    .append(supervisor.getSupervisorFirstName()).append(" ")
-                    .append(supervisor.getSupervisorLastName()).append(")");
-        }
-
-        /* If the log file exists, append two new lines
-         * to the new entry so it can be easily distinguished
-         * from the previous entry when the user reads the log file.
-         */
-        if (LogFileHelper.logFileExists()) {
-            logEntry.append(newLine).append(newLine);
-        }
-
-        // Append the current log file text so that the new
-        // entry will appear on the top of any previous entries
-        logEntry.append(LogFileHelper.getLogFileText());
-
-        // Update the log file to reflect the new entry
-        LogFileHelper.setLogFileText(logEntry.toString());
-
         LogEntry newLogEntry = new LogEntry(localDate.toString(), hours.getText());
         newLogEntry.setLogEntryComments(comments.getText());
         if (locationComboBox.getValue() != null) {
