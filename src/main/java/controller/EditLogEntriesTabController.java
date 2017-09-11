@@ -4,17 +4,21 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import databasemanagement.objectrelationalmap.LogEntryMapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Control;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
@@ -36,10 +40,10 @@ import java.util.ResourceBundle;
 public class EditLogEntriesTabController implements Initializable {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;
+    @FXML private StackPane tabRootPane;
     @FXML private TableView<LogEntry> logEntriesTableView;
-    @FXML private Button generateReportButton;
-    @FXML private Button saveButton;
-    @FXML private Button undoChangesButton;
+    @FXML private JFXButton generateReportButton;
+    @FXML private JFXButton helpButton;
 
     void setCurrentStage(Stage stage) {
         this.currentStage = stage;
@@ -51,25 +55,39 @@ public class EditLogEntriesTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO: Re-comment this
-        saveButton.setDisable(true);
-        undoChangesButton.setDisable(true);
-
-        // TODO: Re-comment this
-        saveButton.setOnMouseClicked(event -> {
-            saveButton.setDisable(true);
-            undoChangesButton.setDisable(true);
-            generateReportButton.setDisable(false);
-        });
-
-        // TODO: Re-comment this
-        undoChangesButton.setOnMouseClicked(event -> {
-            saveButton.setDisable(true);
-            undoChangesButton.setDisable(true);
-            generateReportButton.setDisable(false);
-        });
 
         generateReportButton.setOnMouseClicked(event -> generateReport());
+        helpButton.setOnMouseClicked(event -> {
+            JFXDialogLayout dialogLayout = new JFXDialogLayout();
+            dialogLayout.setHeading(new Text("Editing & Deleting Logs"));
+            StringBuilder message = new StringBuilder(System.lineSeparator())
+                    .append("To edit a log, click on the cell that you would like to edit.")
+                    .append(System.lineSeparator())
+                    .append("Once you are finished editing, press the ENTER key to save your changes.")
+                    .append(System.lineSeparator())
+                    .append("If you click away without pressing the ENTER key, your changes will be lost.")
+                    .append(System.lineSeparator())
+                    .append(System.lineSeparator())
+                    .append("To delete a log, right click on the row containing the log you would like")
+                    .append(System.lineSeparator())
+                    .append("to delete and choose the Delete option.");
+            Text body = new Text(message.toString());
+            dialogLayout.setBody(body);
+
+            JFXDialog dialog = new JFXDialog(tabRootPane, dialogLayout, JFXDialog.DialogTransition.CENTER);
+
+            JFXButton okButton = new JFXButton("OKAY");
+            okButton.setOnMouseClicked(deleteEvent -> {
+                dialog.close();
+            });
+            // Light blue text fill
+            okButton.setTextFill(Color.valueOf("#6c93e4"));
+            okButton.getStyleClass().add("dialogButton");
+
+            dialogLayout.setActions(okButton);
+
+            dialog.show();
+        });
 
         // Generate table columns
         TableColumn<LogEntry, String> dateColumn = new TableColumn<>("Date");

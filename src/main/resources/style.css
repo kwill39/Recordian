@@ -28,13 +28,13 @@
     -fx-font-size: 13;
 }
 
-.blueButton {
+.helpButton {
     -fx-background-color: -blue;
     -fx-text-fill: WHITE;
-}
-
-.blueButton:pressed {
-    -fx-background-color: #3c6dbb;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 24;
+    -fx-padding: 0 8 0 8;
+    -fx-background-radius: 100;
 }
 
 .greyPane {

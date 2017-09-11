@@ -17,7 +17,7 @@
     </rowConstraints>
     <children>
         <Label fx:id="errorLabel" text="An error has occurred.&#13;&#13;If this continues to happen, you may&#13;need to restart the application." textAlignment="CENTER" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" />
-      <JFXButton fx:id="okButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="OK" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <JFXButton fx:id="okButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="OKAY" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
