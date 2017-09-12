@@ -12,6 +12,8 @@
           </Tab>
           <Tab fx:id="editLogEntriesTab" text="Edit Logs">
           </Tab>
+          <Tab fx:id="graphsTab" text="Graphs">
+          </Tab>
         </tabs>
       </TabPane>
    </children>

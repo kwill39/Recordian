@@ -17,7 +17,7 @@
       </rowConstraints>
         <padding><Insets bottom="15" left="15" right="15" top="15" /></padding>
        <children>
-          <TableView fx:id="logEntriesTableView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" />
+          <TableView fx:id="logEntriesTableView" GridPane.columnSpan="2147483647" />
           <JFXButton fx:id="generateReportButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="Export As PDF..." GridPane.rowIndex="1">
              <GridPane.margin>
                 <Insets top="10.0" />

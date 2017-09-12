@@ -37,8 +37,21 @@
     -fx-background-radius: 100;
 }
 
+.graphTypeRadioButton {
+    -fx-text-fill: -blue;
+    -jfx-selected-color: -blue;
+    -jfx-unselected-color: -blue;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
+}
+
 .greyPane {
     -fx-background-color: -lightGrey;
+}
+
+.tab .tab-label {
+    -fx-font-family: "Roboto";
+    -fx-text-fill: -blue;
 }
 
 .tab:selected {

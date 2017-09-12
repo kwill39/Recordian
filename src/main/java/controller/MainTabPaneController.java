@@ -14,18 +14,22 @@ public class MainTabPaneController implements Initializable {
     private Stage currentStage;
     @FXML private Tab newLogTab;
     @FXML private Tab editLogEntriesTab;
+    @FXML private Tab graphsTab;
     @FXML private NewLogEntryTabController newLogEntryTabController;
     @FXML private SuccessfulLogSubmissionController successfulLogSubmissionController;
     @FXML private EditLogEntriesTabController editLogEntriesTabController;
+    @FXML private GraphsTabController graphsTabController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set the initial tabs for the main tab pane
         FXMLLoader newLogEntryTabLoader = new FXMLLoader(getClass().getResource("/view/newLogEntryTab.fxml"));
         FXMLLoader editLogEntriesTabLoader = new FXMLLoader(getClass().getResource("/view/editLogEntriesTab.fxml"));
+        FXMLLoader graphsTabLoader = new FXMLLoader(getClass().getResource("/view/graphsTab.fxml"));
         try {
             newLogTab.setContent(newLogEntryTabLoader.load());
             editLogEntriesTab.setContent(editLogEntriesTabLoader.load());
+            graphsTab.setContent(graphsTabLoader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,6 +39,9 @@ public class MainTabPaneController implements Initializable {
         newLogEntryTabController.setParentTabPaneController(this);
         editLogEntriesTabController = editLogEntriesTabLoader.getController();
         editLogEntriesTabController.setParentTabPaneController(this);
+        graphsTabController = graphsTabLoader.getController();
+        graphsTabController.setParentTabPaneController(this);
+
     }
 
     public Stage getCurrentStage() {
@@ -46,6 +53,7 @@ public class MainTabPaneController implements Initializable {
         // Some of the tabs may need to know their stage
         newLogEntryTabController.setCurrentStage(currentStage);
         editLogEntriesTabController.setCurrentStage(currentStage);
+        graphsTabController.setCurrentStage(currentStage);
     }
 
     /**
@@ -73,8 +81,20 @@ public class MainTabPaneController implements Initializable {
             e.printStackTrace();
         }
         editLogEntriesTabController = editLogEntriesTabLoader.getController();
-        editLogEntriesTabController.setCurrentStage(currentStage);
         editLogEntriesTabController.setParentTabPaneController(this);
+        editLogEntriesTabController.setCurrentStage(currentStage);
+
+        // Reset the Graphs tab so that it takes into account the most recent submission
+        FXMLLoader graphsTabLoader = new FXMLLoader(getClass().getResource("/view/graphsTab.fxml"));
+        try {
+            graphsTab.setContent(graphsTabLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        graphsTabController = graphsTabLoader.getController();
+        graphsTabController.setParentTabPaneController(this);
+        graphsTabController.setCurrentStage(currentStage);
+
     }
 
     /**
