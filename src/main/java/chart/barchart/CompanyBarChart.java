@@ -10,17 +10,11 @@ import java.util.List;
 public class CompanyBarChart extends BarChartFactory {
     private CompanyMapper companyMapper = new CompanyMapper();
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     String barChartXAxisLabel() {
         return "Company";
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     XYChart.Series<String, Number> barChartData() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
@@ -33,17 +27,11 @@ public class CompanyBarChart extends BarChartFactory {
         return series;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected String sqlQuery() {
         return ChartDataQuery.COMPANY.getSqlQuery();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected String chartTitle() {
         return "Number of Times Worked For Each Company";
