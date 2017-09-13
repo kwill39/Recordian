@@ -1,6 +1,8 @@
 package controller;
 
 import chart.barchart.CompanyBarChart;
+import chart.barchart.LocationBarChart;
+import chart.barchart.SupervisorBarChart;
 import chart.piechart.CompanyPieChart;
 import chart.piechart.LocationPieChart;
 import chart.piechart.SupervisorPieChart;
@@ -16,6 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GraphsTabController implements Initializable {
@@ -23,10 +28,18 @@ public class GraphsTabController implements Initializable {
     private MainTabPaneController parentTabPaneController;
     private static final String BAR_CHART = "BAR_CHART";
     private static final String PIE_CHART = "PIE_CHART";
-    private BarChart<String, Number> companyBarChart = new CompanyBarChart().getBarChart();
-    private PieChart locationPieChart = new LocationPieChart().getPieChart();
-    private PieChart companyPieChart = new CompanyPieChart().getPieChart();
-    private PieChart supervisorPieChart = new SupervisorPieChart().getPieChart();
+    private List<BarChart<String, Number>> barCharts =
+            new ArrayList<>(Arrays.asList(
+                    new LocationBarChart().getBarChart(),
+                    new CompanyBarChart().getBarChart(),
+                    new SupervisorBarChart().getBarChart()
+            ));
+    private List<PieChart> pieCharts =
+            new ArrayList<>(Arrays.asList(
+                    new LocationPieChart().getPieChart(),
+                    new CompanyPieChart().getPieChart(),
+                    new SupervisorPieChart().getPieChart()
+            ));
     @FXML private ToggleGroup chartType;
     @FXML private JFXRadioButton barChartButton;
     @FXML private JFXRadioButton pieChartButton;
@@ -45,7 +58,7 @@ public class GraphsTabController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Set default chart view
-        chartContainer.getChildren().addAll(companyBarChart);
+        chartContainer.getChildren().addAll(barCharts);
 
         // In order to center the charts to the scroll pane,
         // the chartContainer (VBox) needs to have the same width as its scroll pane
@@ -61,11 +74,11 @@ public class GraphsTabController implements Initializable {
             switch (newValue.getUserData().toString()) {
                 case BAR_CHART:
                     chartContainer.getChildren().clear();
-                    chartContainer.getChildren().addAll(companyBarChart);
+                    chartContainer.getChildren().addAll(barCharts);
                     break;
                 case PIE_CHART:
                     chartContainer.getChildren().clear();
-                    chartContainer.getChildren().addAll(locationPieChart, companyPieChart, supervisorPieChart);
+                    chartContainer.getChildren().addAll(pieCharts);
                     break;
             }
         });
