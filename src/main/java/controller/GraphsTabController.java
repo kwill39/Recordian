@@ -60,9 +60,7 @@ public class GraphsTabController implements Initializable {
         // Set default chart view
         chartContainer.getChildren().addAll(barCharts);
 
-        // In order to center the charts to the scroll pane,
-        // the chartContainer (VBox) needs to have the same width as its scroll pane
-        chartContainer.minWidthProperty().bind(chartScrollPane.widthProperty());
+        chartScrollPane.setFitToWidth(true);
 
         // Used to find out which radio button was selected
         barChartButton.setUserData(BAR_CHART);
