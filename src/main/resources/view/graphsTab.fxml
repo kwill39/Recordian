@@ -11,23 +11,23 @@
       <children>
          <HBox alignment="CENTER">
             <children>
-               <JFXRadioButton fx:id="barGraphButton" mnemonicParsing="false" selected="true" styleClass="graphTypeRadioButton" text="Bar Graph">
+               <JFXRadioButton fx:id="barChartButton" mnemonicParsing="false" selected="true" styleClass="chartTypeRadioButton" text="Bar Chart">
                   <HBox.margin>
                      <Insets bottom="10.0" left="10.0" right="40.0" top="10.0" />
                   </HBox.margin>
                   <toggleGroup>
-                     <ToggleGroup fx:id="graphType" />
+                     <ToggleGroup fx:id="chartType" />
                   </toggleGroup>
                </JFXRadioButton>
-               <JFXRadioButton fx:id="pieChartButton" mnemonicParsing="false" styleClass="graphTypeRadioButton" text="Pie Chart" toggleGroup="$graphType">
+               <JFXRadioButton fx:id="pieChartButton" mnemonicParsing="false" styleClass="chartTypeRadioButton" text="Pie Chart" toggleGroup="$chartType">
                   <HBox.margin>
                      <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
                   </HBox.margin>
                </JFXRadioButton>
             </children></HBox>
-         <ScrollPane fx:id="graphScrollPane" VBox.vgrow="ALWAYS">
+         <ScrollPane fx:id="chartScrollPane" VBox.vgrow="ALWAYS">
             <content>
-               <VBox fx:id="graphContainer" alignment="CENTER" spacing="100.0" />
+               <VBox fx:id="chartContainer" alignment="CENTER" spacing="100.0" />
             </content></ScrollPane>
          <HBox alignment="CENTER_LEFT">
             <children>
