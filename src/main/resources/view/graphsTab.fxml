@@ -27,7 +27,7 @@
             </children></HBox>
          <ScrollPane fx:id="graphScrollPane" VBox.vgrow="ALWAYS">
             <content>
-               <VBox fx:id="graphContainer" alignment="CENTER" />
+               <VBox fx:id="graphContainer" alignment="CENTER" spacing="100.0" />
             </content></ScrollPane>
          <HBox alignment="CENTER_LEFT">
             <children>
