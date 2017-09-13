@@ -37,14 +37,6 @@
     -fx-background-radius: 100;
 }
 
-.graphTypeRadioButton {
-    -fx-text-fill: -blue;
-    -jfx-selected-color: -blue;
-    -jfx-unselected-color: -blue;
-    -fx-font-family: "Roboto";
-    -fx-font-size: 14;
-}
-
 .greyPane {
     -fx-background-color: -lightGrey;
 }
@@ -92,6 +84,28 @@
 
 .table-row-cell:selected {
     -fx-background-color: -lightBlue;
+}
+
+/***************************************************************************
+ *                                                                         *
+ * Charts                                                                  *
+ *                                                                         *
+ **************************************************************************/
+
+.chartTypeRadioButton {
+    -fx-text-fill: -blue;
+    -jfx-selected-color: -blue;
+    -jfx-unselected-color: -blue;
+    -fx-font-family: "Roboto";
+    -fx-font-size: 14;
+}
+
+.chart-bar {
+    -fx-bar-fill: -lightBlue;
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: -lightBlue;
 }
 
 .blueLabel {
