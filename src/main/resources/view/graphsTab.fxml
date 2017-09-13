@@ -11,7 +11,7 @@
       <children>
          <HBox alignment="CENTER">
             <children>
-               <JFXRadioButton mnemonicParsing="false" selected="true" styleClass="graphTypeRadioButton" text="Bar Graph">
+               <JFXRadioButton fx:id="barGraphButton" mnemonicParsing="false" selected="true" styleClass="graphTypeRadioButton" text="Bar Graph">
                   <HBox.margin>
                      <Insets bottom="10.0" left="10.0" right="40.0" top="10.0" />
                   </HBox.margin>
@@ -19,13 +19,16 @@
                      <ToggleGroup fx:id="graphType" />
                   </toggleGroup>
                </JFXRadioButton>
-               <JFXRadioButton mnemonicParsing="false" styleClass="graphTypeRadioButton" text="Pie Chart" toggleGroup="$graphType">
+               <JFXRadioButton fx:id="pieChartButton" mnemonicParsing="false" styleClass="graphTypeRadioButton" text="Pie Chart" toggleGroup="$graphType">
                   <HBox.margin>
                      <Insets bottom="10.0" left="40.0" right="10.0" top="10.0" />
                   </HBox.margin>
                </JFXRadioButton>
             </children></HBox>
-         <ScrollPane fx:id="graphContainer" VBox.vgrow="ALWAYS" />
+         <ScrollPane fx:id="graphScrollPane" VBox.vgrow="ALWAYS">
+            <content>
+               <VBox fx:id="graphContainer" alignment="CENTER" />
+            </content></ScrollPane>
          <HBox alignment="CENTER_LEFT">
             <children>
                 <JFXButton fx:id="generateReportButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="Export As PDF...">
