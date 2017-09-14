@@ -21,7 +21,8 @@ import java.util.ResourceBundle;
 public class BackupTabController implements Initializable {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;
-    @FXML private JFXButton backupButton;
+    @FXML private JFXButton createBackupButton;
+    @FXML private JFXButton importBackupButton;
 
     void setCurrentStage(Stage stage) {
         this.currentStage = stage;
@@ -33,7 +34,8 @@ public class BackupTabController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        backupButton.setOnMouseClicked(event -> generateBackupCopy());
+        createBackupButton.setOnMouseClicked(event -> generateBackupCopy());
+        importBackupButton.setOnMouseClicked(event -> importBackup());
     }
 
     /**
@@ -62,6 +64,34 @@ public class BackupTabController implements Initializable {
                     DatabaseHelper.createDatabase();
                 }
                 Files.copy(theDatabase.toPath(), backupFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Imports a database with a structure that is exactly like
+     * that of the structure of a database used within this application
+     * and replaces the currently used database with the imported database
+     */
+    private void importBackup() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Import Backup Copy");
+        fileChooser.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+        FileChooser.ExtensionFilter databaseExtensionFilter =
+                new FileChooser.ExtensionFilter(
+                        "DB - Database (.db)", "*.db");
+        fileChooser.getExtensionFilters().add(databaseExtensionFilter);
+        fileChooser.setSelectedExtensionFilter(databaseExtensionFilter);
+        File backupFile = fileChooser.showOpenDialog(currentStage);
+
+        if (backupFile != null) {
+            try {
+                File theDatabase = new File(DatabaseHelper.DATABASE_PATH_NAME);
+                Files.copy(backupFile.toPath(), theDatabase.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception e) {
                 e.printStackTrace();
             }

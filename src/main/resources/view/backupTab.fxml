@@ -5,8 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+
 <StackPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BackupTabController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -16,11 +18,16 @@
                   <Image url="@../icons/databaseIcon.png" />
                </image>
             </ImageView>
-            <Label text="Let's face it. Our computers probably aren’t going to provide us with a two weeks notice before quitting. Creating a backup copy of your personal files helps you ensure you'll never lose the information you need – even if your computer does. Backup copies contain all log entries, locations, companies, and supervisors." textAlignment="JUSTIFY" wrapText="true">
+            <Label text="Let's face it. Our computers probably aren’t going to provide us with a two weeks notice before quitting. Having a backup copy of your personal files helps you ensure you'll never lose the information you need – even if your computer does. Backup copies contain all log entries, locations, companies, and supervisors." textAlignment="JUSTIFY" wrapText="true">
                <VBox.margin>
-                  <Insets bottom="25.0" left="80.0" right="80.0" top="50.0" />
+                  <Insets bottom="40.0" left="80.0" right="80.0" top="50.0" />
                </VBox.margin></Label>
-            <JFXButton fx:id="backupButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="Create Backup..." />
+            <HBox alignment="CENTER" spacing="40.0">
+               <children>
+                  <JFXButton fx:id="createBackupButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="Create Backup..." />
+                  <JFXButton fx:id="importBackupButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="WHITE" styleClass="addEditDatabaseItemCancelButton" text="Import Backup..." />
+               </children>
+            </HBox>
          </children></VBox>
    </children>
 </StackPane>
