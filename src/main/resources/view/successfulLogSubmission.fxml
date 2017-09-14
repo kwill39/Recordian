@@ -15,7 +15,7 @@
          </font></Label>
       <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../checkMark.png" />
+            <Image url="@../icons/checkMark.png" />
          </image>
          <VBox.margin>
             <Insets bottom="50.0" left="50.0" right="50.0" top="30.0" />
