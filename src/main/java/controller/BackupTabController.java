@@ -92,6 +92,8 @@ public class BackupTabController implements Initializable {
             try {
                 File theDatabase = new File(DatabaseHelper.DATABASE_PATH_NAME);
                 Files.copy(backupFile.toPath(), theDatabase.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                // Inform the parent TabPane controller that a new database was imported
+                parentTabPaneController.newDatabaseWasImported();
             } catch (Exception e) {
                 e.printStackTrace();
             }

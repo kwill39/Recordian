@@ -98,6 +98,12 @@ public class MainTabPaneController implements Initializable, DatabaseChangeObser
         reloadNewLogEntryTab();
     }
 
+    void newDatabaseWasImported() {
+        reloadNewLogEntryTab();
+        reloadEditLogsTab();
+        reloadGraphsTab();
+    }
+
     /**
      * Displays a confirmation view to the user informing them
      * that the log entry was successfully submitted to the database
