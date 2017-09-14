@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
@@ -59,7 +60,9 @@ public class EditLogEntriesTabController implements Initializable {
         generateReportButton.setOnMouseClicked(event -> generateReport());
         helpButton.setOnMouseClicked(event -> {
             JFXDialogLayout dialogLayout = new JFXDialogLayout();
-            dialogLayout.setHeading(new Text("Editing & Deleting Logs"));
+            Text headingText = new Text("Editing & Deleting Logs");
+            headingText.setFill(Paint.valueOf("#6c93e4"));
+            dialogLayout.setHeading(headingText);
             StringBuilder message = new StringBuilder(System.lineSeparator())
                     .append("To edit a log, click on the cell that you would like to edit.")
                     .append(System.lineSeparator())

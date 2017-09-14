@@ -12,13 +12,17 @@ import java.util.ResourceBundle;
 
 public class MainTabPaneController implements Initializable {
     private Stage currentStage;
+
     @FXML private Tab newLogTab;
     @FXML private Tab editLogEntriesTab;
     @FXML private Tab graphsTab;
+    @FXML private Tab backupTab;
+
     @FXML private NewLogEntryTabController newLogEntryTabController;
     @FXML private SuccessfulLogSubmissionController successfulLogSubmissionController;
     @FXML private EditLogEntriesTabController editLogEntriesTabController;
     @FXML private GraphsTabController graphsTabController;
+    @FXML private BackupTabController backupTabController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -26,10 +30,12 @@ public class MainTabPaneController implements Initializable {
         FXMLLoader newLogEntryTabLoader = new FXMLLoader(getClass().getResource("/view/newLogEntryTab.fxml"));
         FXMLLoader editLogEntriesTabLoader = new FXMLLoader(getClass().getResource("/view/editLogEntriesTab.fxml"));
         FXMLLoader graphsTabLoader = new FXMLLoader(getClass().getResource("/view/graphsTab.fxml"));
+        FXMLLoader backupTabLoader = new FXMLLoader(getClass().getResource("/view/backupTab.fxml"));
         try {
             newLogTab.setContent(newLogEntryTabLoader.load());
             editLogEntriesTab.setContent(editLogEntriesTabLoader.load());
             graphsTab.setContent(graphsTabLoader.load());
+            backupTab.setContent(backupTabLoader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -41,6 +47,8 @@ public class MainTabPaneController implements Initializable {
         editLogEntriesTabController.setParentTabPaneController(this);
         graphsTabController = graphsTabLoader.getController();
         graphsTabController.setParentTabPaneController(this);
+        backupTabController = backupTabLoader.getController();
+        backupTabController.setParentTabPaneController(this);
 
     }
 
@@ -54,6 +62,7 @@ public class MainTabPaneController implements Initializable {
         newLogEntryTabController.setCurrentStage(currentStage);
         editLogEntriesTabController.setCurrentStage(currentStage);
         graphsTabController.setCurrentStage(currentStage);
+        backupTabController.setCurrentStage(currentStage);
     }
 
     /**

@@ -20,7 +20,7 @@
                <VBox.margin>
                   <Insets bottom="25.0" left="80.0" right="80.0" top="50.0" />
                </VBox.margin></Label>
-            <JFXButton fx:id="backupButton" buttonType="RAISED" mnemonicParsing="false" styleClass="darkBlueButton" text="Create Backup..." />
+            <JFXButton fx:id="backupButton" buttonType="RAISED" mnemonicParsing="false" ripplerFill="#003c82" styleClass="darkBlueButton" text="Create Backup..." />
          </children></VBox>
    </children>
 </StackPane>

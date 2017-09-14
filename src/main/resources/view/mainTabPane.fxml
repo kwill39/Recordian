@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.StackPane?>
 <?import java.lang.String?>
 <StackPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="700.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainTabPaneController">
    <children>
-      <TabPane tabClosingPolicy="UNAVAILABLE">
+      <TabPane tabClosingPolicy="UNAVAILABLE" tabMinWidth="75.0">
         <tabs>
           <Tab fx:id="newLogTab" text="New Log">
           </Tab>
           <Tab fx:id="editLogEntriesTab" text="Edit Logs">
           </Tab>
           <Tab fx:id="graphsTab" text="Graphs">
+          </Tab>
+          <Tab fx:id="backupTab" text="Backup">
           </Tab>
         </tabs>
       </TabPane>
