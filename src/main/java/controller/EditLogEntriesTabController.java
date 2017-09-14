@@ -258,7 +258,7 @@ public class EditLogEntriesTabController implements Initializable {
         fileChooser.setInitialDirectory(
                 new File(System.getProperty("user.home"))
         );
-        fileChooser.setInitialFileName("Hour Tracker Report.pdf");
+        fileChooser.setInitialFileName("Log Entries.pdf");
         FileChooser.ExtensionFilter pdfExtensionFilter =
                 new FileChooser.ExtensionFilter(
                         "PDF - Portable Document Format (.pdf)", "*.pdf");
