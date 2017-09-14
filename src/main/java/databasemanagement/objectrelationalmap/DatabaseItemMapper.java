@@ -10,7 +10,6 @@ import java.util.List;
  * @since   Version 2
  */
 interface DatabaseItemMapper<T> {
-    String url = "jdbc:sqlite:Hour_Tracker_Files/HourTracker.db";
 
     /**
      * Creates a new <code>DatabaseItem</code> record

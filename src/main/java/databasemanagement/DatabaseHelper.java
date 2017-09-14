@@ -17,7 +17,9 @@ public final class DatabaseHelper {
     /**
      * The url that leads to the SQLite database
      */
-    public static final String DATABASE_CONNECTION_URL = "jdbc:sqlite:Hour_Tracker_Files/HourTracker.db";
+    public static final String DATABASE_PATH_NAME = "Hour_Tracker_Files/HourTracker.db";
+    public static final String DATABASE_DIRECTORY_PATH_NAME = "Hour_Tracker_Files";
+    public static final String DATABASE_CONNECTION_URL = "jdbc:sqlite:" + DATABASE_PATH_NAME;
 
     private DatabaseHelper(){}
 
@@ -27,7 +29,7 @@ public final class DatabaseHelper {
      */
     public static void createDatabase() {
         // Creates a new database file with appropriate tables
-        new File("Hour_Tracker_Files").mkdir();
+        new File(DATABASE_DIRECTORY_PATH_NAME).mkdir();
         try (Connection dbConnection = DriverManager.getConnection(DATABASE_CONNECTION_URL);) {
             Statement statement = dbConnection.createStatement();
 
@@ -86,7 +88,7 @@ public final class DatabaseHelper {
      * recreate the database for test methods to run on a fresh database.
      */
     public static void deleteDatabase(){
-        File databaseFile = new File("Hour_Tracker_Files/HourTracker.db");
+        File databaseFile = new File(DATABASE_PATH_NAME);
         databaseFile.delete();
     }
 }

@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import controller.databaseitemcontroller.DatabaseItemModificationController;
 import databasemanagement.DatabaseChangeObservable;
 import databasemanagement.DatabaseChangeObserver;
+import databasemanagement.DatabaseHelper;
 import databasemanagement.objectrelationalmap.CompanyMapper;
 import databasemanagement.objectrelationalmap.LocationMapper;
 import databasemanagement.objectrelationalmap.LogEntryMapper;
@@ -42,7 +43,7 @@ import java.util.function.Consumer;
 public class NewLogEntryTabController implements Initializable, DatabaseChangeObserver {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;
-    private final String DEFAULTS_FILE_PATH = "Hour_Tracker_Files/defaults.ser";
+    private static final String DEFAULTS_FILE_PATH = DatabaseHelper.DATABASE_DIRECTORY_PATH_NAME + "/defaults.ser";
 
     /**
      * Used for finding a default combo box item
