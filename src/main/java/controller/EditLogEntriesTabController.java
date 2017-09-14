@@ -106,8 +106,6 @@ public class EditLogEntriesTabController implements Initializable {
         TableColumn<LogEntry, String> supervisorFirstNameColumn = new TableColumn<>("Supervisor First Name");
         TableColumn<LogEntry, String> supervisorLastNameColumn = new TableColumn<>("Supervisor Last Name");
 
-        // TODO: if (columnListFile does not exist)
-
         List<TableColumn<LogEntry, String>> columnList = new ArrayList<>();
         columnList.add(dateColumn);
         columnList.add(hoursColumn);
@@ -121,10 +119,6 @@ public class EditLogEntriesTabController implements Initializable {
         columnList.add(supervisorDisplayNameColumn);
         columnList.add(supervisorFirstNameColumn);
         columnList.add(supervisorLastNameColumn);
-
-        // TODO: write this one to new columnList file
-
-        // TODO: else, load in columnList file list
 
         // Set cell value factories
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("logEntryDate"));
