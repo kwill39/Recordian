@@ -24,7 +24,6 @@ public abstract class ChartFactory {
             while (resultSet.next()) {
                 numberOfLogEntries++;
             }
-            resultSet.close();
             return numberOfLogEntries;
         } catch (SQLException e) {
             e.printStackTrace();

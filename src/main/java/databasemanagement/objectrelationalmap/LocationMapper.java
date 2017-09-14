@@ -44,22 +44,30 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
     @Override
     public Location read(int locationID) {
         String sqlRead = "SELECT * FROM locations WHERE locationID = ?";
+        ResultSet resultSet = null;
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
                 PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
         ) {
             preparedStatement.setInt(1, locationID);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             Location fetchedLocation = new Location(resultSet.getString("locationName"));
             fetchedLocation.setLocationID(resultSet.getInt("locationID"));
             fetchedLocation.setLocationAddress(resultSet.getString("locationAddress"));
             fetchedLocation.setLocationCity(resultSet.getString("locationCity"));
             fetchedLocation.setLocationState(resultSet.getString("locationState"));
             fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
-            resultSet.close();
             return fetchedLocation;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }
@@ -72,22 +80,30 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      */
     public Location read(String locationName) {
         String sqlRead = "SELECT * FROM locations WHERE locationName = ?";
+        ResultSet resultSet = null;
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
                 PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
         ) {
             preparedStatement.setString(1, locationName);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             Location fetchedLocation = new Location(resultSet.getString("locationName"));
             fetchedLocation.setLocationID(resultSet.getInt("locationID"));
             fetchedLocation.setLocationAddress(resultSet.getString("locationAddress"));
             fetchedLocation.setLocationCity(resultSet.getString("locationCity"));
             fetchedLocation.setLocationState(resultSet.getString("locationState"));
             fetchedLocation.setLocationZipCode(resultSet.getString("locationZipCode"));
-            resultSet.close();
             return fetchedLocation;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }

@@ -75,12 +75,13 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
     @Override
     public LogEntry read(int logEntryID) {
         String sqlRead = "SELECT * FROM logEntries WHERE logEntryID = ?";
+        ResultSet resultSet = null;
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
                 PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
         ) {
             preparedStatement.setInt(1, logEntryID);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             LogEntry fetchedLogEntry = new LogEntry(resultSet.getString("logEntryDate"),
                     resultSet.getString("logEntryHours"));
             fetchedLogEntry.setLogEntryID(resultSet.getInt("logEntryID"));
@@ -94,10 +95,17 @@ public class LogEntryMapper implements DatabaseItemMapper<LogEntry>{
             fetchedLogEntry.setLogEntrySupervisorFirstName(resultSet.getString("logEntrySupervisorFirstName"));
             fetchedLogEntry.setLogEntrySupervisorLastName(resultSet.getString("logEntrySupervisorLastName"));
             fetchedLogEntry.setLogEntrySupervisorDisplayName(resultSet.getString("logEntrySupervisorDisplayName"));
-            resultSet.close();
             return fetchedLogEntry;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }

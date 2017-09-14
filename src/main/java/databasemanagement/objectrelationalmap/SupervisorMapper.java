@@ -42,20 +42,28 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
     @Override
     public Supervisor read(int supervisorID) {
         String sqlRead = "SELECT * FROM supervisors WHERE supervisorID = ?";
+        ResultSet resultSet = null;
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
                 PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
         ) {
             preparedStatement.setInt(1, supervisorID);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             Supervisor fetchedSupervisor = new Supervisor(resultSet.getString("supervisorDisplayName"));
             fetchedSupervisor.setSupervisorID(resultSet.getInt("supervisorID"));
             fetchedSupervisor.setSupervisorFirstName(resultSet.getString("supervisorFirstName"));
             fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
-            resultSet.close();
             return fetchedSupervisor;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }
@@ -68,20 +76,28 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
      */
     public Supervisor read(String supervisorDisplayName) {
         String sqlRead = "SELECT * FROM supervisors WHERE supervisorDisplayName = ?";
+        ResultSet resultSet = null;
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
                 PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
         ) {
             preparedStatement.setString(1, supervisorDisplayName);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             Supervisor fetchedSupervisor = new Supervisor(resultSet.getString("supervisorDisplayName"));
             fetchedSupervisor.setSupervisorID(resultSet.getInt("supervisorID"));
             fetchedSupervisor.setSupervisorFirstName(resultSet.getString("supervisorFirstName"));
             fetchedSupervisor.setSupervisorLastName(resultSet.getString("supervisorLastName"));
-            resultSet.close();
             return fetchedSupervisor;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }

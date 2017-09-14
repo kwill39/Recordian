@@ -46,18 +46,26 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     @Override
     public Company read(int companyID) {
         String sqlRead = "SELECT * FROM companies WHERE companyID = ?";
+        ResultSet resultSet = null;
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
                 PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
         ) {
             preparedStatement.setInt(1, companyID);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             Company fetchedCompany = new Company(resultSet.getString("companyName"));
             fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
-            resultSet.close();
             return fetchedCompany;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }
@@ -70,18 +78,26 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
      */
     public Company read(String companyName) {
         String sqlRead = "SELECT * FROM companies WHERE companyName = ?";
+        ResultSet resultSet = null;
         try (
                 Connection dbConnection = DriverManager.getConnection(DatabaseHelper.DATABASE_CONNECTION_URL);
                 PreparedStatement preparedStatement = dbConnection.prepareStatement(sqlRead)
         ) {
             preparedStatement.setString(1, companyName);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             Company fetchedCompany = new Company(resultSet.getString("companyName"));
             fetchedCompany.setCompanyID(resultSet.getInt("companyID"));
-            resultSet.close();
             return fetchedCompany;
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }
