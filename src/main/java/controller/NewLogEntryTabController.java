@@ -22,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -130,7 +131,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             CompanyMapper companyMapper = new CompanyMapper();
             Company company = companyMapper.read(companyComboBox.getValue());
             JFXDialogLayout dialogLayout = new JFXDialogLayout();
-            dialogLayout.setHeading(new Text("Delete Company"));
+            Text headingText = new Text("Delete Company");
+            headingText.setFill(Paint.valueOf("#6c93e4"));
+            dialogLayout.setHeading(headingText);
             Text body = new Text("Are you sure you want to delete " + '"' + company.getCompanyName() + '"' + "?");
             dialogLayout.setBody(body);
 
@@ -163,7 +166,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             LocationMapper locationMapper = new LocationMapper();
             Location location = locationMapper.read(locationComboBox.getValue());
             JFXDialogLayout dialogLayout = new JFXDialogLayout();
-            dialogLayout.setHeading(new Text("Delete Location"));
+            Text headingText = new Text("Delete Location");
+            headingText.setFill(Paint.valueOf("#6c93e4"));
+            dialogLayout.setHeading(headingText);
             Text body = new Text("Are you sure you want to delete " + '"' + location.getLocationName() + '"' + "?");
             dialogLayout.setBody(body);
 
@@ -196,7 +201,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             SupervisorMapper supervisorMapper = new SupervisorMapper();
             Supervisor supervisor = supervisorMapper.read(supervisorComboBox.getValue());
             JFXDialogLayout dialogLayout = new JFXDialogLayout();
-            dialogLayout.setHeading(new Text("Delete Supervisor"));
+            Text headingText = new Text("Delete Supervisor");
+            headingText.setFill(Paint.valueOf("#6c93e4"));
+            dialogLayout.setHeading(headingText);
             Text body = new Text("Are you sure you want to delete " + '"' + supervisor.getSupervisorDisplayName() + '"' + "?");
             dialogLayout.setBody(body);
 
