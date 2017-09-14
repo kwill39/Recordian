@@ -6,6 +6,10 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 abstract class BarChartFactory extends ChartFactory {
     protected final CategoryAxis xAxis = new CategoryAxis();
     protected final NumberAxis yAxis = new NumberAxis();

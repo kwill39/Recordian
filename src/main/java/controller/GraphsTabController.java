@@ -39,6 +39,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class GraphsTabController implements Initializable {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;

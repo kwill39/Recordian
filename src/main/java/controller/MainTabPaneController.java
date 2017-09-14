@@ -10,6 +10,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class MainTabPaneController implements Initializable {
     private Stage currentStage;
 

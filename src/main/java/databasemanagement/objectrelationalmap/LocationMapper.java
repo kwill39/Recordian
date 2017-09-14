@@ -8,12 +8,19 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data access object that interfaces between
+ * the SQLite database and {@link Location} objects
+ *
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
 public final class LocationMapper implements DatabaseItemMapper<Location> {
 
     /**
      * {@inheritDoc}
      *
-     * @param location a <code>Location<code/> object
+     * @param location a {@link Location} object
      */
     @Override
     public void create(Location location) {
@@ -39,7 +46,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
      * {@inheritDoc}
      *
      * @param   locationID the ID of the <code>Location</code>
-     * @return  the <code>Location</code> whose ID matches that of <code>locationID</code>
+     * @return  the {@link Location} whose ID matches that of <code>locationID</code>
      */
     @Override
     public Location read(int locationID) {
@@ -75,8 +82,8 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
     /**
      * Retrieves the {@link Location} whose location name matches the location name given as an argument
      *
-     * @param   locationName the unique name of the <code>Location</code>
-     * @return  the <code>Location</code> whose <code>locationName</code> matches that of <code>locationName</code>
+     * @param   locationName the unique name of the {@link Location}
+     * @return  the {@link Location} whose <code>locationName</code> matches that of <code>locationName</code>
      */
     public Location read(String locationName) {
         String sqlRead = "SELECT * FROM locations WHERE locationName = ?";
@@ -111,7 +118,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
     /**
      * {@inheritDoc}
      *
-     * @return a <code>List</code> of <code>Location<code/> objects
+     * @return a {@link List} of {@link Location} objects
      */
     @Override
     public List<Location> readAll() {
@@ -142,7 +149,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
     /**
      * {@inheritDoc}
      *
-     * @param location a <code>Location<code/> object that has a valid primary key
+     * @param location a {@link Location} object that has a valid primary key
      */
     @Override
     public void update(Location location) {
@@ -172,7 +179,7 @@ public final class LocationMapper implements DatabaseItemMapper<Location> {
     /**
      * {@inheritDoc}
      *
-     * @param location a <code>Location<code/> object that has a valid primary key
+     * @param location a {@link Location} object that has a valid primary key
      */
     @Override
     public void delete(Location location) {

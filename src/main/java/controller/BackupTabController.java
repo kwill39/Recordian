@@ -14,6 +14,10 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class BackupTabController implements Initializable {
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;

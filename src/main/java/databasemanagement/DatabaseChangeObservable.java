@@ -5,6 +5,15 @@ import model.DatabaseItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Listens to the mapper classes for changes to a
+ * {@link DatabaseItem} and notifies its observers
+ * whenever a <code>DatabaseItem</code> is modified
+ * within the database
+ *
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public final class DatabaseChangeObservable {
 
     private static List<DatabaseChangeObserver> observers = new ArrayList<>();

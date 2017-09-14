@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * <code>DatabaseHelper</code> is a helper class that contains methods used for
+ * A helper class that contains methods used for
  * setting up and tearing down an Hour Tracker SQLite database.
  *
  * @author  Kyle Williams

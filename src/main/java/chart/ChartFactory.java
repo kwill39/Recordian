@@ -4,6 +4,10 @@ import databasemanagement.DatabaseHelper;
 
 import java.sql.*;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public abstract class ChartFactory {
 
     /**

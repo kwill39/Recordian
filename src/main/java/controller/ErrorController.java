@@ -32,7 +32,7 @@ public class ErrorController implements Initializable {
     }
 
     /**
-     * @param stage the JavaFX <code>stage</code> that contains the
+     * @param stage the JavaFX {@link Stage} that contains the
      *              view which this controller interacts with
      */
     public void setStage(Stage stage) {

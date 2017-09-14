@@ -7,6 +7,10 @@ import model.Supervisor;
 
 import java.util.List;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class SupervisorBarChart extends BarChartFactory {
     private SupervisorMapper supervisorMapper = new SupervisorMapper();
 

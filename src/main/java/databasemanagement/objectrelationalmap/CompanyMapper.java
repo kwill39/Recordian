@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Data access object that interfaces between
- * the SQLite database and <code>Company</code> objects
+ * the SQLite database and {@link Company} objects
  *
  * @author  Kyle Williams
  * @since   Version 2
@@ -20,7 +20,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     /**
      * {@inheritDoc}
      *
-     * @param company a <code>Company<code/> object
+     * @param company a {@link Company} object
      */
     @Override
     public void create(Company company) {
@@ -40,8 +40,8 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     /**
      * {@inheritDoc}
      *
-     * @param   companyID the ID of the <code>Company</code>
-     * @return  the <code>Company</code> whose ID matches that of <code>companyID</code>
+     * @param   companyID the ID of the {@link Company}
+     * @return  the {@link Company} whose ID matches that of <code>companyID</code>
      */
     @Override
     public Company read(int companyID) {
@@ -73,8 +73,8 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     /**
      * Retrieves the {@link Company} whose company name matches <code>companyName</code>
      *
-     * @param   companyName the unique name of the <code>Company</code>
-     * @return  the <code>Company</code> whose <code>companyName</code> matches that of <code>companyName</code>
+     * @param   companyName the unique name of the {@link Company}
+     * @return  the {@link Company} whose <code>companyName</code> matches that of <code>companyName</code>
      */
     public Company read(String companyName) {
         String sqlRead = "SELECT * FROM companies WHERE companyName = ?";
@@ -105,7 +105,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     /**
      * {@inheritDoc}
      *
-     * @return a <code>List</code> of <code>Company<code/> objects
+     * @return a {@link List} of {@link Company} objects
      */
     @Override
     public List<Company> readAll() {
@@ -132,7 +132,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     /**
      * {@inheritDoc}
      *
-     * @param company a <code>Company<code/> object that has a valid primary key
+     * @param company a {@link Company} object that has a valid primary key
      */
     @Override
     public void update(Company company) {
@@ -153,7 +153,7 @@ public final class CompanyMapper implements DatabaseItemMapper<Company> {
     /**
      * {@inheritDoc}
      *
-     * @param company a <code>Company<code/> object that has a valid primary key
+     * @param company a {@link Company} object that has a valid primary key
      */
     @Override
     public void delete(Company company) {

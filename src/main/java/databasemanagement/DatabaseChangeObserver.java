@@ -4,6 +4,10 @@ import model.DatabaseItem;
 
 import java.util.List;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public interface DatabaseChangeObserver {
 
     /**

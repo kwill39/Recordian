@@ -7,6 +7,10 @@ import model.Location;
 
 import java.util.List;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class LocationBarChart extends BarChartFactory {
     private LocationMapper locationMapper = new LocationMapper();
 

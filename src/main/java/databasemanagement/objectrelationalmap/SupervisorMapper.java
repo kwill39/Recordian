@@ -8,12 +8,19 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data access object that interfaces between
+ * the SQLite database and {@link Supervisor} objects
+ *
+ * @author  Kyle Williams
+ * @since   Version 2
+ */
 public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
 
     /**
      * {@inheritDoc}
      *
-     * @param supervisor a <code>Supervisor<code/> object
+     * @param supervisor a {@link Supervisor} object
      */
     @Override
     public void create(Supervisor supervisor) {
@@ -36,8 +43,8 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
     /**
      * {@inheritDoc}
      *
-     * @param   supervisorID the ID of the <code>DatabaseItem</code>
-     * @return  the <code>Supervisor</code> whose ID matches that of <code>supervisorID</code>
+     * @param   supervisorID the ID of the {@link Supervisor}
+     * @return  the {@link Supervisor} whose ID matches that of <code>supervisorID</code>
      */
     @Override
     public Supervisor read(int supervisorID) {
@@ -71,8 +78,8 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
     /**
      * Retrieves the {@link Supervisor} whose supervisor name matches the supervisor name given as an argument
      *
-     * @param   supervisorDisplayName the unique name of the <code>DatabaseItem</code>
-     * @return  the <code>Supervisor</code> whose <code>supervisorDisplayName</code> matches that of <code>supervisorDisplayName</code>
+     * @param   supervisorDisplayName the unique name of the {@link Supervisor}
+     * @return  the {@link Supervisor} whose <code>supervisorDisplayName</code> matches that of <code>supervisorDisplayName</code>
      */
     public Supervisor read(String supervisorDisplayName) {
         String sqlRead = "SELECT * FROM supervisors WHERE supervisorDisplayName = ?";
@@ -105,7 +112,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
     /**
      * {@inheritDoc}
      *
-     * @return a <code>List</code> of <code>Supervisor<code/> objects
+     * @return a {@link List} of {@link Supervisor} objects
      */
     @Override
     public List<Supervisor> readAll() {
@@ -134,7 +141,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
     /**
      * {@inheritDoc}
      *
-     * @param supervisor a <code>Supervisor<code/> object that has a valid primary key
+     * @param supervisor a {@link Supervisor} object that has a valid primary key
      */
     @Override
     public void update(Supervisor supervisor) {
@@ -160,7 +167,7 @@ public final class SupervisorMapper implements DatabaseItemMapper<Supervisor> {
     /**
      * {@inheritDoc}
      *
-     * @param supervisor <code>Supervisor<code/> object that has a valid primary key
+     * @param supervisor {@link Supervisor} object that has a valid primary key
      */
     @Override
     public void delete(Supervisor supervisor) {

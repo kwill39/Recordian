@@ -6,6 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 1
+ */
 public class Main extends Application {
 
     @Override

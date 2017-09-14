@@ -50,17 +50,17 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
      */
     private enum DatabaseItemType{COMPANY, LOCATION, SUPERVISOR}
     /**
-     * A list containing the name of each <code>Company</code> within the SQLite companies table.
+     * A list containing the name of each {@link Company} within the SQLite companies table.
      * The strings in this list make up the items within <code>companyComboBox</code>.
      */
     private ObservableList<String> companyNames = FXCollections.observableArrayList();
     /**
-     * A list containing the name of each <code>Location</code> within the SQLite locations table.
+     * A list containing the name of each {@link Location} within the SQLite locations table.
      * The strings in this list make up the items within <code>locationComboBox</code>.
      */
     private ObservableList<String> locationNames = FXCollections.observableArrayList();
     /**
-     * A list containing the display name of each <code>Supervisor</code> within the SQLite supervisors table.
+     * A list containing the display name of each {@link Supervisor} within the SQLite supervisors table.
      * The strings in this list make up the items within <code>supervisorComboBox</code>.
      */
     private ObservableList<String> supervisorDisplayNames = FXCollections.observableArrayList();
@@ -449,7 +449,7 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Creates a new JavaFX stage for adding/editing/deleting a <code>DatabaseItem</code>
+     * Creates a new JavaFX stage for adding/editing/deleting a {@link DatabaseItem}
      *
      * @param viewPath      the path to the xml file representing the view
      * @param stageTitle    the title to be shown at the top of the stage
@@ -511,12 +511,12 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Gets the ID of the <code>DatabaseItem</code> that is the
+     * Gets the ID of the {@link DatabaseItem} that is the
      * default choice for the combo box that represents
      * DatabaseItems of type <code>databaseItemType</code>
      *
      * @param databaseItemType the type of DatabaseItem
-     * @return a DatabaseItem ID
+     * @return a {@link DatabaseItem} ID
      */
     private Integer getDefaultComboBoxItemID(DatabaseItemType databaseItemType) {
         HashMap<DatabaseItemType, Integer> defaults = readFromDefaultsFile();
@@ -525,11 +525,11 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
 
     /**
      * Sets the default choice for the combo box that represents
-     * DatabaseItems of type <code>DatabaseItemType</code> to
-     * the DatabaseItem represented by <code>databaseItemID</code>
+     * {@link DatabaseItem}s of type <code>databaseItemType</code> to
+     * the <code>DatabaseItem</code> represented by <code>databaseItemID</code>
      *
      * @param databaseItemType  the type of DatabaseItem
-     * @param databaseItemID    a DatabaseItem ID
+     * @param databaseItemID    a {@link DatabaseItem} ID
      */
     private void setDefaultComboBoxItemID(DatabaseItemType databaseItemType, Integer databaseItemID) {
         HashMap<DatabaseItemType, Integer> defaultsHashMap = readFromDefaultsFile();
@@ -572,10 +572,10 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
      * Otherwise, the user is trying to set the default.
      *
      * @param clickedCheckbox   the checkbox that was clicked by the user
-     * @param databaseItemID    the ID of the DatabaseItem in the combo box
+     * @param databaseItemID    the ID of the {@link DatabaseItem} in the combo box
      *                          associated with <code>clickedCheckbox</code> at
      *                          the time when the user clicked <code>clickedCheckbox</code>
-     * @param databaseItemType  the type of DatabaseItem represented by <code>databaseItemID</code>
+     * @param databaseItemType  the type of {@link DatabaseItem} represented by <code>databaseItemID</code>
      */
     private void defaultCheckboxClicked(CheckBox clickedCheckbox,
                                         Integer databaseItemID, DatabaseItemType databaseItemType){
@@ -612,10 +612,10 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Reads in the defaults for each DatabaseItem combo box
+     * Reads in the defaults for each {@link DatabaseItem} combo box
      *
-     * @return either a <code>HashMap&lt;DatabaseItemType, Integer&gt;</code> representing the default
-     * choices for each DatabaseItem combo box or null if no <code>HashMap&lt;DatabaseItemType, Integer&gt;</code>
+     * @return either a {@link HashMap} representing the default
+     * choices for each {@link DatabaseItem} combo box or null if no {@link HashMap}
      * was found in the defaults file
      */
     private HashMap<DatabaseItemType, Integer> readFromDefaultsFile() {
@@ -633,10 +633,9 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Writes the defaults for the DatabaseItem combo boxes to the defaults file
+     * Writes the defaults for the {@link DatabaseItem} combo boxes to the defaults file
      *
-     * @param defaultsHashMap a <code>HashMap&lt;DatabaseItemType, Integer&gt;</code>
-     * representing the default choices for each DatabaseItem combo box
+     * @param defaultsHashMap a {@link HashMap} representing the default choices for each {@link DatabaseItem} combo box
      */
     private void writeToDefaultsFile(HashMap<DatabaseItemType, Integer> defaultsHashMap) {
         File defaultsFile = new File(DEFAULTS_FILE_PATH);

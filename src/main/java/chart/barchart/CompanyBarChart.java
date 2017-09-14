@@ -7,6 +7,10 @@ import model.Company;
 
 import java.util.List;
 
+/**
+ * @author  Kyle Williams
+ * @since   Version 3
+ */
 public class CompanyBarChart extends BarChartFactory {
     private CompanyMapper companyMapper = new CompanyMapper();
 
