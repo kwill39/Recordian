@@ -31,6 +31,7 @@ import model.*;
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -343,18 +344,28 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
     }
 
     /**
-     * Submits a work iteration, to the log file, with all the
-     * information given by the user pertaining to the work iteration
+     * Submits a log entry to the database containing
+     * the information provided by the user
      */
     @FXML private void submit(){
+
+        // Ensure that the mandatory fields are filled out
         if (hours.getText().isEmpty() || theDatePicker.getValue() == null) {
             errorLabel.setVisible(true);
             return;
         }
 
-        LocalDate localDate = theDatePicker.getValue();
-        LogEntry newLogEntry = new LogEntry(localDate.toString(), hours.getText());
+        // Getting the date as a String
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        String date = theDatePicker.getValue().format(dateTimeFormatter);
+
+        // Inserting date and hours into log entry
+        LogEntry newLogEntry = new LogEntry(date, hours.getText());
+
+        // Comments
         newLogEntry.setLogEntryComments(comments.getText());
+
+        // Location
         if (locationComboBox.getValue() != null) {
             LocationMapper locationMapper = new LocationMapper();
             Location theLocation = locationMapper.read(locationComboBox.getValue());
@@ -364,11 +375,15 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             newLogEntry.setLogEntryLocationState(theLocation.getLocationState());
             newLogEntry.setLogEntryLocationZipCode(theLocation.getLocationZipCode());
         }
+
+        // Company
         if (companyComboBox.getValue() != null) {
             CompanyMapper companyMapper = new CompanyMapper();
             Company theCompany = companyMapper.read(companyComboBox.getValue());
             newLogEntry.setLogEntryCompanyName(theCompany.getCompanyName());
         }
+
+        // Supervisor
         if (supervisorComboBox.getValue() != null) {
             SupervisorMapper supervisorMapper = new SupervisorMapper();
             Supervisor theSupervisor = supervisorMapper.read(supervisorComboBox.getValue());
@@ -376,9 +391,12 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             newLogEntry.setLogEntrySupervisorLastName(theSupervisor.getSupervisorLastName());
             newLogEntry.setLogEntrySupervisorDisplayName(theSupervisor.getSupervisorDisplayName());
         }
+
+        // Submit the log entry
         LogEntryMapper logEntryMapper = new LogEntryMapper();
         logEntryMapper.create(newLogEntry);
 
+        // Display the Submission Complete view to the user
         parentTabPaneController.logEntryWasSubmitted();
     }
 
