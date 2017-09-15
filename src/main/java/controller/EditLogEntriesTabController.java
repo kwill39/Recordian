@@ -233,7 +233,7 @@ public class EditLogEntriesTabController implements Initializable {
         logEntriesTableView.setRowFactory(callback -> {
             TableRow<LogEntry> row = new TableRow<>();
             ContextMenu rowContextMenu = new ContextMenu();
-            MenuItem deleteEntry = new MenuItem("Delete");
+            MenuItem deleteEntry = new MenuItem("Delete Row");
             deleteEntry.setOnAction(handler -> {
                 LogEntryMapper logEntryMapper1 = new LogEntryMapper();
                 ObservableList<LogEntry> logEntriesToBeDeleted = logEntriesTableView.getSelectionModel().getSelectedItems();
