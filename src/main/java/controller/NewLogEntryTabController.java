@@ -355,12 +355,8 @@ public class NewLogEntryTabController implements Initializable, DatabaseChangeOb
             return;
         }
 
-        // Getting the date as a String
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        String date = theDatePicker.getValue().format(dateTimeFormatter);
-
         // Inserting date and hours into log entry
-        LogEntry newLogEntry = new LogEntry(date, hours.getText());
+        LogEntry newLogEntry = new LogEntry(theDatePicker.getValue().toString(), hours.getText());
 
         // Comments
         newLogEntry.setLogEntryComments(comments.getText());
