@@ -82,7 +82,6 @@ public class EditLogEntriesTabController implements Initializable {
             okButton.setOnMouseClicked(deleteEvent -> {
                 dialog.close();
             });
-            // Light blue text fill
             okButton.setTextFill(Color.valueOf("#6c93e4"));
             okButton.getStyleClass().add("dialogButton");
 
