@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Data access object (DAO) interface
- * that is implemented by all DAO concrete classes in Kyle's Hour Tracker
+ * that is implemented by all DAO concrete classes
  *
  * @author  Kyle Williams
  * @since   Version 2

@@ -1,4 +1,4 @@
-group 'kyles-hour-tracker'
+group 'recordian'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'

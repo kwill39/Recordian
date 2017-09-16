@@ -20,7 +20,7 @@ public class Main extends Application {
 
         // Creates the main view of the application
         FXMLLoader root = new FXMLLoader(getClass().getResource("/view/mainTabPane.fxml"));
-        primaryStage.setTitle("Kyle's Hour Tracker");
+        primaryStage.setTitle("Recordian");
         primaryStage.setScene(new Scene(root.load()));
         primaryStage.setOnCloseRequest(event -> Platform.exit());
         MainTabPaneController mainTabPaneController = root.getController();

@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 /**
  * A helper class that contains methods used for
- * setting up and tearing down an Hour Tracker SQLite database.
+ * setting up and tearing down the SQLite database.
  *
  * @author  Kyle Williams
  * @since   Version 2
@@ -17,15 +17,15 @@ public final class DatabaseHelper {
     /**
      * The url that leads to the SQLite database
      */
-    public static final String DATABASE_PATH_NAME = "Hour_Tracker_Files/HourTracker.db";
-    public static final String DATABASE_DIRECTORY_PATH_NAME = "Hour_Tracker_Files";
+    public static final String DATABASE_PATH_NAME = "Recordian_Files/Recordian.db";
+    public static final String DATABASE_DIRECTORY_PATH_NAME = "Recordian_Files";
     public static final String DATABASE_CONNECTION_URL = "jdbc:sqlite:" + DATABASE_PATH_NAME;
 
     private DatabaseHelper(){}
 
     /**
-     * Creates an Hour Tracker SQLite database - including the
-     * tables which are accessed and used throughout Kyle's Hour Tracker
+     * Creates an SQLite database - including the
+     * tables which are accessed and used throughout the application
      */
     public static void createDatabase() {
         // Creates a new database file with appropriate tables
@@ -83,7 +83,8 @@ public final class DatabaseHelper {
     }
 
     /**
-     * Deletes the SQLite database used in Kyle's Hour Tracker.
+     * Deletes the SQLite database
+     * <p>
      * This method is commonly used by test classes in order to
      * recreate the database for test methods to run on a fresh database.
      */

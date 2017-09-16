@@ -24,9 +24,11 @@ hs_err_pid*
 # Test Files #
 HourTracker.db
 Hours_Worked.txt
+Recordian.db
 
 # Test Directorys #
 Hour_Tracker_Files
+Recordian_Files
 
 # Gradle generated files #
 .gradle
