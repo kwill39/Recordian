@@ -1,7 +1,7 @@
-# Recordian
+# <img src="https://github.com/kwilliams3/Recordian-Images/blob/master/logos/recordianLogoSquare.png" alt="Recordian Logo" width="50" height="50" padding="">Recordian
 
 ### Introduction
-Recordian is the application that helps you keep a record of your work logs so you never miss a beat! Recordian acts as a work logbook that helps you keep a consistent record of details pertaining to each work day. I created Recordian for my father as a solution to the problems he encountered while trying to maintain a paperback logbook. Check out the [Recordian wiki](https://github.com/kwilliams3/Recordian/wiki) for more information about why and how Recordian was developed!
+Recordian is the application that helps you keep a record of your work logs so you never miss a beat! Recordian acts as an electronic logbook that helps you keep a consistent record of details pertaining to each work day. I created Recordian for my father as a solution to the problems he encountered while trying to maintain a paperback logbook. Check out the [Recordian wiki](https://github.com/kwilliams3/Recordian/wiki) for more information about why and how Recordian was developed!
 
 ### Advantages of Using Recordian
 
@@ -43,4 +43,4 @@ Once the download has finished, move the JAR file to a more permanent location s
 If you are using Windows, you should be able to double-click the JAR file to launch the program. Alternatively, you can launch the program by opening a terminal, navigating to the directory where the JAR file is stored, and entering the command `java -jar recordian.jar`
 <br>
 <br>
-The program should launch, and a new folder will be created called *Hour_Tracker_Files*. This folder should not be moved or edited. It is where the database and defaults are stored.
+The program should launch, and a new folder will be created called *Recordian_Files*. This folder should not be moved or edited. It is where the database and defaults are stored.
