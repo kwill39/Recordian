@@ -1,10 +1,9 @@
 # Recordian
-(Check out the [Recordian wiki](https://github.com/kwilliams3/Recordian/wiki) to learn why and how Recordian was developed!)
 
-## Introduction
-Recordian is an application that acts as a work logbook - helping you keep a consistent record of details pertaining to each work day. Recordian was originally created for my father as a solution to the problems he encountered while trying to maintain a paperback logbook.
+### Introduction
+Recordian is the application that helps you keep a record of your work logs so you never miss a beat! Recordian acts as a work logbook that helps you keep a consistent record of details pertaining to each work day. I created Recordian for my father as a solution to the problems he encountered while trying to maintain a paperback logbook. Check out the [Recordian wiki](https://github.com/kwilliams3/Recordian/wiki) for more information about why and how Recordian was developed!
 
-## Advantages of Using Recordian
+### Advantages of Using Recordian
 
 1. Create work logs quickly
 ![New Log Image](https://github.com/kwilliams3/Recordian-Images/blob/master/version3/screenshots/newLog.png)
@@ -26,19 +25,21 @@ Recordian is an application that acts as a work logbook - helping you keep a con
 1. Create backup copies containing all log entries, locations, companies, and supervisors
 ![Backup Image](https://github.com/kwilliams3/Recordian-Images/blob/master/version3/screenshots/backup.png)
 
-## Getting Started
+### Getting Started
 
 
-#### Prerequisites
+##### Prerequisites
 You must have [Java](https://java.com/en/download/) installed on your computer.
 
-#### Download
-The latest release can be found [here](https://github.com/kwilliams3/Recordian/releases).
+##### Download
+Click "recordian.jar" under the downloads section of the [latest release](https://github.com/kwilliams3/Recordian/releases).
 
-#### Install
+*Note: You may receive a warning stating that recordian.jar could be harmful to your computer. Your browser provides this warning because malicious software developers could choose to store malware in a .jar file that could cause problems for your computer. As such, most browsers will prompt you to keep the file if you know you've downloaded it from a trusted source or discard the file.*
+
+##### Install
 Once the download has finished, move the JAR file to a more permanent location such as your Documents folder or even your Desktop.
 
-#### Usage
+##### Usage
 If you are using Windows, you should be able to double-click the JAR file to launch the program. Alternatively, you can launch the program by opening a terminal, navigating to the directory where the JAR file is stored, and entering the command `java -jar recordian.jar`
 <br>
 <br>
