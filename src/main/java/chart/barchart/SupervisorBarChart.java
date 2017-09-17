@@ -38,6 +38,6 @@ public class SupervisorBarChart extends BarChartFactory {
 
     @Override
     protected String chartTitle() {
-        return "Number of Times Worked For Each Supervisor";
+        return "Number of Times Worked Under Each Supervisor";
     }
 }
