@@ -16,22 +16,24 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
         // Create a new database file if one does not currently exist
         databaseHelper.createDatabase();
+        Stage mainView = createMainViewOfRecordian(primaryStage);
+        mainView.show();
+    }
 
-        // Creates the main view of the application
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    private Stage createMainViewOfRecordian(Stage primaryStage) throws Exception {
         FXMLLoader root = new FXMLLoader(getClass().getResource("/view/mainTabPane.fxml"));
         primaryStage.setTitle("Recordian");
         primaryStage.setScene(new Scene(root.load()));
         primaryStage.setOnCloseRequest(event -> Platform.exit());
         MainTabPaneController mainTabPaneController = root.getController();
         mainTabPaneController.setCurrentStage(primaryStage);
-        primaryStage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch(args);
+        return primaryStage;
     }
 }
