@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
  * @since   Version 3
  */
 public class BackupTabController implements Initializable {
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
     private Stage currentStage;
     private MainTabPaneController parentTabPaneController;
     @FXML private StackPane tabRootPane;
@@ -68,7 +69,7 @@ public class BackupTabController implements Initializable {
             try {
                 File theDatabase = new File(DatabaseHelper.DATABASE_PATH_NAME);
                 if (!theDatabase.exists()) {
-                    DatabaseHelper.createDatabase();
+                    databaseHelper.createDatabase();
                 }
                 Files.copy(theDatabase.toPath(), backupFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (Exception e) {

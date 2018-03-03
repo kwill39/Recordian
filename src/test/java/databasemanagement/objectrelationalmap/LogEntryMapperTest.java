@@ -16,6 +16,7 @@ import static org.junit.Assert.assertTrue;
  * @since   Version 3
  */
 public class LogEntryMapperTest implements DatabaseItemMapperTest<LogEntry> {
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
     private LogEntryMapper logEntryMapper = new LogEntryMapper();
     private LogEntry logEntry1;
     private LogEntry logEntry2;
@@ -27,8 +28,8 @@ public class LogEntryMapperTest implements DatabaseItemMapperTest<LogEntry> {
 
     @Before
     public void populateDatabase(){
-        DatabaseHelper.deleteDatabase();
-        DatabaseHelper.createDatabase();
+        databaseHelper.deleteDatabase();
+        databaseHelper.createDatabase();
         // Create the records
         logEntry1 = new LogEntry("2017-09-1", "1");
         logEntry1.setLogEntryComments("One");
@@ -76,7 +77,7 @@ public class LogEntryMapperTest implements DatabaseItemMapperTest<LogEntry> {
 
     @After
     public void deleteDatabase(){
-        DatabaseHelper.deleteDatabase();
+        databaseHelper.deleteDatabase();
     }
 
     // Testing to see that the records were read properly also

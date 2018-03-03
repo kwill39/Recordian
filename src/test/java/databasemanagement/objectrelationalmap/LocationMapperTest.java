@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
  * @since   Version 2
  */
 public class LocationMapperTest implements DatabaseItemMapperTest<Location> {
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
     private LocationMapper locationMapper = new LocationMapper();
     private Location snowland;
     private Location springland;
@@ -27,8 +28,8 @@ public class LocationMapperTest implements DatabaseItemMapperTest<Location> {
 
     @Before
     public void populateDatabase(){
-        DatabaseHelper.deleteDatabase();
-        DatabaseHelper.createDatabase();
+        databaseHelper.deleteDatabase();
+        databaseHelper.createDatabase();
         // Create the records
         snowland = new Location("Snowland");
         snowland.setLocationAddress("188 Winter Blvd");
@@ -58,7 +59,7 @@ public class LocationMapperTest implements DatabaseItemMapperTest<Location> {
 
     @After
     public void deleteDatabase(){
-        DatabaseHelper.deleteDatabase();
+        databaseHelper.deleteDatabase();
     }
 
     // Testing to see that the records were read properly also

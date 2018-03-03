@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
  * @since   Version 2
  */
 public class SupervisorMapperTest implements DatabaseItemMapperTest<Supervisor> {
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
     private SupervisorMapper supervisorMapper = new SupervisorMapper();
     private Supervisor jimbo;
     private Supervisor frankie;
@@ -26,8 +27,8 @@ public class SupervisorMapperTest implements DatabaseItemMapperTest<Supervisor> 
 
     @Before
     public void populateDatabase() throws Exception {
-        DatabaseHelper.deleteDatabase();
-        DatabaseHelper.createDatabase();
+        databaseHelper.deleteDatabase();
+        databaseHelper.createDatabase();
         jimbo = new Supervisor("Jimbo");
         jimbo.setSupervisorFirstName("Jim");
         jimbo.setSupervisorLastName("Jimmerson");
@@ -49,7 +50,7 @@ public class SupervisorMapperTest implements DatabaseItemMapperTest<Supervisor> 
 
     @After
     public void deleteDatabase() {
-        DatabaseHelper.deleteDatabase();
+        databaseHelper.deleteDatabase();
     }
 
     // Testing to see that the records were read properly also

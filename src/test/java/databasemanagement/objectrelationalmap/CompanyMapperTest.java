@@ -15,6 +15,7 @@ import static org.junit.Assert.assertTrue;
  * @since   Version 2
  */
 public class CompanyMapperTest implements DatabaseItemMapperTest<Company> {
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
     private CompanyMapper companyMapper = new CompanyMapper();
     private Company snowRemover;
     private Company springRemover;
@@ -26,8 +27,8 @@ public class CompanyMapperTest implements DatabaseItemMapperTest<Company> {
 
     @Before
     public void populateDatabase() {
-        DatabaseHelper.deleteDatabase();
-        DatabaseHelper.createDatabase();
+        databaseHelper.deleteDatabase();
+        databaseHelper.createDatabase();
         // Create the records
         snowRemover = new Company("SnowRemover");
         springRemover = new Company("SpringRemover");
@@ -45,7 +46,7 @@ public class CompanyMapperTest implements DatabaseItemMapperTest<Company> {
 
     @After
     public void deleteDatabase(){
-        DatabaseHelper.deleteDatabase();
+        databaseHelper.deleteDatabase();
     }
 
     // Testing to see that the records were read properly also

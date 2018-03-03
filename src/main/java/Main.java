@@ -12,11 +12,13 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    private DatabaseHelper databaseHelper = new DatabaseHelper();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
         // Create a new database file if one does not currently exist
-        DatabaseHelper.createDatabase();
+        databaseHelper.createDatabase();
 
         // Creates the main view of the application
         FXMLLoader root = new FXMLLoader(getClass().getResource("/view/mainTabPane.fxml"));
