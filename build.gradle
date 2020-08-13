@@ -1,29 +1,32 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath 'org.openjfx:javafx-plugin:0.0.9'
-    }
-}
+
 plugins {
-  id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+    id 'org.beryx.jlink' version '2.12.0'
 }
 javafx {
-    version = '12'
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing']
-    configuration = 'compileOnly'
+    version = '14'
+    modules = [
+            'javafx.controls',
+            'javafx.fxml',
+            'javafx.swing',
+            'javafx.graphics',
+            'javafx.base',
+            'javafx.controls'
+    ]
 }
 apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'java'
 apply plugin: 'idea'
 
+mainClassName = 'Main'
 group 'recordian'
 version '1.0-SNAPSHOT'
-sourceCompatibility = 1.8
 
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
 repositories {
     mavenCentral()
 }
@@ -40,3 +43,28 @@ dependencies {
 }
 
 
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+jlink {
+    mergedModule {
+        requires 'java.xml.crypto';
+        requires 'javafx.graphics';
+        requires 'javafx.controls';
+        requires 'java.logging';
+        requires 'java.sql';
+        requires 'java.xml';
+        requires 'java.desktop';
+        requires 'javafx.base';
+        provides 'java.sql.Driver' with 'org.sqlite.JDBC';
+    }
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = mainClassName
+    }
+}
